@@ -12,7 +12,7 @@ public:
 
 	}
 	void addPontoPartilha(PontoPartilha* spot);  //Criacao de uma nova loja
-	void addNewUtente(Utente* utente);	  //Adiciona um novo utente
+	void addNewUtente(Utente* utente);	 		 //Adiciona um novo utente
 
 	//Metodos Get
 	vector<Utente* > getUtentes() const;

@@ -17,7 +17,7 @@ class Utente {
 	//...
 public:
 	explicit Utente(string nome, string tipoUtente);
-	void alugaBicicleta();
+	void alugaBicicleta(string bikeType, unsigned int numHours);	//Dia.Mes.Ano são detetados na interface apartir do menu de opções
 	void devolveBicicleta();
 	void updateHistoric();
 	void displayHistoric() const;
@@ -28,6 +28,7 @@ public:
 	string getUtenteNome() const;
 	string getTipoUtente() const;
 	Localizacao getLocalizacao() const;
+	Bicicleta* getBike() const;
 
 	/* MÉTODOS SET */
 	void setUtenteLocation(Localizacao spot);

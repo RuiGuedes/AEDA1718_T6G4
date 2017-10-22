@@ -1,7 +1,5 @@
 #include "Utente.h"
 
-using namespace std;
-
 int Utente::lastId = 0;
 
 Utente::Utente(string nome, string tipoUtente) : id(++lastId)
@@ -31,6 +29,10 @@ string Utente::getTipoUtente() const {
 
 Localizacao Utente::getLocalizacao() const {
 	return local;
+}
+
+Bicicleta* Utente::getBike() const {
+	return bike;
 }
 
 /////////////////
