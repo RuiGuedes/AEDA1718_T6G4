@@ -1,6 +1,5 @@
 #include "Bicicleta.h"
 
-
 Bicicleta::Bicicleta(string tipo) {
 	bikeType = tipo;
 	disponivel = true;
@@ -12,6 +11,10 @@ Bicicleta::Bicicleta(string tipo) {
 
 string Bicicleta::getBikeType() const {
 	return bikeType;
+}
+
+string Bicicleta::getBikeName() const {
+	return bikeName;
 }
 
 bool Bicicleta::getBikeAvailable() const {

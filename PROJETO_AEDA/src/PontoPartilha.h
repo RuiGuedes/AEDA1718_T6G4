@@ -17,7 +17,7 @@ public:
 	Localizacao getLocal() const;
 	int getCapacidade() const;
 	int getNumberOfBikes() const;
-	vector <vector<Bicicleta *> > getBikeTypes();
+	vector <string> getBikeTypes();
 
 	//Metodos set
 

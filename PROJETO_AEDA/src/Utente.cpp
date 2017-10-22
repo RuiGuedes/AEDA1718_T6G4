@@ -83,13 +83,18 @@ void Utente::updateHistoric() {
 	}
 }
 
-void Utente::alugaBicicleta() {
+void Utente::alugaBicicleta(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano) {
 
 	//Verifica a localização do utente
 	Localizacao spot = this->getLocalizacao();
 
-	//Descobre ponto de partilha mais próximo
-	//PontoPartilha shop = this->findNearestShop(Localizacao spot);
+	//Descobre os ponto de partilha mais próximos e retorna-os num vetor por ordem crescente de proximidade
+
+	//Verifica por ordem se tem o tipo de bicleta pretendida
+
+	//Se tiver: atribui a bicicleta ao utente e remove-a do pontopartilha e regista a utilizacao
+
+	//Senão tiver: faz cout "Neste momento não é possivel alugar a bicicleta do tipo (bikeType)
 
 	return;
 }
