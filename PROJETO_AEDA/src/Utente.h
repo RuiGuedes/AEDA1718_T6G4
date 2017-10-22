@@ -1,11 +1,9 @@
-#include <string>
-#include <vector>
-#include <iostream>
-#include "Localizacao.h"
-#include "Utilizacao.h"
-#include "Bicicleta.h"
+#pragma once
 
-using namespace std;
+#include "Includes.h"
+#include "Localizacao.h"
+#include "Bicicleta.h"
+#include "Utilizacao.h"
 
 class Utente {
 	static int lastId;

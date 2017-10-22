@@ -1,9 +1,8 @@
+#pragma once
+
+#include "Includes.h"
 #include "PontoPartilha.h"
 #include "Utente.h"
-#include <vector>
-#include <string>
-
-using namespace std;
 
 class Sistema {
 	vector<PontoPartilha* > pontosPartilha;

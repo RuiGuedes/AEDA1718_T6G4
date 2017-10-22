@@ -1,6 +1,6 @@
-#include <string>
+#pragma once
 
-using namespace std;
+#include "Includes.h"
 
 class Utilizacao {
 private:
