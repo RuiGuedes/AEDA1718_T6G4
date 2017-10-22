@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <iostream>
 #include "Localizacao.h"
 #include "Utilizacao.h"
 #include "Bicicleta.h"
@@ -30,8 +31,8 @@ public:
 	Localizacao getLocalizacao() const;
 
 	/* MÉTODOS SET */
-	void setUtenteLocation();
-	void setTipoUtente();  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
+	void setUtenteLocation(Localizacao spot);
+	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
 
 
 };

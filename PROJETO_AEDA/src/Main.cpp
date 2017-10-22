@@ -14,7 +14,7 @@ int main()
 	Utente* u2 = new Utente("Andre", "Socio");
 	Utente* u3 = new Utente("Andre", "Socio");
 
-	cout << u1->getId() << endl << u2->getId() << endl << u3->getId() << endl ;
+	u3->setTipoUtente(2);
 
 	return 0;
 }
