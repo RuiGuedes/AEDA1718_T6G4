@@ -2,7 +2,9 @@
 
 using namespace std;
 
-Utente::Utente(string nome, string tipoUtente)
+int Utente::lastId = 0;
+
+Utente::Utente(string nome, string tipoUtente) : id(++lastId)
 {
 	this->nome = nome;
 	this->tipoUtente = tipoUtente;
@@ -10,7 +12,19 @@ Utente::Utente(string nome, string tipoUtente)
 
 }
 
+int Utente::getId() const {
+	return id;
+}
+
+string Utente::getUtenteNome() const {
+	return nome;
+}
+
 string Utente::getTipoUtente() const {
 
-	return this->tipoUtente;
+	return tipoUtente;
+}
+
+Localizacao Utente::getLocalizacao() const {
+	return local;
 }
