@@ -1,4 +1,10 @@
 #include <string>
+#include <vector>
+#include "Localizacao.h"
+#include "Utilizacao.h"
+#include "Bicicleta.h"
+
+using namespace std;
 
 class Utente {
 	static int id;
@@ -13,7 +19,10 @@ public:
 	void alugaBicicleta();
 	void devolveBicicleta();
 	string getTipoUtente() const;
-	Utente();
+	Utente(string nome, string tipoUtente);
+	void setUtenteLocation();
 	Localizacao getLocalizacao() const;
-	void setTipoUtente();   //Faz pagamento;
+	void setTipoUtente();  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
+	void updateHistoric();
+
 };

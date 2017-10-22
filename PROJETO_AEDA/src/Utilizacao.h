@@ -1,0 +1,7 @@
+
+class Utilizacao {
+private:
+
+public:
+
+};
