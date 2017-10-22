@@ -9,8 +9,13 @@ class Sistema {
 	vector<PontoPartilha* > pontosPartilha;
 	vector<Utente* > utentes;
 public:
-	Sistema();
-	void addPontoPartilha(Utente* utente);  //Criacao de uma nova loja
+	Sistema() {
+
+	}
+	void addPontoPartilha(PontoPartilha* spot);  //Criacao de uma nova loja
 	void addNewUtente(Utente* utente);	  //Adiciona um novo utente
 
+	//Metodos Get
+	vector<Utente* > getUtentes() const;
+	vector<PontoPartilha* > getPontosPartilha() const;
 };

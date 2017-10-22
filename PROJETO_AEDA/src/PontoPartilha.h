@@ -1,5 +1,7 @@
 
 
+using namespace std;
+
 class PontoPartilha {
 	/*Localizacao local;
 	unsigned int capacidade;

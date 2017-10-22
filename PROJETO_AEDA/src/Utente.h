@@ -22,6 +22,7 @@ public:
 	void alugaBicicleta();
 	void devolveBicicleta();
 	void updateHistoric();
+	void displayHistoric() const;
 
 	/* MÉTODOS GET */
 	static int getLastId() {return lastId;}

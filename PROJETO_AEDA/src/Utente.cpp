@@ -12,6 +12,10 @@ Utente::Utente(string nome, string tipoUtente) : id(++lastId)
 
 }
 
+/////////////////
+// METODOS GET //
+/////////////////
+
 int Utente::getId() const {
 	return id;
 }
@@ -29,6 +33,9 @@ Localizacao Utente::getLocalizacao() const {
 	return local;
 }
 
+/////////////////
+// METODOS SET //
+/////////////////
 
 void Utente::setUtenteLocation(Localizacao spot) {
 	local = spot;
@@ -60,6 +67,11 @@ void Utente::setTipoUtente(int tipo) {
 	return;
 }
 
+
+////////////
+// OTHERS //
+////////////
+
 void Utente::updateHistoric() {
 
 	for(unsigned int i = 0; i < utilizacoes.size(); i+=0)
@@ -67,4 +79,15 @@ void Utente::updateHistoric() {
 		historico.push_back(utilizacoes.at(i));
 		utilizacoes.erase(utilizacoes.begin() + i);
 	}
+}
+
+void Utente::alugaBicicleta() {
+
+	//Verifica a localização do utente
+	Localizacao spot = this->getLocalizacao();
+
+	//Descobre ponto de partilha mais próximo
+	//PontoPartilha shop = this->findNearestShop(Localizacao spot);
+
+	return;
 }
