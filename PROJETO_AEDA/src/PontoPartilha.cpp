@@ -7,6 +7,11 @@
 PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage) {
 	local = spot;
 	capacidade = storage;
+	vector<Bicicleta *> v1,v2,v3,v4;
+	bicicletas.push_back(v1);
+	bicicletas.push_back(v2);
+	bicicletas.push_back(v3);
+	bicicletas.push_back(v4);
 }
 
 /////////////////
@@ -77,4 +82,24 @@ void  PontoPartilha::removeBike(Utente utente) {
 			bicicletas.at(indicator).erase(bicicletas.at(indicator).begin() + i);
 	}
 
+}
+
+void PontoPartilha::adicionaBike(Bicicleta* bike) {
+
+	int indicator;
+	string tipo = bike->getBikeType();
+
+	if(tipo == "urbana")
+		indicator = 0;
+	else if(tipo == "urbanaSimples")
+		indicator = 1;
+	else if(tipo == "corrida")
+		indicator = 2;
+	else if(tipo == "infantil")
+		indicator = 3;
+
+
+	bicicletas.at(indicator).push_back(bike);
+
+	return;
 }

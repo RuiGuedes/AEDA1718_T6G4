@@ -12,6 +12,7 @@ class PontoPartilha {
 public:
 	PontoPartilha(Localizacao spot,unsigned int storage);
 	void removeBike(Utente utente);
+	void adicionaBike(Bicicleta* bike);
 
 	//Metodos get
 	Localizacao getLocal() const;

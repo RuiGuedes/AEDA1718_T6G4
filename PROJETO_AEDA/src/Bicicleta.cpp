@@ -1,7 +1,8 @@
 #include "Bicicleta.h"
 
-Bicicleta::Bicicleta(string tipo) {
+Bicicleta::Bicicleta(string tipo, string name) {
 	bikeType = tipo;
+	bikeName = name;
 	disponivel = true;
 }
 

@@ -35,6 +35,10 @@ Bicicleta* Utente::getBike() const {
 	return bike;
 }
 
+vector<Utilizacao> Utente::getUtilizacoes() const {
+	return utilizacoes;
+}
+
 /////////////////
 // METODOS SET //
 /////////////////
@@ -94,6 +98,20 @@ void Utente::alugaBicicleta(string bikeType, unsigned int numHours, unsigned int
 
 	//Se tiver: atribui a bicicleta ao utente e remove-a do pontopartilha e regista a utilizacao
 
+	/* Atribui bicicleta ao utente */
+
+	/* Remove bicicleta do ponto partilha */
+
+	/* Regista utilizacao */
+	if(this->getTipoUtente() == "Socio")
+		utilizacoes.push_back(Utilizacao(bikeType, numHours, dia, mes,ano));
+	else {
+
+		/* Apresenta o preço do aluguer */
+
+		/* Adiciona ao historio */
+		historico.push_back(Utilizacao(bikeType, numHours, dia, mes,ano));
+	}
 	//Senão tiver: faz cout "Neste momento não é possivel alugar a bicicleta do tipo (bikeType)
 
 	return;

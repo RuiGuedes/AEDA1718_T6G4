@@ -7,7 +7,7 @@ class Bicicleta {
 	string bikeName;
 	bool disponivel;  //True -> Disponivel || False -> Indisponivel
 public:
-	Bicicleta(string tipo);
+	Bicicleta(string tipo, string name);
 
 	//Metodos Get
 	string getBikeType() const;
