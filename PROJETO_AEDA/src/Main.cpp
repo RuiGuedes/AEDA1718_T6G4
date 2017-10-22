@@ -1,6 +1,5 @@
 #include "Includes.h"
 #include "Sistema.h"
-#include "Utente.h"
 
 using namespace std;
 
@@ -20,7 +19,23 @@ int main()
 	sys.addNewUtente(u2);
 	sys.addNewUtente(u3);
 
-	cout << sys.getUtentes().size() << endl;
+	Localizacao loc("Porto");
+
+	PontoPartilha *p1 = new PontoPartilha(loc, 100);
+	PontoPartilha *p2 = new PontoPartilha(loc, 20);
+	PontoPartilha *p3 = new PontoPartilha(loc, 17);
+
+	sys.addPontoPartilha(p1);
+	sys.addPontoPartilha(p2);
+	sys.addPontoPartilha(p3);
+
+	///////////////////////////////////////
+	// Zona de inicialização do programa //
+	///////////////////////////////////////
+
+	cout << "Utentes = " << sys.getUtentes().size() << endl;
+	cout << "Pontos Partilha = " << sys.getPontosPartilha().size() << endl;
+	cout << "Capacidade = " << sys.getPontosPartilha().at(0)->getCapacidade() << endl;
 
 	return 0;
 }
