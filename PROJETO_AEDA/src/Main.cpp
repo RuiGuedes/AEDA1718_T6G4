@@ -5,6 +5,11 @@ using namespace std;
 
 int main()
 {
+	//Códigos para aceitação de caracteres da língua portugesa
+	SetConsoleCP(1252);
+	SetConsoleOutputCP(1252);
+
+
 	///////////////////////////////////////
 	// Zona de inicialização do programa //
 	///////////////////////////////////////
@@ -46,4 +51,55 @@ int main()
 	cout << u1->getUtilizacoes().at(0).getano() << ".\nBicicleta = " << u1->getUtilizacoes().at(0).getBikeType()  << endl;
 
 	return 0;
+}
+
+
+void openInterface(){
+	int option;
+	do
+	{
+		char value[10];
+
+		//Informacao inicial apresentadada ao utilizador
+		cout << setfill('#') << setw(59) << endl;
+		cout << setw(20) << "    BIKE SYSTEM    " << setw(20);
+		cout << setfill('#') << setw(59) << endl;
+
+
+		cout << endl << "Funcionalidades disponiveis: " << endl << endl;
+
+		cout << "1 - " << endl;
+		cout << "2 - Visualizacao de informacao" << endl;
+		cout << "3 - Sair" << endl;
+		cout << endl << "Introduza uma opcao (1-3): ";        //Opção returnada pelo utilizador
+
+		cin.ignore(1000, '\n');
+		cin.get(value, 10);
+
+		//Executa este ciclo até receber um valor válido
+		while ((valid_number(value) == false) || (atoi(value) < 1) || (atoi(value) > 3))
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Opcao invalida ! Tente novamente. " << endl;
+			cout << "Introduza uma opcao (1-3): ";
+			cin.get(value, 10);
+		}
+
+		option = atoi(value);
+
+		//Opcões possiveis apresentadas no menu
+		switch (option)
+		{
+		case 1:
+			gestao_condutores(SR);
+			break;
+		case 2:
+			visu_info(SR);
+			break;
+		case 3:
+			cout << endl;
+			break;
+		}
+	} while (option != 3);
 }
