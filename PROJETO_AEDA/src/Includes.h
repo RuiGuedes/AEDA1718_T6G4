@@ -10,3 +10,7 @@
 
 using namespace std;
 
+
+// Prótotipos das funções
+void openInterface();
+bool valid_number(string number);
