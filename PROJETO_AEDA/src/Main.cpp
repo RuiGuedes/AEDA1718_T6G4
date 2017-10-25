@@ -1,6 +1,6 @@
 #include "Includes.h"
 #include "Sistema.h"
-
+#include "Exceções.h"
 using namespace std;
 
 int main()
@@ -9,7 +9,14 @@ int main()
 	SetConsoleCP(1252);
 	SetConsoleOutputCP(1252);
 
-	openInterface();
+	try{
+//		openInterface();
+	}
+	catch (OpcaoInvalida &op){
+		cout << "Opção inválida !" << endl;
+		throw;
+	}
+
 
 	///////////////////////////////////////
 	// Zona de inicialização do programa //
