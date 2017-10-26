@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <climits>
+#include <cmath>
 
 
 using namespace std;
