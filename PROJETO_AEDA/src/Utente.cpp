@@ -39,6 +39,10 @@ vector<Utilizacao> Utente::getUtilizacoes() const {
 	return utilizacoes;
 }
 
+bool Utente::getAvailable() const {
+	return disponivel;
+}
+
 /////////////////
 // METODOS SET //
 /////////////////
@@ -74,6 +78,14 @@ void Utente::setTipoUtente(int tipo) {
 }
 
 
+void Utente::setAvailable() {
+
+	if(disponivel == false)
+		disponivel = true;
+	else
+		disponivel = false;
+}
+
 ////////////
 // OTHERS //
 ////////////
@@ -90,7 +102,7 @@ void Utente::updateHistoric() {
 void Utente::alugaBicicleta(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano) {
 
 	//Verifica a localização do utente
-	Localizacao spot = this->getLocalizacao();
+	//Localizacao spot = this->getLocalizacao();
 
 	//Descobre os ponto de partilha mais próximos e retorna-os num vetor por ordem crescente de proximidade
 

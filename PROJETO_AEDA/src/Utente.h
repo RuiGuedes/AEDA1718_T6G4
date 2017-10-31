@@ -14,7 +14,7 @@ class Utente {
 	Bicicleta* bike;		//Bicicleta é uma classe
 	vector<Utilizacao> utilizacoes; //dia, mes, ano, horas de uso, tipo de bike //Queremos para ver pagamentos em falta
 	vector<Utilizacao> historico;
-	//...
+	bool disponivel = true;
 public:
 	explicit Utente(string nome, string tipoUtente);
 	void alugaBicicleta(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano);
@@ -32,10 +32,11 @@ public:
 	Localizacao getLocalizacao() const;
 	Bicicleta* getBike() const;
 	vector<Utilizacao> getUtilizacoes() const;
+	bool getAvailable() const;
 
 	/* MÉTODOS SET */
 	void setUtenteLocation(Localizacao spot);
 	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
-
+	void setAvailable();
 
 };
