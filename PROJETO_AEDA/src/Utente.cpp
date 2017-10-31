@@ -7,6 +7,7 @@ Utente::Utente(string nome, string tipoUtente) : id(++lastId)
 	this->nome = nome;
 	this->tipoUtente = tipoUtente;
 	this->bike = 0;
+	local = Localizacao("OutOfRange",0,0);
 
 }
 

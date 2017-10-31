@@ -8,6 +8,7 @@
 #include <climits>
 #include <cmath>
 #include <stdlib.h>
+#include <algorithm>
 
 
 using namespace std;
@@ -16,4 +17,5 @@ using namespace std;
 void openInterface();
 bool valid_number(string number);
 bool valid_word(string word);
+bool valid_number_double(string number);
 
