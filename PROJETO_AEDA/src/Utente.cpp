@@ -44,6 +44,7 @@ bool Utente::getAvailable() const {
 	return disponivel;
 }
 
+
 /////////////////
 // METODOS SET //
 /////////////////

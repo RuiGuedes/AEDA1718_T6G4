@@ -6,7 +6,8 @@
 void registo_utente(Sistema & BS);
 void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
-void alugaBike(Sistema &ER,int index) {
+vector<double> ExtraData(Sistema &ER,int index);
+void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
 	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
@@ -456,12 +457,12 @@ void infoER(Sistema &ER) {
 }
 
 
-void openInterface(){
+void openInterface(Sistema & ER){
 
 	int value { };
 	string option;
 
-	Sistema ER { };
+	//Sistema ER { };
 
 	do
 	{
@@ -624,7 +625,7 @@ void menu_interface(Sistema &ER){
 	while(attempts <= 3)
 	{
 		try{
-			cout << "Username: ";
+			cout << "Username (ID): ";
 			cin >> info;
 
 			if(valid_number(info) == false)
@@ -713,7 +714,7 @@ void menu_interface(Sistema &ER){
 		{
 		case 1:
 			system("cls");
-			alugaBike(ER,index);
+			alugaBike(ER,index,ExtraData(ER,index));
 			break;
 		case 2:
 			system("cls");
@@ -755,6 +756,20 @@ void admin_interface(Sistema &BS) {
 
 }
 
+vector<double> ExtraData(Sistema &ER,int index) {
+
+	vector<double> distancias;
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		distancias.push_back(ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(i)->getLocal()));
+	}
+
+	sort(distancias.begin(),distancias.end());
+
+	return distancias;
+
+}
 
 bool valid_number(string number)
 {
@@ -768,7 +783,7 @@ bool valid_number(string number)
 bool valid_number_double(string number)
 {
 	for (unsigned int i = 0; i < number.size(); i++){
-		if ((!(isdigit(number.at(i)))) && number.at(i) != '.')
+		if ((!(isdigit(number.at(i)))) && (number.at(i) != '.') && (number.at(i) != '-'))
 			return false;
 	}
 	return true;
