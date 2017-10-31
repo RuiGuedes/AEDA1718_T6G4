@@ -13,5 +13,7 @@
 using namespace std;
 
 // Prótotipos das funções
-void openInterface(int attempts);
+void openInterface();
 bool valid_number(string number);
+bool valid_word(string word);
+

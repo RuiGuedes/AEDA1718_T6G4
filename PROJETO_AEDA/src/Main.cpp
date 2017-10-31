@@ -9,29 +9,9 @@ int main()
 	SetConsoleCP(1252);
 	SetConsoleOutputCP(1252);
 
-	int attempts { 0 };
+	openInterface();
 
-	while(attempts <= 5)
-	{
-		try{
-			openInterface(attempts);
-		}
-		catch (OpcaoInvalida &op){
 
-			if(attempts == 5)
-			{
-				cout << "\nEsgotou o numero máximo de tentativas para acedera uma das opções.\n";
-				cout << "Tente novamente mais tarde !\n";
-				return -1;
-			}
-
-			attempts++;
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-			cin.ignore(1000,'\n');
-		}
-	};
 
 //
 //	///////////////////////////////////////

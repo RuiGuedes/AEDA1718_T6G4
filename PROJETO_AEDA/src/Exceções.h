@@ -1,8 +1,8 @@
 #include "Includes.h"
 
-
+template<class T>
 class OpcaoInvalida {
 public:
-	int opcao;
-	OpcaoInvalida(int op) { opcao = op;}
+	T opcao;
+	OpcaoInvalida(T op) { opcao = op;}
 };

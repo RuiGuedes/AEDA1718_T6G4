@@ -20,7 +20,9 @@ public:
 	void alugaBicicleta(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano);
 	void devolveBicicleta();
 	void updateHistoric();
-	void displayHistoric() const;
+	void displayHistoric() const {
+
+	}
 
 	/* MÉTODOS GET */
 	static int getLastId() {return lastId;}
