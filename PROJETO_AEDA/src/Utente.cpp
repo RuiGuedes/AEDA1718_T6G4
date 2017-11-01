@@ -36,7 +36,7 @@ Bicicleta* Utente::getBike() const {
 	return bike;
 }
 
-vector<Utilizacao> Utente::getUtilizacoes() const {
+vector<Utilizacao> Utente::getUtilizacoes() {
 	return utilizacoes;
 }
 

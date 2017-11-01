@@ -10,7 +10,7 @@ class PontoPartilha {
 	vector <vector<Bicicleta *> > bicicletas;
 public:
 	PontoPartilha(Localizacao spot,unsigned int storage);
-	void removeBike(Utente & utente);
+	void removeBike(Bicicleta *bike);
 	void adicionaBike(Bicicleta* bike);
 
 	//Metodos get

@@ -14,7 +14,7 @@ public:
 	friend bool ExistID(int identificacao);
 
 	//Metodos Get
-	vector<Utente* > getUtentes() const;
-	vector<PontoPartilha* > getPontosPartilha() const;
+	vector<Utente* > getUtentes();
+	vector<PontoPartilha* > getPontosPartilha();
 };
 

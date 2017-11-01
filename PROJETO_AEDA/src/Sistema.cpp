@@ -12,11 +12,11 @@ void Sistema::addPontoPartilha(PontoPartilha* spot) {
 /////////////////
 // METODOS GET //
 /////////////////
-vector<Utente* > Sistema::getUtentes() const {
+vector<Utente* > Sistema::getUtentes(){
 	return utentes;
 }
 
-vector<PontoPartilha* > Sistema::getPontosPartilha() const {
+vector<PontoPartilha* > Sistema::getPontosPartilha() {
 	return pontosPartilha;
 }
 

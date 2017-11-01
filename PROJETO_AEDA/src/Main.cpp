@@ -77,7 +77,6 @@ int main()
 	sys.getPontosPartilha().at(0)->adicionaBike(bike9);
 	sys.getPontosPartilha().at(0)->adicionaBike(bike10);
 
-
 	openInterface(sys);
 
 	//

@@ -67,24 +67,24 @@ vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
 // OTHERS //
 ////////////
 
-void  PontoPartilha::removeBike(Utente & utente) {
+void  PontoPartilha::removeBike(Bicicleta *bike) {
 
-	Bicicleta* bike = utente.getBike();
+	vector<Bicicleta *> bikes;
 
 	int indicator;
 	string tipo = bike->getBikeType();
 	string name = bike->getBikeName();
 
-	if(tipo == "urbana")
+	if(tipo == "Urbana")
 		indicator = 0;
-	else if(tipo == "urbanaSimples")
+	else if(tipo == "Urbana Simples")
 		indicator = 1;
-	else if(tipo == "corrida")
+	else if(tipo == "Corrida")
 		indicator = 2;
-	else if(tipo == "infantil")
+	else if(tipo == "Infantil")
 		indicator = 3;
 
-	for(unsigned int i = 0; bicicletas.at(indicator).size(); i++)
+	for(unsigned int i = 0; i < bicicletas.at(indicator).size(); i++)
 	{
 		if(bicicletas.at(indicator).at(i)->getBikeName() == name)
 			bicicletas.at(indicator).erase(bicicletas.at(indicator).begin() + i);
@@ -97,13 +97,13 @@ void PontoPartilha::adicionaBike(Bicicleta* bike) {
 	int indicator;
 	string tipo = bike->getBikeType();
 
-	if(tipo == "urbana")
+	if(tipo == "Urbana")
 		indicator = 0;
-	else if(tipo == "urbanaSimples")
+	else if(tipo == "Urbana Simples")
 		indicator = 1;
-	else if(tipo == "corrida")
+	else if(tipo == "Corrida")
 		indicator = 2;
-	else if(tipo == "infantil")
+	else if(tipo == "Infantil")
 		indicator = 3;
 
 

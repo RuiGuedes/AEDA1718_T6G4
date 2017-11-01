@@ -37,7 +37,7 @@ public:
 	string getTipoUtente() const;
 	Localizacao getLocalizacao() const;
 	Bicicleta* getBike() const;
-	vector<Utilizacao> getUtilizacoes() const;
+	vector<Utilizacao> getUtilizacoes();
 	bool getAvailable() const;
 
 	/* MÉTODOS SET */

@@ -219,10 +219,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 		};
 
-
-		//ER.getUtentes().at(index)->alugaBicicleta(bikeType,numHours,d1,distancias);
-
-		int idPP {0};
+		int idPP {-1};
 		//Verifica por ordem se tem o tipo de bicleta pretendida
 		for(unsigned int i = 0; i < distancias.size(); i++)
 		{
@@ -231,54 +228,70 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			for(unsigned int k = 0; k < bikes.size(); k++)
 			{
 				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
-
-					//if(bikes.at(k).at(q) == bikeType)
 				{
-					idPP = i;
-					i = distancias.size();
-					k = bikes.size();
+					if(bikes.at(k).at(q)->getBikeType() == bikeType)
+					{
+						idPP = i;
+						q = bikes.at(k).size();
+					}
+
+
 				}
+
+				if(idPP != -1)
+					k = bikes.size();
 			}
 
+			if(idPP != -1)
+				i = distancias.size();
+
 		}
 
-		if(idPP == 0)
-		{
-			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
-		}
+
+
+	if(idPP == -1)
+	{
+		cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
+	}
+	else
+	{
+
+		if(bikeType == "Urbana")
+			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
+		else if(bikeType == "Urbana Simples")
+			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
+		else if(bikeType == "Corrida")
+			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
 		else
+			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
+
+		cout << "AAAAA" << endl;
+		ER.getUtentes().at(index)->setAvailable();
+
+		ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
+
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 		{
-
-			if(bikeType == "Urbana")
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
-			else if(bikeType == "Urbana Simples")
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
-			else if(bikeType == "Corrida")
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
-			else
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
-
-			ER.getUtentes().at(index)->setAvailable();
-
-			ER.getPontosPartilha().at(idPP)->removeBike(*(ER.getUtentes().at(index)));
-
-			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
-				ER.getUtentes().at(index)->getUtilizacoes().push_back(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
+			cout << "AAAAA" << endl;
+			Utilizacao p(bikeType, numHours, d1.dia, d1.mes, d1.ano);
+			ER.getUtentes().at(index)->getUtilizacoes().push_back(p);
+			cout << "BBBBB" << endl;
+		}
 			else {
 
-				/* Apresenta o preço do aluguer */
+			/* Apresenta o preço do aluguer */
 
-				/* Adiciona ao historio */
-				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
-			}
-
-			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
+			/* Adiciona ao historio */
+			ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
 		}
 
-		system("pause");
-		system("cls");
-		return;
+		cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
 	}
+
+	system("pause");
+	system("cls");
+	return;
+}
 }
 void devolveBike(Sistema &ER,int index) {
 
