@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Includes.h"
 #include "Localizacao.h"
 #include "Bicicleta.h"
@@ -11,7 +10,7 @@ class PontoPartilha {
 	vector <vector<Bicicleta *> > bicicletas;
 public:
 	PontoPartilha(Localizacao spot,unsigned int storage);
-	void removeBike(Utente utente);
+	void removeBike(Utente & utente);
 	void adicionaBike(Bicicleta* bike);
 
 	//Metodos get
@@ -19,6 +18,7 @@ public:
 	int getCapacidade() const;
 	int getNumberOfBikes() const;
 	vector <string> getBikeTypes();
+	vector <vector<Bicicleta *> > getBikes() const;
 
 	//Metodos set
 

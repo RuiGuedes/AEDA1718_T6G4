@@ -1,16 +1,14 @@
 #pragma once
 
 #include "Includes.h"
-#include "PontoPartilha.h"
 #include "Utente.h"
+#include "PontoPartilha.h"
 
 class Sistema {
 	vector<PontoPartilha* > pontosPartilha;
 	vector<Utente* > utentes;
 public:
-	Sistema() {
-
-	}
+	Sistema() {}
 	void addPontoPartilha(PontoPartilha* spot);  //Criacao de uma nova loja
 	void addNewUtente(Utente* utente);	 		 //Adiciona um novo utente
 	friend bool ExistID(int identificacao);

@@ -5,6 +5,12 @@
 #include "Bicicleta.h"
 #include "Utilizacao.h"
 
+struct data {
+	int dia;
+	int mes;
+	int ano;
+};
+
 class Utente {
 	static int lastId;
 	int id;
@@ -16,8 +22,8 @@ class Utente {
 	vector<Utilizacao> historico;
 	bool disponivel = true;
 public:
-	explicit Utente(string nome, string tipoUtente);
-	void alugaBicicleta(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano);
+	explicit Utente(string nome, string tipoUtente,Localizacao spot);
+	void alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias);
 	void devolveBicicleta();
 	void updateHistoric();
 	void displayHistoric() const {
@@ -38,5 +44,7 @@ public:
 	void setUtenteLocation(Localizacao spot);
 	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
 	void setAvailable();
+	void setBike(Bicicleta* bike);
+	void setHistoric(Utilizacao ut);
 
 };

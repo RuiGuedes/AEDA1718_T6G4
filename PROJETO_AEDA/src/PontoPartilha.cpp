@@ -43,23 +43,31 @@ vector <string> PontoPartilha::getBikeTypes() {
 	vector <string> bikeTypes;
 
 	if(bicicletas.at(0).size() != 0)
-		bikeTypes.push_back("urbana");
-	else if(bicicletas.at(1).size() != 0)
-		bikeTypes.push_back("urbanaSimples");
-	else if(bicicletas.at(2).size() != 0)
-		bikeTypes.push_back("corrida");
-	else if(bicicletas.at(3).size() != 0)
-		bikeTypes.push_back("infantil");
+		bikeTypes.push_back("Urbana");
+
+	if(bicicletas.at(1).size() != 0)
+		bikeTypes.push_back("Urbana Simples");
+
+	if(bicicletas.at(2).size() != 0)
+		bikeTypes.push_back("Corrida");
+
+	if(bicicletas.at(3).size() != 0)
+		bikeTypes.push_back("Infantil");
 
 	return bikeTypes;
 }
 
 
+vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
+
+	return bicicletas;
+}
+
 ////////////
 // OTHERS //
 ////////////
 
-void  PontoPartilha::removeBike(Utente utente) {
+void  PontoPartilha::removeBike(Utente & utente) {
 
 	Bicicleta* bike = utente.getBike();
 

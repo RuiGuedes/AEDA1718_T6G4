@@ -6,8 +6,8 @@
 void registo_utente(Sistema & BS);
 void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
-vector<double> ExtraData(Sistema &ER,int index);
-void alugaBike(Sistema &ER,int index,vector<double> distancias) {
+vector<int> ExtraData(Sistema &ER,int index);
+void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
 	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
@@ -33,7 +33,9 @@ void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 		//string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano)
 
 		string bikeType;
-		int numHours{}, dia{}, mes{}, ano {};
+		data d1;
+		int numHours{};
+		//, dia{}, mes{}, ano {}
 		int value {};
 		string option {};
 
@@ -123,7 +125,7 @@ void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 				if(value < 2017)
 					throw OpcaoInvalida<int>(value);
 
-				ano = value;
+				d1.ano = value;
 				break;
 			}
 			catch (OpcaoInvalida<int> &op){
@@ -152,7 +154,7 @@ void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 				if(value < 1 || value > 12)
 					throw OpcaoInvalida<int>(value);
 
-				mes = value;
+				d1.mes = value;
 				break;
 			}
 			catch (OpcaoInvalida<int> &op){
@@ -178,20 +180,20 @@ void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 					throw OpcaoInvalida<string>(option);
 
 				value = stoi(option);
-				if(mes == 2)
+				if(d1.mes == 2)
 				{
 					if(value < 1 || value > 28)
 						throw OpcaoInvalida<int>(value);
 
-					dia = value;
+					d1.dia = value;
 					break;
 				}
-				else if((mes == 1) ||(mes == 3) ||(mes == 5) ||(mes == 7) ||(mes == 8) ||(mes == 10) ||(mes == 12))
+				else if((d1.mes == 1) ||(d1.mes == 3) ||(d1.mes == 5) ||(d1.mes == 7) ||(d1.mes == 8) ||(d1.mes == 10) ||(d1.mes == 12))
 				{
 					if(value < 1 || value > 31)
 						throw OpcaoInvalida<int>(value);
 
-					dia = value;
+					d1.dia = value;
 					break;
 				}
 				else
@@ -199,7 +201,7 @@ void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 					if(value < 1 || value > 30)
 						throw OpcaoInvalida<int>(value);
 
-					dia = value;
+					d1.dia = value;
 					break;
 				}
 			}
@@ -218,10 +220,60 @@ void alugaBike(Sistema &ER,int index,vector<double> distancias) {
 		};
 
 
-		ER.getUtentes().at(index)->alugaBicicleta(bikeType,numHours,dia,mes,ano);
-		ER.getUtentes().at(index)->setAvailable();
+		//ER.getUtentes().at(index)->alugaBicicleta(bikeType,numHours,d1,distancias);
 
-		cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
+		int idPP {0};
+		//Verifica por ordem se tem o tipo de bicleta pretendida
+		for(unsigned int i = 0; i < distancias.size(); i++)
+		{
+			vector <vector<Bicicleta *> > bikes = ER.getPontosPartilha().at(distancias.at(i))->getBikes();
+
+			for(unsigned int k = 0; k < bikes.size(); k++)
+			{
+				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
+
+					//if(bikes.at(k).at(q) == bikeType)
+				{
+					idPP = i;
+					i = distancias.size();
+					k = bikes.size();
+				}
+			}
+
+		}
+
+		if(idPP == 0)
+		{
+			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
+		}
+		else
+		{
+
+			if(bikeType == "Urbana")
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
+			else if(bikeType == "Urbana Simples")
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
+			else if(bikeType == "Corrida")
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
+			else
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
+
+			ER.getUtentes().at(index)->setAvailable();
+
+			ER.getPontosPartilha().at(idPP)->removeBike(*(ER.getUtentes().at(index)));
+
+			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
+				ER.getUtentes().at(index)->getUtilizacoes().push_back(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
+			else {
+
+				/* Apresenta o preço do aluguer */
+
+				/* Adiciona ao historio */
+				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
+			}
+
+			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
+		}
 
 		system("pause");
 		system("cls");
@@ -456,7 +508,6 @@ void infoER(Sistema &ER) {
 
 }
 
-
 void openInterface(Sistema & ER){
 
 	int value { };
@@ -595,7 +646,55 @@ void registo_utente(Sistema & ER){
 	else
 		tipoUtente = "Socio";
 
-	Utente* u1 = new Utente(nome,tipoUtente);
+	cout << endl << "Localizacao: " << endl << endl;
+
+	cout << "Indique as suas cordenadas GPS:" << endl;
+
+	double coordX { }, coordY { };
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada X: ";
+			cin >> option;
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordX = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada Y: ";
+			cin >> option;
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordY = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	Localizacao spot;
+	spot.setX(coordX);
+	spot.setY(coordY);
+
+	Utente* u1 = new Utente(nome,tipoUtente,spot);
 
 	ER.addNewUtente(u1);
 
@@ -608,7 +707,6 @@ void registo_utente(Sistema & ER){
 
 void menu_interface(Sistema &ER){
 
-	system("CLS");
 
 	//Informacao inicial apresentadada ao utilizador
 	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
@@ -754,11 +852,38 @@ void menu_interface(Sistema &ER){
 
 void admin_interface(Sistema &BS) {
 
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+	cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+	cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+	cout << "Administração" << endl << endl;
+
+	for(unsigned int i = 0; i < BS.getPontosPartilha().size(); i++)
+	{
+		for(unsigned int k = 0; k < BS.getPontosPartilha().at(i)->getBikes().size(); k++)
+		{
+			for(unsigned int q = 0; q < BS.getPontosPartilha().at(i)->getBikes().at(k).size(); q++)
+			{
+				cout << BS.getPontosPartilha().at(i)->getBikes().at(k).at(q)->getBikeType() << endl;
+			}
+
+			cout << endl;
+		}
+	}
+
+	system("pause");
+	system("cls");
+	return;
 }
 
-vector<double> ExtraData(Sistema &ER,int index) {
+vector<int> ExtraData(Sistema &ER,int index) {
 
 	vector<double> distancias;
+	vector<int> indices;
 
 	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
 	{
@@ -767,7 +892,18 @@ vector<double> ExtraData(Sistema &ER,int index) {
 
 	sort(distancias.begin(),distancias.end());
 
-	return distancias;
+	for(unsigned int i = 0; i < distancias.size(); i++)
+	{
+		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
+		{
+			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
+			{
+				indices.push_back(k);
+			}
+		}
+	}
+
+	return indices;
 
 }
 

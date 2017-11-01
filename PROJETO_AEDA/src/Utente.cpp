@@ -2,12 +2,12 @@
 
 int Utente::lastId = 0;
 
-Utente::Utente(string nome, string tipoUtente) : id(++lastId)
+Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
 {
 	this->nome = nome;
 	this->tipoUtente = tipoUtente;
 	this->bike = 0;
-	local = Localizacao("OutOfRange",0,0);
+	local = spot;
 
 }
 
@@ -88,6 +88,14 @@ void Utente::setAvailable() {
 		disponivel = false;
 }
 
+void Utente::setBike(Bicicleta* bike) {
+	this->bike = bike;
+}
+
+void Utente::setHistoric(Utilizacao ut) {
+	this->historico.push_back(ut);
+}
+
 ////////////
 // OTHERS //
 ////////////
@@ -101,14 +109,7 @@ void Utente::updateHistoric() {
 	}
 }
 
-void Utente::alugaBicicleta(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano) {
-
-	//Verifica a localização do utente
-	//Localizacao spot = this->getLocalizacao();
-
-	//Descobre os ponto de partilha mais próximos e retorna-os num vetor por ordem crescente de proximidade
-
-	//Verifica por ordem se tem o tipo de bicleta pretendida
+void Utente::alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias) {
 
 	//Se tiver: atribui a bicicleta ao utente e remove-a do pontopartilha e regista a utilizacao
 
@@ -116,16 +117,8 @@ void Utente::alugaBicicleta(string bikeType, unsigned int numHours, unsigned int
 
 	/* Remove bicicleta do ponto partilha */
 
-	/* Regista utilizacao */
-	if(this->getTipoUtente() == "Socio")
-		utilizacoes.push_back(Utilizacao(bikeType, numHours, dia, mes,ano));
-	else {
-
-		/* Apresenta o preço do aluguer */
-
-		/* Adiciona ao historio */
-		historico.push_back(Utilizacao(bikeType, numHours, dia, mes,ano));
-	}
+//	/* Regista utilizacao */
+//
 	//Senão tiver: faz cout "Neste momento não é possivel alugar a bicicleta do tipo (bikeType)
 
 	return;
