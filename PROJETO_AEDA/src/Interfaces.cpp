@@ -233,25 +233,24 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			{
 				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
 				{
+					cout << "AAAAA" << endl;
 					if(bikes.at(k).at(q)->getBikeType() == bikeType)
 					{
 						idPP = i;
-						q = bikes.at(k).size();
+						break;
 					}
 
 
 				}
 
 				if(idPP != -1)
-					k = bikes.size();
+					break;
 			}
 
 			if(idPP != -1)
-				i = distancias.size();
+				break;
 
 		}
-
-
 
 		if(idPP == -1)
 		{
@@ -269,7 +268,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			else
 				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
 
-			cout << "AAAAA" << endl;
+			cout << "BBBBB" << endl;
 			ER.getUtentes().at(index)->setAvailable();
 
 			//ALTERACAO
@@ -277,10 +276,9 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 			{
-				cout << "AAAAA" << endl;
 				Utilizacao p(bikeType, numHours, d1.dia, d1.mes, d1.ano);
-				ER.getUtentes().at(index)->getUtilizacoes().push_back(p);
-				cout << "BBBBB" << endl;
+				ER.getUtentes().at(index)->setUtilizacoes(p);
+
 			}
 			else {
 

@@ -46,5 +46,6 @@ public:
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
+	void setUtilizacoes(Utilizacao ut);
 
 };

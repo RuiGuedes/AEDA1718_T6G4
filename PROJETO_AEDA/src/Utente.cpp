@@ -96,6 +96,11 @@ void Utente::setHistoric(Utilizacao ut) {
 	this->historico.push_back(ut);
 }
 
+void Utente::setUtilizacoes(Utilizacao ut) {
+
+	this->utilizacoes.push_back(ut);
+}
+
 ////////////
 // OTHERS //
 ////////////
