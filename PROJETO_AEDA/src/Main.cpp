@@ -35,15 +35,15 @@ int main()
 	sys.addNewUtente(u2);
 	sys.addNewUtente(u3);
 
-	PontoPartilha *p1 = new PontoPartilha(loc1, 100);
-	PontoPartilha *p2 = new PontoPartilha(loc2, 20);
-	PontoPartilha *p3 = new PontoPartilha(loc3, 17);
-	PontoPartilha *p4 = new PontoPartilha(loc4, 44);
-	PontoPartilha *p5 = new PontoPartilha(loc5, 32);
-	PontoPartilha *p6 = new PontoPartilha(loc6, 70);
-	PontoPartilha *p7 = new PontoPartilha(loc7, 48);
-	PontoPartilha *p8 = new PontoPartilha(loc8, 29);
-	PontoPartilha *p9 = new PontoPartilha(loc9, 85);
+	PontoPartilha *p1 = new PontoPartilha(loc1, 100,"A");
+	PontoPartilha *p2 = new PontoPartilha(loc2, 20, "B");
+	PontoPartilha *p3 = new PontoPartilha(loc3, 17, "C");
+	PontoPartilha *p4 = new PontoPartilha(loc4, 44,"D");
+	PontoPartilha *p5 = new PontoPartilha(loc5, 32,"E");
+	PontoPartilha *p6 = new PontoPartilha(loc6, 70,"F");
+	PontoPartilha *p7 = new PontoPartilha(loc7, 48,"G");
+	PontoPartilha *p8 = new PontoPartilha(loc8, 29,"H");
+	PontoPartilha *p9 = new PontoPartilha(loc9, 85,"I");
 
 	sys.addPontoPartilha(p1);
 	sys.addPontoPartilha(p2);

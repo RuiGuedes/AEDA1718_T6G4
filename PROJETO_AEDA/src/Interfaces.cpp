@@ -7,6 +7,8 @@ void registo_utente(Sistema & BS);
 void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
 vector<int> ExtraData(Sistema &ER,int index);
+
+
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -249,49 +251,49 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 
 
-	if(idPP == -1)
-	{
-		cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
-	}
-	else
-	{
-
-		if(bikeType == "Urbana")
-			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
-		else if(bikeType == "Urbana Simples")
-			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
-		else if(bikeType == "Corrida")
-			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
-		else
-			ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
-
-		cout << "AAAAA" << endl;
-		ER.getUtentes().at(index)->setAvailable();
-
-		ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
-
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
+		if(idPP == -1)
 		{
-			cout << "AAAAA" << endl;
-			Utilizacao p(bikeType, numHours, d1.dia, d1.mes, d1.ano);
-			ER.getUtentes().at(index)->getUtilizacoes().push_back(p);
-			cout << "BBBBB" << endl;
+			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
 		}
+		else
+		{
+
+			if(bikeType == "Urbana")
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
+			else if(bikeType == "Urbana Simples")
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
+			else if(bikeType == "Corrida")
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
+			else
+				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
+
+			cout << "AAAAA" << endl;
+			ER.getUtentes().at(index)->setAvailable();
+
+			ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
+
+			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
+			{
+				cout << "AAAAA" << endl;
+				Utilizacao p(bikeType, numHours, d1.dia, d1.mes, d1.ano);
+				ER.getUtentes().at(index)->getUtilizacoes().push_back(p);
+				cout << "BBBBB" << endl;
+			}
 			else {
 
-			/* Apresenta o preço do aluguer */
+				/* Apresenta o preço do aluguer */
 
-			/* Adiciona ao historio */
-			ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
+				/* Adiciona ao historio */
+				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
+			}
+
+			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
 		}
 
-		cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
 	}
-
-	system("pause");
-	system("cls");
-	return;
-}
 }
 void devolveBike(Sistema &ER,int index) {
 
@@ -521,6 +523,255 @@ void infoER(Sistema &ER) {
 
 }
 
+
+void addPP(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+	cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+	cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+	cout << "Adiciona Ponto Partilha:" << endl << endl;
+
+	string nome,locname;
+	int value {};
+	string option {};
+
+	while(1)
+	{
+		try {
+			cout << "Nome: " ;
+			cin >> nome;
+			if(valid_word(nome) == false)
+				throw OpcaoInvalida<string>(nome);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	cout << endl << "Localizacao: " << endl << endl;
+
+	while(1)
+	{
+		try {
+			cout << "Nome: " ;
+			cin >> locname;
+			if(valid_word(locname) == false)
+				throw OpcaoInvalida<string>(nome);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	cout << "Indique as suas cordenadas GPS:" << endl;
+
+	double coordX { }, coordY { };
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada X: ";
+			cin >> option;
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordX = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada Y: ";
+			cin >> option;
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordY = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	Localizacao spot;
+	spot.setNome(locname);
+	spot.setX(coordX);
+	spot.setY(coordY);
+
+	while(1)
+	{
+		try{
+			cout << endl << "Capacidade: ";
+			cin >> option;
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Capacidade inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	PontoPartilha* pp = new PontoPartilha(spot,value,nome);
+
+	ER.addPontoPartilha(pp);
+
+	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+}
+void visualizaPP(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+	cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+	cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+	cout << "Visualiza Pontos Partilha:" << endl << endl;
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		cout << "Nome: " << ER.getPontosPartilha().at(i)->getNome() << endl;
+		cout << "Capacidade: " << ER.getPontosPartilha().at(i)->getCapacidade() << endl;
+		cout << "Localização: " << endl << "    Nome: " << ER.getPontosPartilha().at(i)->getLocal().getNome() << endl;
+		cout << "    Coordenadas: (" << ER.getPontosPartilha().at(i)->getLocal().getX() << " , " << ER.getPontosPartilha().at(i)->getLocal().getY();
+		cout << ") " << endl << endl;
+	}
+
+	system("pause");
+	system("cls");
+	return;
+}
+void visualizaUtente(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+	cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+	cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+	cout << "Visualiza Utentes:" << endl << endl;
+
+	for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
+	{
+		cout << "Nome: " << ER.getUtentes().at(i)->getUtenteNome() << endl;
+		cout << "Tipo de Utente: " << ER.getUtentes().at(i)->getTipoUtente() << endl;
+		cout << "ID: " << ER.getUtentes().at(i)->getId() << endl;
+		cout << "Localização: " << endl << "    Nome: " << ER.getUtentes().at(i)->getLocalizacao().getNome() << endl;
+		cout << "    Coordenadas: (" << ER.getUtentes().at(i)->getLocalizacao().getX() << " , " << ER.getUtentes().at(i)->getLocalizacao().getY();
+		cout << ") " << endl << endl;
+	}
+
+	system("pause");
+	system("cls");
+	return;
+
+}
+void visualizaBikes(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+	cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+	cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+	cout << "Visualiza Bicicletas:" << endl << endl;
+
+	int numU{}, numUS{}, numC{}, numI{};
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		numU += ER.getPontosPartilha().at(i)->getBikes().at(0).size();
+		numUS += ER.getPontosPartilha().at(i)->getBikes().at(1).size();
+		numC += ER.getPontosPartilha().at(i)->getBikes().at(2).size();
+		numI += ER.getPontosPartilha().at(i)->getBikes().at(3).size();
+	}
+
+	cout << "No total existem no momento: " << endl;
+	cout << "->  Bicicletas Urbanas: " << numU << endl;
+	cout << "->  Bicicletas Urbanas Simples: " << numUS << endl;
+	cout << "->  Bicicletas Corrida: " << numC << endl;
+	cout << "->  Bicicletas Infantil: " << numI << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+
+}
+void adicionaBike(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+	cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+	cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+	cout << "Adiciona Bicicleta:" << endl << endl;
+
+	string nomePP, tipoUtente;
+	//int value {};
+	int index {};
+
+	while(1)
+	{
+		try {
+			cout << "Nome do Ponto Partilha: " ;
+			cin >> nomePP;
+			if(valid_word(nomePP) == false)
+				throw OpcaoInvalida<string>(nomePP);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	for(unsigned int i = 0; ER.getPontosPartilha().size(); i++)
+	{
+		if(ER.getPontosPartilha().at(i)->getNome() == nomePP)
+			index = i;
+	}
+
+	cout << index;
+	//if(ER.getPontosPartilha().at(index)->getCapacidade() == )
+}
+
 void openInterface(Sistema & ER){
 
 	int value { };
@@ -707,11 +958,11 @@ void registo_utente(Sistema & ER){
 	spot.setX(coordX);
 	spot.setY(coordY);
 
-	Utente* u1 = new Utente(nome,tipoUtente,spot);
+	Utente* u12 = new Utente(nome,tipoUtente,spot);
 
-	ER.addNewUtente(u1);
+	ER.addNewUtente(u12);
 
-	cout << endl << "Utente #" << u1->getId() << " registado com sucesso." << endl << endl;
+	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
 
 	system("pause");
 	system("cls");
@@ -785,15 +1036,17 @@ void menu_interface(Sistema &ER){
 		cout << "3 - Historial" << endl;
 		cout << "4 - Pagamentos pendentes" << endl;
 		cout << "5 - Atualiza Localização" << endl;
-		cout << "6 - Ponto de partilha mais próximo" << endl;
-		cout << "7 - Obter informações sobre ECO RIDES" << endl;
-		cout << "8 - Sair" << endl << endl;
+		cout << "6 - Efetuar pagamento das mensalidades" << endl;
+		cout << "7 - Ponto de partilha mais próximo" << endl;
+		cout << "8 - Mudar o tipo de utente" << endl;
+		cout << "9 - Obter informações sobre ECO RIDES" << endl;
+		cout << "10 - Sair" << endl << endl;
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opcao (1-8): ";
+				cout << endl << "Introduza uma opcao (1-10): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -801,7 +1054,7 @@ void menu_interface(Sistema &ER){
 
 				value = stoi(option);
 
-				if(value < 1 || value > 8)
+				if(value < 1 || value > 10)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -845,17 +1098,25 @@ void menu_interface(Sistema &ER){
 			break;
 		case 6:
 			system("cls");
-			NearestPP(ER,index);
+			//Efetua pagamento
 			break;
 		case 7:
 			system("cls");
-			infoER(ER);
+			NearestPP(ER,index);
 			break;
 		case 8:
+			system("cls");
+			//Mudar tipo de utente
+			break;
+		case 9:
+			system("cls");
+			infoER(ER);
+			break;
+		case 10:
 			cout << endl;
 			break;
 		}
-	}while(value != 8);
+	}while(value != 10);
 
 	system("pause");
 	system("cls");
@@ -863,8 +1124,7 @@ void menu_interface(Sistema &ER){
 
 }
 
-void admin_interface(Sistema &BS) {
-
+void admin_interface(Sistema &ER) {
 
 	//Informacao inicial apresentadada ao utilizador
 	cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
@@ -873,20 +1133,123 @@ void admin_interface(Sistema &BS) {
 	cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
 	cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
 
-	cout << "Administração" << endl << endl;
 
-	for(unsigned int i = 0; i < BS.getPontosPartilha().size(); i++)
+	int attempts { 1 };
+	string info;
+	string password = "1234";
+
+	while(attempts <= 3)
 	{
-		for(unsigned int k = 0; k < BS.getPontosPartilha().at(i)->getBikes().size(); k++)
-		{
-			for(unsigned int q = 0; q < BS.getPontosPartilha().at(i)->getBikes().at(k).size(); q++)
+		try{
+			cout << "Admin (Password): ";
+			cin >> info;
+
+			if(info != password)
 			{
-				cout << BS.getPontosPartilha().at(i)->getBikes().at(k).at(q)->getBikeType() << endl;
+				attempts++;
+				throw OpcaoInvalida<string>(info);
 			}
 
-			cout << endl;
+			break;
 		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Password inválida (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	if(attempts > 3)
+	{
+		cout << endl << "Acesso negado: password incorreta" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
 	}
+
+	system("cls");
+
+	string option;
+	int value {};
+
+	do
+	{
+		//Informacao inicial apresentadada ao utilizador
+		cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+		cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+		cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+		cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+		cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+
+		cout << "Administração" << endl << endl;
+
+		cout << "1 - Adiciona bicicleta" << endl;
+		cout << "2 - Adiciona ponto partilha" << endl;
+		cout << "3 - Visualiza pontos de partilha" << endl;
+		cout << "4 - Visualiza bicicletas" << endl;
+		cout << "5 - Visualiza utentes" << endl;
+		cout << "6 - Sair" << endl << endl;
+
+		while(1)
+		{
+			try {
+
+				cout << endl << "Introduza uma opcao (1-6): ";
+				cin >> option;
+
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+
+				value = stoi(option);
+
+				if(value < 1 || value > 6)
+					throw OpcaoInvalida<int>(value);
+
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+
+		//Opcões possiveis apresentadas no menu
+		switch (value)
+		{
+		case 1:
+			system("cls");
+			adicionaBike(ER);
+			break;
+		case 2:
+			system("cls");
+			addPP(ER);
+			break;
+		case 3:
+			system("cls");
+			visualizaPP(ER);
+			break;
+		case 4:
+			system("cls");
+			visualizaBikes(ER);
+			break;
+		case 5:
+			system("cls");
+			visualizaUtente(ER);
+			break;
+		case 6:
+			cout << endl;
+			break;
+		}
+	}while(value != 6);
 
 	system("pause");
 	system("cls");
