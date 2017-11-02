@@ -222,6 +222,8 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		};
 
 		int idPP {-1};
+
+		//ALTERACAO
 		//Verifica por ordem se tem o tipo de bicleta pretendida
 		for(unsigned int i = 0; i < distancias.size(); i++)
 		{
@@ -257,7 +259,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		}
 		else
 		{
-
+			//ALTERACAO
 			if(bikeType == "Urbana")
 				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
 			else if(bikeType == "Urbana Simples")
@@ -270,6 +272,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			cout << "AAAAA" << endl;
 			ER.getUtentes().at(index)->setAvailable();
 
+			//ALTERACAO
 			ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
@@ -880,7 +883,7 @@ void registo_utente(Sistema & ER){
 	while(1)
 	{
 		try{
-			cout << endl << "Introduza uma opcao (1-3): ";
+			cout << endl << "Introduza uma opcao (1-2): ";
 			cin >> option;
 			if(valid_number(option) == false)
 				throw OpcaoInvalida<string>(option);
