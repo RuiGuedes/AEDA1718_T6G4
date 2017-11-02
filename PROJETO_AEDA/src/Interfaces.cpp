@@ -305,11 +305,25 @@ void devolveBike(Sistema &ER,int index) {
 	{
 		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
 	}
-	else
+	else if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 	{
 		cout << "Devolve bicicleta: " << endl << endl;
 
 		Utilizacao ut = ER.getUtentes().at(index)->getUtilizacoes().at(ER.getUtentes().at(index)->getUtilizacoes().size() - 1);
+
+		cout << "Tipo de bicicleta: " << ut.getBikeType() << endl;
+		cout << "Número de horas: " << ut.getUseTime() << endl;
+		cout << "Data (dd/mm/aaaa): " << ut.getdia() << "/" << ut.getmes() << "/" << ut.getano()<< endl;
+
+		ER.getUtentes().at(index)->setAvailable();
+
+		cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
+	}
+	else
+	{
+		cout << "Devolve bicicleta: " << endl << endl;
+
+		Utilizacao ut = ER.getUtentes().at(index)->getHistorico().at(ER.getUtentes().at(index)->getHistorico().size() - 1);
 
 		cout << "Tipo de bicicleta: " << ut.getBikeType() << endl;
 		cout << "Número de horas: " << ut.getUseTime() << endl;

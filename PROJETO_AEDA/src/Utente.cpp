@@ -44,6 +44,9 @@ bool Utente::getAvailable() const {
 	return disponivel;
 }
 
+vector<Utilizacao> Utente::getHistorico() {
+	return this->historico;
+}
 
 /////////////////
 // METODOS SET //

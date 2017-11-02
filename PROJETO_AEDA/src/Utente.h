@@ -37,6 +37,7 @@ public:
 	Bicicleta* getBike() const;
 	vector<Utilizacao> getUtilizacoes();
 	bool getAvailable() const;
+	vector<Utilizacao> getHistorico();
 
 	/* MÉTODOS SET */
 	void setUtenteLocation(Localizacao spot);
