@@ -223,7 +223,6 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 		int idPP {-1};
 
-		//ALTERACAO
 		//Verifica por ordem se tem o tipo de bicleta pretendida
 		for(unsigned int i = 0; i < distancias.size(); i++)
 		{
@@ -233,10 +232,10 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			{
 				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
 				{
-					cout << "AAAAA" << endl;
+
 					if(bikes.at(k).at(q)->getBikeType() == bikeType)
 					{
-						idPP = i;
+						idPP = distancias.at(i);
 						break;
 					}
 
@@ -258,7 +257,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		}
 		else
 		{
-			//ALTERACAO
+
 			if(bikeType == "Urbana")
 				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
 			else if(bikeType == "Urbana Simples")
@@ -268,10 +267,8 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			else
 				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
 
-			cout << "BBBBB" << endl;
 			ER.getUtentes().at(index)->setAvailable();
 
-			//ALTERACAO
 			ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
@@ -284,7 +281,6 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 				/* Apresenta o preço do aluguer */
 
-				/* Adiciona ao historio */
 				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
 			}
 
@@ -1087,7 +1083,16 @@ void menu_interface(Sistema &ER){
 			break;
 		case 3:
 			system("cls");
+			//Informacao inicial apresentadada ao utilizador
+			cout << "#######  ####### #######      ##########  ##  #####     #######  #######" << endl;
+			cout << "###      ##      ##   ##      ##      ##  ##  ##  ###   ###      ##     " << endl;
+			cout << "#######  ##      ##   ##      ##   #####  ##  ##    ##  ######   #######" << endl;
+			cout << "###      ##      ##   ##      ##   ##     ##  ##  ###   ###           ##" << endl;
+			cout << "#######  ####### #######      ##     ###  ##  #####     #######  #######" << endl << endl;
+			cout << "Histórico: " << endl << endl;
 			ER.getUtentes().at(index)->displayHistoric();
+			system("pause");
+			system("cls");
 			break;
 		case 4:
 			system("cls");

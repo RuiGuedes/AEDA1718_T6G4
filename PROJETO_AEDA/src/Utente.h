@@ -26,9 +26,7 @@ public:
 	void alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias);
 	void devolveBicicleta();
 	void updateHistoric();
-	void displayHistoric() const {
-
-	}
+	void displayHistoric();
 
 	/* MÉTODOS GET */
 	static int getLastId() {return lastId;}

@@ -114,6 +114,26 @@ void Utente::updateHistoric() {
 	}
 }
 
+void Utente::displayHistoric() {
+
+	if(this->historico.size() != 0)
+	{
+		for(unsigned int i = 0; i < this->historico.size(); i++)
+		{
+			cout << "Tipo de bicicleta: " << this->historico.at(i).getBikeType() << endl;
+			cout << "Número de horas: " << this->historico.at(i).getUseTime() << endl;
+			cout << "Data (dd/mm/aaaa): " << this->historico.at(i).getdia() << "/";
+			cout << this->historico.at(i).getmes();
+			cout << "/" << this->historico.at(i).getano()<< endl << endl;
+
+		}
+	}
+	else
+	{
+		cout << "Este utente ainda não utilizou qualquer tipo de servico" << endl << endl;
+	}
+}
+
 void Utente::alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias) {
 
 	//Se tiver: atribui a bicicleta ao utente e remove-a do pontopartilha e regista a utilizacao
@@ -122,9 +142,11 @@ void Utente::alugaBicicleta(string bikeType, unsigned int numHours, struct data,
 
 	/* Remove bicicleta do ponto partilha */
 
-//	/* Regista utilizacao */
-//
+	//	/* Regista utilizacao */
+	//
 	//Senão tiver: faz cout "Neste momento não é possivel alugar a bicicleta do tipo (bikeType)
 
 	return;
 }
+
+
