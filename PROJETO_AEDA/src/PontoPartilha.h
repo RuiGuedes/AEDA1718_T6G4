@@ -11,8 +11,6 @@ class PontoPartilha {
 	string nome;
 public:
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
-	void removeBike(Bicicleta *bike);
-	void adicionaBike(Bicicleta* bike);
 
 	//Metodos get
 	Localizacao getLocal() const;
@@ -23,5 +21,6 @@ public:
 	vector <vector<Bicicleta *> > getBikes() const;
 
 	//Metodos set
-
+	void removeBike(Bicicleta *bike);
+	void adicionaBike(Bicicleta* bike);
 };

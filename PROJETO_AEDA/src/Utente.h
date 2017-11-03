@@ -23,9 +23,7 @@ class Utente {
 	bool disponivel = true;
 public:
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
-	void alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias);
-	void devolveBicicleta();
-	void updateHistoric();
+
 	void displayHistoric();
 
 	/* MÉTODOS GET */
@@ -46,5 +44,8 @@ public:
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
 	void setUtilizacoes(Utilizacao ut);
+	void alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias);
+	void devolveBicicleta();
+	void updateHistoric();
 
 };
