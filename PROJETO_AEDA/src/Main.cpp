@@ -4,6 +4,7 @@
 using namespace std;
 
 void openInterface(Sistema & ER);
+void checkoutSys(Sistema & ER);
 
 int main()
 {
@@ -55,6 +56,8 @@ int main()
 	sys.addPontoPartilha(p8);
 	sys.addPontoPartilha(p9);
 
+
+
 	Bicicleta *bike1 = new Bicicleta("Urbana Simples", "us1");
 	Bicicleta *bike2 = new Bicicleta("Urbana Simples", "us2");
 	Bicicleta *bike3 = new Bicicleta("Urbana Simples", "us3");
@@ -79,7 +82,8 @@ int main()
 
 	openInterface(sys);
 
-	//
+	checkoutSys(sys);
+
 	//	Bicicleta* b1 = new Bicicleta("urbana", "u1");
 	//	p1->adicionaBike(b1);
 	//
@@ -98,6 +102,129 @@ int main()
 
 	return 0;
 }
+
+
+
+void checkinSys(Sistema & ER){
+	ifstream f_pontos_partilha;
+
+	ifstream f_utentes;
+
+	ifstream f_bicicletas;
+
+	try{
+		f_pontos_partilha.open("pontosPartilha.txt");
+		if (!f_pontos_partilha.is_open())
+			throw AberturaFalhada<string>("pontos_partilha.txt");
+
+		f_bicicletas.open("bicicletas.txt");
+		if (!f_bicicletas.is_open())
+			throw AberturaFalhada<string>("bicicletas.txt");
+
+		f_utentes.open("utentes.txt");
+		if (!f_utentes.is_open())
+			throw AberturaFalhada<string>("utentes.txt");
+	}
+	catch (AberturaFalhada<string> &a){
+		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
+		cout << "Tente mais tarde./n";
+		return;
+	}
+
+
+
+
+
+
+
+
+
+}
+
+void checkoutSys(Sistema & ER){
+
+	///////////////////////////////////////////////////////////////
+	//antes de fazer check out , os utentes tem que devolver bike//
+	///////////////////////////////////////////////////////////////
+
+	ofstream f_pontos_partilha;
+
+	ofstream f_utentes;
+
+	ofstream f_bicicletas;
+
+	try{
+		f_pontos_partilha.open("pontosPartilha.txt");
+		if (!f_pontos_partilha.is_open())
+			throw AberturaFalhada<string>("pontos_partilha.txt");
+
+		f_bicicletas.open("bicicletas.txt");
+		if (!f_bicicletas.is_open())
+			throw AberturaFalhada<string>("bicicletas.txt");
+
+		f_utentes.open("utentes.txt");
+		if (!f_utentes.is_open())
+			throw AberturaFalhada<string>("utentes.txt");
+	}
+	catch (AberturaFalhada<string> &a){
+		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
+		cout << "Tente mais tarde./n";
+		return;
+	}
+
+
+	for(unsigned int it=0 ; it<ER.getUtentes().size() ; it++){
+		f_utentes << *ER.getUtentes().at(it) << endl;
+	}
+
+	for(unsigned int it=0 ; it<ER.getPontosPartilha().size() ; it++){
+		f_pontos_partilha << *ER.getPontosPartilha().at(it) << endl;
+
+		PontoPartilha p(*ER.getPontosPartilha().at(it));
+
+		for(unsigned int j=0 ; j<p.getBikes().size() ; j++)
+			for(unsigned int k=0 ; k <p.getBikes().at(j).size() ; k++){
+				f_bicicletas << *p.getBikes().at(j).at(k) << endl;
+			}
+	}
+
+	f_pontos_partilha.close();
+
+	f_utentes.close();
+
+	f_bicicletas.close();
+
+	return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

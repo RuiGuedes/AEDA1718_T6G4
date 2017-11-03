@@ -1,28 +1,23 @@
 #include "Utilizacao.h"
 
-Utilizacao::Utilizacao(string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano) {
-	this->bikeType = bikeType;
-	useTime = numHours;
 
-	this->dia = dia;
-	this->mes = mes;
-	this->ano = ano;
+Utilizacao::Utilizacao(){
+	this->bikeType = " ";
+	this->useTime = 0;
+}
+
+Utilizacao::Utilizacao(string bikeType, unsigned int numHours, Data d) {
+	this->bikeType = bikeType;
+	this->useTime = numHours;
+	this->data=d;
 }
 
 /////////////////
 // METODOS GET //
 /////////////////
 
-unsigned int Utilizacao::getdia()const {
-	return dia;
-}
-
-unsigned int Utilizacao::getmes()const {
-	return mes;
-}
-
-unsigned int Utilizacao::getano()const {
-	return ano;
+Data Utilizacao::getData()const {
+	return data;
 }
 
 unsigned int Utilizacao::getUseTime() const {
@@ -57,4 +52,5 @@ void Data::setMes(unsigned int m){
 void Data::setAno(unsigned int a){
 	this->ano=a;
 }
+
 

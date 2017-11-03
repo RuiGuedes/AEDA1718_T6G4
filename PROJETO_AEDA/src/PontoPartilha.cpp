@@ -27,13 +27,13 @@ int PontoPartilha::getCapacidade() const {
 	return capacidade;
 }
 
-int PontoPartilha::getNumberOfBikes() const {
+vector<int> PontoPartilha::getNumberOfBikes() const {
 
-	int number_bikes = 0;
+	vector<int> number_bikes;
 
 	for(unsigned int i = 0; i < bicicletas.size(); i++)
 	{
-		number_bikes += bicicletas.at(i).size();
+		number_bikes.push_back(bicicletas.at(i).size());
 	}
 
 	return number_bikes;

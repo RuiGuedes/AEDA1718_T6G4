@@ -16,4 +16,21 @@ public:
 
 	//Metodos Set
 	void setBikeAvailable();
+
+	friend ostream & operator <<(ostream & o, const Bicicleta & b);
+	friend istream & operator >>(istream & i, Bicicleta & b);
 };
+
+inline ostream& operator <<(ostream & o, const Bicicleta & b)
+{
+	o << b.bikeName << '/' << b.bikeType << '/' << b.disponivel;
+	return o;
+}
+
+inline istream& operator >>(istream & i, Bicicleta & b)
+{
+	char b1, b2;
+	i >>  b.bikeName >> b1 >> b.bikeType >> b2 >> b.disponivel;
+	return i;
+}
+

@@ -12,11 +12,11 @@ vector<int> ExtraData(Sistema &ER,int index);
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 
 	if(ER.getUtentes().at(index)->getAvailable() == false)
@@ -37,7 +37,6 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		string bikeType;
 		Data d1;
 		int numHours{};
-		//, dia{}, mes{}, ano {}
 		int value {};
 		string option {};
 
@@ -236,30 +235,30 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 		}
 
-//		//Verifica por ordem se tem o tipo de bicleta pretendida
-//		for(unsigned int i = 0; i < distancias.size(); i++)
-//		{
-//			vector <vector<Bicicleta *> > bikes = ER.getPontosPartilha().at(distancias.at(i))->getBikes();
-//
-//			for(unsigned int k = 0; k < bikes.size(); k++)
-//			{
-//				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
-//				{
-//
-//					if(bikes.at(k).at(q)->getBikeType() == bikeType)
-//					{
-//						idPP = distancias.at(i);
-//						break;
-//					}
-//				}
-//
-//				if(idPP != -1)
-//					break;
-//			}
-//
-//			if(idPP != -1)
-//				break;
-//		}
+		//		//Verifica por ordem se tem o tipo de bicleta pretendida
+		//		for(unsigned int i = 0; i < distancias.size(); i++)
+		//		{
+		//			vector <vector<Bicicleta *> > bikes = ER.getPontosPartilha().at(distancias.at(i))->getBikes();
+		//
+		//			for(unsigned int k = 0; k < bikes.size(); k++)
+		//			{
+		//				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
+		//				{
+		//
+		//					if(bikes.at(k).at(q)->getBikeType() == bikeType)
+		//					{
+		//						idPP = distancias.at(i);
+		//						break;
+		//					}
+		//				}
+		//
+		//				if(idPP != -1)
+		//					break;
+		//			}
+		//
+		//			if(idPP != -1)
+		//				break;
+		//		}
 
 		if(idPP == -1)
 		{
@@ -283,7 +282,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 			{
-				Utilizacao p(bikeType, numHours, d1.getDia(), d1.getMes(), d1.getAno());
+				Utilizacao p(bikeType, numHours, d1);
 				ER.getUtentes().at(index)->setUtilizacoes(p);
 
 			}
@@ -299,7 +298,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 				else //bikeType == "Infantil"
 					cout << "Total a pagar : " << numHours*2 << "€" << endl;
 
-				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.getDia(), d1.getMes(), d1.getAno()));
+				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1));
 			}
 
 			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
@@ -310,14 +309,15 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		return;
 	}
 }
+
 void devolveBike(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	if(ER.getUtentes().at(index)->getAvailable() == true)
 	{
@@ -331,7 +331,7 @@ void devolveBike(Sistema &ER,int index) {
 
 		cout << "Tipo de bicicleta: " << ut.getBikeType() << endl;
 		cout << "Número de horas: " << ut.getUseTime() << endl;
-		cout << "Data (dd/mm/aaaa): " << ut.getdia() << "/" << ut.getmes() << "/" << ut.getano()<< endl;
+		cout << "Data (dd/mm/aaaa): " << ut.getData() << endl;
 
 		ER.getUtentes().at(index)->setAvailable();
 
@@ -345,7 +345,7 @@ void devolveBike(Sistema &ER,int index) {
 
 		cout << "Tipo de bicicleta: " << ut.getBikeType() << endl;
 		cout << "Número de horas: " << ut.getUseTime() << endl;
-		cout << "Data (dd/mm/aaaa): " << ut.getdia() << "/" << ut.getmes() << "/" << ut.getano()<< endl;
+		cout << "Data (dd/mm/aaaa): " << ut.getData() << endl;
 
 		ER.getUtentes().at(index)->setAvailable();
 
@@ -356,6 +356,7 @@ void devolveBike(Sistema &ER,int index) {
 	return;
 
 }
+
 int ExistID(Sistema & sys, int identificacao) {
 
 	for(unsigned int i = 0; i < sys.getUtentes().size() ; i++)
@@ -366,14 +367,15 @@ int ExistID(Sistema & sys, int identificacao) {
 
 	return -1;
 }
+
 void displayPagPendentes(Sistema &ER,int index){
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 	cout << "Pagamentos pendentes:" << endl << endl;
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
@@ -393,11 +395,18 @@ void displayPagPendentes(Sistema &ER,int index){
 			{
 				cout << "Tipo de bicicleta: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() << endl;
 				cout << "Número de horas: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime() << endl;
-				cout << "Data (dd/mm/aaaa): " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getdia() << "/";
-				cout << ER.getUtentes().at(index)->getUtilizacoes().at(i).getmes();
-				cout << "/" << ER.getUtentes().at(index)->getUtilizacoes().at(i).getano()<< endl << endl;
+				cout << "Data (dd/mm/aaaa): " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getData() << endl << endl;
 
+
+
+
+				/////////////////////////////////////////////////
 				//FALTA CALCULAR O PRECO DAS UTILIZACOES !!!!
+				/////////////////////////////////////////////////
+
+
+
+
 			}
 		}
 		else
@@ -411,14 +420,15 @@ void displayPagPendentes(Sistema &ER,int index){
 	}
 
 }
+
 void updateLocation(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 	cout << "Localizacao: " << endl << endl;
 
 	cout << "Indique as suas cordenadas GPS:" << endl;
@@ -477,14 +487,15 @@ void updateLocation(Sistema &ER,int index) {
 	return;
 
 }
+
 void NearestPP(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 	cout << "Pontos de partilha mais próximo: " << endl << endl;
 
 	vector<double> distancias;
@@ -514,14 +525,15 @@ void NearestPP(Sistema &ER,int index) {
 	return;
 
 }
+
 void infoER(Sistema &ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 	cout << "Informações:" << endl << endl;
 
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
@@ -551,11 +563,12 @@ void infoER(Sistema &ER) {
 void addPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
 	cout << "Adiciona Ponto Partilha:" << endl << endl;
 
 	string nome,locname;
@@ -672,15 +685,15 @@ void addPP(Sistema & ER) {
 	system("cls");
 	return;
 }
+
 void visualizaPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
-	cout << "Visualiza Pontos Partilha:" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
 	{
@@ -695,15 +708,15 @@ void visualizaPP(Sistema & ER) {
 	system("cls");
 	return;
 }
+
 void visualizaUtente(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
-	cout << "Visualiza Utentes:" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
 	{
@@ -720,15 +733,15 @@ void visualizaUtente(Sistema & ER) {
 	return;
 
 }
+
 void visualizaBikes(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
-	cout << "Visualiza Bicicletas:" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	int numU{}, numUS{}, numC{}, numI{};
 
@@ -751,15 +764,15 @@ void visualizaBikes(Sistema & ER) {
 	return;
 
 }
+
 void adicionaBike(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
-	cout << "Adiciona Bicicleta:" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	string nomePP, tipoUtente;
 	//int value {};
@@ -801,11 +814,11 @@ void openInterface(Sistema & ER){
 	do
 	{
 		//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 		cout << "1 - Registar " << endl;
 		cout << "2 - Entrar" << endl;
@@ -860,16 +873,17 @@ void openInterface(Sistema & ER){
 			break;
 		}
 	}while(value != 4);
+	return;
 }
 
 void registo_utente(Sistema & ER){
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	cout << "Regista novo utente:" << endl;
 
@@ -992,11 +1006,11 @@ void menu_interface(Sistema &ER){
 
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	int attempts { 0 };
 	int identificacao { };
@@ -1042,11 +1056,11 @@ void menu_interface(Sistema &ER){
 	do
 	{
 		//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 		cout << "Bem-Vindo !" << endl << endl;
 
@@ -1106,11 +1120,12 @@ void menu_interface(Sistema &ER){
 		case 3:
 			system("cls");
 			//Informacao inicial apresentadada ao utilizador
-			cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-			cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-			cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-			cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-			cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+			cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+			cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+			cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+			cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+			cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
 			cout << "Histórico: " << endl << endl;
 			ER.getUtentes().at(index)->displayHistoric();
 			system("pause");
@@ -1155,11 +1170,11 @@ void menu_interface(Sistema &ER){
 void admin_interface(Sistema &ER) {
 
 	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 
 	int attempts { 1 };
@@ -1204,11 +1219,11 @@ void admin_interface(Sistema &ER) {
 	do
 	{
 		//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  ######    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ###   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ###  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ###   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  ######    ######  #######" << endl << endl;
+		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 		cout << "Administração" << endl << endl;
 

@@ -125,9 +125,7 @@ void Utente::displayHistoric() {
 		{
 			cout << "Tipo de bicicleta: " << this->historico.at(i).getBikeType() << endl;
 			cout << "Número de horas: " << this->historico.at(i).getUseTime() << endl;
-			cout << "Data (dd/mm/aaaa): " << this->historico.at(i).getdia() << "/";
-			cout << this->historico.at(i).getmes();
-			cout << "/" << this->historico.at(i).getano()<< endl << endl;
+			cout << "Data (dd/mm/aaaa): " << this->historico.at(i).getData() << endl << endl;
 
 		}
 	}

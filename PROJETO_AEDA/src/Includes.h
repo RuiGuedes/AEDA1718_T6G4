@@ -9,7 +9,15 @@
 #include <cmath>
 #include <stdlib.h>
 #include <algorithm>
+#include <fstream>
 
+//#include "Bicicleta.h"
+#include "Localizacao.h"
+//#include "Utilizacao.h"
+//#include "Utente.h"
+//#include "PontoPartilha.h"
+//#include "Sistema.h"
+//#include "Exceções.h"
 
 using namespace std;
 
