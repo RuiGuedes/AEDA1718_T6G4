@@ -137,7 +137,7 @@ void Utente::displayHistoric() {
 	}
 }
 
-void Utente::alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias) {
+void Utente::alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias) {
 
 	//Se tiver: atribui a bicicleta ao utente e remove-a do pontopartilha e regista a utilizacao
 

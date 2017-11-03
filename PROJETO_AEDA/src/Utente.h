@@ -5,11 +5,11 @@
 #include "Bicicleta.h"
 #include "Utilizacao.h"
 
-struct data {
-	int dia;
-	int mes;
-	int ano;
-};
+//struct data {
+//	int dia;
+//	int mes;
+//	int ano;
+//};
 
 class Utente {
 	static int lastId;
@@ -44,7 +44,7 @@ public:
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
 	void setUtilizacoes(Utilizacao ut);
-	void alugaBicicleta(string bikeType, unsigned int numHours, struct data, vector<int> distancias);
+	void alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias);
 	void devolveBicicleta();
 	void updateHistoric();
 

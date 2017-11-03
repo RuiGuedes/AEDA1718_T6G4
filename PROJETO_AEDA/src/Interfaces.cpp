@@ -35,7 +35,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		//string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano)
 
 		string bikeType;
-		data d1;
+		Data d1;
 		int numHours{};
 		//, dia{}, mes{}, ano {}
 		int value {};
@@ -127,7 +127,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 				if(value < 2017)
 					throw OpcaoInvalida<int>(value);
 
-				d1.ano = value;
+				d1.setAno(value);
 				break;
 			}
 			catch (OpcaoInvalida<int> &op){
@@ -156,7 +156,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 				if(value < 1 || value > 12)
 					throw OpcaoInvalida<int>(value);
 
-				d1.mes = value;
+				d1.setMes(value);
 				break;
 			}
 			catch (OpcaoInvalida<int> &op){
@@ -182,20 +182,20 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 					throw OpcaoInvalida<string>(option);
 
 				value = stoi(option);
-				if(d1.mes == 2)
+				if(d1.getMes() == 2)
 				{
 					if(value < 1 || value > 28)
 						throw OpcaoInvalida<int>(value);
 
-					d1.dia = value;
+					d1.setDia(value);
 					break;
 				}
-				else if((d1.mes == 1) ||(d1.mes == 3) ||(d1.mes == 5) ||(d1.mes == 7) ||(d1.mes == 8) ||(d1.mes == 10) ||(d1.mes == 12))
+				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
 				{
 					if(value < 1 || value > 31)
 						throw OpcaoInvalida<int>(value);
 
-					d1.dia = value;
+					d1.setDia(value);
 					break;
 				}
 				else
@@ -203,7 +203,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 					if(value < 1 || value > 30)
 						throw OpcaoInvalida<int>(value);
 
-					d1.dia = value;
+					d1.setDia(value);
 					break;
 				}
 			}
@@ -283,15 +283,23 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 			{
-				Utilizacao p(bikeType, numHours, d1.dia, d1.mes, d1.ano);
+				Utilizacao p(bikeType, numHours, d1.getDia(), d1.getMes(), d1.getAno());
 				ER.getUtentes().at(index)->setUtilizacoes(p);
 
 			}
 			else {
-
 				/* Apresenta o preço do aluguer */
 
-				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.dia, d1.mes, d1.ano));
+				if(bikeType == "Urbana")
+					cout << "Total a pagar : " << numHours*4 << "€" << endl;
+				else if(bikeType == "Urbana Simples")
+					cout << "Total a pagar : " << numHours*3 << "€" << endl;
+				else if(bikeType == "Corrida")
+					cout << "Total a pagar : " << numHours*5 << "€" << endl;
+				else //bikeType == "Infantil"
+					cout << "Total a pagar : " << numHours*2 << "€" << endl;
+
+				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1.getDia(), d1.getMes(), d1.getAno()));
 			}
 
 			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
@@ -539,7 +547,6 @@ void infoER(Sistema &ER) {
 	return;
 
 }
-
 
 void addPP(Sistema & ER) {
 
