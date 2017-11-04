@@ -25,6 +25,7 @@ public:
 	void removeBike(Bicicleta *bike);
 	void adicionaBike(Bicicleta* bike);
 	void limpaVectorBike();
+	friend void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos);
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
 };

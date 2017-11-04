@@ -122,5 +122,16 @@ void PontoPartilha::limpaVectorBike(){
 	bicicletas.at(3).clear();
 }
 
+void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos) {
+	for (unsigned int p = 1; p < pontos.size(); p++)
+	{
+		PontoPartilha tmp = *pontos[p];
+		int j;
+		for (j = p; j > 0 && local.distancia(tmp.getLocal()) < local.distancia(pontos[j-1]->getLocal()); j--)
+			*pontos[j] = *pontos[j-1];
+		*pontos[j] = tmp;
+	}
+}
+
 
 

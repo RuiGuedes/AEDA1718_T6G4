@@ -21,6 +21,7 @@ public:
 
 	//Outros
 	double distancia(Localizacao local) const;
+	Localizacao & operator =(Localizacao & l);
 	friend ostream & operator <<(ostream & o, const Localizacao & l);
 	friend istream & operator >>(istream & i, Localizacao & l);
 };

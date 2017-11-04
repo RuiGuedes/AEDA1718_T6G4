@@ -51,6 +51,14 @@ void Localizacao::setY(double y) {
 // OUTROS //
 ////////////
 
+Localizacao & Localizacao::operator =(Localizacao & l) {
+	setNome(l.nome);
+	setX(l.x);
+	setY(l.y);
+	return *this;
+}
+
+
 double Localizacao::distancia(Localizacao local) const{
 	return sqrt(pow((local.x - x),2) + pow((local.y - y),2));
 }
