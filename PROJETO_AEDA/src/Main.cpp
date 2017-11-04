@@ -4,6 +4,7 @@
 using namespace std;
 
 void openInterface(Sistema & ER);
+void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
 
 int main()
@@ -80,6 +81,7 @@ int main()
 	sys.getPontosPartilha().at(0)->adicionaBike(bike9);
 	sys.getPontosPartilha().at(0)->adicionaBike(bike10);
 
+	//	checkinSys(sys);
 	openInterface(sys);
 
 	checkoutSys(sys);
@@ -105,41 +107,62 @@ int main()
 
 
 
-void checkinSys(Sistema & ER){
-	ifstream f_pontos_partilha;
-
-	ifstream f_utentes;
-
-	ifstream f_bicicletas;
-
-	try{
-		f_pontos_partilha.open("pontosPartilha.txt");
-		if (!f_pontos_partilha.is_open())
-			throw AberturaFalhada<string>("pontos_partilha.txt");
-
-		f_bicicletas.open("bicicletas.txt");
-		if (!f_bicicletas.is_open())
-			throw AberturaFalhada<string>("bicicletas.txt");
-
-		f_utentes.open("utentes.txt");
-		if (!f_utentes.is_open())
-			throw AberturaFalhada<string>("utentes.txt");
-	}
-	catch (AberturaFalhada<string> &a){
-		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
-		cout << "Tente mais tarde./n";
-		return;
-	}
-
-
-
-
-
-
-
-
-
-}
+//void checkinSys(Sistema & ER){
+//	ifstream f_pontos_partilha;
+//
+//	ifstream f_utentes;
+//
+//	ifstream f_bicicletas;
+//
+//	try{
+//		f_pontos_partilha.open("pontosPartilha.txt");
+//		if (!f_pontos_partilha.is_open())
+//			throw AberturaFalhada<string>("pontos_partilha.txt");
+//
+//		f_bicicletas.open("bicicletas.txt");
+//		if (!f_bicicletas.is_open())
+//			throw AberturaFalhada<string>("bicicletas.txt");
+//
+//		f_utentes.open("utentes.txt");
+//		if (!f_utentes.is_open())
+//			throw AberturaFalhada<string>("utentes.txt");
+//	}
+//	catch (AberturaFalhada<string> &a){
+//		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
+//		cout << "Tente mais tarde./n";
+//		return;
+//	}
+//
+//	while(!f_utentes.eof()){
+//		Utente * u = new Utente();
+//		f_utentes >> *u;
+//		ER.addNewUtente(u);
+//	}
+//
+//	while(!f_pontos_partilha.eof()){
+//		PontoPartilha * p = new PontoPartilha();
+//		f_utentes >> *p;
+//		vector<int> numType = (*p).getNumberOfBikes();
+//		(*p).limpaVectorBike();
+//
+//		for (unsigned int j=0 ; j<numType.size() ; j++)
+//			for (int k=0 ; k < numType.at(j) ; k++){
+//				Bicicleta* b = new Bicicleta();
+//				f_bicicletas >> *b;
+//
+//				(*p).adicionaBike(b);
+//			}
+//
+//		ER.addPontoPartilha(p);
+//	}
+//
+//	f_pontos_partilha.close();
+//
+//	f_utentes.close();
+//
+//	f_bicicletas.close();
+//	return;
+//}
 
 void checkoutSys(Sistema & ER){
 

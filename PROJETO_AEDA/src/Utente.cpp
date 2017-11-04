@@ -2,6 +2,8 @@
 
 int Utente::lastId = 0;
 
+Utente::Utente() : id(++lastId){this->bike = 0;}
+
 Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
 {
 	this->nome = nome;

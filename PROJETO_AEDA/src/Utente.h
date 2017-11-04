@@ -18,6 +18,7 @@ class Utente {
 	vector<Utilizacao> historico;
 	bool disponivel = true;
 public:
+	Utente();
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
 
 	void displayHistoric();

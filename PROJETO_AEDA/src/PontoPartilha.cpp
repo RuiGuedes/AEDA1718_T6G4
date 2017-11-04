@@ -4,6 +4,8 @@
 // OTHERS //
 ////////////
 
+PontoPartilha::PontoPartilha(){capacidade = 0;};
+
 PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) {
 	local = spot;
 	capacidade = storage;
@@ -112,3 +114,13 @@ void PontoPartilha::adicionaBike(Bicicleta* bike) {
 
 	return;
 }
+
+void PontoPartilha::limpaVectorBike(){
+	bicicletas.at(0).clear();
+	bicicletas.at(1).clear();
+	bicicletas.at(2).clear();
+	bicicletas.at(3).clear();
+}
+
+
+

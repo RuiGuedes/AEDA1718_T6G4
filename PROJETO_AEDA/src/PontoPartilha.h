@@ -10,6 +10,7 @@ class PontoPartilha {
 	vector <vector<Bicicleta *> > bicicletas;
 	string nome;
 public:
+	PontoPartilha();
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
 
 	//Metodos get
@@ -23,6 +24,7 @@ public:
 	//Metodos set
 	void removeBike(Bicicleta *bike);
 	void adicionaBike(Bicicleta* bike);
+	void limpaVectorBike();
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
 };
