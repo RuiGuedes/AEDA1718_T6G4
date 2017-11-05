@@ -4,7 +4,14 @@
 // OTHERS //
 ////////////
 
-PontoPartilha::PontoPartilha(){capacidade = 0;};
+PontoPartilha::PontoPartilha(){
+	capacidade = 0;
+	vector<Bicicleta *> v1,v2,v3,v4;
+	bicicletas.push_back(v1);
+	bicicletas.push_back(v2);
+	bicicletas.push_back(v3);
+	bicicletas.push_back(v4);
+}
 
 PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) {
 	local = spot;

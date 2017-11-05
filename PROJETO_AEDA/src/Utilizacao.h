@@ -55,7 +55,8 @@ inline ostream& operator <<(ostream & o, const Utilizacao & u)
 
 inline istream& operator >>(istream & i, Utilizacao & u)
 {
-	char b1, b2;
-	i >>  u.bikeType >> b1 >> u.useTime >> b2 >> u.data;
+	char b1;
+	getline(i,u.bikeType,'-');
+	i >> u.useTime >> b1 >> u.data;
 	return i;
 }

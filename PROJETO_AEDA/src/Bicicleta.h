@@ -30,8 +30,10 @@ inline ostream& operator <<(ostream & o, const Bicicleta & b)
 
 inline istream& operator >>(istream & i, Bicicleta & b)
 {
-	char b1, b2;
-	i >>  b.bikeName >> b1 >> b.bikeType >> b2 >> b.disponivel;
+	getline(i,b.bikeName,'/');
+	getline(i,b.bikeType,'/');
+	i >> b.disponivel;
+
 	return i;
 }
 

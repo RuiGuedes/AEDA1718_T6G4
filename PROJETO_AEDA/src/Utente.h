@@ -68,21 +68,23 @@ inline ostream& operator <<(ostream & o, const Utente & u)
 
 inline istream& operator >>(istream & i, Utente & u)
 {
-	char b1, b2, b3, b4, b5, b6, b7;
+	char b1, b2, b3, b4, b5;
 	unsigned int utiliz, hist;
 	Utilizacao ut;
 
-	i >>  u.nome >> b1 >> u.tipoUtente >> b2 >> u.local >> b3 >> utiliz >> b4;
+	getline(i,u.nome,',');
+	getline(i,u.tipoUtente,',');
+	i >> u.local >> b1 >> utiliz >> b2;
 
 	for(unsigned int k=0 ; k < utiliz ; k++){
-		i >> ut >> b5;
+		i >> ut >> b3;
 		u.utilizacoes.push_back(ut);
 	}
 
-	i >> hist >> b6;
+	i >> hist >> b4;
 
 	for(unsigned int k=0 ; k < hist ; k++){
-		i >> ut >> b7;
+		i >> ut >> b5;
 		u.historico.push_back(ut);
 	}
 

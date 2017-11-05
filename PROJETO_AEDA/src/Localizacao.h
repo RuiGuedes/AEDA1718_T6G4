@@ -34,7 +34,8 @@ inline ostream& operator <<(ostream & o, const Localizacao & l)
 
 inline istream& operator >>(istream & i, Localizacao & l)
 {
-	char b1, b2;
-	i >>  l.nome >> b1 >> l.x >> b2 >> l.y;
+	char b1;
+	getline(i,l.nome,'/');
+	i >> l.x >> b1 >> l.y;
 	return i;
 }
