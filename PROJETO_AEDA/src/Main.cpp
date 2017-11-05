@@ -2,7 +2,7 @@
 #include "Sistema.h"
 #include "Exceções.h"
 using namespace std;
-
+#include <sstream>
 void openInterface(Sistema & ER);
 void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
@@ -83,6 +83,7 @@ int main()
 
 
 	//	checkinSys(sys);
+
 	openInterface(sys);
 
 	checkoutSys(sys);
@@ -111,10 +112,85 @@ int main()
 //void checkinSys(Sistema & ER){
 //	ifstream f_pontos_partilha;
 //
+//		ifstream f_utentes;
+//
+//		ifstream f_bicicletas;
+//		cout <<"inicioooooooo\n";
+//		try{
+//			f_pontos_partilha.open("pontosPartilha.txt");
+//			if (!f_pontos_partilha.is_open())
+//				throw AberturaFalhada<string>("pontos_partilha.txt");
+//
+//			f_bicicletas.open("bicicletas.txt");
+//			if (!f_bicicletas.is_open())
+//				throw AberturaFalhada<string>("bicicletas.txt");
+//
+//			f_utentes.open("utentes.txt");
+//			if (!f_utentes.is_open())
+//				throw AberturaFalhada<string>("utentes.txt");
+//		}
+//		catch (AberturaFalhada<string> &a){
+//			cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
+//			cout << "Tente mais tarde./n";
+//			return 0;
+//		}
+//		cout<<"inininini\n";
+//		while(!f_utentes.eof()){
+//			string s;
+//			getline(f_utentes,s);
+//			istringstream ss (s);
+//
+//			Utente u1;
+//
+//			ss >> u1;
+//			Utente * u = new Utente(u1);
+//			sys.addNewUtente(u);
+//		}
+//		cout<<"ini\n";
+//
+//		while(!f_pontos_partilha.eof()){
+//			string s;
+//			getline(f_pontos_partilha,s);
+//			istringstream ss (s);
+//
+//			cout<<"ini1\n";
+//			PontoPartilha p1;
+//
+//			cout<<"ini2\n";
+//
+//			ss >> p1;
+//			cout<<"ini3\n";
+//
+//			vector<int> numType = p1.getNumberOfBikes();
+//			p1.limpaVectorBike();
+//			cout<<"ini4\n";
+//
+//			for (unsigned int j=0 ; j<numType.size() ; j++)
+//				for (int k=0 ; k < numType.at(j) ; k++){
+//					Bicicleta b1;
+//					f_bicicletas >> b1;
+//					Bicicleta* b = new Bicicleta(b1);
+//					p1.adicionaBike(b);
+//					cout<<"ini5\n";
+//				}
+//			PontoPartilha * p = new PontoPartilha(p1);
+//			sys.addPontoPartilha(p);
+//			cout<<"ini6\n";
+//		}
+//		cout<<"fimmmmmm\n";
+//		f_pontos_partilha.close();
+//
+//		f_utentes.close();
+//
+//		f_bicicletas.close();
+//
+//
+//	ifstream f_pontos_partilha;
+//
 //	ifstream f_utentes;
 //
 //	ifstream f_bicicletas;
-//
+//	cout <<"inicioooooooo\n";
 //	try{
 //		f_pontos_partilha.open("pontosPartilha.txt");
 //		if (!f_pontos_partilha.is_open())
@@ -133,13 +209,13 @@ int main()
 //		cout << "Tente mais tarde./n";
 //		return;
 //	}
-//
+//	cout<<"inininini\n";
 //	while(!f_utentes.eof()){
 //		Utente * u = new Utente();
 //		f_utentes >> *u;
 //		ER.addNewUtente(u);
 //	}
-//
+//	cout<<"ini\n";
 //	while(!f_pontos_partilha.eof()){
 //		PontoPartilha * p = new PontoPartilha();
 //		f_utentes >> *p;
@@ -156,7 +232,7 @@ int main()
 //
 //		ER.addPontoPartilha(p);
 //	}
-//
+//	cout<<"fimmmmmm\n";
 //	f_pontos_partilha.close();
 //
 //	f_utentes.close();

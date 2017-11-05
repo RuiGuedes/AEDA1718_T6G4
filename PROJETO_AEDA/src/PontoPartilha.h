@@ -46,16 +46,16 @@ inline istream& operator >>(istream & i, PontoPartilha & p)
 
 	i >> p.nome >> b1 >> p.local >> b2 >> p.capacidade >> b3 >> u >> b4 >> uc >> b5 >> c >> b6 >> inf >> b7;
 
-	for (unsigned int k=0 ; k<u ; k++){
+	for (unsigned int k=0 ; k<u-1 ; k++){
 		bikes.at(0).push_back(b);
 	}
-	for (unsigned int k=0 ; k<uc ; k++){
+	for (unsigned int k=0 ; k<uc-1 ; k++){
 		bikes.at(1).push_back(b);
 	}
-	for (unsigned int k=0 ; k<c ; k++){
+	for (unsigned int k=0 ; k<c-1 ; k++){
 		bikes.at(2).push_back(b);
 	}
-	for (unsigned int k=0 ; k<inf ; k++){
+	for (unsigned int k=0 ; k<inf-1 ; k++){
 		bikes.at(3).push_back(b);
 	}
 
