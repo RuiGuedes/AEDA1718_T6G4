@@ -488,6 +488,71 @@ void updateLocation(Sistema &ER,int index) {
 
 }
 
+void efetuaPag(Sistema &ER,int index) {
+
+	////// Notas: /////////
+	//   Onde guardar os pagamentos ja efetuados?
+	//   Acrescentar perguntas sobre que meses quer pagar
+	//////////////////////////
+
+
+
+	//Informacao inicial apresentadada ao utilizador
+		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+		cout << "Pagamentos pendentes:" << endl << endl;
+
+		unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
+
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+		{
+			cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+
+			system("pause");
+			system("cls");
+			return;
+
+		}
+		else
+		{
+			if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
+			{
+				for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+				{
+					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+						somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+						somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+						somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else	//Infantil
+						somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				}
+
+				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+
+				if(somaU+somaUS+somaC+somaI < 20)  //descontos
+					preco = preco * 0.95;
+				else
+					preco = preco * 0.9;
+
+				cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
+
+			}
+			else
+			{
+				cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
+			}
+
+			system("pause");
+			system("cls");
+			return;
+		}
+}
+
 void NearestPP(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
