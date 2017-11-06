@@ -1,3 +1,6 @@
 Andre,Socio,Paranhos/41.1754/-8.60752,0,0,
 Jose,Regular,Ramalde/41.1721/-8.64806,0,0,
 Ana,Socio,Campanhã/41.1555/-8.57138,0,0,
+Rui,Socio,/28/-82,2,Urbana-1-25/12/2019;Infantil-2-1/1/2018;0,
+Cesar,Regular,/2/-9,0,0,
+Bernardo,Regular,/99/-36,0,1,Urbana-2-12/11/2017;

@@ -35,6 +35,7 @@ public:
 	vector<Utilizacao> getHistorico();
 
 	/* MÉTODOS SET */
+	static void setLastId() {--lastId;}
 	void setUtenteLocation(Localizacao spot);
 	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
 	void setAvailable();

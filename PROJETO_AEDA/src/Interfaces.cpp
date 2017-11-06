@@ -235,31 +235,6 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 		}
 
-		//		//Verifica por ordem se tem o tipo de bicleta pretendida
-		//		for(unsigned int i = 0; i < distancias.size(); i++)
-		//		{
-		//			vector <vector<Bicicleta *> > bikes = ER.getPontosPartilha().at(distancias.at(i))->getBikes();
-		//
-		//			for(unsigned int k = 0; k < bikes.size(); k++)
-		//			{
-		//				for(unsigned int q = 0; q < bikes.at(k).size(); q++)
-		//				{
-		//
-		//					if(bikes.at(k).at(q)->getBikeType() == bikeType)
-		//					{
-		//						idPP = distancias.at(i);
-		//						break;
-		//					}
-		//				}
-		//
-		//				if(idPP != -1)
-		//					break;
-		//			}
-		//
-		//			if(idPP != -1)
-		//				break;
-		//		}
-
 		if(idPP == -1)
 		{
 			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
@@ -491,8 +466,8 @@ void updateLocation(Sistema &ER,int index) {
 void efetuaPag(Sistema &ER,int index) {
 
 	////// Notas: /////////
-	//   Onde guardar os pagamentos ja efetuados?
-	//   Acrescentar perguntas sobre que meses quer pagar
+	//   Onde guardar os pagamentos ja efetuados?   removes de utilizaçoes e colocas em historico
+	//   Acrescentar perguntas sobre que meses quer pagar  		sim
 	//////////////////////////
 
 
@@ -1137,7 +1112,7 @@ void menu_interface(Sistema &ER){
 		cout << "6 - Efetuar pagamento das mensalidades" << endl;
 		cout << "7 - Ponto de partilha mais próximo" << endl;
 		cout << "8 - Mudar o tipo de utente" << endl;
-		cout << "9 - Obter informações sobre ECO RIDES" << endl;
+		cout << "9 - Obter informações sobre ECO RIDES" << endl; //
 		cout << "10 - Sair" << endl << endl;
 
 		while(1)
@@ -1221,12 +1196,14 @@ void menu_interface(Sistema &ER){
 			infoER(ER);
 			break;
 		case 10:
+			///////////////////////////////////////////////////////////////
+			//antes de fazer check out , os utentes tem que devolver bike//
+			///////////////////////////////////////////////////////////////
 			cout << endl;
 			break;
 		}
 	}while(value != 10);
 
-	system("pause");
 	system("cls");
 	return;
 
@@ -1330,6 +1307,13 @@ void admin_interface(Sistema &ER) {
 			}
 		};
 
+
+		//////////////////////////////////////////
+		////////adicionar condiçao de mesmo nome ao criar ponto de partilha e bicicleta
+		//////// Funçao REMOVE UTENTE
+		////////////////REMOVE BIKE
+		////////////////REMOVE PONTO DE PARTILHA
+		//////////////////////////////////////////
 		//Opcões possiveis apresentadas no menu
 		switch (value)
 		{
@@ -1359,7 +1343,6 @@ void admin_interface(Sistema &ER) {
 		}
 	}while(value != 6);
 
-	system("pause");
 	system("cls");
 	return;
 }
