@@ -9,7 +9,7 @@ void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
 
 /////////////////////////////////
-///César :: infoER concluir  !!ver includes!!  responder ás notas do bernardo
+///César :: !!ver includes!!
 ///Rui   :: adimin menu  implementar funçoes.
 ///Bernardo  :: muda tipo utente
 ////////////////////////////////

@@ -577,19 +577,41 @@ void infoER(Sistema &ER) {
 	cout << "Informações:" << endl << endl;
 
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
-	cout << "Numero total de pontos de Partilha: 9" << endl << endl;
+	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
 	cout << "Pontos de Partilha:" << endl;
-	cout << "     - ECO_RIDES_A" << endl;
-	cout << "     - ECO_RIDES_B" << endl;
-	cout << "     - ECO_RIDES_C" << endl;
-	cout << "     - ECO_RIDES_D" << endl;
-	cout << "     - ECO_RIDES_E" << endl;
-	cout << "     - ECO_RIDES_F" << endl;
-	cout << "     - ECO_RIDES_G" << endl;
-	cout << "     - ECO_RIDES_H" << endl;
-	cout << "     - ECO_RIDES_I" << endl << endl;
+	cout << setw (5) << "Nome" << setw (25) << "Local" << setw (20) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" << setw (10) << "Corrida" << setw (12) << "Infantil" << endl;
+
+	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
+		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
+			 << setw(25) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+			 << setw(10) << ER.getPontosPartilha().at(i)->getLocal().getX()
+			 << setw(10) << ER.getPontosPartilha().at(i)->getLocal().getY();
+
+		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
+
+		cout << setw(10) << numtypes.at(0);
+		cout << setw(18) << numtypes.at(1);
+		cout << setw(10) << numtypes.at(2);
+		cout << setw(12) << numtypes.at(3);
+
+		cout << endl;
+	}
+
+	cout << endl;
+
 	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
-	cout << "Founders: " << endl;
+
+	cout << "Tabela de Preços:" << endl;
+
+	cout << setw(20) << "Tipo de bicicleta" << setw(15) << "Preço por hora" << endl;
+	cout << setw(20) << "Urbana" << setw(15) << "4€" << endl <<
+			setw(20) << "Urbana Simples" << setw(15) << "3€" << endl <<
+			setw(20) << "Corrida" << setw(15) << "5€" << endl <<
+			setw(20) << "Infantil" << setw(15) << "2€" << endl <<
+			endl;
+
+	cout << "Fundadores: " << endl;
 	cout << "  - Rui Guedes" << endl;
 	cout << "  - César Pinho" << endl;
 	cout << "  - Bernardo Santos" << endl << endl;
@@ -1460,16 +1482,16 @@ void menu_interface(Sistema &ER){
 
 		cout << "Bem-Vindo !" << endl << endl;
 
-		cout << "1 - Alugar bicicleta" << endl;
-		cout << "2 - Devolver bicicleta" << endl;
-		cout << "3 - Historial" << endl;
-		cout << "4 - Pagamentos pendentes" << endl;
-		cout << "5 - Atualiza Localização" << endl;
-		cout << "6 - Efetuar pagamento das mensalidades" << endl;
-		cout << "7 - Ponto de partilha mais próximo" << endl;
-		cout << "8 - Mudar o tipo de utente" << endl;
-		cout << "9 - Obter informações sobre ECO RIDES" << endl; //
-		cout << "10 - Sair" << endl << endl;
+		cout << "1  - Alugar bicicleta" << endl;
+		cout << "2  - Devolver bicicleta" << endl;
+		cout << "3  - Historial" << endl;				//CRIAR UMA FUNCAO
+		cout << "4  - Pagamentos pendentes" << endl;		//FALTA CALCULAR O PRECO DAS UTILIZACOES
+		cout << "5  - Atualiza Localização" << endl;		//ADICIONAR OPCAO PARA ADICIONAR LOCALOZACAO POR NOME
+		cout << "6  - Efetuar pagamento das mensalidades" << endl;		//FALTA TERMINAR E VERIFICAR
+		cout << "7  - Ponto de partilha mais próximo" << endl;
+		cout << "8  - Mudar o tipo de utente" << endl;			//FALTA IMPLEMENTAR
+		cout << "9  - Obter informações sobre ECO RIDES" << endl;
+		cout << "10 - Voltar" << endl << endl;
 
 		while(1)
 		{
@@ -1577,13 +1599,23 @@ void admin_interface(Sistema &ER) {
 
 	int attempts { 1 };
 	string info;
+	char c;
 	string password = "1234";
 
 	while(attempts <= 3)
 	{
 		try{
+			info="";
 			cout << "Admin (Password): ";
-			cin >> info;
+			cin.ignore();
+
+			c= _getch();
+			while(c != 13){
+				info.push_back(c);
+				cout << '*';
+				c= _getch();
+
+			}
 
 			if(info != password)
 			{

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <fstream>
+#include <conio.h>
 
 //#include "Bicicleta.h"
 #include "Localizacao.h"
