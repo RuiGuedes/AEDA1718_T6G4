@@ -814,6 +814,8 @@ void adicionaBike(Sistema & ER) {
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
+	cout << "Adiciona bicicleta: " << endl;
+
 	string nomePP, biketype;
 	bool cond {false};
 	int indexPP {-1};
@@ -903,10 +905,7 @@ void adicionaBike(Sistema & ER) {
 			cout << "Nome da Bicicleta: " ;
 			cin >> nomePP;
 			if(valid_bike(nomePP) == false)
-			{
-				cout << valid_bike(nomePP) << endl;
 				throw OpcaoInvalida<string>(nomePP);
-			}
 
 			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
 			{
@@ -938,6 +937,99 @@ void adicionaBike(Sistema & ER) {
 	system("pause");
 	system("cls");
 	return;
+}
+
+void removeBike(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+	cout << "Remove bicicleta: " << endl << endl;
+
+	string nomePP, biketype;
+	bool cond {false};
+	int indexPP {-1};
+	int indexBB {-1};
+
+	//Verifica tipo de bicicleta a remover
+	while(1)
+	{
+		try {
+			cout << "Tipo de Bicicleta: " ;
+			cin >> biketype;
+			if(valid_word(biketype) == false)
+				throw OpcaoInvalida<string>(biketype);
+
+			if(biketype == "Urbana")
+				indexBB = 0;
+			else if(biketype == "Urbana Simples")
+				indexBB = 1;
+			else if(biketype == "Corrida")
+				indexBB = 2;
+			else if(biketype == "Infantil")
+				indexBB = 3;
+
+			if(indexBB == -1)
+				throw OpcaoInvalida<string>(biketype);
+
+
+			cout << endl;
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	//Verifica se o nome da bicicleta a remover e verifica se existe
+	while(1)
+	{
+		try {
+			cout << "Nome da Bicicleta: " ;
+			cin >> nomePP;
+			if(valid_bike(nomePP) == false)
+				throw OpcaoInvalida<string>(nomePP);
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				for(unsigned int k = 0; k < ER.getPontosPartilha().at(i)->getBikes().at(indexBB).size(); k++)
+				{
+					if(ER.getPontosPartilha().at(i)->getBikes().at(indexBB).at(k)->getBikeName() == nomePP)
+					{
+						indexPP = i;
+						cond = true;
+					}
+				}
+			}
+
+			if(cond == false)
+				throw OpcaoInvalida<string>(nomePP);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Bicicleta inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+			cond = false;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	Bicicleta * bc = new Bicicleta(biketype,nomePP);
+	ER.getPontosPartilha().at(indexPP)->removeBike(bc);
+
+	cout << endl << "Bicicleta removida com sucesso !" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+
 }
 
 void openInterface(Sistema & ER){
@@ -1367,16 +1459,19 @@ void admin_interface(Sistema &ER) {
 
 		cout << "1 - Adiciona bicicleta" << endl;
 		cout << "2 - Adiciona ponto partilha" << endl;
-		cout << "3 - Visualiza pontos de partilha" << endl;
-		cout << "4 - Visualiza bicicletas" << endl;
-		cout << "5 - Visualiza utentes" << endl;
-		cout << "6 - Sair" << endl << endl;
+		cout << "3 - Remove bicicleta" << endl;
+		cout << "4 - Remove ponto de partilha" << endl;
+		cout << "5 - Remove utente" << endl;
+		cout << "6 - Visualiza pontos de partilha" << endl;
+		cout << "7 - Visualiza bicicletas" << endl;
+		cout << "8 - Visualiza utentes" << endl;
+		cout << "9 - Sair" << endl << endl;
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opcao (1-6): ";
+				cout << endl << "Introduza uma opcao (1-9): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -1384,7 +1479,7 @@ void admin_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 6)
+				if(value < 1 || value > 9)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -1424,21 +1519,33 @@ void admin_interface(Sistema &ER) {
 			break;
 		case 3:
 			system("cls");
-			visualizaPP(ER);
+			removeBike(ER);
 			break;
 		case 4:
 			system("cls");
-			visualizaBikes(ER);
+
 			break;
 		case 5:
 			system("cls");
-			visualizaUtente(ER);
+
 			break;
 		case 6:
+			system("cls");
+			visualizaPP(ER);
+			break;
+		case 7:
+			system("cls");
+			visualizaBikes(ER);
+			break;
+		case 8:
+			system("cls");
+			visualizaUtente(ER);
+			break;
+		case 9:
 			cout << endl;
 			break;
 		}
-	}while(value != 6);
+	}while(value != 9);
 
 	system("cls");
 	return;

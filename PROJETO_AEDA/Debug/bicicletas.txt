@@ -1,4 +1,3 @@
-u1/Urbana/1
 u2/Urbana/1
 u3/Urbana/1
 u5/Urbana/1
