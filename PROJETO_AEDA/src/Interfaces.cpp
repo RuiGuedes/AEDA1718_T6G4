@@ -21,7 +21,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	if(ER.getUtentes().at(index)->getAvailable() == false)
 	{
-		cout << "Não é possível alugar duas bicicletas em simultãneo !"  << endl << endl;
+		cout << "Não é possível alugar duas bicicletas em simultâneo !"  << endl << endl;
 
 		system("pause");
 		system("cls");
@@ -480,7 +480,67 @@ void efetuaPag(Sistema &ER,int index) {
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 	cout << "Pagamentos pendentes:" << endl << endl;
 
+	unsigned int ano{}, mes{};
+	string option {};
+
+	while(1)
+			{
+				try{
+					cout << endl << "Ano: ";
+					cin >> option;
+					if(valid_number(option) == false)
+						throw OpcaoInvalida<string>(option);
+
+					ano = stoi(option);
+					if(ano < 2017)
+						throw OpcaoInvalida<int>(ano);
+
+					break;
+				}
+				catch (OpcaoInvalida<int> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+				catch (OpcaoInvalida<string> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+			};
+
+			while(1)
+			{
+				try{
+					cout << endl << "Mes[1-12]: ";
+					cin >> option;
+					if(valid_number(option) == false)
+						throw OpcaoInvalida<string>(option);
+
+					mes = stoi(option);
+					if(mes < 1 || mes > 12)
+						throw OpcaoInvalida<int>(mes);
+
+					break;
+				}
+				catch (OpcaoInvalida<int> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+				catch (OpcaoInvalida<string> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+			};
+
 	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
+	bool exist_pag = false;
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
 	{
@@ -497,24 +557,36 @@ void efetuaPag(Sistema &ER,int index) {
 		{
 			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
 			{
-				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else	//Infantil
-					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano && ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes() == mes)
+				{
+					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+						somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+						somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+						somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else	//Infantil
+						somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+
+					exist_pag = true;
+				}
 			}
 
-			preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
-
-			if(somaU+somaUS+somaC+somaI < 20)  //descontos
-				preco = preco * 0.95;
+			if(exist_pag == false)
+				cout << "Não existe nenhum registo de aluguer para o período referido!" << endl;
 			else
-				preco = preco * 0.9;
+			{
+				ER.getUtentes().at(index)->updateHistoric();
 
-			cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
+				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+
+				if(somaU+somaUS+somaC+somaI < 20)  //descontos
+					preco = preco * 0.95;
+				else
+					preco = preco * 0.9;
+
+				cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
+			}
 
 		}
 		else
@@ -1487,7 +1559,7 @@ void menu_interface(Sistema &ER){
 		cout << "2  - Devolver bicicleta" << endl;
 		cout << "3  - Historial" << endl;				//CRIAR UMA FUNCAO
 		cout << "4  - Pagamentos pendentes" << endl;		//FALTA CALCULAR O PRECO DAS UTILIZACOES
-		cout << "5  - Atualiza Localização" << endl;		//ADICIONAR OPCAO PARA ADICIONAR LOCALOZACAO POR NOME
+		cout << "5  - Atualiza Localização" << endl;		//ADICIONAR OPCAO PARA ADICIONAR LOCALIZACAO POR NOME
 		cout << "6  - Efetuar pagamento das mensalidades" << endl;		//FALTA TERMINAR E VERIFICAR
 		cout << "7  - Ponto de partilha mais próximo" << endl;
 		cout << "8  - Mudar o tipo de utente" << endl;			//FALTA IMPLEMENTAR
