@@ -1668,8 +1668,8 @@ void admin_interface(Sistema &ER) {
 
 
 		//////////////////////////////////////////
-		////////adicionar condiçao de mesmo nome ao criar ponto de partilha
-
+		////// - ADICIONA PONTO DE PARTILHA NUMA LOCALIZACAO EXISTENTE
+        //////////////////////////////////////////
 		//Opcões possiveis apresentadas no menu
 		switch (value)
 		{
