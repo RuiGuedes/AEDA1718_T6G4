@@ -614,6 +614,7 @@ void addPP(Sistema & ER) {
 	string nome,locname;
 	int value {};
 	string option {};
+	bool cond {false};
 
 	while(1)
 	{
@@ -622,10 +623,24 @@ void addPP(Sistema & ER) {
 			cin >> nome;
 			if(valid_word(nome) == false)
 				throw OpcaoInvalida<string>(nome);
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				if(ER.getPontosPartilha().at(i)->getNome() == nome)
+					cond = true;
+			}
+
+			if(cond == true)
+				throw OpcaoInvalida<string>(nome);
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			if(cond == true)
+				cout << "Já existe esse nome (" << op.opcao << ") ! Tente novamente." << endl;
+			else
+				cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cond = false;
 			cin.clear();
 			cin.ignore(1000,'\n');
 		}
