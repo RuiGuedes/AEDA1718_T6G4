@@ -578,23 +578,23 @@ void infoER(Sistema &ER) {
 
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
 	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
-	cout << "Pontos de Partilha:" << endl;
-	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (12) << "GPS";
-	cout << setw (12) << "Urbana" << setw (18) << "Urbana Simples" <<
-			setw (9) << "Corrida" << "Infantil" << endl;
+	cout << "Pontos de Partilha:" << endl << endl;
+	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << "Infantil" << endl << endl;
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
 			 << setw(25) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-			 << setw(10) << ER.getPontosPartilha().at(i)->getLocal().getX()
-			 << setw(10) << ER.getPontosPartilha().at(i)->getLocal().getY();
+			 << '(' << ER.getPontosPartilha().at(i)->getLocal().getX()
+			 << " , " << ER.getPontosPartilha().at(i)->getLocal().getY() << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
-		cout << setw(10) << numtypes.at(0);
-		cout << setw(18) << numtypes.at(1);
-		cout << setw(10) << numtypes.at(2);
-		cout << setw(12) << numtypes.at(3);
+		cout << setw(13) << numtypes.at(0);
+		cout << setw(15) << numtypes.at(1);
+		cout << setw(9) << numtypes.at(2);
+		cout << numtypes.at(3);
 
 		cout << endl;
 	}
@@ -603,7 +603,7 @@ void infoER(Sistema &ER) {
 
 	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
 
-	cout << "Tabela de Preços:" << endl;
+	cout << "Tabela de Preços:" << endl << endl;
 
 	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
 	cout << setw(26) << "Urbana" << "4€" << endl <<
