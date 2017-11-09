@@ -26,3 +26,4 @@ using namespace std;
 bool valid_number(string number);
 bool valid_word(string word);
 bool valid_number_double(string number);
+bool valid_bike(string bike);

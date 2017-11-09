@@ -473,59 +473,59 @@ void efetuaPag(Sistema &ER,int index) {
 
 
 	//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-		cout << "Pagamentos pendentes:" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	cout << "Pagamentos pendentes:" << endl << endl;
 
-		unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
+	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
 
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+	{
+		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+
+	}
+	else
+	{
+		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
 		{
-			cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+			{
+				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else	//Infantil
+					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+			}
 
-			system("pause");
-			system("cls");
-			return;
+			preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+
+			if(somaU+somaUS+somaC+somaI < 20)  //descontos
+				preco = preco * 0.95;
+			else
+				preco = preco * 0.9;
+
+			cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
 
 		}
 		else
 		{
-			if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
-			{
-				for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-				{
-					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-						somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-						somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-						somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-					else	//Infantil
-						somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				}
-
-				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
-
-				if(somaU+somaUS+somaC+somaI < 20)  //descontos
-					preco = preco * 0.95;
-				else
-					preco = preco * 0.9;
-
-				cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
-
-			}
-			else
-			{
-				cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
-			}
-
-			system("pause");
-			system("cls");
-			return;
+			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		}
+
+		system("pause");
+		system("cls");
+		return;
+	}
 }
 
 void NearestPP(Sistema &ER,int index) {
@@ -814,10 +814,13 @@ void adicionaBike(Sistema & ER) {
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-	string nomePP, tipoUtente;
-	//int value {};
-	int index {};
+	string nomePP, biketype;
+	bool cond {false};
+	int indexPP {-1};
+	int indexBB {-1};
+	int numberbikes {0};
 
+	//Verifica ponto de partilha ao qual quer adicionar
 	while(1)
 	{
 		try {
@@ -825,6 +828,16 @@ void adicionaBike(Sistema & ER) {
 			cin >> nomePP;
 			if(valid_word(nomePP) == false)
 				throw OpcaoInvalida<string>(nomePP);
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				if(ER.getPontosPartilha().at(i)->getNome() == nomePP)
+					indexPP = i;
+			}
+
+			if(indexPP == -1)
+				throw OpcaoInvalida<string>(nomePP);
+			cout << endl;
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
@@ -834,14 +847,97 @@ void adicionaBike(Sistema & ER) {
 		}
 	}
 
-	for(unsigned int i = 0; ER.getPontosPartilha().size(); i++)
+	for(unsigned int i = 0; i < ER.getPontosPartilha().at(indexPP)->getBikes().size(); i++)
 	{
-		if(ER.getPontosPartilha().at(i)->getNome() == nomePP)
-			index = i;
+
+		numberbikes += ER.getPontosPartilha().at(indexPP)->getBikes().at(i).size();
+
 	}
 
-	cout << index;
-	//if(ER.getPontosPartilha().at(index)->getCapacidade() == )
+	if(ER.getPontosPartilha().at(indexPP)->getCapacidade() == numberbikes)
+	{
+		cout << "A capacidade deste ponto de partilha já foi alcancada ! Tente adicionar a outro ponto de partilha." << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	//Verifica tipo de bicicleta a adicionar
+	while(1)
+	{
+		try {
+			cout << "Tipo de Bicicleta: " ;
+			cin >> biketype;
+			if(valid_word(biketype) == false)
+				throw OpcaoInvalida<string>(biketype);
+
+
+			if(biketype == "Urbana")
+				indexBB = 0;
+			else if(biketype == "Urbana Simples")
+				indexBB = 1;
+			else if(biketype == "Corrida")
+				indexBB = 2;
+			else if(biketype == "Infantil")
+				indexBB = 3;
+
+			if(indexBB == -1)
+				throw OpcaoInvalida<string>(biketype);
+
+
+			cout << endl;
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	//Verifica se o nome da bicicleta a adicionar é diferente e adiciona
+	while(1)
+	{
+		try {
+			cout << "Nome da Bicicleta: " ;
+			cin >> nomePP;
+			if(valid_bike(nomePP) == false)
+			{
+				cout << valid_bike(nomePP) << endl;
+				throw OpcaoInvalida<string>(nomePP);
+			}
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				for(unsigned int k = 0; k < ER.getPontosPartilha().at(i)->getBikes().at(indexBB).size(); k++)
+				{
+					if(ER.getPontosPartilha().at(i)->getBikes().at(indexBB).at(k)->getBikeName() == nomePP)
+						cond = true;
+				}
+			}
+
+			if(cond == true)
+				throw OpcaoInvalida<string>(nomePP);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Nome já existente(" << op.opcao << ") ! Tente novamente." << endl;
+			cond = false;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	Bicicleta * bc = new Bicicleta(biketype,nomePP);
+	ER.getPontosPartilha().at(indexPP)->adicionaBike(bc);
+
+	cout << endl << "Bicicleta adicionada com sucesso !" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
 }
 
 void openInterface(Sistema & ER){
@@ -1309,11 +1405,12 @@ void admin_interface(Sistema &ER) {
 
 
 		//////////////////////////////////////////
-		////////adicionar condiçao de mesmo nome ao criar ponto de partilha e bicicleta
+		////////adicionar condiçao de mesmo nome ao criar ponto de partilha
 		//////// Funçao REMOVE UTENTE
 		////////////////REMOVE BIKE
 		////////////////REMOVE PONTO DE PARTILHA
 		//////////////////////////////////////////
+
 		//Opcões possiveis apresentadas no menu
 		switch (value)
 		{
@@ -1400,3 +1497,12 @@ bool valid_word(string word)
 	}
 	return true;
 }
+
+bool valid_bike(string bike)
+{
+	if (isdigit(bike.at(0)))
+		return false;
+
+	return true;
+}
+

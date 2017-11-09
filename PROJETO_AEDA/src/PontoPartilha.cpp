@@ -77,6 +77,10 @@ vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
 // OTHERS //
 ////////////
 
+void PontoPartilha::setNome(string name) {
+	nome = name;
+}
+
 void  PontoPartilha::removeBike(Bicicleta *bike) {
 
 	vector<Bicicleta *> bikes;

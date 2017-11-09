@@ -24,6 +24,7 @@ public:
 	//Metodos set
 	void removeBike(Bicicleta *bike);
 	void adicionaBike(Bicicleta* bike);
+	void setNome(string name);
 	void limpaVectorBike();
 	friend void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos);
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
