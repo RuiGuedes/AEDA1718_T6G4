@@ -726,6 +726,65 @@ void addPP(Sistema & ER) {
 	return;
 }
 
+void removePP(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+	cout << "Remove Ponto Partilha:" << endl << endl;
+
+	string nomePP;
+	int indexPP {-1};
+
+	if(ER.getPontosPartilha().size() == 0)
+	{
+		cout << "Neste momento não existem pontos de partilha !" << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	//Verifica ponto de partilha que quer remover
+	while(1)
+	{
+		try {
+			cout << "Nome do Ponto Partilha: " ;
+			cin >> nomePP;
+			if(valid_word(nomePP) == false)
+				throw OpcaoInvalida<string>(nomePP);
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				if(ER.getPontosPartilha().at(i)->getNome() == nomePP)
+					indexPP = i;
+			}
+
+			if(indexPP == -1)
+				throw OpcaoInvalida<string>(nomePP);
+			cout << endl;
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	ER.removePonto(indexPP);
+
+	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+}
+
 void visualizaPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -843,7 +902,7 @@ void adicionaBike(Sistema & ER) {
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
 			cin.ignore(1000,'\n');
 		}
@@ -1030,6 +1089,100 @@ void removeBike(Sistema & ER) {
 	system("cls");
 	return;
 
+}
+
+void removeUT(Sistema & ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+	cout << "Remove utente: " << endl << endl;
+
+	if(ER.getUtentes().size() == 0)
+	{
+		cout << "Neste momento não existem utentes !" << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	string nomeUT;
+	int indexUT {-1};
+
+	//Verifica o nome do utente que quer remover
+	while(1)
+	{
+		try {
+			cout << "Nome do Utente: " ;
+			cin >> nomeUT;
+			if(valid_word(nomeUT) == false)
+				throw OpcaoInvalida<string>(nomeUT);
+
+			for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
+			{
+				if(ER.getUtentes().at(i)->getUtenteNome() == nomeUT)
+					indexUT = i;
+			}
+
+			if(indexUT == -1)
+				throw OpcaoInvalida<string>(nomeUT);
+			cout << endl;
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Utente inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	}
+
+	ER.removeUtente(indexUT);
+
+	if((unsigned int)indexUT == ER.getUtentes().size())
+	{
+
+		ER.getUtentes().at(0)->setLastId();
+
+		cout << "Utente removido com sucesso !" << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+	}
+
+	if(indexUT == 0)
+	{
+		for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
+		{
+
+			ER.getUtentes().at(i)->setID();
+		}
+
+		ER.getUtentes().at(0)->setLastId();
+	}
+	else
+	{
+
+		for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
+		{
+			if(i != 0)
+				ER.getUtentes().at(i)->setID();
+		}
+		ER.getUtentes().at(0)->setLastId();
+	}
+
+
+
+	cout << "Utente removido com sucesso !" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
 }
 
 void openInterface(Sistema & ER){
@@ -1501,10 +1654,6 @@ void admin_interface(Sistema &ER) {
 
 		//////////////////////////////////////////
 		////////adicionar condiçao de mesmo nome ao criar ponto de partilha
-		//////// Funçao REMOVE UTENTE
-		////////////////REMOVE BIKE
-		////////////////REMOVE PONTO DE PARTILHA
-		//////////////////////////////////////////
 
 		//Opcões possiveis apresentadas no menu
 		switch (value)
@@ -1523,11 +1672,11 @@ void admin_interface(Sistema &ER) {
 			break;
 		case 4:
 			system("cls");
-
+			removePP(ER);
 			break;
 		case 5:
 			system("cls");
-
+			removeUT(ER);
 			break;
 		case 6:
 			system("cls");

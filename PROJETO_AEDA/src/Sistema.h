@@ -16,5 +16,9 @@ public:
 	//Metodos Get
 	vector<Utente* > getUtentes();
 	vector<PontoPartilha* > getPontosPartilha();
+
+	//Others
+	void removePonto(int indexPP);
+	void removeUtente(int indexUT);
 };
 

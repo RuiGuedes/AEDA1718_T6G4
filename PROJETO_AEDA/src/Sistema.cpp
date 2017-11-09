@@ -20,3 +20,19 @@ vector<PontoPartilha* > Sistema::getPontosPartilha() {
 	return pontosPartilha;
 }
 
+////////////
+// OTHERS //
+////////////
+
+void Sistema::removePonto(int indexPP) {
+
+	pontosPartilha.erase(pontosPartilha.begin() + indexPP);
+	return;
+}
+
+void Sistema::removeUtente(int indexUT) {
+
+	utentes.erase(utentes.begin() + indexUT);
+	return;
+}
+
