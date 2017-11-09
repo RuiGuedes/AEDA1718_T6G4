@@ -579,8 +579,9 @@ void infoER(Sistema &ER) {
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
 	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
 	cout << "Pontos de Partilha:" << endl;
-	cout << setw (5) << "Nome" << setw (25) << "Local" << setw (20) << "GPS";
-	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" << setw (10) << "Corrida" << setw (12) << "Infantil" << endl;
+	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (12) << "GPS";
+	cout << setw (12) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << "Infantil" << endl;
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
@@ -604,11 +605,11 @@ void infoER(Sistema &ER) {
 
 	cout << "Tabela de Preços:" << endl;
 
-	cout << setw(20) << "Tipo de bicicleta" << setw(15) << "Preço por hora" << endl;
-	cout << setw(20) << "Urbana" << setw(15) << "4€" << endl <<
-			setw(20) << "Urbana Simples" << setw(15) << "3€" << endl <<
-			setw(20) << "Corrida" << setw(15) << "5€" << endl <<
-			setw(20) << "Infantil" << setw(15) << "2€" << endl <<
+	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
+	cout << setw(26) << "Urbana" << "4€" << endl <<
+			setw(26) << "Urbana Simples" << "3€" << endl <<
+			setw(26) << "Corrida" << "5€" << endl <<
+			setw(26) << "Infantil" << "2€" << endl <<
 			endl;
 
 	cout << "Fundadores: " << endl;
