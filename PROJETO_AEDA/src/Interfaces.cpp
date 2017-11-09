@@ -30,7 +30,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 	}
 	else
 	{
-		cout << "Aluga Biciclea: " << endl << endl;
+		cout << "Aluga Bicicleta: " << endl << endl;
 
 		//string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano)
 
@@ -351,49 +351,51 @@ void displayPagPendentes(Sistema &ER,int index){
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Pagamentos pendentes:" << endl << endl;
+
+	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-	{
 		cout << "Neste tipo de utente (Regular) não é possivel ter pagamentos pendentes !" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-
-	}
 	else
 	{
 		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
 		{
+			cout << "Pagamentos pendentes:" << endl << endl;
+
 			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
 			{
 				cout << "Tipo de bicicleta: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() << endl;
 				cout << "Número de horas: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime() << endl;
 				cout << "Data (dd/mm/aaaa): " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getData() << endl << endl;
 
+				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else	//Infantil
+					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
 
+				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
 
+				if(somaU+somaUS+somaC+somaI < 20)  //descontos
+					preco = preco * 0.95;
+				else
+					preco = preco * 0.9;
 
-				/////////////////////////////////////////////////
-				//FALTA CALCULAR O PRECO DAS UTILIZACOES !!!!
-				/////////////////////////////////////////////////
-
-
-
-
+				cout << "Total a pagar: " << preco << "€" << endl << endl;
 			}
 		}
 		else
 		{
 			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		}
-
-		system("pause");
-		system("cls");
-		return;
 	}
 
+	system("pause");
+	system("cls");
+	return;
 }
 
 void updateLocation(Sistema &ER,int index) {
@@ -465,25 +467,28 @@ void updateLocation(Sistema &ER,int index) {
 
 void efetuaPag(Sistema &ER,int index) {
 
-	////// Notas: /////////
-	//   Onde guardar os pagamentos ja efetuados?   removes de utilizaçoes e colocas em historico
-	//   Acrescentar perguntas sobre que meses quer pagar  		sim
-	//////////////////////////
-
-
-
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Pagamentos pendentes:" << endl << endl;
 
-	unsigned int ano{}, mes{};
+	unsigned int ano{}, mes{}, value{};
 	string option {};
+	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
+	bool exist_pag = false;
 
-	while(1)
+	do{
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+			cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+		else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0)
+			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
+		else
+		{
+			cout << "Período a liquidar:" << endl << endl;
+
+			while(1)
 			{
 				try{
 					cout << endl << "Ano: ";
@@ -539,22 +544,8 @@ void efetuaPag(Sistema &ER,int index) {
 				}
 			};
 
-	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
-	bool exist_pag = false;
+			exist_pag = false;
 
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-	{
-		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-
-	}
-	else
-	{
-		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
-		{
 			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
 			{
 				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano && ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes() == mes)
@@ -585,19 +576,44 @@ void efetuaPag(Sistema &ER,int index) {
 				else
 					preco = preco * 0.9;
 
-				cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
+				cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
 			}
-
 		}
-		else
+
+		cout << "Opções: " << endl;
+		cout << "     1 - Sair" << endl;
+		cout << "     2 - Efetuar mais pagamentos" << endl;
+
+		while(1)
 		{
-			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
-		}
+			try{
+				cout << endl << "Introduza uma opção (1-2): ";
+				cin >> option;
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+				value = stoi(option);
+				if(value < 1 || value > 2)
+					throw OpcaoInvalida<int>(value);
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
 
-		system("pause");
-		system("cls");
-		return;
-	}
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+	} while(value==2);
+
+	system("pause");
+	system("cls");
+	return;
 }
 
 void NearestPP(Sistema &ER,int index) {
@@ -636,6 +652,51 @@ void NearestPP(Sistema &ER,int index) {
 	system("cls");
 	return;
 
+}
+
+void mudaTipoUT(Sistema &ER,int index){
+
+	//Informacao inicial apresentadada ao utilizador
+		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+		string novo_tipo;
+		int type;
+		bool valid_type = false;
+
+		do
+		{
+			cout << "Introduza o tipo de utilizador para que quer mudar: ";
+			cin >> novo_tipo;
+			cout << endl << endl;
+			if(novo_tipo != "Regular" && novo_tipo != "Socio")
+				cout << "Tipo invalido!" << endl << endl;
+			else
+				valid_type = true;
+
+		} while(valid_type==false);
+
+
+		if(novo_tipo == "Regular")
+			type = 0;
+		else
+			type = 1;
+
+////FALTA: Mudar efetuaPag para que seja possivel efetuar todos os pagamentos existentes de uma vez
+
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular"){
+			cout << "Necessita de efetuar os pagamentos em falta!" << endl << endl;
+			efetuaPag(ER, index);
+		}
+
+		ER.getUtentes().at(index)->setTipoUtente(type);
+
+		system("pause");
+		system("cls");
+		return;
 }
 
 void infoER(Sistema &ER) {
@@ -1632,7 +1693,7 @@ void menu_interface(Sistema &ER){
 			break;
 		case 6:
 			system("cls");
-			//Efetua pagamento
+			efetuaPag(ER,index);
 			break;
 		case 7:
 			system("cls");
@@ -1640,7 +1701,7 @@ void menu_interface(Sistema &ER){
 			break;
 		case 8:
 			system("cls");
-			//Mudar tipo de utente
+			mudaTipoUT(ER,index);
 			break;
 		case 9:
 			system("cls");
