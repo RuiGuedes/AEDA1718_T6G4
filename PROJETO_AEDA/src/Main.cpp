@@ -9,7 +9,7 @@ void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
 
 /////////////////////////////////
-///César :: !!ver includes!!
+///César :: ver interfaces linha 572
 ///Rui   :: adimin menu  implementar funçoes.
 ///Bernardo  :: muda tipo utente
 ////////////////////////////////

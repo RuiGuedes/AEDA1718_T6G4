@@ -718,9 +718,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-			 << setw(25) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-			 << '(' << ER.getPontosPartilha().at(i)->getLocal().getX()
-			 << " , " << ER.getPontosPartilha().at(i)->getLocal().getY() << ')';
+			 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+			 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+			 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 

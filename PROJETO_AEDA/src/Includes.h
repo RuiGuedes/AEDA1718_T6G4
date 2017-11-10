@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -12,13 +14,6 @@
 #include <fstream>
 #include <conio.h>
 
-//#include "Bicicleta.h"
-#include "Localizacao.h"
-//#include "Utilizacao.h"
-//#include "Utente.h"
-//#include "PontoPartilha.h"
-//#include "Sistema.h"
-//#include "Exceções.h"
 
 using namespace std;
 

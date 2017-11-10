@@ -5,8 +5,6 @@
 #include "Bicicleta.h"
 #include "Utilizacao.h"
 
-//struct data {int dia; int mes; int ano;};
-
 class Utente {
 	static int lastId;
 	int id;
