@@ -465,7 +465,7 @@ void updateLocation(Sistema &ER,int index) {
 
 }
 
-void efetuaPag(Sistema &ER,int index) {
+void efetuaPag(Sistema &ER,int index, string mode = "single") {
 
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
@@ -479,110 +479,25 @@ void efetuaPag(Sistema &ER,int index) {
 	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
 	bool exist_pag = false;
 
-	do{
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-			cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
-		else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0)
-			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
-		else
-		{
-			cout << "Período a liquidar:" << endl << endl;
+	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
+		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 
-			while(1)
-			{
-				try{
-					cout << endl << "Ano: ";
-					cin >> option;
-					if(valid_number(option) == false)
-						throw OpcaoInvalida<string>(option);
+	else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0){
+		cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 
-					ano = stoi(option);
-					if(ano < 2017)
-						throw OpcaoInvalida<int>(ano);
-
-					break;
-				}
-				catch (OpcaoInvalida<int> &op){
-
-					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-					cin.clear();
-					cin.ignore(1000,'\n');
-				}
-				catch (OpcaoInvalida<string> &op){
-
-					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-					cin.clear();
-					cin.ignore(1000,'\n');
-				}
-			};
-
-			while(1)
-			{
-				try{
-					cout << endl << "Mes[1-12]: ";
-					cin >> option;
-					if(valid_number(option) == false)
-						throw OpcaoInvalida<string>(option);
-
-					mes = stoi(option);
-					if(mes < 1 || mes > 12)
-						throw OpcaoInvalida<int>(mes);
-
-					break;
-				}
-				catch (OpcaoInvalida<int> &op){
-
-					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-					cin.clear();
-					cin.ignore(1000,'\n');
-				}
-				catch (OpcaoInvalida<string> &op){
-
-					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-					cin.clear();
-					cin.ignore(1000,'\n');
-				}
-			};
-
-			exist_pag = false;
-
-			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-			{
-				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano && ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes() == mes)
-				{
-					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-						somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-						somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-						somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-					else	//Infantil
-						somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-
-					exist_pag = true;
-				}
-			}
-
-			if(exist_pag == false)
-				cout << "Não existe nenhum registo de aluguer para o período referido!" << endl;
-			else
-			{
-				ER.getUtentes().at(index)->updateHistoric();
-
-				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
-
-				if(somaU+somaUS+somaC+somaI < 20)  //descontos
-					preco = preco * 0.95;
-				else
-					preco = preco * 0.9;
-
-				cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
-			}
-		}
-
-		cout << "Opções: " << endl;
-		cout << "     1 - Sair" << endl;
-		cout << "     2 - Efetuar mais pagamentos" << endl;
+	else
+	{
+		cout << "Opções de pagamento: " << endl;
+		cout << "     1 - Mês a mês" << endl;
+		cout << "     2 - Totalidade das utilizações" << endl;
 
 		while(1)
 		{
@@ -609,7 +524,163 @@ void efetuaPag(Sistema &ER,int index) {
 				cin.ignore(1000,'\n');
 			}
 		};
-	} while(value==2);
+
+		if(value == 2)
+			mode = "all";
+
+		if(mode=="single"){   //Pagar mês a mês
+			do{
+				cout << "Período a liquidar:" << endl << endl;
+
+				while(1)
+				{
+					try{
+						cout << endl << "Ano: ";
+						cin >> option;
+						if(valid_number(option) == false)
+							throw OpcaoInvalida<string>(option);
+
+						ano = stoi(option);
+						if(ano < 2017)
+							throw OpcaoInvalida<int>(ano);
+
+						break;
+					}
+					catch (OpcaoInvalida<int> &op){
+
+						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+						cin.ignore(1000,'\n');
+					}
+					catch (OpcaoInvalida<string> &op){
+
+						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+						cin.ignore(1000,'\n');
+					}
+				};
+
+				while(1)
+				{
+					try{
+						cout << endl << "Mes[1-12]: ";
+						cin >> option;
+						if(valid_number(option) == false)
+							throw OpcaoInvalida<string>(option);
+
+						mes = stoi(option);
+						if(mes < 1 || mes > 12)
+							throw OpcaoInvalida<int>(mes);
+
+						break;
+					}
+					catch (OpcaoInvalida<int> &op){
+
+						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+						cin.ignore(1000,'\n');
+					}
+					catch (OpcaoInvalida<string> &op){
+
+						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+						cin.ignore(1000,'\n');
+					}
+				};
+
+				exist_pag = false;
+
+				for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+				{
+					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano && ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes() == mes)
+					{
+						if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+							somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+						else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+							somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+						else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+							somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+						else	//Infantil
+							somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+
+						exist_pag = true;
+					}
+				}
+
+				if(exist_pag == false)
+					cout << "Não existe nenhum registo de aluguer para o período referido!" << endl;
+				else
+				{
+					ER.getUtentes().at(index)->updateHistoric();
+
+					preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+
+					if(somaU+somaUS+somaC+somaI < 20)  //descontos
+						preco = preco * 0.95;
+					else
+						preco = preco * 0.9;
+
+					cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
+				}
+
+				cout << "Opções: " << endl;
+				cout << "     1 - Sair" << endl;
+				cout << "     2 - Efetuar mais pagamentos" << endl;
+
+				while(1)
+				{
+					try{
+						cout << endl << "Introduza uma opção (1-2): ";
+						cin >> option;
+						if(valid_number(option) == false)
+							throw OpcaoInvalida<string>(option);
+						value = stoi(option);
+						if(value < 1 || value > 2)
+							throw OpcaoInvalida<int>(value);
+						break;
+					}
+					catch (OpcaoInvalida<int> &op){
+
+						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+						cin.ignore(1000,'\n');
+					}
+					catch (OpcaoInvalida<string> &op){
+						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+						cin.ignore(1000,'\n');
+					}
+				};
+			} while(value==2);
+		}
+
+
+		else {   //Pagar todas as utilizações (usado em mudaTipoUT)
+
+			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+			{
+				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else	//Infantil
+					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+			}
+
+			ER.getUtentes().at(index)->updateHistoric();
+
+			preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+
+			if(somaU+somaUS+somaC+somaI < 20)  //descontos
+				preco = preco * 0.95;
+			else
+				preco = preco * 0.9;
+
+			cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
+		}
+	}
 
 	system("pause");
 	system("cls");
@@ -663,9 +734,9 @@ void mudaTipoUT(Sistema &ER,int index){
 		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-		string novo_tipo;
+		string novo_tipo, opcao;
 		int type;
-		bool valid_type = false;
+		bool valid_type = false, valid_op = false;
 
 		do
 		{
@@ -687,12 +758,31 @@ void mudaTipoUT(Sistema &ER,int index){
 
 ////FALTA: Mudar efetuaPag para que seja possivel efetuar todos os pagamentos existentes de uma vez
 
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular"){
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular" && ER.getUtentes().at(index)->getUtilizacoes().size() > 0){
 			cout << "Necessita de efetuar os pagamentos em falta!" << endl << endl;
-			efetuaPag(ER, index);
+
+			do{
+				cout << "Deseja prosseguir? (Sim/Nao) " << endl << endl;
+				cin >> opcao;
+				cout << endl << endl;
+				if(opcao != "Sim" && opcao != "Nao")
+					cout << "Escolha uma das opções (Sim/Nao)" << endl << endl;
+				else
+					valid_op = true;
+
+			} while(valid_op==false);
+
+
+			if(opcao == "Sim")
+				efetuaPag(ER, index, "all");
+			else
+				return;
 		}
 
 		ER.getUtentes().at(index)->setTipoUtente(type);
+
+		//////NOTA: Por alguma razao o system("pause") está a aparecer antes da linha de cima ////
+		/// (aparece primeiro "Press a key to continue" e só depois o output da função de cima) ///
 
 		system("pause");
 		system("cls");
@@ -1167,6 +1257,7 @@ void adicionaBike(Sistema & ER) {
 	system("pause");
 	system("cls");
 	return;
+
 }
 
 void removeBike(Sistema & ER) {

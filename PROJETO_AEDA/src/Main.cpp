@@ -17,7 +17,7 @@ void checkoutSys(Sistema & ER);
 
 int main()
 {
-	//Códigos para aceitação de caracteres da língua portugesa
+	//Códigos para aceitação de caracteres da língua portuguesa
 	SetConsoleCP(1252);
 	SetConsoleOutputCP(1252);
 
