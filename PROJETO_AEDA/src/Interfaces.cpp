@@ -613,7 +613,14 @@ void efetuaPag(Sistema &ER,int index, string mode = "single") {
 				{
 					ER.getUtentes().at(index)->updateHistoric();
 
-					preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+					if(somaC > 0)
+						preco = 50;
+					else if(somaU > 0)
+						preco = 40;
+					else if(somaUS > 0)
+						preco = 30;
+					else if(somaI > 0)
+						preco = 20;
 
 					if(somaU+somaUS+somaC+somaI < 20)  //descontos
 						preco = preco * 0.95;
