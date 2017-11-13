@@ -64,9 +64,9 @@ void Utente::setLastId()
 	--lastId;
 }
 
-void Utente::setID()
+void Utente::setID(int identificacao)
 {
-	id--;
+	id = identificacao;
 }
 
 void Utente::setUtenteLocation(Localizacao spot) {
@@ -124,6 +124,7 @@ void Utente::setUtilizacoes(Utilizacao ut) {
 ////////////
 // OTHERS //
 ////////////
+
 
 void Utente::updateHistoric() {
 

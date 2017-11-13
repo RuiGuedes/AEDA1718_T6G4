@@ -22,7 +22,6 @@ public:
 	void alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias);
 	void devolveBicicleta();
 	void updateHistoric();
-
 	friend ostream & operator <<(ostream & o, const Utente & u);
 	friend istream & operator >>(istream & i, Utente & u);
 
@@ -39,7 +38,7 @@ public:
 
 	//Metodos Set
 	static void setLastId();
-	void setID();
+	void setID(int identificacao);
 	void setUtenteLocation(Localizacao spot);
 	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
 	void setAvailable();

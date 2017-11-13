@@ -15,7 +15,6 @@ int SequentialSearch(const vector<T> &v, T x)
 	return -1; // não encontrou
 }
 
-
 void registo_utente(Sistema & BS);
 void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
@@ -1452,6 +1451,7 @@ void removeUT(Sistema & ER) {
 		return;
 	}
 
+	/*
 	if(indexUT == 0)
 	{
 		for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
@@ -1472,7 +1472,7 @@ void removeUT(Sistema & ER) {
 		}
 		ER.getUtentes().at(0)->setLastId();
 	}
-
+	*/
 
 
 	cout << "Utente removido com sucesso !" << endl << endl;
