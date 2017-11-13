@@ -328,31 +328,48 @@ void devolveBike(Sistema &ER,int index) {
 	{
 		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
 	}
-	else if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
-	{
-		cout << "Devolve bicicleta: " << endl << endl;
-		cout << "Resumo do último aluguer: " << endl << endl;
 
+	vector<int> index_distancias = ExtraData(ER,index);
+
+
+	//Remove a bicicleta do utente e entrega-a no ponto partilha mais próximo
+	for(unsigned int i = 0; i < index_distancias.size(); i++)
+	{
+		int lotacao {0};
+
+		for(unsigned int k = 0; k < ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
+		{
+			lotacao += ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
+		}
+
+		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
+		{
+			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(ER.getUtentes().at(index)->getBike());
+			Bicicleta * p {0};
+			ER.getUtentes().at(index)->setBike(p);
+			break;
+		}
+	}
+
+	cout << "Devolve bicicleta: " << endl << endl;
+	cout << "Resumo do último aluguer: " << endl << endl;
+
+	//Verifica o tipo de utente e apresenta a respetiva informação
+	if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
+	{
 		Utilizacao ut = ER.getUtentes().at(index)->getUtilizacoes().at(ER.getUtentes().at(index)->getUtilizacoes().size() - 1);
 		ut.displayUtilizacao();
-
-		ER.getUtentes().at(index)->setAvailable();
-
-		cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
 	}
 	else
 	{
-		cout << "Devolve bicicleta: " << endl << endl;
-		cout << "Resumo do último aluguer: " << endl << endl;
-
 		Utilizacao ut = ER.getUtentes().at(index)->getHistorico().at(ER.getUtentes().at(index)->getHistorico().size() - 1);
 		ut.displayUtilizacao();
-
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
-		ER.getUtentes().at(index)->setAvailable();
-
-		cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
 	}
+
+	ER.getUtentes().at(index)->setAvailable();
+	cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
+
 	system("pause");
 	system("cls");
 	return;
@@ -821,9 +838,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-													 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-													 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-													 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																					 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																					 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																					 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -1451,7 +1468,7 @@ void removeUT(Sistema & ER) {
 		}
 		ER.getUtentes().at(0)->setLastId();
 	}
-	*/
+	 */
 
 
 	cout << "Utente removido com sucesso !" << endl << endl;
