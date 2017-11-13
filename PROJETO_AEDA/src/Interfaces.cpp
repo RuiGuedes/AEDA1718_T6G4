@@ -21,7 +21,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	if(ER.getUtentes().at(index)->getAvailable() == false)
 	{
-		cout << "Não é possível alugar duas bicicletas em simultãneo !"  << endl << endl;
+		cout << "Não é possível alugar duas bicicletas em simultâneo !"  << endl << endl;
 
 		system("pause");
 		system("cls");
@@ -30,7 +30,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 	}
 	else
 	{
-		cout << "Aluga Biciclea: " << endl << endl;
+		cout << "Aluga Bicicleta: " << endl << endl;
 
 		//string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano)
 
@@ -351,49 +351,51 @@ void displayPagPendentes(Sistema &ER,int index){
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Pagamentos pendentes:" << endl << endl;
+
+	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-	{
 		cout << "Neste tipo de utente (Regular) não é possivel ter pagamentos pendentes !" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-
-	}
 	else
 	{
 		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
 		{
+			cout << "Pagamentos pendentes:" << endl << endl;
+
 			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
 			{
 				cout << "Tipo de bicicleta: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() << endl;
 				cout << "Número de horas: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime() << endl;
 				cout << "Data (dd/mm/aaaa): " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getData() << endl << endl;
 
+				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+				else	//Infantil
+					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
 
+				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
 
+				if(somaU+somaUS+somaC+somaI < 20)  //descontos
+					preco = preco * 0.95;
+				else
+					preco = preco * 0.9;
 
-				/////////////////////////////////////////////////
-				//FALTA CALCULAR O PRECO DAS UTILIZACOES !!!!
-				/////////////////////////////////////////////////
-
-
-
-
+				cout << "Total a pagar: " << preco << "€" << endl << endl;
 			}
 		}
 		else
 		{
 			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		}
-
-		system("pause");
-		system("cls");
-		return;
 	}
 
+	system("pause");
+	system("cls");
+	return;
 }
 
 void updateLocation(Sistema &ER,int index) {
@@ -465,67 +467,153 @@ void updateLocation(Sistema &ER,int index) {
 
 void efetuaPag(Sistema &ER,int index) {
 
-	////// Notas: /////////
-	//   Onde guardar os pagamentos ja efetuados?   removes de utilizaçoes e colocas em historico
-	//   Acrescentar perguntas sobre que meses quer pagar  		sim
-	//////////////////////////
-
-
-
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Pagamentos pendentes:" << endl << endl;
 
+	unsigned int ano{}, mes{}, value{};
+	string option {};
 	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
+	bool exist_pag = false;
 
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-	{
-		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-
-	}
-	else
-	{
-		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
-		{
-			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-			{
-				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else	//Infantil
-					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-			}
-
-			preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
-
-			if(somaU+somaUS+somaC+somaI < 20)  //descontos
-				preco = preco * 0.95;
-			else
-				preco = preco * 0.9;
-
-			cout << "Pagamento de " << preco << "€" << "efetuado!" << endl;
-
-		}
+	do{
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+			cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+		else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0)
+			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		else
 		{
-			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
+			cout << "Período a liquidar:" << endl << endl;
+
+			while(1)
+			{
+				try{
+					cout << endl << "Ano: ";
+					cin >> option;
+					if(valid_number(option) == false)
+						throw OpcaoInvalida<string>(option);
+
+					ano = stoi(option);
+					if(ano < 2017)
+						throw OpcaoInvalida<int>(ano);
+
+					break;
+				}
+				catch (OpcaoInvalida<int> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+				catch (OpcaoInvalida<string> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+			};
+
+			while(1)
+			{
+				try{
+					cout << endl << "Mes[1-12]: ";
+					cin >> option;
+					if(valid_number(option) == false)
+						throw OpcaoInvalida<string>(option);
+
+					mes = stoi(option);
+					if(mes < 1 || mes > 12)
+						throw OpcaoInvalida<int>(mes);
+
+					break;
+				}
+				catch (OpcaoInvalida<int> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+				catch (OpcaoInvalida<string> &op){
+
+					cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+					cin.ignore(1000,'\n');
+				}
+			};
+
+			exist_pag = false;
+
+			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+			{
+				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano && ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes() == mes)
+				{
+					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
+						somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+						somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
+						somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+					else	//Infantil
+						somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
+
+					exist_pag = true;
+				}
+			}
+
+			if(exist_pag == false)
+				cout << "Não existe nenhum registo de aluguer para o período referido!" << endl;
+			else
+			{
+				ER.getUtentes().at(index)->updateHistoric();
+
+				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
+
+				if(somaU+somaUS+somaC+somaI < 20)  //descontos
+					preco = preco * 0.95;
+				else
+					preco = preco * 0.9;
+
+				cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
+			}
 		}
 
-		system("pause");
-		system("cls");
-		return;
-	}
+		cout << "Opções: " << endl;
+		cout << "     1 - Sair" << endl;
+		cout << "     2 - Efetuar mais pagamentos" << endl;
+
+		while(1)
+		{
+			try{
+				cout << endl << "Introduza uma opção (1-2): ";
+				cin >> option;
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+				value = stoi(option);
+				if(value < 1 || value > 2)
+					throw OpcaoInvalida<int>(value);
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+	} while(value==2);
+
+	system("pause");
+	system("cls");
+	return;
 }
 
 void NearestPP(Sistema &ER,int index) {
@@ -566,6 +654,51 @@ void NearestPP(Sistema &ER,int index) {
 
 }
 
+void mudaTipoUT(Sistema &ER,int index){
+
+	//Informacao inicial apresentadada ao utilizador
+		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+		string novo_tipo;
+		int type;
+		bool valid_type = false;
+
+		do
+		{
+			cout << "Introduza o tipo de utilizador para que quer mudar: ";
+			cin >> novo_tipo;
+			cout << endl << endl;
+			if(novo_tipo != "Regular" && novo_tipo != "Socio")
+				cout << "Tipo invalido!" << endl << endl;
+			else
+				valid_type = true;
+
+		} while(valid_type==false);
+
+
+		if(novo_tipo == "Regular")
+			type = 0;
+		else
+			type = 1;
+
+////FALTA: Mudar efetuaPag para que seja possivel efetuar todos os pagamentos existentes de uma vez
+
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular"){
+			cout << "Necessita de efetuar os pagamentos em falta!" << endl << endl;
+			efetuaPag(ER, index);
+		}
+
+		ER.getUtentes().at(index)->setTipoUtente(type);
+
+		system("pause");
+		system("cls");
+		return;
+}
+
 void infoER(Sistema &ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -578,22 +711,23 @@ void infoER(Sistema &ER) {
 
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
 	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
-	cout << "Pontos de Partilha:" << endl;
-	cout << setw (5) << "Nome" << setw (25) << "Local" << setw (20) << "GPS";
-	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" << setw (10) << "Corrida" << setw (12) << "Infantil" << endl;
+	cout << "Pontos de Partilha:" << endl << endl;
+	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << "Infantil" << endl << endl;
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-			 << setw(25) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-			 << setw(10) << ER.getPontosPartilha().at(i)->getLocal().getX()
-			 << setw(10) << ER.getPontosPartilha().at(i)->getLocal().getY();
+			 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+			 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+			 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
-		cout << setw(10) << numtypes.at(0);
-		cout << setw(18) << numtypes.at(1);
-		cout << setw(10) << numtypes.at(2);
-		cout << setw(12) << numtypes.at(3);
+		cout << setw(13) << numtypes.at(0);
+		cout << setw(15) << numtypes.at(1);
+		cout << setw(9) << numtypes.at(2);
+		cout << numtypes.at(3);
 
 		cout << endl;
 	}
@@ -602,13 +736,13 @@ void infoER(Sistema &ER) {
 
 	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
 
-	cout << "Tabela de Preços:" << endl;
+	cout << "Tabela de Preços:" << endl << endl;
 
-	cout << setw(20) << "Tipo de bicicleta" << setw(15) << "Preço por hora" << endl;
-	cout << setw(20) << "Urbana" << setw(15) << "4€" << endl <<
-			setw(20) << "Urbana Simples" << setw(15) << "3€" << endl <<
-			setw(20) << "Corrida" << setw(15) << "5€" << endl <<
-			setw(20) << "Infantil" << setw(15) << "2€" << endl <<
+	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
+	cout << setw(26) << "Urbana" << "4€" << endl <<
+			setw(26) << "Urbana Simples" << "3€" << endl <<
+			setw(26) << "Corrida" << "5€" << endl <<
+			setw(26) << "Infantil" << "2€" << endl <<
 			endl;
 
 	cout << "Fundadores: " << endl;
@@ -1486,7 +1620,7 @@ void menu_interface(Sistema &ER){
 		cout << "2  - Devolver bicicleta" << endl;
 		cout << "3  - Historial" << endl;				//CRIAR UMA FUNCAO
 		cout << "4  - Pagamentos pendentes" << endl;		//FALTA CALCULAR O PRECO DAS UTILIZACOES
-		cout << "5  - Atualiza Localização" << endl;		//ADICIONAR OPCAO PARA ADICIONAR LOCALOZACAO POR NOME
+		cout << "5  - Atualiza Localização" << endl;		//ADICIONAR OPCAO PARA ADICIONAR LOCALIZACAO POR NOME
 		cout << "6  - Efetuar pagamento das mensalidades" << endl;		//FALTA TERMINAR E VERIFICAR
 		cout << "7  - Ponto de partilha mais próximo" << endl;
 		cout << "8  - Mudar o tipo de utente" << endl;			//FALTA IMPLEMENTAR
@@ -1559,7 +1693,7 @@ void menu_interface(Sistema &ER){
 			break;
 		case 6:
 			system("cls");
-			//Efetua pagamento
+			efetuaPag(ER,index);
 			break;
 		case 7:
 			system("cls");
@@ -1567,7 +1701,7 @@ void menu_interface(Sistema &ER){
 			break;
 		case 8:
 			system("cls");
-			//Mudar tipo de utente
+			mudaTipoUT(ER,index);
 			break;
 		case 9:
 			system("cls");
