@@ -379,10 +379,8 @@ void displayPagPendentes(Sistema &ER,int index){
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
-
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-		cout << "Neste tipo de utente (Regular) não é possivel ter pagamentos pendentes !" << endl << endl;
+		cout << "Neste tipo de utente [Regular] não é possivel ter pagamentos pendentes !" << endl << endl;
 	else
 	{
 		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
@@ -391,27 +389,8 @@ void displayPagPendentes(Sistema &ER,int index){
 
 			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
 			{
-				cout << "Tipo de bicicleta: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() << endl;
-				cout << "Número de horas: " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime() << endl;
-				cout << "Data (dd/mm/aaaa): " << ER.getUtentes().at(index)->getUtilizacoes().at(i).getData() << endl << endl;
-
-				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else	//Infantil
-					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-
-				preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
-
-				if(somaU+somaUS+somaC+somaI < 20)  //descontos
-					preco = preco * 0.95;
-				else
-					preco = preco * 0.9;
-
-				cout << "Total a pagar: " << preco << "€" << endl << endl;
+				ER.getUtentes().at(index)->getUtilizacoes().at(i).displayUtilizacao();
+				cout << endl;
 			}
 		}
 		else
