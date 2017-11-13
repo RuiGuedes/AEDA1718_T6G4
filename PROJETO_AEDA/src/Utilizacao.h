@@ -51,6 +51,7 @@ public:
 	Data getData() const;
 	unsigned int getUseTime() const;
 	string getBikeType() const;
+	double getPrice() const;
 };
 
 inline ostream& operator <<(ostream & o, const Utilizacao & u)

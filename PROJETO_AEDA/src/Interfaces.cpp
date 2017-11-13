@@ -286,16 +286,8 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 			else
 			{
-				/* Apresenta o preço do aluguer */
-				if(bikeType == "Urbana")
-					price = numHours*4;
-				else if(bikeType == "Urbana Simples")
-					price = numHours*3;
-				else if(bikeType == "Corrida")
-					price = numHours*5;
-				else //bikeType == "Infantil"
-					price = numHours*2;
 
+				price = p.getPrice();
 				ER.getUtentes().at(index)->setHistoric(p);
 			}
 
@@ -340,12 +332,10 @@ void devolveBike(Sistema &ER,int index) {
 	else if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 	{
 		cout << "Devolve bicicleta: " << endl << endl;
+		cout << "Resumo do último aluguer: " << endl << endl;
 
 		Utilizacao ut = ER.getUtentes().at(index)->getUtilizacoes().at(ER.getUtentes().at(index)->getUtilizacoes().size() - 1);
-
-		cout << "Tipo de bicicleta: " << ut.getBikeType() << endl;
-		cout << "Número de horas: " << ut.getUseTime() << endl;
-		cout << "Data (dd/mm/aaaa): " << ut.getData() << endl;
+		ut.displayUtilizacao();
 
 		ER.getUtentes().at(index)->setAvailable();
 
@@ -354,13 +344,12 @@ void devolveBike(Sistema &ER,int index) {
 	else
 	{
 		cout << "Devolve bicicleta: " << endl << endl;
+		cout << "Resumo do último aluguer: " << endl << endl;
 
 		Utilizacao ut = ER.getUtentes().at(index)->getHistorico().at(ER.getUtentes().at(index)->getHistorico().size() - 1);
+		ut.displayUtilizacao();
 
-		cout << "Tipo de bicicleta: " << ut.getBikeType() << endl;
-		cout << "Número de horas: " << ut.getUseTime() << endl;
-		cout << "Data (dd/mm/aaaa): " << ut.getData() << endl;
-
+		cout << "Montante: " << ut.getPrice() << "€" << endl;
 		ER.getUtentes().at(index)->setAvailable();
 
 		cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;

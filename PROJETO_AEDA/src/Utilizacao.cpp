@@ -39,6 +39,17 @@ string Utilizacao::getBikeType() const {
 	return bikeType;
 }
 
+double Utilizacao::getPrice() const {
+
+	if(bikeType == "Urbana")
+		return useTime*4;
+	else if(bikeType == "Urbana Simples")
+		return useTime*3;
+	else if(bikeType == "Corrida")
+		return useTime*5;
+	else //bikeType == "Infantil"
+		return useTime*2;
+}
 
 //////////
 // DATA //
