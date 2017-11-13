@@ -45,6 +45,7 @@ public:
 	Utilizacao(string bikeType, unsigned int numHours, Data d);
 	friend ostream & operator <<(ostream & o, const Utilizacao & u);
 	friend istream & operator >>(istream & i, Utilizacao & u);
+	void displayUtilizacao();
 
 	//Metodos Get
 	Data getData() const;

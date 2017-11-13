@@ -3,6 +3,19 @@
 #include "Utente.h"
 #include "Exceções.h"
 
+/* Procura um valor xnum vetor vde elementos comparáveiscom os operadores de comparação.
+ * Retorna o índice da primeira ocorrência de xem v, se encontrar; senão, retorna -1.
+ */
+template <class T>
+int SequentialSearch(const vector<T> &v, T x)
+{
+	for (unsigned int i = 0; i < v.size(); i++)
+		if (v[i] == x)
+			return i;// encontrou
+	return -1; // não encontrou
+}
+
+
 void registo_utente(Sistema & BS);
 void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
@@ -32,8 +45,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 	{
 		cout << "Aluga Bicicleta: " << endl << endl;
 
-		//string bikeType, unsigned int numHours, unsigned int dia, unsigned int mes, unsigned int ano)
-
+		cout << "Preencha os seguintes campos: " << endl << endl;
 		string bikeType;
 		Data d1;
 		int numHours{};
@@ -46,11 +58,11 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		cout << "     3 - Corrida" << endl;
 		cout << "     4 - Infantil" << endl << endl;
 
-
+		//Executa até obter um tipo de bicicleta válido
 		while(1)
 		{
 			try{
-				cout << endl << "Introduza uma opcao (1-4): ";
+				cout << endl << "Introduza uma opcao [1-4]: ";
 				cin >> option;
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
@@ -63,18 +75,19 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 			catch (OpcaoInvalida<int> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 		};
 
+		//Verifica o tipo de bicicleta selecionada
 		if(value == 1)
 			bikeType = "Urbana";
 		else if(value == 2)
@@ -84,11 +97,11 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		else
 			bikeType = "Infantil";
 
-
+		//Executa até obter um número de horas válido
 		while(1)
 		{
 			try{
-				cout << endl << "Número de horas: ";
+				cout << endl << "Número de horas [0-24]: ";
 				cin >> option;
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
@@ -102,22 +115,23 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 			catch (OpcaoInvalida<int> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Número de horas inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Número de horas inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 		};
 
+		//Executa até obter um ano válido
 		while(1)
 		{
 			try{
-				cout << endl << "Ano: ";
+				cout << endl << "Ano [2017 - ...]: ";
 				cin >> option;
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
@@ -131,22 +145,23 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 			catch (OpcaoInvalida<int> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 		};
 
+		//Executa até obter um mês válido
 		while(1)
 		{
 			try{
-				cout << endl << "Mes[1-12]: ";
+				cout << endl << "Mes [1-12]: ";
 				cin >> option;
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
@@ -160,18 +175,21 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 			catch (OpcaoInvalida<int> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 		};
 
+		/* Executa até obter um dia válido
+		 * Considera que fevereiro tem 28 dias
+		 */
 		while(1)
 		{
 			try{
@@ -208,31 +226,34 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			}
 			catch (OpcaoInvalida<int> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Dia inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Dia inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
 				cin.ignore(1000,'\n');
 			}
 		};
 
-		int idPP {-1};
+		int idPP {};
 		vector<string> bikesType;
 
 		//Verifica se tem o tipo de bicleta pretendida por ordem de distancia
-		for (unsigned int i=0 ; i < distancias.size(); i++){
+		for (unsigned int i=0 ; i < distancias.size(); i++)
+		{
 			bikesType = ER.getPontosPartilha().at(distancias.at(i))->getBikeTypes();
 
-			for (unsigned int k = 0; k < bikesType.size(); k++){
-				if(bikesType.at(k)== bikeType){
-					idPP=distancias.at(i);
-					break;
-				}
+			idPP = SequentialSearch(bikesType,bikeType);
+
+			if(idPP != -1)
+			{
+				idPP = distancias.at(i);
+				break;
 			}
+
 		}
 
 		if(idPP == -1)
@@ -255,26 +276,44 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 			ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
 
+			Utilizacao p(bikeType, numHours, d1);
+			double price {0};
+
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 			{
-				Utilizacao p(bikeType, numHours, d1);
 				ER.getUtentes().at(index)->setUtilizacoes(p);
 
 			}
-			else {
+			else
+			{
 				/* Apresenta o preço do aluguer */
-
 				if(bikeType == "Urbana")
-					cout << "Total a pagar : " << numHours*4 << "€" << endl;
+					price = numHours*4;
 				else if(bikeType == "Urbana Simples")
-					cout << "Total a pagar : " << numHours*3 << "€" << endl;
+					price = numHours*3;
 				else if(bikeType == "Corrida")
-					cout << "Total a pagar : " << numHours*5 << "€" << endl;
+					price = numHours*5;
 				else //bikeType == "Infantil"
-					cout << "Total a pagar : " << numHours*2 << "€" << endl;
+					price = numHours*2;
 
-				ER.getUtentes().at(index)->setHistoric(Utilizacao(bikeType, numHours, d1));
+				ER.getUtentes().at(index)->setHistoric(p);
 			}
+
+			cout << endl;
+			system("cls");
+
+			//Informacao inicial apresentadada ao utilizador
+			cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+			cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+			cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+			cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+			cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+			cout << "Aluga Bicicleta: " << endl << endl;
+
+			cout << "Resumo do aluger: " << endl << endl;
+			p.displayUtilizacao();
+			if(price !=0)
+				cout << "Montante: " << price << "€" << endl;
 
 			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
 		}
@@ -735,65 +774,65 @@ void NearestPP(Sistema &ER,int index) {
 void mudaTipoUT(Sistema &ER,int index){
 
 	//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-		string novo_tipo, opcao;
-		int type;
-		bool valid_type = false, valid_op = false;
+	string novo_tipo, opcao;
+	int type;
+	bool valid_type = false, valid_op = false;
 
-		do
-		{
-			cout << "Introduza o tipo de utilizador para que quer mudar: ";
-			cin >> novo_tipo;
-			cout << endl << endl;
-			if(novo_tipo != "Regular" && novo_tipo != "Socio")
-				cout << "Tipo invalido!" << endl << endl;
-			else
-				valid_type = true;
-
-		} while(valid_type==false);
-
-
-		if(novo_tipo == "Regular")
-			type = 0;
+	do
+	{
+		cout << "Introduza o tipo de utilizador para que quer mudar: ";
+		cin >> novo_tipo;
+		cout << endl << endl;
+		if(novo_tipo != "Regular" && novo_tipo != "Socio")
+			cout << "Tipo invalido!" << endl << endl;
 		else
-			type = 1;
+			valid_type = true;
 
-////FALTA: Mudar efetuaPag para que seja possivel efetuar todos os pagamentos existentes de uma vez
-
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular" && ER.getUtentes().at(index)->getUtilizacoes().size() > 0){
-			cout << "Necessita de efetuar os pagamentos em falta!" << endl << endl;
-
-			do{
-				cout << "Deseja prosseguir? (Sim/Nao) " << endl << endl;
-				cin >> opcao;
-				cout << endl << endl;
-				if(opcao != "Sim" && opcao != "Nao")
-					cout << "Escolha uma das opções (Sim/Nao)" << endl << endl;
-				else
-					valid_op = true;
-
-			} while(valid_op==false);
+	} while(valid_type==false);
 
 
-			if(opcao == "Sim")
-				efetuaPag(ER, index, "all");
+	if(novo_tipo == "Regular")
+		type = 0;
+	else
+		type = 1;
+
+	////FALTA: Mudar efetuaPag para que seja possivel efetuar todos os pagamentos existentes de uma vez
+
+	if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular" && ER.getUtentes().at(index)->getUtilizacoes().size() > 0){
+		cout << "Necessita de efetuar os pagamentos em falta!" << endl << endl;
+
+		do{
+			cout << "Deseja prosseguir? (Sim/Nao) " << endl << endl;
+			cin >> opcao;
+			cout << endl << endl;
+			if(opcao != "Sim" && opcao != "Nao")
+				cout << "Escolha uma das opções (Sim/Nao)" << endl << endl;
 			else
-				return;
-		}
+				valid_op = true;
 
-		ER.getUtentes().at(index)->setTipoUtente(type);
+		} while(valid_op==false);
 
-		//////NOTA: Por alguma razao o system("pause") está a aparecer antes da linha de cima ////
-		/// (aparece primeiro "Press a key to continue" e só depois o output da função de cima) ///
 
-		system("pause");
-		system("cls");
-		return;
+		if(opcao == "Sim")
+			efetuaPag(ER, index, "all");
+		else
+			return;
+	}
+
+	ER.getUtentes().at(index)->setTipoUtente(type);
+
+	//////NOTA: Por alguma razao o system("pause") está a aparecer antes da linha de cima ////
+	/// (aparece primeiro "Press a key to continue" e só depois o output da função de cima) ///
+
+	system("pause");
+	system("cls");
+	return;
 }
 
 void infoER(Sistema &ER) {
@@ -815,9 +854,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-			 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-			 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-			 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+													 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+													 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+													 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -1933,7 +1972,7 @@ void admin_interface(Sistema &ER) {
 
 		//////////////////////////////////////////
 		////// - ADICIONA PONTO DE PARTILHA NUMA LOCALIZACAO EXISTENTE
-        //////////////////////////////////////////
+		//////////////////////////////////////////
 		//Opcões possiveis apresentadas no menu
 		switch (value)
 		{

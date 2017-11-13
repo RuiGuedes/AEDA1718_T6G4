@@ -15,6 +15,14 @@ Utilizacao::Utilizacao(string bikeType, unsigned int numHours, Data d) {
 	this->data=d;
 }
 
+void Utilizacao::displayUtilizacao() {
+
+	cout << "Tipo de bicicleta: " << bikeType << endl;
+	cout << "Número de horas: " << useTime << endl;
+	cout << "Data (DD/MM/AAAA): " << data << endl;
+
+}
+
 /////////////////
 // METODOS GET //
 /////////////////

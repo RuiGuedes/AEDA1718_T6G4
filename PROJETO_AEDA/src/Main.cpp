@@ -1,6 +1,7 @@
 #include "Includes.h"
 #include "Sistema.h"
 #include "Exceções.h"
+#include <Windows.h>
 
 using namespace std;
 
@@ -25,10 +26,17 @@ int main()
 	// Zona de inicialização do programa //
 	///////////////////////////////////////
 
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
 	Sistema sys;
-
-	checkinSys(sys);
-
+	cout << "APPLICATION LOADING";
+	cout << " .";checkinSys(sys) ; cout << "\b.."; Sleep(1000); cout << "\b\b...";Sleep(500);
+	system("cls");
 	openInterface(sys);
 
 	checkoutSys(sys);
