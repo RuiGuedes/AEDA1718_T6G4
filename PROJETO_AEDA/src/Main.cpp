@@ -36,8 +36,6 @@ int main()
 	return 0;
 }
 
-
-
 void checkinSys(Sistema & ER){
 	ifstream f_utentes;
 
@@ -122,8 +120,6 @@ void checkinSys(Sistema & ER){
 
 	return;
 };
-
-
 
 void checkoutSys(Sistema & ER){
 

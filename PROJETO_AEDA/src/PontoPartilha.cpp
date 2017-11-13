@@ -1,9 +1,5 @@
 #include "PontoPartilha.h"
 
-////////////
-// OTHERS //
-////////////
-
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
 	vector<Bicicleta *> v1,v2,v3,v4;
@@ -22,63 +18,6 @@ PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) 
 	bicicletas.push_back(v2);
 	bicicletas.push_back(v3);
 	bicicletas.push_back(v4);
-}
-
-/////////////////
-// METODOS GET //
-/////////////////
-
-Localizacao PontoPartilha::getLocal() const {
-	return local;
-}
-
-int PontoPartilha::getCapacidade() const {
-	return capacidade;
-}
-
-vector<int> PontoPartilha::getNumberOfBikes() const {
-
-	vector<int> number_bikes;
-
-	for(unsigned int i = 0; i < bicicletas.size(); i++)
-	{
-		number_bikes.push_back(bicicletas.at(i).size());
-	}
-
-	return number_bikes;
-}
-
-vector <string> PontoPartilha::getBikeTypes() {
-
-	vector <string> bikeTypes;
-
-	if(bicicletas.at(0).size() != 0)
-		bikeTypes.push_back("Urbana");
-
-	if(bicicletas.at(1).size() != 0)
-		bikeTypes.push_back("Urbana Simples");
-
-	if(bicicletas.at(2).size() != 0)
-		bikeTypes.push_back("Corrida");
-
-	if(bicicletas.at(3).size() != 0)
-		bikeTypes.push_back("Infantil");
-
-	return bikeTypes;
-}
-
-
-vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
-
-	return bicicletas;
-}
-
-////////////
-// OTHERS //
-////////////
-
-void PontoPartilha::setNome(string name) {
-	nome = name;
 }
 
 void  PontoPartilha::removeBike(Bicicleta *bike) {
@@ -133,6 +72,7 @@ void PontoPartilha::limpaVectorBike(){
 	bicicletas.at(3).clear();
 }
 
+/*
 void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos) {
 	for (unsigned int p = 1; p < pontos.size(); p++)
 	{
@@ -142,6 +82,63 @@ void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos) {
 			*pontos[j] = *pontos[j-1];
 		*pontos[j] = tmp;
 	}
+}
+*/
+
+/////////////////
+// METODOS GET //
+/////////////////
+
+Localizacao PontoPartilha::getLocal() const {
+	return local;
+}
+
+int PontoPartilha::getCapacidade() const {
+	return capacidade;
+}
+
+vector<int> PontoPartilha::getNumberOfBikes() const {
+
+	vector<int> number_bikes;
+
+	for(unsigned int i = 0; i < bicicletas.size(); i++)
+	{
+		number_bikes.push_back(bicicletas.at(i).size());
+	}
+
+	return number_bikes;
+}
+
+vector <string> PontoPartilha::getBikeTypes() {
+
+	vector <string> bikeTypes;
+
+	if(bicicletas.at(0).size() != 0)
+		bikeTypes.push_back("Urbana");
+
+	if(bicicletas.at(1).size() != 0)
+		bikeTypes.push_back("Urbana Simples");
+
+	if(bicicletas.at(2).size() != 0)
+		bikeTypes.push_back("Corrida");
+
+	if(bicicletas.at(3).size() != 0)
+		bikeTypes.push_back("Infantil");
+
+	return bikeTypes;
+}
+
+vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
+
+	return bicicletas;
+}
+
+/////////////////
+// METODOS SET //
+/////////////////
+
+void PontoPartilha::setNome(string name) {
+	nome = name;
 }
 
 

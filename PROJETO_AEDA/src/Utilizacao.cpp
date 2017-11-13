@@ -1,5 +1,8 @@
 #include "Utilizacao.h"
 
+////////////////
+// UTILIZACAO //
+////////////////
 
 Utilizacao::Utilizacao(){
 	this->bikeType = " ";
@@ -29,7 +32,9 @@ string Utilizacao::getBikeType() const {
 }
 
 
-
+//////////
+// DATA //
+//////////
 
 Data::Data(){ dia=0; mes=0; ano=0;}
 
@@ -39,9 +44,17 @@ Data::Data(unsigned int dia,unsigned int mes,unsigned int ano){
 	this->ano=ano;
 }
 
+/////////////////
+// METODOS GET //
+/////////////////
+
 unsigned int Data::getDia() const { return dia; }
 unsigned int Data::getMes() const { return mes; }
 unsigned int Data::getAno() const { return ano; }
+
+/////////////////
+// METODOS SET //
+/////////////////
 
 void Data::setDia(unsigned int d){
 	this->dia=d;

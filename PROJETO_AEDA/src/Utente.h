@@ -12,17 +12,22 @@ class Utente {
 	string tipoUtente;
 	Localizacao local;		//Localizacao é uma classe
 	Bicicleta* bike;		//Bicicleta é uma classe
-	vector<Utilizacao> utilizacoes; //dia, mes, ano, horas de uso, tipo de bike //Queremos para ver pagamentos em falta
+	vector<Utilizacao> utilizacoes;	//Apenas associadas aos sócios
 	vector<Utilizacao> historico;
 	bool disponivel = true;
 public:
 	Utente();
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
-
 	void displayHistoric();
+	void alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias);
+	void devolveBicicleta();
+	void updateHistoric();
 
-	/* MÉTODOS GET */
-	static int getLastId() {return lastId;}
+	friend ostream & operator <<(ostream & o, const Utente & u);
+	friend istream & operator >>(istream & i, Utente & u);
+
+	//Metodos Get
+	static int getLastId();
 	int getId() const;
 	string getUtenteNome() const;
 	string getTipoUtente() const;
@@ -32,21 +37,15 @@ public:
 	bool getAvailable() const;
 	vector<Utilizacao> getHistorico();
 
-	/* MÉTODOS SET */
-	static void setLastId() {--lastId;}
-	void setID() {id--;}
+	//Metodos Set
+	static void setLastId();
+	void setID();
 	void setUtenteLocation(Localizacao spot);
 	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
 	void setUtilizacoes(Utilizacao ut);
-	void alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias);
-	void devolveBicicleta();
-	void updateHistoric();
-
-	friend ostream & operator <<(ostream & o, const Utente & u);
-	friend istream & operator >>(istream & i, Utente & u);
 };
 
 inline ostream& operator <<(ostream & o, const Utente & u)

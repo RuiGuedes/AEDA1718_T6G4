@@ -13,8 +13,12 @@ class PontoPartilha {
 public:
 	PontoPartilha();
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
+	void limpaVectorBike();
+	//friend void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos);
+	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
+	friend istream & operator >>(istream & i, PontoPartilha & p);
 
-	//Metodos get
+	//Metodos Get
 	Localizacao getLocal() const;
 	string getNome() const { return nome; }
 	int getCapacidade() const;
@@ -22,14 +26,11 @@ public:
 	vector <string> getBikeTypes();
 	vector <vector<Bicicleta *> > getBikes() const;
 
-	//Metodos set
+	//Metodos Set
 	void removeBike(Bicicleta *bike);
 	void adicionaBike(Bicicleta* bike);
 	void setNome(string name);
-	void limpaVectorBike();
-	friend void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos);
-	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
-	friend istream & operator >>(istream & i, PontoPartilha & p);
+
 };
 
 inline ostream& operator <<(ostream & o, const PontoPartilha & p)

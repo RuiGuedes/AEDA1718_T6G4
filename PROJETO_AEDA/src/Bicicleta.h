@@ -9,6 +9,8 @@ class Bicicleta {
 public:
 	Bicicleta();
 	Bicicleta(string tipo, string name);
+	friend ostream & operator <<(ostream & o, const Bicicleta & b);
+	friend istream & operator >>(istream & i, Bicicleta & b);
 
 	//Metodos Get
 	string getBikeType() const;
@@ -18,8 +20,6 @@ public:
 	//Metodos Set
 	void setBikeAvailable();
 
-	friend ostream & operator <<(ostream & o, const Bicicleta & b);
-	friend istream & operator >>(istream & i, Bicicleta & b);
 };
 
 inline ostream& operator <<(ostream & o, const Bicicleta & b)

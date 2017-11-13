@@ -8,14 +8,19 @@ protected:
 public:
 	Data();
 	Data(unsigned int dia,unsigned int mes,unsigned int ano);
+	friend ostream & operator<<(ostream & o, const Data & d);
+	friend istream & operator>>(istream & i, Data & d);
+
+	//Metodos Get
 	unsigned int getDia() const;
 	unsigned int getMes() const;
 	unsigned int getAno() const;
+
+	//Metodos Set
 	void setDia(unsigned int d);
 	void setMes(unsigned int m);
 	void setAno(unsigned int a);
-	friend ostream & operator<<(ostream & o, const Data & d);
-	friend istream & operator>>(istream & i, Data & d);
+
 };
 
 inline ostream & operator<< (ostream & o, const Data & d){
@@ -38,13 +43,13 @@ private:
 public:
 	Utilizacao(); // necessario para o overload do operador de extracao na classe utente
 	Utilizacao(string bikeType, unsigned int numHours, Data d);
+	friend ostream & operator <<(ostream & o, const Utilizacao & u);
+	friend istream & operator >>(istream & i, Utilizacao & u);
 
-	//Metodos get
+	//Metodos Get
 	Data getData() const;
 	unsigned int getUseTime() const;
 	string getBikeType() const;
-	friend ostream & operator <<(ostream & o, const Utilizacao & u);
-	friend istream & operator >>(istream & i, Utilizacao & u);
 };
 
 inline ostream& operator <<(ostream & o, const Utilizacao & u)

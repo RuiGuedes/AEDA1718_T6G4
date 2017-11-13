@@ -17,7 +17,7 @@
 
 using namespace std;
 
-// Prótotipos das funções
+//Prótotipos das funções
 
 bool valid_number(string number);
 bool valid_word(string word);

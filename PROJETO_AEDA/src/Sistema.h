@@ -9,16 +9,14 @@ class Sistema {
 	vector<Utente* > utentes;
 public:
 	Sistema() {}
-	void addPontoPartilha(PontoPartilha* spot);  //Criacao de uma nova loja
-	void addNewUtente(Utente* utente);	 		 //Adiciona um novo utente
-//	friend bool ExistID(int identificacao);
+	void addPontoPartilha(PontoPartilha* spot); 	 //Criacao de uma nova loja
+	void addNewUtente(Utente* utente);	 		 	//Adiciona um novo utente
+	void removePonto(int indexPP);
+	void removeUtente(int indexUT);
 
 	//Metodos Get
 	vector<Utente* > getUtentes();
 	vector<PontoPartilha* > getPontosPartilha();
 
-	//Others
-	void removePonto(int indexPP);
-	void removeUtente(int indexUT);
 };
 

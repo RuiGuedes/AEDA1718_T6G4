@@ -17,6 +17,11 @@ Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
 // METODOS GET //
 /////////////////
 
+int Utente::getLastId()
+{
+	return lastId;
+}
+
 int Utente::getId() const {
 	return id;
 }
@@ -53,6 +58,16 @@ vector<Utilizacao> Utente::getHistorico() {
 /////////////////
 // METODOS SET //
 /////////////////
+
+void Utente::setLastId()
+{
+	--lastId;
+}
+
+void Utente::setID()
+{
+	id--;
+}
 
 void Utente::setUtenteLocation(Localizacao spot) {
 	local = spot;

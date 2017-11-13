@@ -8,22 +8,21 @@ class Localizacao {
 public:
 	Localizacao();  //default
 	Localizacao(string nome, double x, double y);
-
-	//Metodos get
-	string getNome() const;
-	double getX() const;
-	double getY() const;
-
-	//Metodos set
-	void setNome(string nome);
-	void setX(double x);
-	void setY(double y);
-
-	//Outros
 	double distancia(Localizacao local) const;
 	Localizacao & operator =(Localizacao & l);
 	friend ostream & operator <<(ostream & o, const Localizacao & l);
 	friend istream & operator >>(istream & i, Localizacao & l);
+
+	//Metodos Get
+	string getNome() const;
+	double getX() const;
+	double getY() const;
+
+	//Metodos Set
+	void setNome(string nome);
+	void setX(double x);
+	void setY(double y);
+
 };
 
 inline ostream& operator <<(ostream & o, const Localizacao & l)
