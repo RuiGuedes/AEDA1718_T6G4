@@ -9,7 +9,7 @@ void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
 
 /////////////////////////////////
-///César :: ver interfaces linha 572
+///César :: ver interfaces linha 674 e o pagamento de todas as utilizaçoes
 ///Rui   :: adimin menu  implementar funçoes.
 ///Bernardo  :: muda tipo utente
 ////////////////////////////////
@@ -17,7 +17,7 @@ void checkoutSys(Sistema & ER);
 
 int main()
 {
-	//Códigos para aceitação de caracteres da língua portugesa
+	//Códigos para aceitação de caracteres da língua portuguesa
 	SetConsoleCP(1252);
 	SetConsoleOutputCP(1252);
 
