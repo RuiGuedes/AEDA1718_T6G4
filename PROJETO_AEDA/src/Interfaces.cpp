@@ -37,8 +37,6 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
 	tamanho = ER.getPontosPartilha().at(index)->getBikes().at(value).size();
 
-	cout << "tamanho = " << tamanho << endl << endl;
-
 	//Guarda num vetor os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
 	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
 	{
@@ -450,7 +448,7 @@ void devolveBike(Sistema &ER,int index) {
 
 	ER.getUtentes().at(index)->setAvailable();
 	cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
-	cout << ER.getPontosPartilha().at(index_pp)->getLocal().getNome() << endl << endl;
+
 	System_Manager(ER,index_pp,bikeType);
 	system("pause");
 	system("cls");
