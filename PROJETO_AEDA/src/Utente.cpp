@@ -13,6 +13,62 @@ Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
 
 }
 
+void Utente::alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP) {
+
+	if(bikeType == "Urbana")
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
+	else if(bikeType == "Urbana Simples")
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
+	else if(bikeType == "Corrida")
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
+	else
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
+
+	setAvailable();
+
+	ER.getPontosPartilha().at(idPP)->removeBike(getBike());
+
+
+	if(getTipoUtente() == "Socio")
+	{
+		setUtilizacoes(ut);
+
+	}
+	else
+	{
+		setHistoric(ut);
+	}
+
+	return;
+}
+
+void Utente::updateHistoric() {
+
+	for(unsigned int i = 0; i < utilizacoes.size(); i+=0)
+	{
+		historico.push_back(utilizacoes.at(i));
+		utilizacoes.erase(utilizacoes.begin() + i);
+	}
+}
+
+void Utente::displayHistoric() {
+
+	if(this->historico.size() != 0)
+	{
+		for(unsigned int i = 0; i < this->historico.size(); i++)
+		{
+			cout << "Tipo de bicicleta: " << this->historico.at(i).getBikeType() << endl;
+			cout << "Número de horas: " << this->historico.at(i).getUseTime() << endl;
+			cout << "Data (dd/mm/aaaa): " << this->historico.at(i).getData() << endl << endl;
+
+		}
+	}
+	else
+	{
+		cout << "Este utente ainda não utilizou qualquer tipo de servico" << endl << endl;
+	}
+}
+
 /////////////////
 // METODOS GET //
 /////////////////
@@ -99,7 +155,6 @@ void Utente::setTipoUtente(int tipo) {
 	return;
 }
 
-
 void Utente::setAvailable() {
 
 	if(disponivel == false)
@@ -121,51 +176,7 @@ void Utente::setUtilizacoes(Utilizacao ut) {
 	this->utilizacoes.push_back(ut);
 }
 
-////////////
-// OTHERS //
-////////////
 
 
-void Utente::updateHistoric() {
-
-	for(unsigned int i = 0; i < utilizacoes.size(); i+=0)
-	{
-		historico.push_back(utilizacoes.at(i));
-		utilizacoes.erase(utilizacoes.begin() + i);
-	}
-}
-
-void Utente::displayHistoric() {
-
-	if(this->historico.size() != 0)
-	{
-		for(unsigned int i = 0; i < this->historico.size(); i++)
-		{
-			cout << "Tipo de bicicleta: " << this->historico.at(i).getBikeType() << endl;
-			cout << "Número de horas: " << this->historico.at(i).getUseTime() << endl;
-			cout << "Data (dd/mm/aaaa): " << this->historico.at(i).getData() << endl << endl;
-
-		}
-	}
-	else
-	{
-		cout << "Este utente ainda não utilizou qualquer tipo de servico" << endl << endl;
-	}
-}
-
-void Utente::alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias) {
-
-	//Se tiver: atribui a bicicleta ao utente e remove-a do pontopartilha e regista a utilizacao
-
-	/* Atribui bicicleta ao utente */
-
-	/* Remove bicicleta do ponto partilha */
-
-	//	/* Regista utilizacao */
-	//
-	//Senão tiver: faz cout "Neste momento não é possivel alugar a bicicleta do tipo (bikeType)
-
-	return;
-}
 
 

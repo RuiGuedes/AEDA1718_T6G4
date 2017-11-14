@@ -39,7 +39,7 @@ public:
 	Utente();
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
 	void displayHistoric();
-	void alugaBicicleta(string bikeType, unsigned int numHours, Data d, vector<int> distancias);
+	void alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP);
 	void devolveBicicleta();
 	void updateHistoric();
 	friend ostream & operator <<(ostream & o, const Utente & u);

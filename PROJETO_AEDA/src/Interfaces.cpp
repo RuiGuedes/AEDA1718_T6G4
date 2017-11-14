@@ -94,7 +94,6 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 	return;
 }
 
-//COMPLETO
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -331,32 +330,15 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		else
 		{
 
-			if(bikeType == "Urbana")
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
-			else if(bikeType == "Urbana Simples")
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
-			else if(bikeType == "Corrida")
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
-			else
-				ER.getUtentes().at(index)->setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
-
-			ER.getUtentes().at(index)->setAvailable();
-
-			ER.getPontosPartilha().at(idPP)->removeBike(ER.getUtentes().at(index)->getBike());
-
 			Utilizacao p(bikeType, numHours, d1);
 			double price {0};
 
-			if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
-			{
-				ER.getUtentes().at(index)->setUtilizacoes(p);
+			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
 
-			}
-			else
+			if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
 			{
-
 				price = p.getPrice();
-				ER.getUtentes().at(index)->setHistoric(p);
+
 			}
 
 			cout << endl;
@@ -368,26 +350,30 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 			cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 			cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-			cout << "Aluga Bicicleta: " << endl << endl;
 
+			cout << "Aluga Bicicleta: " << endl << endl;
 			cout << "Resumo do aluger: " << endl << endl;
+
 			p.displayUtilizacao();
+
 			if(price !=0)
 				cout << "Montante: " << price << "€" << endl;
+
 			cout << "Ponto Partilha: ECO_RIDES_" << ER.getPontosPartilha().at(idPP)->getNome() << endl;
 			cout << "Localização: " << ER.getPontosPartilha().at(idPP)->getLocal().getNome() << endl;
 
-			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
-		}
+			System_Manager(ER,idPP,bikeType);
 
-		System_Manager(ER,idPP,bikeType);
+			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
+
+		}
 
 		system("pause");
 		system("cls");
 		return;
 	}
 }
-//COMPLETO
+
 void devolveBike(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -921,9 +907,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																																																			 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																																																			 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																																																			 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																																																					 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																																																					 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																																																					 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
