@@ -59,16 +59,16 @@ public:
 
 inline ostream& operator <<(ostream & o, const Utilizacao & u)
 {
-	//o << u.bikeType << '-' << u.useTime << '-' <<  u.data;
-	o << u.bikeType << '-' << u.useTime << '-' <<  u.data << '/' <<  u.pontoPartilha << '/' <<  u.localizacao;
+	o << u.bikeType << '-' <<  u.pontoPartilha << '-' <<  u.localizacao << '-' << u.useTime << '-' <<  u.data ;
 	return o;
 }
 
 inline istream& operator >>(istream & i, Utilizacao & u)
 {
-	char b1,b2,b3;
+	char b1;
 	getline(i,u.bikeType,'-');
-	//i >> u.useTime >> b1 >> u.data;
-	i >> u.useTime >> b1 >> u.data >> b2 >> u.pontoPartilha >> b3 >> u.localizacao;
+	getline(i,u.pontoPartilha,'-');
+	getline(i,u.localizacao,'-');
+	i >> u.useTime >> b1 >> u.data;
 	return i;
 }

@@ -38,10 +38,10 @@ i7/Infantil/1
 i8/Infantil/1
 i9/Infantil/1
 i10/Infantil/1
-u11/Urbana/1
 u12/Urbana/1
 u13/Urbana/1
 u14/Urbana/1
+u11/Urbana/1
 us13/Urbana Simples/1
 us14/Urbana Simples/1
 us15/Urbana Simples/1
