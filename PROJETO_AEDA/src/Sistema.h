@@ -40,6 +40,7 @@ public:
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
 	void displayHistoric();
 	void alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP);
+	int removeBicicleta(Sistema &ER, vector<int> index_distancias); 			//Retorna o indice do ponto de partilha afetado
 	void devolveBicicleta();
 	void updateHistoric();
 	friend ostream & operator <<(ostream & o, const Utente & u);

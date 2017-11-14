@@ -42,6 +42,34 @@ void Utente::alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP
 	return;
 }
 
+int Utente::removeBicicleta(Sistema &ER, vector<int> index_distancias) {
+
+	int index_pp {-1};
+
+	setAvailable();
+
+	for(unsigned int i = 0; i < index_distancias.size(); i++)
+	{
+		int lotacao {0};
+
+		for(unsigned int k = 0; k < ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
+		{
+			lotacao += ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
+		}
+
+		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
+		{
+			index_pp = index_distancias.at(i);
+			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(getBike());
+			Bicicleta * p {0};
+			setBike(p);
+			break;
+		}
+	}
+
+	return index_pp;
+}
+
 void Utente::updateHistoric() {
 
 	for(unsigned int i = 0; i < utilizacoes.size(); i+=0)

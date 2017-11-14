@@ -388,27 +388,9 @@ void devolveBike(Sistema &ER,int index) {
 		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
 	}
 
-	vector<int> index_distancias = ExtraData(ER,index);
 	int index_pp {-1};
-	//Remove a bicicleta do utente e entrega-a no ponto partilha mais próximo
-	for(unsigned int i = 0; i < index_distancias.size(); i++)
-	{
-		int lotacao {0};
 
-		for(unsigned int k = 0; k < ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
-		{
-			lotacao += ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
-		}
-
-		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
-		{
-			index_pp = index_distancias.at(i);
-			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(ER.getUtentes().at(index)->getBike());
-			Bicicleta * p {0};
-			ER.getUtentes().at(index)->setBike(p);
-			break;
-		}
-	}
+	index_pp = ER.getUtentes().at(index)->removeBicicleta(ER,ExtraData(ER,index));
 
 	cout << "Devolve bicicleta: " << endl << endl;
 	cout << "Resumo do último aluguer: " << endl << endl;
@@ -434,7 +416,6 @@ void devolveBike(Sistema &ER,int index) {
 		cout << "Localização: " << ER.getPontosPartilha().at(index_pp)->getLocal().getNome() << endl;
 	}
 
-	ER.getUtentes().at(index)->setAvailable();
 	cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
 
 	System_Manager(ER,index_pp,bikeType);
@@ -444,7 +425,7 @@ void devolveBike(Sistema &ER,int index) {
 	return;
 
 }
-//COMPLETO
+
 int ExistID(Sistema & sys, int identificacao) {
 
 	for(unsigned int i = 0; i < sys.getUtentes().size() ; i++)
