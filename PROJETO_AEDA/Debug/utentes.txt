@@ -1,6 +1,10 @@
-Andre,Socio,/41/-8.2,4,Corrida-4-23/3/2018;Infantil-3-2/5/2018;Urbana-12-2/2/2017;Urbana-2-2/2/2222;0,
-Jose,Regular,/41.1721/-8.64806,0,5,Urbana-4-2/2/2017;Urbana-5-2/2/2017;Urbana-4-23/2/2018;Urbana-2-2/2/2017;Urbana Simples-12-1/1/2019;
-Ana,Socio,/41.1754/-8.60752,2,Urbana Simples-3-2/2/2017;Urbana-2-3/3/2017;0,
-Rui,Socio,/45/-9,3,Urbana-1-25/12/2019;Infantil-2-1/1/2018;Corrida-4-12/3/2019;0,
+Andre,Socio,/41/-8.2,1,Urbana Simples-2-2/2/2222/C/Campanhã;0,
+Jose,Regular,/41.1721/-8.64806,0,0,
+Ana,Socio,/41.1754/-8.60752,0,0,
+Rui,Socio,/45/-9,0,0,
 Cesar,Regular,/2/-9,0,0,
-Bernardo,Regular,/99/-36,0,1,Urbana-2-12/11/2017;
+Ana,Socio,/41.235/-8.012,0,0,
+Joana,Regular,/42.2345/-9.6723,0,0,
+Roberto,Socio,/37.23/-8.1723,0,0,
+Bernardo,Regular,/-28.1312/9.1234,0,0,
+Pedro,Socio,/12.1222/-9.7231,0,0,

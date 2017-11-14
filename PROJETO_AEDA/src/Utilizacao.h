@@ -40,9 +40,12 @@ private:
 	Data data;
 	unsigned int useTime;
 	string bikeType;
+	string pontoPartilha;
+	string localizacao;
 public:
 	Utilizacao(); // necessario para o overload do operador de extracao na classe utente
 	Utilizacao(string bikeType, unsigned int numHours, Data d);
+	Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc);
 	friend ostream & operator <<(ostream & o, const Utilizacao & u);
 	friend istream & operator >>(istream & i, Utilizacao & u);
 	void displayUtilizacao();
@@ -56,14 +59,16 @@ public:
 
 inline ostream& operator <<(ostream & o, const Utilizacao & u)
 {
-	o << u.bikeType << '-' << u.useTime << '-' <<  u.data;
+	//o << u.bikeType << '-' << u.useTime << '-' <<  u.data;
+	o << u.bikeType << '-' << u.useTime << '-' <<  u.data << '/' <<  u.pontoPartilha << '/' <<  u.localizacao;
 	return o;
 }
 
 inline istream& operator >>(istream & i, Utilizacao & u)
 {
-	char b1;
+	char b1,b2,b3;
 	getline(i,u.bikeType,'-');
-	i >> u.useTime >> b1 >> u.data;
+	//i >> u.useTime >> b1 >> u.data;
+	i >> u.useTime >> b1 >> u.data >> b2 >> u.pontoPartilha >> b3 >> u.localizacao;
 	return i;
 }

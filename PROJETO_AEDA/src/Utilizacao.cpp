@@ -15,11 +15,23 @@ Utilizacao::Utilizacao(string bikeType, unsigned int numHours, Data d) {
 	this->data=d;
 }
 
+Utilizacao::Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc) {
+	this->bikeType = bikeType;
+	this->useTime = numHours;
+	this->data=d;
+	this->pontoPartilha = pp;
+	this->localizacao = loc;
+}
+
 void Utilizacao::displayUtilizacao() {
 
 	cout << "Tipo de bicicleta: " << bikeType << endl;
 	cout << "Número de horas: " << useTime << endl;
 	cout << "Data (DD/MM/AAAA): " << data << endl;
+	cout << "Ponto Partilha: ECO_RIDES_" << pontoPartilha << endl;
+	cout << "Localização: " << localizacao << endl;
+
+	return;
 
 }
 

@@ -330,7 +330,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		else
 		{
 
-			Utilizacao p(bikeType, numHours, d1);
+			Utilizacao p(bikeType, numHours, d1,ER.getPontosPartilha().at(idPP)->getNome(),ER.getPontosPartilha().at(idPP)->getLocal().getNome());
 			double price {0};
 
 			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
@@ -358,9 +358,6 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 			if(price !=0)
 				cout << "Montante: " << price << "€" << endl;
-
-			cout << "Ponto Partilha: ECO_RIDES_" << ER.getPontosPartilha().at(idPP)->getNome() << endl;
-			cout << "Localização: " << ER.getPontosPartilha().at(idPP)->getLocal().getNome() << endl;
 
 			System_Manager(ER,idPP,bikeType);
 
@@ -403,8 +400,6 @@ void devolveBike(Sistema &ER,int index) {
 		Utilizacao ut = ER.getUtentes().at(index)->getUtilizacoes().at(ER.getUtentes().at(index)->getUtilizacoes().size() - 1);
 		bikeType = ut.getBikeType();
 		ut.displayUtilizacao();
-		cout << "Ponto Partilha: ECO_RIDES_" << ER.getPontosPartilha().at(index_pp)->getNome() << endl;
-		cout << "Localização: " << ER.getPontosPartilha().at(index_pp)->getLocal().getNome() << endl;
 	}
 	else
 	{
@@ -412,8 +407,6 @@ void devolveBike(Sistema &ER,int index) {
 		ut.displayUtilizacao();
 		bikeType = ut.getBikeType();
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
-		cout << "Ponto Partilha: ECO_RIDES_" << ER.getPontosPartilha().at(index_pp)->getNome() << endl;
-		cout << "Localização: " << ER.getPontosPartilha().at(index_pp)->getLocal().getNome() << endl;
 	}
 
 	cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
@@ -436,7 +429,7 @@ int ExistID(Sistema & sys, int identificacao) {
 
 	return -1;
 }
-//COMPLETO
+//Falta adicionar o ponto de partilha e localizadao no display
 void displayPagPendentes(Sistema &ER,int index){
 
 	//Informacao inicial apresentadada ao utilizador
