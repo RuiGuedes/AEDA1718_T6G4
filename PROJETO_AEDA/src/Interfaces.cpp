@@ -95,6 +95,7 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 	return;
 }
 
+//COMPLETO
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -387,7 +388,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		return;
 	}
 }
-
+//COMPLETO
 void devolveBike(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -458,7 +459,7 @@ void devolveBike(Sistema &ER,int index) {
 	return;
 
 }
-
+//COMPLETO
 int ExistID(Sistema & sys, int identificacao) {
 
 	for(unsigned int i = 0; i < sys.getUtentes().size() ; i++)
@@ -469,7 +470,7 @@ int ExistID(Sistema & sys, int identificacao) {
 
 	return -1;
 }
-
+//COMPLETO
 void displayPagPendentes(Sistema &ER,int index){
 
 	//Informacao inicial apresentadada ao utilizador
@@ -503,7 +504,7 @@ void displayPagPendentes(Sistema &ER,int index){
 	system("cls");
 	return;
 }
-
+//COMPLETO
 void updateLocation(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -524,6 +525,7 @@ void updateLocation(Sistema &ER,int index) {
 		try{
 			cout << endl << "Coordenada X: ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
@@ -534,7 +536,6 @@ void updateLocation(Sistema &ER,int index) {
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
@@ -543,6 +544,7 @@ void updateLocation(Sistema &ER,int index) {
 		try{
 			cout << endl << "Coordenada Y: ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
@@ -553,7 +555,6 @@ void updateLocation(Sistema &ER,int index) {
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
@@ -799,7 +800,7 @@ void efetuaPag(Sistema &ER,int index, string mode = "single") {
 	system("cls");
 	return;
 }
-
+//COMPLETO
 void NearestPP(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -901,7 +902,7 @@ void mudaTipoUT(Sistema &ER,int index){
 	system("cls");
 	return;
 }
-
+//COMPLETO
 void infoER(Sistema &ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -958,7 +959,7 @@ void infoER(Sistema &ER) {
 	return;
 
 }
-
+//COMPLETO
 void addPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -975,11 +976,13 @@ void addPP(Sistema & ER) {
 	string option {};
 	bool cond {false};
 
+	cin.ignore(1000,'\n');
+
 	while(1)
 	{
 		try {
 			cout << "Nome: " ;
-			cin >> nome;
+			getline(cin,nome);
 			if(valid_word(nome) == false)
 				throw OpcaoInvalida<string>(nome);
 
@@ -1001,7 +1004,6 @@ void addPP(Sistema & ER) {
 				cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
 			cond = false;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
@@ -1011,7 +1013,7 @@ void addPP(Sistema & ER) {
 	{
 		try {
 			cout << "Nome: " ;
-			cin >> locname;
+			getline(cin , locname);
 			if(valid_word(locname) == false)
 				throw OpcaoInvalida<string>(nome);
 			break;
@@ -1019,11 +1021,10 @@ void addPP(Sistema & ER) {
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
-	cout << "Indique as suas cordenadas GPS:" << endl;
+	cout << "Indique as cordenadas GPS:" << endl;
 
 	double coordX { }, coordY { };
 
@@ -1032,6 +1033,7 @@ void addPP(Sistema & ER) {
 		try{
 			cout << endl << "Coordenada X: ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
@@ -1042,7 +1044,6 @@ void addPP(Sistema & ER) {
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
@@ -1051,6 +1052,7 @@ void addPP(Sistema & ER) {
 		try{
 			cout << endl << "Coordenada Y: ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
@@ -1061,11 +1063,10 @@ void addPP(Sistema & ER) {
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
-	Localizacao spot;
+	Localizacao spot{};
 	spot.setNome(locname);
 	spot.setX(coordX);
 	spot.setY(coordY);
@@ -1073,19 +1074,23 @@ void addPP(Sistema & ER) {
 	while(1)
 	{
 		try{
-			cout << endl << "Capacidade: ";
+			cout << endl << "Capacidade [20,30]: ";
 			cin >> option;
-			if(valid_number_double(option) == false)
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
 				throw OpcaoInvalida<string>(option);
 
 			value = stoi(option);
+
+			if((value < 20) || (value > 30))
+				throw OpcaoInvalida<string>(option);
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op){
 
 			cout << "Capacidade inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
@@ -2103,6 +2108,7 @@ vector<int> ExtraData(Sistema &ER,int index) {
 
 }
 
+//Verifica se um número é positivo e contem apenas algarismos
 bool valid_number(string number)
 {
 	for (unsigned int i = 0; i < number.size(); i++){
@@ -2112,6 +2118,7 @@ bool valid_number(string number)
 	return true;
 }
 
+//Verifica se um número é positivo/negativo e contem apenas algarismos ou apenas "." e "-"
 bool valid_number_double(string number)
 {
 	for (unsigned int i = 0; i < number.size(); i++){
@@ -2121,6 +2128,7 @@ bool valid_number_double(string number)
 	return true;
 }
 
+//Verifica se é a string não contem numeros
 bool valid_word(string word)
 {
 	for (unsigned int i = 0; i < word.size(); i++){
