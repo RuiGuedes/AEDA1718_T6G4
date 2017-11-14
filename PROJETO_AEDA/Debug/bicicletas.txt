@@ -1,8 +1,8 @@
-u1/Urbana/1
-u2/Urbana/1
 u3/Urbana/1
 u4/Urbana/1
 u5/Urbana/1
+u6/Urbana/1
+u7/Urbana/1
 us1/Urbana Simples/1
 us2/Urbana Simples/1
 us3/Urbana Simples/1
@@ -18,11 +18,11 @@ i2/Infantil/1
 i3/Infantil/1
 i4/Infantil/1
 i5/Infantil/1
-u6/Urbana/1
-u7/Urbana/1
-u8/Urbana/1
 u9/Urbana/1
 u10/Urbana/1
+u1/Urbana/1
+u2/Urbana/1
+u11/Urbana/1
 us6/Urbana Simples/1
 us7/Urbana Simples/1
 us8/Urbana Simples/1
@@ -38,11 +38,11 @@ i7/Infantil/1
 i8/Infantil/1
 i9/Infantil/1
 i10/Infantil/1
-u11/Urbana/1
 u12/Urbana/1
 u13/Urbana/1
 u14/Urbana/1
 u15/Urbana/1
+u8/Urbana/1
 us11/Urbana Simples/1
 us12/Urbana Simples/1
 us13/Urbana Simples/1

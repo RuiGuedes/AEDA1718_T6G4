@@ -20,66 +20,81 @@ void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
 vector<int> ExtraData(Sistema &ER,int index);
 
-void System_Manager(Sistema &ER, int index, string bikeType) {
+void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
-	//ER - sistema
-	//index - indice do ponto partilha afetado independentemente da perta de bike ou ganho
-	//bikeType - tipo de bicicleta
-	/*
-	 * 2 - valor minimo
-	 * 8 - valor maximo
-	 */
-
+	int value {-1};
 	int tamanho{-1};
-	//Verifica se o limite minimo ou maximo de bicicletas do tipo "bikeType" foi alcancado
+	vector<int> indicesSup5, indicesInf5;
+
 	if(bikeType == "Urbana")
-	{
-		tamanho = ER.getPontosPartilha().at(index)->getBikes().at(0).size();
-		if(tamanho < 2)
-		{
-			//Necessita de receber bicicletas
-		}
-		else if(tamanho > 8)
-		{
-			//Necessita de distribuir bicicletas
-		}
-	}
+		value = 0;
 	else if(bikeType == "Urbana Simples")
-	{
-		tamanho = ER.getPontosPartilha().at(index)->getBikes().at(1).size();
-		if(tamanho < 2)
-		{
-			//Necessita de receber bicicletas
-		}
-		else if(tamanho > 8)
-		{
-			//Necessita de distribuir bicicletas
-		}
-	}
-	else if(bikeType == "Corrida")
-	{
-		tamanho = ER.getPontosPartilha().at(index)->getBikes().at(2).size();
-		if(tamanho < 2)
-		{
-			//Necessita de receber bicicletas
-		}
-		else if(tamanho > 8)
-		{
-			//Necessita de distribuir bicicletas
-		}
-	}
+		value = 1;
+	else if(bikeType == "Urbana Simples")
+		value = 2;
 	else
+		value = 3;
+
+	tamanho = ER.getPontosPartilha().at(index)->getBikes().at(value).size();
+
+	cout << "tamanho = " << tamanho << endl << endl;
+
+	//Guarda num vetor os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
 	{
-		tamanho = ER.getPontosPartilha().at(index)->getBikes().at(3).size();
-		if(tamanho < 2)
+		if(i != index)
 		{
-			//Necessita de receber bicicletas
+			if(ER.getPontosPartilha().at(i)->getBikes().at(0).size() > 5)
+				indicesSup5.push_back(i);
+			else if(ER.getPontosPartilha().at(i)->getBikes().at(0).size() < 5)
+				indicesInf5.push_back(i);
 		}
-		else if(tamanho > 8)
+
+	}
+
+	//Ordena os vectores por ordem crescente
+	sort(indicesSup5.begin(), indicesSup5.end());
+	sort(indicesInf5.begin(), indicesInf5.end());
+
+	//Necessita de receber bicicletas
+	if(tamanho <= 2)
+	{
+		//Distribui bicicletas
+		for(int k = indicesSup5.size() - 1; k >= 0; k--)
 		{
-			//Necessita de distribuir bicicletas
+			while(ER.getPontosPartilha().at(indicesSup5.at(k))->getBikes().at(value).size() > 5)
+			{
+				if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
+					break;
+
+				ER.getPontosPartilha().at(index)->adicionaBike(ER.getPontosPartilha().at(indicesSup5.at(k))->getBikes().at(value).at(0));
+				ER.getPontosPartilha().at(indicesSup5.at(k))->removeBike(ER.getPontosPartilha().at(indicesSup5.at(k))->getBikes().at(value).at(0));
+			}
+
+			if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
+				break;
 		}
 	}
+	else if(tamanho >= 8)	//Necessita de fornecer bicicletas
+	{
+		//Distribui bicicletas
+		for(unsigned int k = 0; k < indicesInf5.size(); k++)
+		{
+			while(ER.getPontosPartilha().at(indicesInf5.at(k))->getBikes().at(0).size() < 5)
+			{
+				if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
+					break;
+
+				ER.getPontosPartilha().at(indicesInf5.at(k))->adicionaBike(ER.getPontosPartilha().at(index)->getBikes().at(value).at(0));
+				ER.getPontosPartilha().at(index)->removeBike(ER.getPontosPartilha().at(index)->getBikes().at(value).at(0));
+			}
+
+			if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
+				break;
+		}
+	}
+
+	return;
 }
 
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
@@ -370,6 +385,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
 		}
 
+		System_Manager(ER,idPP,bikeType);
 		system("pause");
 		system("cls");
 		return;
@@ -391,8 +407,7 @@ void devolveBike(Sistema &ER,int index) {
 	}
 
 	vector<int> index_distancias = ExtraData(ER,index);
-
-
+	int index_pp {-1};
 	//Remove a bicicleta do utente e entrega-a no ponto partilha mais próximo
 	for(unsigned int i = 0; i < index_distancias.size(); i++)
 	{
@@ -405,6 +420,7 @@ void devolveBike(Sistema &ER,int index) {
 
 		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
 		{
+			index_pp = index_distancias.at(i);
 			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(ER.getUtentes().at(index)->getBike());
 			Bicicleta * p {0};
 			ER.getUtentes().at(index)->setBike(p);
@@ -415,22 +431,27 @@ void devolveBike(Sistema &ER,int index) {
 	cout << "Devolve bicicleta: " << endl << endl;
 	cout << "Resumo do último aluguer: " << endl << endl;
 
+	string bikeType;
+
 	//Verifica o tipo de utente e apresenta a respetiva informação
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
 	{
 		Utilizacao ut = ER.getUtentes().at(index)->getUtilizacoes().at(ER.getUtentes().at(index)->getUtilizacoes().size() - 1);
+		bikeType = ut.getBikeType();
 		ut.displayUtilizacao();
 	}
 	else
 	{
 		Utilizacao ut = ER.getUtentes().at(index)->getHistorico().at(ER.getUtentes().at(index)->getHistorico().size() - 1);
 		ut.displayUtilizacao();
+		bikeType = ut.getBikeType();
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
 	}
 
 	ER.getUtentes().at(index)->setAvailable();
 	cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
-
+	cout << ER.getPontosPartilha().at(index_pp)->getLocal().getNome() << endl << endl;
+	System_Manager(ER,index_pp,bikeType);
 	system("pause");
 	system("cls");
 	return;
@@ -899,9 +920,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																															 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																															 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																															 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																																													 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																																													 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																																													 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
