@@ -23,11 +23,11 @@ u7/Urbana/1
 u8/Urbana/1
 u9/Urbana/1
 u10/Urbana/1
-us6/Urbana Simples/1
 us7/Urbana Simples/1
 us8/Urbana Simples/1
 us9/Urbana Simples/1
 us10/Urbana Simples/1
+us6/Urbana Simples/1
 c6/Corrida/1
 c7/Corrida/1
 c8/Corrida/1

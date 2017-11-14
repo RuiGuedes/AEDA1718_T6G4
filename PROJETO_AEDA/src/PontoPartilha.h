@@ -17,6 +17,8 @@ public:
 	//friend void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos);
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
+	void removeBike(Bicicleta *bike);
+	void adicionaBike(Bicicleta* bike);
 
 	//Metodos Get
 	Localizacao getLocal() const;
@@ -27,8 +29,6 @@ public:
 	vector <vector<Bicicleta *> > getBikes() const;
 
 	//Metodos Set
-	void removeBike(Bicicleta *bike);
-	void adicionaBike(Bicicleta* bike);
 	void setNome(string name);
 
 };

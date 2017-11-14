@@ -1,5 +1,5 @@
 Andre,Socio,/41.1721/-8.64806,3,Corrida-4-23/3/2018;Infantil-3-2/5/2018;Urbana-12-2/2/2017;0,
-Jose,Regular,/41.1721/-8.64806,0,4,Urbana-4-2/2/2017;Urbana-5-2/2/2017;Urbana-4-23/2/2018;Urbana-2-2/2/2017;
+Jose,Regular,/41.1721/-8.64806,0,5,Urbana-4-2/2/2017;Urbana-5-2/2/2017;Urbana-4-23/2/2018;Urbana-2-2/2/2017;Urbana Simples-12-1/1/2019;
 Ana,Socio,/41.1754/-8.60752,2,Urbana Simples-3-2/2/2017;Urbana-2-3/3/2017;0,
 Rui,Socio,/45/-9,3,Urbana-1-25/12/2019;Infantil-2-1/1/2018;Corrida-4-12/3/2019;0,
 Cesar,Regular,/2/-9,0,0,
