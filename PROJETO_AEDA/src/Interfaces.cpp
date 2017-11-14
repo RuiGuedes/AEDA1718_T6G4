@@ -172,7 +172,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		while(1)
 		{
 			try{
-				cout << endl << "Número de horas [0-24]: ";
+				cout << endl << "Número de horas [1-24]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
@@ -409,7 +409,7 @@ void devolveBike(Sistema &ER,int index) {
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
 	}
 
-	cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
+	cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << ER.getPontosPartilha().at(index_pp)->getNome() << " !" << endl << endl;
 
 	System_Manager(ER,index_pp,bikeType);
 
@@ -429,7 +429,7 @@ int ExistID(Sistema & sys, int identificacao) {
 
 	return -1;
 }
-//Falta adicionar o ponto de partilha e localizadao no display
+
 void displayPagPendentes(Sistema &ER,int index){
 
 	//Informacao inicial apresentadada ao utilizador
@@ -463,7 +463,7 @@ void displayPagPendentes(Sistema &ER,int index){
 	system("cls");
 	return;
 }
-//COMPLETO
+
 void updateLocation(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -474,7 +474,10 @@ void updateLocation(Sistema &ER,int index) {
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 	cout << "Localizacao: " << endl << endl;
 
-	cout << "Indique as suas cordenadas GPS:" << endl;
+	cout << "Localização atual: (" << ER.getUtentes().at(index)->getLocalizacao().getX() << " , " << ER.getUtentes().at(index)->getLocalizacao().getY();
+	cout << ")" << endl << endl;
+
+	cout << "Indique as novas cordenadas GPS:" << endl;
 
 	string option;
 	double coordX { }, coordY { };
@@ -530,7 +533,7 @@ void updateLocation(Sistema &ER,int index) {
 	return;
 
 }
-
+//ESTOU AQUI
 void efetuaPag(Sistema &ER,int index, string mode = "single") {
 
 	//Informacao inicial apresentadada ao utilizador
