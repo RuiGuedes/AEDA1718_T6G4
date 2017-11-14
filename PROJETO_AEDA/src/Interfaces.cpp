@@ -1,6 +1,5 @@
 #include "Includes.h"
 #include "Sistema.h"
-#include "Utente.h"
 #include "Exceções.h"
 
 /* Procura um valor xnum vetor vde elementos comparáveiscom os operadores de comparação.

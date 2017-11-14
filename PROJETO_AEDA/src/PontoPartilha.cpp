@@ -1,4 +1,4 @@
-#include "PontoPartilha.h"
+#include "Sistema.h"
 
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
