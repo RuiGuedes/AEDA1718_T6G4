@@ -2081,6 +2081,7 @@ void admin_interface(Sistema &ER) {
 	return;
 }
 
+//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao ponto de partilha com indicie = index
 vector<int> ExtraData(Sistema &ER,int index) {
 
 	vector<double> distancias;
