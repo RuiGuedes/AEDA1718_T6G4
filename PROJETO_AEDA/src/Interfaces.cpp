@@ -480,7 +480,7 @@ void updateLocation(Sistema &ER,int index) {
 
 	ER.getUtentes().at(index)->setUtenteLocation(spot);
 
-	cout << "O utente encontra-se agora num novo local de coordenadas (" << coordX << " , " << coordY << ")" << endl << endl;
+	cout << endl << "O utente encontra-se agora num novo local de coordenadas (" << coordX << " , " << coordY << ")" << endl << endl;
 
 	system("pause");
 	system("cls");
@@ -838,9 +838,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																					 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																					 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																					 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																									 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																									 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																									 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -1190,6 +1190,8 @@ void adicionaBike(Sistema & ER) {
 			if(indexPP == -1)
 				throw OpcaoInvalida<string>(nomePP);
 			cout << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
@@ -1220,7 +1222,7 @@ void adicionaBike(Sistema & ER) {
 	{
 		try {
 			cout << "Tipo de Bicicleta: " ;
-			cin >> biketype;
+			getline(cin,biketype);
 			if(valid_word(biketype) == false)
 				throw OpcaoInvalida<string>(biketype);
 
@@ -1244,7 +1246,6 @@ void adicionaBike(Sistema & ER) {
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
@@ -1855,29 +1856,18 @@ void admin_interface(Sistema &ER) {
 
 	int attempts { 1 };
 	string info;
-	char c;
-	string password = "1234";
 
 	while(attempts <= 3)
 	{
 		try{
-			info="";
 			cout << "Admin (Password): ";
-			cin.ignore();
+			cin >> info;
 
-			c= _getch();
-			while(c != 13){
-				info.push_back(c);
-				cout << '*';
-				c= _getch();
-
-			}
-
-			if(info != password)
-			{
-				attempts++;
+			if(valid_number(info) == false)
 				throw OpcaoInvalida<string>(info);
-			}
+
+			if(info != "1234")
+				throw OpcaoInvalida<string>(info);
 
 			break;
 		}
