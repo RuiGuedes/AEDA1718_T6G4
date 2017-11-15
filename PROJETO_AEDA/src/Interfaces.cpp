@@ -1085,17 +1085,14 @@ void addPP(Sistema & ER) {
 
 	PontoPartilha* pp = new PontoPartilha(spot,value,nome);
 
-	//int lastNumBike = stoi(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).at(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).size()-1)->getBikeName().substr(1));
-	//lastNumBike++;
-
 	ER.addPontoPartilha(pp);
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
-		string u = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
-		string us = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
-		string c = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
-		string inf = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
+		string u = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana"));
+		string us = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana Simples"));
+		string c = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Corrida"));
+		string inf = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Infantil"));
 
 		Bicicleta* b1 = new Bicicleta("Urbana",u);
 		Bicicleta* b2 = new Bicicleta("Urbana Simples",us);
@@ -1107,8 +1104,10 @@ void addPP(Sistema & ER) {
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
 
-		//lastNumBike++;
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward();
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Infantil");
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -1174,7 +1173,10 @@ void removePP(Sistema & ER) {
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
-		ER.getPontosPartilha().at(0)->setBikeLastIdBackward();
+		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Infantil");
 	}
 
 	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
@@ -1184,7 +1186,6 @@ void removePP(Sistema & ER) {
 	return;
 }
 
-//ESTOU AQUI
 void adicionaBike(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -1194,20 +1195,23 @@ void adicionaBike(Sistema & ER) {
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-	cout << "Adiciona bicicleta: " << endl;
+	cout << "Adiciona bicicleta: " << endl << endl;
 
-	string nomePP, biketype;
-	bool cond {false};
+	string biketype;
+	string nomePP;
 	int indexPP {-1};
 	int indexBB {-1};
 	int numberbikes {0};
+
+	cin.ignore(1000,'\n');
 
 	//Verifica ponto de partilha ao qual quer adicionar
 	while(1)
 	{
 		try {
 			cout << "Nome do Ponto Partilha: " ;
-			cin >> nomePP;
+			getline(cin,nomePP);
+			//cin >> nomePP;
 			if(valid_word(nomePP) == false)
 				throw OpcaoInvalida<string>(nomePP);
 
@@ -1220,14 +1224,12 @@ void adicionaBike(Sistema & ER) {
 			if(indexPP == -1)
 				throw OpcaoInvalida<string>(nomePP);
 			cout << endl;
-			cin.clear();
-			cin.ignore(1000,'\n');
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
@@ -1258,55 +1260,34 @@ void adicionaBike(Sistema & ER) {
 
 
 			if(biketype == "Urbana")
+			{
 				indexBB = 0;
+				nomePP = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana"));
+			}
 			else if(biketype == "Urbana Simples")
+			{
 				indexBB = 1;
+				nomePP = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana Simples"));
+			}
 			else if(biketype == "Corrida")
+			{
 				indexBB = 2;
+				nomePP = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Corrida"));
+			}
 			else if(biketype == "Infantil")
+			{
 				indexBB = 3;
+				nomePP = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Infantil"));
+			}
 
 			if(indexBB == -1)
 				throw OpcaoInvalida<string>(biketype);
 
-
-			cout << endl;
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-		}
-	}
-
-	//Verifica se o nome da bicicleta a adicionar é diferente e adiciona
-	while(1)
-	{
-		try {
-			cout << "Nome da Bicicleta: " ;
-			cin >> nomePP;
-			if(valid_bike(nomePP) == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				for(unsigned int k = 0; k < ER.getPontosPartilha().at(i)->getBikes().at(indexBB).size(); k++)
-				{
-					if(ER.getPontosPartilha().at(i)->getBikes().at(indexBB).at(k)->getBikeName() == nomePP)
-						cond = true;
-				}
-			}
-
-			if(cond == true)
-				throw OpcaoInvalida<string>(nomePP);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome já existente(" << op.opcao << ") ! Tente novamente." << endl;
-			cond = false;
-			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
@@ -1337,12 +1318,14 @@ void removeBike(Sistema & ER) {
 	int indexPP {-1};
 	int indexBB {-1};
 
+	cin.ignore(1000,'\n');
+
 	//Verifica tipo de bicicleta a remover
 	while(1)
 	{
 		try {
 			cout << "Tipo de Bicicleta: " ;
-			cin >> biketype;
+			getline(cin,biketype);
 			if(valid_word(biketype) == false)
 				throw OpcaoInvalida<string>(biketype);
 
@@ -1358,14 +1341,11 @@ void removeBike(Sistema & ER) {
 			if(indexBB == -1)
 				throw OpcaoInvalida<string>(biketype);
 
-
-			cout << endl;
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
@@ -1374,7 +1354,8 @@ void removeBike(Sistema & ER) {
 	{
 		try {
 			cout << "Nome da Bicicleta: " ;
-			cin >> nomePP;
+			getline(cin,nomePP);
+
 			if(valid_bike(nomePP) == false)
 				throw OpcaoInvalida<string>(nomePP);
 
@@ -1399,10 +1380,10 @@ void removeBike(Sistema & ER) {
 			cout << "Bicicleta inexistente(" << op.opcao << ") ! Tente novamente." << endl;
 			cond = false;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
+	ER.getPontosPartilha().at(0)->setBikeLastIdBackward(biketype);
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->removeBike(bc);
 
@@ -1413,7 +1394,7 @@ void removeBike(Sistema & ER) {
 	return;
 
 }
-
+//ESTOU AQUI
 void removeUT(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -1946,7 +1927,7 @@ void admin_interface(Sistema &ER) {
 		{
 			try {
 
-				cout << endl << "Introduza uma opcao (1-9): ";
+				cout << endl << "Introduza uma opcao (1-7): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -1954,7 +1935,7 @@ void admin_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 9)
+				if(value < 1 || value > 7)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -2009,7 +1990,7 @@ void admin_interface(Sistema &ER) {
 			break;
 
 		}
-	}while(value != 9);
+	}while(value != 7);
 
 	system("cls");
 	return;
@@ -2073,6 +2054,7 @@ bool valid_word(string word)
 	return true;
 }
 
+//Verifica se o nome da bicicleta é correto - não pode começar por um número
 bool valid_bike(string bike)
 {
 	if (isdigit(bike.at(0)))

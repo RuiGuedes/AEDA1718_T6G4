@@ -117,7 +117,10 @@ class PontoPartilha : public Sistema {
 	unsigned int capacidade;
 	vector <vector<Bicicleta *> > bicicletas;
 	string nome;
-	static int bikelastID;
+	static int UbikelastID;
+	static int USbikelastID;
+	static int CbikelastID;
+	static int IbikelastID;
 public:
 	PontoPartilha();
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
@@ -130,7 +133,7 @@ public:
 	void adicionaBike(Bicicleta* bike);
 
 	//Metodos Get
-	static int getBikeLastId();
+	static int getBikeLastId(string bike);
 	Localizacao getLocal() const;
 	string getNome() const { return nome; }
 	int getCapacidade() const;
@@ -140,8 +143,8 @@ public:
 
 	//Metodos Set
 	void setNome(string name);
-	static void setBikeLastIdFoward();
-	static void setBikeLastIdBackward();
+	static void setBikeLastIdFoward(string bike);
+	static void setBikeLastIdBackward(string bike);
 };
 
 inline ostream& operator <<(ostream & o, const PontoPartilha & p)

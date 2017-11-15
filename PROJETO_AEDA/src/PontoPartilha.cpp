@@ -1,6 +1,9 @@
 #include "Sistema.h"
 
-int PontoPartilha::bikelastID = 56;
+int PontoPartilha::UbikelastID = 51;
+int PontoPartilha::USbikelastID = 51;
+int PontoPartilha::CbikelastID = 51;
+int PontoPartilha::IbikelastID = 51;
 
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
@@ -91,8 +94,16 @@ void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos) {
 // METODOS GET //
 /////////////////
 
-int PontoPartilha::getBikeLastId() {
-	return bikelastID;
+int PontoPartilha::getBikeLastId(string bike) {
+
+	if(bike == "Urbana")
+		return UbikelastID;
+	else if(bike == "Urbana Simples")
+		return USbikelastID;
+	else if(bike == "Corrida")
+		return CbikelastID;
+	else
+		return IbikelastID;
 }
 
 Localizacao PontoPartilha::getLocal() const {
@@ -147,13 +158,27 @@ void PontoPartilha::setNome(string name) {
 	nome = name;
 }
 
-void PontoPartilha::setBikeLastIdFoward() {
-	bikelastID++;
-	return;
+void PontoPartilha::setBikeLastIdFoward(string bike) {
+
+	if(bike == "Urbana")
+		UbikelastID++;
+	else if(bike == "Urbana Simples")
+		USbikelastID++;
+	else if(bike == "Corrida")
+		CbikelastID++;
+	else
+		IbikelastID++;
 }
 
-void PontoPartilha::setBikeLastIdBackward() {
-	bikelastID--;
-	return;
+void PontoPartilha::setBikeLastIdBackward(string bike) {
+
+	if(bike == "Urbana")
+		UbikelastID--;
+	else if(bike == "Urbana Simples")
+		USbikelastID--;
+	else if(bike == "Corrida")
+		CbikelastID--;
+	else
+		IbikelastID--;
 }
 
