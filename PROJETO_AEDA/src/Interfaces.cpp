@@ -551,6 +551,15 @@ void efetuaPag(Sistema &ER,int index) {
 	string option {};
 	vector<unsigned int> meses;
 
+	if(ER.getUtentes().at(index)->getAvailable() == false)
+	{
+		cout << "Não é possível efetuar o pagamento uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+	}
+
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
 		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
 		system("pause");
@@ -760,6 +769,15 @@ void mudaTipoUT(Sistema &ER,int index){
 	string option;
 	string tipo = ER.getUtentes().at(index)->getTipoUtente();
 
+	if(ER.getUtentes().at(index)->getAvailable() == false)
+	{
+		cout << "Não é possível efetuar mudar o tipo de utente uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
+
+		system("pause");
+		system("cls");
+		return;
+	}
+
 	if((tipo == "Regular") || (ER.getUtentes().at(index)->getUtilizacoes().size() == 0))
 	{
 		cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
@@ -837,9 +855,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																																																																							 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																																																																							 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																																																																							 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																																																																											 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																																																																											 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																																																																											 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
