@@ -851,20 +851,21 @@ void infoER(Sistema &ER) {
 	cout << "Pontos de Partilha:" << endl << endl;
 	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
 	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
-			setw (9) << "Corrida" << "Infantil" << endl << endl;
+			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																																																																																					 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																																																																																					 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																																																																																					 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+						<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+						<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+						<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
 		cout << setw(13) << numtypes.at(0);
 		cout << setw(15) << numtypes.at(1);
 		cout << setw(9) << numtypes.at(2);
-		cout << numtypes.at(3);
+		cout << setw(11) << numtypes.at(3);
+		cout << ER.getPontosPartilha().at(i)->getCapacidade();
 
 		cout << endl;
 	}
@@ -873,14 +874,31 @@ void infoER(Sistema &ER) {
 
 	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
 
+	cout << left << setw(7) << "ID" << setw(10) << "Nome" << setw(25) << "Tipo de utente" << setw (20) << "GPS" << endl;
+
+	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
+		cout << setw(4) << ER.getUtentes().at(i)->getId()
+				<< setw(15) << ER.getUtentes().at(i)->getUtenteNome()
+				<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+				<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+				<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+	}
+
+	cout << endl;
+
 	cout << "Tabela de Preços:" << endl << endl;
 
 	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
 	cout << setw(26) << "Urbana" << "4€" << endl <<
 			setw(26) << "Urbana Simples" << "3€" << endl <<
 			setw(26) << "Corrida" << "5€" << endl <<
-			setw(26) << "Infantil" << "2€" << endl <<
-			endl;
+			setw(26) << "Infantil" << "2€" << endl << endl;
+
+	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
+	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
+	cout << setw(4) << " " << setw(11) << "30€" << "Infantil , Urbana Simples" << endl;
+	cout << setw(4) << " " << setw(11) << "40€" << "Infantil , Urbana Simples , Urbana" << endl;
+	cout << setw(4) << " " << setw(11) << "50€" << "Infantil , Urbana Simples , Urbana , Corrida" << endl << endl;
 
 	cout << "Fundadores: " << endl;
 	cout << "  - Rui Guedes" << endl;
