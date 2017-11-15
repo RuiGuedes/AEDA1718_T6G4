@@ -855,9 +855,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-								<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-								<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-								<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+												<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+												<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+												<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -878,10 +878,10 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
 		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
-						<< setw(10) << ER.getUtentes().at(i)->getId()
-						<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
-						<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
-						<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+										<< setw(10) << ER.getUtentes().at(i)->getId()
+										<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+										<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+										<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
 	}
 
 	cout << endl;
@@ -1484,7 +1484,7 @@ void openInterface(Sistema & ER){
 		//Informacao inicial apresentadada ao utilizador
 		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "#####  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
@@ -1548,29 +1548,29 @@ void registo_utente(Sistema & ER){
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-	cout << "Regista novo utente:" << endl;
+	cout << "Regista novo utente:" << endl << endl;
 
 	string nome, tipoUtente;
 	int value {};
 	string option {};
+	double coordX { }, coordY { };
 
 	while(1)
 	{
 		try {
 			cout << "Nome: " ;
-			cin >> nome;
+			getline(cin,nome);
 			if(valid_word(nome) == false)
 				throw OpcaoInvalida<string>(nome);
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 	cout << endl << "Tipo de Utente :"<< endl ;
@@ -1582,11 +1582,12 @@ void registo_utente(Sistema & ER){
 		try{
 			cout << endl << "Introduza uma opcao (1-2): ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number(option) == false)
 				throw OpcaoInvalida<string>(option);
 
 			value = stoi(option);
-			if(value < 1 || value > 3)
+			if(value < 1 || value > 2)
 				throw OpcaoInvalida<int>(value);
 
 			break;
@@ -1595,13 +1596,11 @@ void registo_utente(Sistema & ER){
 
 			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 		catch (OpcaoInvalida<string> &op){
 
 			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
@@ -1612,15 +1611,14 @@ void registo_utente(Sistema & ER){
 
 	cout << endl << "Localizacao: " << endl << endl;
 
-	cout << "Indique as suas cordenadas GPS:" << endl;
-
-	double coordX { }, coordY { };
+	cout << "Indique as cordenadas GPS:" << endl;
 
 	while(1)
 	{
 		try{
 			cout << endl << "Coordenada X: ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
@@ -1631,7 +1629,6 @@ void registo_utente(Sistema & ER){
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
@@ -1640,6 +1637,7 @@ void registo_utente(Sistema & ER){
 		try{
 			cout << endl << "Coordenada Y: ";
 			cin >> option;
+			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
@@ -1650,11 +1648,20 @@ void registo_utente(Sistema & ER){
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
 
 	Localizacao spot;
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
+		{
+			spot.setNome(ER.getPontosPartilha().at(i)->getLocal().getNome());
+			break;
+		}
+	}
+
 	spot.setX(coordX);
 	spot.setY(coordY);
 
