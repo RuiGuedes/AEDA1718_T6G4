@@ -724,13 +724,15 @@ void NearestPP(Sistema &ER,int index) {
 
 	sort(distancias.begin(),distancias.end());
 
+	cout << "Ordem  Nome" << setw(16) << "Local"<< endl;
+
 	for(unsigned int i = 0; i < distancias.size(); i++)
 	{
 		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
 		{
 			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
 			{
-				cout << (i+1) << "  - ECO_RIDES_" << ER.getPontosPartilha().at(k)->getNome() << " - ";
+				cout << setw(7) << left << (i+1) << "ECO_RIDES_" << setw(5) << ER.getPontosPartilha().at(k)->getNome();
 				cout << ER.getPontosPartilha().at(k)->getLocal().getNome() << endl;
 			}
 
