@@ -1479,14 +1479,12 @@ void openInterface(Sistema & ER){
 	int value { };
 	string option;
 
-	//Sistema ER { };
-
 	do
 	{
 		//Informacao inicial apresentadada ao utilizador
 		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "#####  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
@@ -1500,6 +1498,7 @@ void openInterface(Sistema & ER){
 			try{
 				cout << endl << "Introduza uma opcao (1-4): ";
 				cin >> option;
+				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
 
@@ -1513,13 +1512,11 @@ void openInterface(Sistema & ER){
 
 				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
-				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
 				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
-				cin.ignore(1000,'\n');
 			}
 		};
 
