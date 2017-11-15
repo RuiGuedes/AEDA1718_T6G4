@@ -874,11 +874,11 @@ void infoER(Sistema &ER) {
 
 	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
 
-	cout << left << setw(7) << "ID" << setw(10) << "Nome" << setw(25) << "Tipo de utente" << setw (20) << "GPS" << endl;
+	cout << left << setw(15) << "  Nome" << setw(6) << "ID" << setw(27) << "Tipo de utente" << setw (20) << "GPS" << endl;
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
-		cout << setw(4) << ER.getUtentes().at(i)->getId()
-				<< setw(15) << ER.getUtentes().at(i)->getUtenteNome()
+		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
+				<< setw(10) << ER.getUtentes().at(i)->getId()
 				<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
 				<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
 				<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
@@ -896,9 +896,9 @@ void infoER(Sistema &ER) {
 
 	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
 	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
-	cout << setw(4) << " " << setw(11) << "30€" << "Infantil , Urbana Simples" << endl;
-	cout << setw(4) << " " << setw(11) << "40€" << "Infantil , Urbana Simples , Urbana" << endl;
-	cout << setw(4) << " " << setw(11) << "50€" << "Infantil , Urbana Simples , Urbana , Corrida" << endl << endl;
+	cout << setw(4) << " " << setw(11) << "30€" << "Infantil + Urbana Simples" << endl;
+	cout << setw(4) << " " << setw(11) << "40€" << "Infantil + Urbana Simples + Urbana" << endl;
+	cout << setw(4) << " " << setw(11) << "50€" << "Infantil + Urbana Simples + Urbana + Corrida" << endl << endl;
 
 	cout << "Fundadores: " << endl;
 	cout << "  - Rui Guedes" << endl;
