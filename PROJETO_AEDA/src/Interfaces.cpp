@@ -383,6 +383,9 @@ void devolveBike(Sistema &ER,int index) {
 	if(ER.getUtentes().at(index)->getAvailable() == true)
 	{
 		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
 	}
 
 	int index_pp {-1};
@@ -533,8 +536,8 @@ void updateLocation(Sistema &ER,int index) {
 	return;
 
 }
-//ESTOU AQUI
-void efetuaPag(Sistema &ER,int index, string mode = "single") {
+
+void efetuaPag(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
@@ -542,11 +545,11 @@ void efetuaPag(Sistema &ER,int index, string mode = "single") {
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	cout << "Efetua pagamento" << endl << endl;
 
-	unsigned int ano{}, mes{}, value{};
+	unsigned int ano{}, mes{};
 	string option {};
-	unsigned int somaU=0, somaUS=0, somaC=0, somaI=0, preco=0;
-	bool exist_pag = false;
+	vector<unsigned int> meses;
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
 		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
@@ -554,7 +557,6 @@ void efetuaPag(Sistema &ER,int index, string mode = "single") {
 		system("cls");
 		return;
 	}
-
 	else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0){
 		cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		system("pause");
@@ -562,207 +564,147 @@ void efetuaPag(Sistema &ER,int index, string mode = "single") {
 		return;
 	}
 
+	//Executa até obter um ano válido
+	while(1)
+	{
+		try{
+			cout << "Liquidação de mensalidades do ano: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			ano = stoi(option);
+			if(ano < 2017)
+				throw OpcaoInvalida<int>(ano);
+
+			cout << endl;
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	//Verifica meses de utilização do respetivo ano
+	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+	{
+		if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano)
+		{
+			if(meses.size() == 0)
+				meses.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes());
+
+			bool cond {false};
+			for(unsigned int k = 0; k < meses.size(); k++)
+			{
+				if(meses.at(k) == ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes())
+					cond = true;
+			}
+
+			if(cond == false)
+				meses.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes());
+
+			cond = false;
+		}
+	}
+
+	if(meses.size() == 0)
+	{
+		cout << "Este utente não possui qualquer pagamento pendente no ano " << ano << " ! " << endl << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 	else
 	{
-		cout << "Opções de pagamento: " << endl;
-		cout << "     1 - Mês a mês" << endl;
-		cout << "     2 - Totalidade das utilizações" << endl;
+		cout << "Meses com mensalidades em atraso: " << endl;
+		for(unsigned int i = 0; i < meses.size(); i++)
+		{
+			if(meses.at(i) == 1)
+				cout << "1 - Janeiro" << endl;
+			else if(meses.at(i) == 2)
+				cout << "2 - Fevereiro" << endl;
+			else if(meses.at(i) == 3)
+				cout << "3 - Março" << endl;
+			else if(meses.at(i) == 4)
+				cout << "4 - Abril" << endl;
+			else if(meses.at(i) == 5)
+				cout << "5 - Maio" << endl;
+			else if(meses.at(i) == 6)
+				cout << "6 - Junho" << endl;
+			else if(meses.at(i) == 7)
+				cout << "7 - Julho" << endl;
+			else if(meses.at(i) == 8)
+				cout << "8 - Agosto" << endl;
+			else if(meses.at(i) == 9)
+				cout << "9 - Setembro" << endl;
+			else if(meses.at(i) == 10)
+				cout << "10 - Outubro" << endl;
+			else if(meses.at(i) == 11)
+				cout << "11 - Novembro" << endl;
+			else if(meses.at(i) == 12)
+				cout << "12 - Dezembro" << endl;
+		}
 
+		cout << endl;
+
+		//Executa até obter um ano válido
 		while(1)
 		{
 			try{
-				cout << endl << "Introduza uma opção (1-2): ";
+				cout << "Liquidação de mensalidades do mês: ";
 				cin >> option;
+				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
-				value = stoi(option);
-				if(value < 1 || value > 2)
-					throw OpcaoInvalida<int>(value);
+
+				mes = stoi(option);
+
+				bool cond {false};
+
+				for(unsigned int i = 0; i < meses.size(); i++)
+				{
+					if(meses.at(i) == mes)
+					{
+						cond = true;
+						break;
+					}
+				}
+
+				if(cond == false)
+					throw OpcaoInvalida<int>(mes);
+
+				cout << endl;
 				break;
 			}
 			catch (OpcaoInvalida<int> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
-				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
-				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
-				cin.ignore(1000,'\n');
 			}
 		};
-
-		if(value == 2)
-			mode = "all";
-
-		if(mode=="single"){   //Pagar mês a mês
-			do{
-				cout << "Período a liquidar:" << endl << endl;
-
-				while(1)
-				{
-					try{
-						cout << endl << "Ano: ";
-						cin >> option;
-						if(valid_number(option) == false)
-							throw OpcaoInvalida<string>(option);
-
-						ano = stoi(option);
-						if(ano < 2017)
-							throw OpcaoInvalida<int>(ano);
-
-						break;
-					}
-					catch (OpcaoInvalida<int> &op){
-
-						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-						cin.clear();
-						cin.ignore(1000,'\n');
-					}
-					catch (OpcaoInvalida<string> &op){
-
-						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-						cin.clear();
-						cin.ignore(1000,'\n');
-					}
-				};
-
-				while(1)
-				{
-					try{
-						cout << endl << "Mes[1-12]: ";
-						cin >> option;
-						if(valid_number(option) == false)
-							throw OpcaoInvalida<string>(option);
-
-						mes = stoi(option);
-						if(mes < 1 || mes > 12)
-							throw OpcaoInvalida<int>(mes);
-
-						break;
-					}
-					catch (OpcaoInvalida<int> &op){
-
-						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-						cin.clear();
-						cin.ignore(1000,'\n');
-					}
-					catch (OpcaoInvalida<string> &op){
-
-						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-						cin.clear();
-						cin.ignore(1000,'\n');
-					}
-				};
-
-				exist_pag = false;
-
-				for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-				{
-					if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano && ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes() == mes)
-					{
-						if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-							somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-						else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-							somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-						else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-							somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-						else	//Infantil
-							somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-
-						exist_pag = true;
-					}
-				}
-
-				if(exist_pag == false)
-					cout << "Não existe nenhum registo de aluguer para o período referido!" << endl;
-				else
-				{
-					ER.getUtentes().at(index)->updateHistoric();
-
-					if(somaC > 0)
-						preco = 50;
-					else if(somaU > 0)
-						preco = 40;
-					else if(somaUS > 0)
-						preco = 30;
-					else if(somaI > 0)
-						preco = 20;
-
-					if(somaU+somaUS+somaC+somaI < 20)  //descontos
-						preco = preco * 0.95;
-					else
-						preco = preco * 0.9;
-
-					cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
-				}
-
-				cout << "Opções: " << endl;
-				cout << "     1 - Sair" << endl;
-				cout << "     2 - Efetuar mais pagamentos" << endl;
-
-				while(1)
-				{
-					try{
-						cout << endl << "Introduza uma opção (1-2): ";
-						cin >> option;
-						if(valid_number(option) == false)
-							throw OpcaoInvalida<string>(option);
-						value = stoi(option);
-						if(value < 1 || value > 2)
-							throw OpcaoInvalida<int>(value);
-						break;
-					}
-					catch (OpcaoInvalida<int> &op){
-
-						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-						cin.clear();
-						cin.ignore(1000,'\n');
-					}
-					catch (OpcaoInvalida<string> &op){
-						cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-						cin.clear();
-						cin.ignore(1000,'\n');
-					}
-				};
-			} while(value==2);
-		}
-
-
-		else {   //Pagar todas as utilizações (usado em mudaTipoUT)
-
-			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-			{
-				if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana")
-					somaU += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-					somaUS += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getBikeType() == "Corrida")
-					somaC += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-				else	//Infantil
-					somaI += ER.getUtentes().at(index)->getUtilizacoes().at(i).getUseTime();
-			}
-
-			ER.getUtentes().at(index)->updateHistoric();
-
-			preco = (somaU>0 ? 40 : 0) + (somaUS>0 ? 30 : 0) + (somaC>0 ? 50 : 0) + (somaI>0 ? 20 : 0);
-
-			if(somaU+somaUS+somaC+somaI < 20)  //descontos
-				preco = preco * 0.95;
-			else
-				preco = preco * 0.9;
-
-			cout << "Pagamento de " << preco << "€ efetuado!" << endl << endl;
-		}
 	}
+
+	ER.getUtentes().at(index)->pagaMensalidade(ER,ano,mes);
 
 	system("pause");
 	system("cls");
 	return;
 }
-//COMPLETO
+//ESTOU AQUI
+//CAdiciona o nome do ponto partilha
 void NearestPP(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -803,6 +745,7 @@ void NearestPP(Sistema &ER,int index) {
 
 void mudaTipoUT(Sistema &ER,int index){
 
+	/*
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
@@ -859,7 +802,7 @@ void mudaTipoUT(Sistema &ER,int index){
 
 	//////NOTA: Por alguma razao o system("pause") está a aparecer antes da linha de cima ////
 	/// (aparece primeiro "Press a key to continue" e só depois o output da função de cima) ///
-
+	*/
 	system("pause");
 	system("cls");
 	return;
@@ -884,9 +827,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																																																					 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																																																					 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																																																					 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																																																																	 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																																																																	 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																																																																	 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 

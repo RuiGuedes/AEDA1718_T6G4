@@ -42,6 +42,7 @@ public:
 	void alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP);
 	int removeBicicleta(Sistema &ER, vector<int> index_distancias); 			//Retorna o indice do ponto de partilha afetado
 	void devolveBicicleta();
+	void pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes);
 	void updateHistoric();
 	friend ostream & operator <<(ostream & o, const Utente & u);
 	friend istream & operator >>(istream & i, Utente & u);

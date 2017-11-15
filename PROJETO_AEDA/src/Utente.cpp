@@ -70,6 +70,88 @@ int Utente::removeBicicleta(Sistema &ER, vector<int> index_distancias) {
 	return index_pp;
 }
 
+void Utente::pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes) {
+
+	unsigned int numUseHours{0};
+	double prestacao{-1};
+	string mesName;
+
+	for(unsigned int i = 0; i < getUtilizacoes().size(); i++)
+	{
+		if((getUtilizacoes().at(i).getData().getAno() == ano) && (getUtilizacoes().at(i).getData().getMes() == mes))
+		{
+			//Soma as horas de uso do respetivo mes
+			numUseHours += getUtilizacoes().at(i).getUseTime();
+
+			//Verifica o tipo de prestacao a ser aplicada
+			unsigned int tmp{};
+
+			if(getUtilizacoes().at(i).getBikeType() == "Urbana")
+				tmp = 0;
+			else if(getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
+				tmp = 1;
+			else if(getUtilizacoes().at(i).getBikeType() == "Corrida")
+				tmp = 2;
+			else
+				tmp = 3;
+
+			if(prestacao == 0)
+				prestacao = tmp;
+			else if(prestacao < tmp)
+				prestacao = tmp;
+
+			//Adiciona utilização ao historico e remove-a das utilizações
+			historico.push_back(getUtilizacoes().at(i));
+			utilizacoes.erase(utilizacoes.begin() + i);
+			i--;
+
+		}
+	}
+
+	if(prestacao == 0)
+		prestacao = 40;
+	else if(prestacao == 1)
+		prestacao = 30;
+	else if(prestacao == 2)
+		prestacao = 50;
+	else
+		prestacao = 20;
+
+	if(mes == 1)
+		mesName = "Janeiro";
+	else if(mes == 2)
+		mesName = "Fevereiro";
+	else if(mes == 3)
+		mesName = "Março";
+	else if(mes == 4)
+		mesName = "Abril";
+	else if(mes == 5)
+		mesName = "Maio";
+	else if(mes == 6)
+		mesName = "Junho";
+	else if(mes == 7)
+		mesName = "Julho";
+	else if(mes == 8)
+		mesName = "Agosto";
+	else if(mes == 9)
+		mesName = "Setembro";
+	else if(mes == 10)
+		mesName = "Outubro";
+	else if(mes == 11)
+		mesName = "Novembro";
+	else if(mes == 12)
+		mesName = "Dezembro";
+
+	cout << "Montante a pagar referente ao mes " << mesName << " do ano " << ano << ": ";
+
+	if(numUseHours >= 20)
+		prestacao = prestacao*0.9;
+
+	cout << prestacao << endl << endl;
+
+	return;
+}
+
 void Utente::updateHistoric() {
 
 	for(unsigned int i = 0; i < utilizacoes.size(); i+=0)
