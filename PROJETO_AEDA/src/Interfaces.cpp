@@ -1311,7 +1311,7 @@ void removeBike(Sistema & ER) {
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-	cout << "Remove bicicleta: " << endl << endl;
+	cout << "Remove bicicleta " << endl << endl;
 
 	string nomePP, biketype;
 	bool cond {false};
@@ -1394,7 +1394,7 @@ void removeBike(Sistema & ER) {
 	return;
 
 }
-//ESTOU AQUI
+
 void removeUT(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -1404,7 +1404,7 @@ void removeUT(Sistema & ER) {
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
-	cout << "Remove utente: " << endl << endl;
+	cout << "Remove utente " << endl << endl;
 
 	if(ER.getUtentes().size() == 0)
 	{
@@ -1418,12 +1418,14 @@ void removeUT(Sistema & ER) {
 	string nomeUT;
 	int indexUT {-1};
 
+	cin.ignore(1000,'\n');
+
 	//Verifica o nome do utente que quer remover
 	while(1)
 	{
 		try {
 			cout << "Nome do Utente: " ;
-			cin >> nomeUT;
+			getline(cin,nomeUT);
 			if(valid_word(nomeUT) == false)
 				throw OpcaoInvalida<string>(nomeUT);
 
@@ -1435,13 +1437,12 @@ void removeUT(Sistema & ER) {
 
 			if(indexUT == -1)
 				throw OpcaoInvalida<string>(nomeUT);
-			cout << endl;
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Utente inexistente(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
@@ -1452,38 +1453,21 @@ void removeUT(Sistema & ER) {
 
 		ER.getUtentes().at(0)->setLastId();
 
-		cout << "Utente removido com sucesso !" << endl << endl;
+		cout << endl << "Utente removido com sucesso !" << endl << endl;
 
 		system("pause");
 		system("cls");
 		return;
 	}
 
-	/*
-	if(indexUT == 0)
+	for(unsigned int i = indexUT; i < ER.getUtentes().size(); i++)
 	{
-		for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
-		{
-
-			ER.getUtentes().at(i)->setID();
-		}
-
-		ER.getUtentes().at(0)->setLastId();
+		ER.getUtentes().at(i)->setIDBackward();
 	}
-	else
-	{
 
-		for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
-		{
-			if(i != 0)
-				ER.getUtentes().at(i)->setID();
-		}
-		ER.getUtentes().at(0)->setLastId();
-	}
-	 */
+	ER.getUtentes().at(0)->setLastId();
 
-
-	cout << "Utente removido com sucesso !" << endl << endl;
+	cout << endl << "Utente removido com sucesso !" << endl << endl;
 
 	system("pause");
 	system("cls");

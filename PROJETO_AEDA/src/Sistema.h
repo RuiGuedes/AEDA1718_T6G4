@@ -60,6 +60,7 @@ public:
 
 	//Metodos Set
 	static void setLastId();
+	void setIDBackward();
 	void setID(int identificacao);
 	void setUtenteLocation(Localizacao spot);
 	void setTipoUtente(string tipo);  	//Necessita de pagar dividas anteriores antes de poder mudar de tipo

@@ -225,9 +225,13 @@ vector<Utilizacao> Utente::getHistorico() {
 // METODOS SET //
 /////////////////
 
+void Utente::setIDBackward() {
+	this->id--;
+}
+
 void Utente::setLastId()
 {
-	--lastId;
+	lastId--;
 }
 
 void Utente::setID(int identificacao)
