@@ -704,7 +704,7 @@ void efetuaPag(Sistema &ER,int index) {
 	return;
 }
 //ESTOU AQUI
-//CAdiciona o nome do ponto partilha
+//Adiciona o nome do ponto partilha
 void NearestPP(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -730,8 +730,10 @@ void NearestPP(Sistema &ER,int index) {
 		{
 			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
 			{
-				cout << (i+1) << " - " << ER.getPontosPartilha().at(k)->getLocal().getNome() << endl;
+				cout << (i+1) << "  - ECO_RIDES_" << ER.getPontosPartilha().at(k)->getNome() << " - ";
+				cout << ER.getPontosPartilha().at(k)->getLocal().getNome() << endl;
 			}
+
 		}
 	}
 
