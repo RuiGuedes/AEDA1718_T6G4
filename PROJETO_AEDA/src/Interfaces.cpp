@@ -745,67 +745,74 @@ void NearestPP(Sistema &ER,int index) {
 	return;
 
 }
-//ESTOU AQUI
+
 void mudaTipoUT(Sistema &ER,int index){
 
-	/*
+
 	//Informacao inicial apresentadada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	cout << "Muda tipo de utente" << endl << endl;
 
-	string novo_tipo, opcao;
-	int type;
-	bool valid_type = false, valid_op = false;
+	string option;
+	string tipo = ER.getUtentes().at(index)->getTipoUtente();
 
-	do
+	if((tipo == "Regular") || (ER.getUtentes().at(index)->getUtilizacoes().size() == 0))
 	{
-		cout << "Introduza o tipo de utilizador para que quer mudar: ";
-		cin >> novo_tipo;
-		cout << endl << endl;
-		if(novo_tipo != "Regular" && novo_tipo != "Socio")
-			cout << "Tipo invalido!" << endl << endl;
-		else
-			valid_type = true;
+		cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
 
-	} while(valid_type==false);
+		while(1)
+		{
+			try {
+				if(tipo == "Regular")
+					cout << "Tem a certeza que pretende mudar para Sócio [Y/N]: ";
+				else
+					cout << "Tem a certeza que pretende mudar para Regular [Y/N]: ";
 
+				cin >> option;
+				cin.ignore(1000,'\n');
 
-	if(novo_tipo == "Regular")
-		type = 0;
-	else
-		type = 1;
+				if(valid_word(option) == false)
+					throw OpcaoInvalida<string>(option);
 
-	////FALTA: Mudar efetuaPag para que seja possivel efetuar todos os pagamentos existentes de uma vez
+				if((option == "Y") || (option == "N"))
+					break;
 
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Socio" && novo_tipo == "Regular" && ER.getUtentes().at(index)->getUtilizacoes().size() > 0){
-		cout << "Necessita de efetuar os pagamentos em falta!" << endl << endl;
+				throw OpcaoInvalida<string>(option);
 
-		do{
-			cout << "Deseja prosseguir? (Sim/Nao) " << endl << endl;
-			cin >> opcao;
-			cout << endl << endl;
-			if(opcao != "Sim" && opcao != "Nao")
-				cout << "Escolha uma das opções (Sim/Nao)" << endl << endl;
+			}
+			catch (OpcaoInvalida<string> &op) {
+				cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+			}
+		}
+
+		if(option == "Y")
+		{
+			if(tipo == "Regular")
+			{
+				ER.getUtentes().at(index)->setTipoUtente("Socio");
+				cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Sócio" << endl << endl;
+			}
 			else
-				valid_op = true;
+			{
+				ER.getUtentes().at(index)->setTipoUtente("Regular");
+				cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Regular" << endl << endl;
+			}
 
-		} while(valid_op==false);
-
-
-		if(opcao == "Sim")
-			efetuaPag(ER, index, "all");
+		}
 		else
-			return;
+			cout << endl << "Mudança cancelada com sucesso " << endl << endl;
+
+	}
+	else
+	{
+		cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
 	}
 
-	ER.getUtentes().at(index)->setTipoUtente(type);
-
-	//////NOTA: Por alguma razao o system("pause") está a aparecer antes da linha de cima ////
-	/// (aparece primeiro "Press a key to continue" e só depois o output da função de cima) ///
-	*/
 	system("pause");
 	system("cls");
 	return;
@@ -830,9 +837,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																																																																	 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																																																																	 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																																																																	 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																																																																							 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																																																																							 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																																																																							 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -867,7 +874,7 @@ void infoER(Sistema &ER) {
 	return;
 
 }
-//COMPLETO
+//ESTOU AQUI
 void addPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador

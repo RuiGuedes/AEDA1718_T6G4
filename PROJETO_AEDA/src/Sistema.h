@@ -62,7 +62,7 @@ public:
 	static void setLastId();
 	void setID(int identificacao);
 	void setUtenteLocation(Localizacao spot);
-	void setTipoUtente(int tipo);  //Necessita de pagar dividas anteriores antes de poder mudar de tipo
+	void setTipoUtente(string tipo);  	//Necessita de pagar dividas anteriores antes de poder mudar de tipo
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);

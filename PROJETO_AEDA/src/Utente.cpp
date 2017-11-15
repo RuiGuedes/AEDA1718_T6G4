@@ -240,27 +240,9 @@ void Utente::setUtenteLocation(Localizacao spot) {
 	return;
 }
 
-void Utente::setTipoUtente(int tipo) {
+void Utente::setTipoUtente(string tipo) {
 
-	string type = this->getTipoUtente();
-	string conversion;
-
-	if(tipo == 1)
-		conversion = "Socio";
-	else
-		conversion = "Regular";
-
-	if(conversion == type)
-		cout << "Este utente já se encontra definido como do tipo " << type << ".\n";
-
-	else {
-		//Efetua pagamento
-		this->updateHistoric();
-		//Muda tipo
-		this->tipoUtente = conversion;
-		cout << "O utente com o ID = " << this->getId() << " é agora do tipo:  " << conversion << ".\n";
-
-	}
+	this->tipoUtente = tipo;
 
 	return;
 }
