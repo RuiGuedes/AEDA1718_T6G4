@@ -855,9 +855,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-						<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-						<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-						<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+								<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+								<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+								<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -878,10 +878,10 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
 		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
-				<< setw(10) << ER.getUtentes().at(i)->getId()
-				<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
-				<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
-				<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+						<< setw(10) << ER.getUtentes().at(i)->getId()
+						<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+						<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+						<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
 	}
 
 	cout << endl;
@@ -1085,17 +1085,17 @@ void addPP(Sistema & ER) {
 
 	PontoPartilha* pp = new PontoPartilha(spot,value,nome);
 
-	int lastNumBike = stoi(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).at(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).size()-1)->getBikeName().substr(1));
-	lastNumBike++;
+	//int lastNumBike = stoi(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).at(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).size()-1)->getBikeName().substr(1));
+	//lastNumBike++;
 
 	ER.addPontoPartilha(pp);
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
-		string u = "u" + to_string(lastNumBike);
-		string us = "us" + to_string(lastNumBike);
-		string c = "c" + to_string(lastNumBike);
-		string inf = "i" + to_string(lastNumBike);
+		string u = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
+		string us = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
+		string c = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
+		string inf = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId());
 
 		Bicicleta* b1 = new Bicicleta("Urbana",u);
 		Bicicleta* b2 = new Bicicleta("Urbana Simples",us);
@@ -1107,7 +1107,8 @@ void addPP(Sistema & ER) {
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
 
-		lastNumBike++;
+		//lastNumBike++;
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward();
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -1171,6 +1172,11 @@ void removePP(Sistema & ER) {
 
 	ER.removePonto(indexPP);
 
+	for(unsigned int i = 0; i < 5; i++)
+	{
+		ER.getPontosPartilha().at(0)->setBikeLastIdBackward();
+	}
+
 	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
 
 	system("pause");
@@ -1178,84 +1184,6 @@ void removePP(Sistema & ER) {
 	return;
 }
 
-void visualizaPP(Sistema & ER) {
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		cout << "Nome: " << ER.getPontosPartilha().at(i)->getNome() << endl;
-		cout << "Capacidade: " << ER.getPontosPartilha().at(i)->getCapacidade() << endl;
-		cout << "Localização: " << endl << "    Nome: " << ER.getPontosPartilha().at(i)->getLocal().getNome() << endl;
-		cout << "    Coordenadas: (" << ER.getPontosPartilha().at(i)->getLocal().getX() << " , " << ER.getPontosPartilha().at(i)->getLocal().getY();
-		cout << ") " << endl << endl;
-	}
-
-	system("pause");
-	system("cls");
-	return;
-}
-
-void visualizaUtente(Sistema & ER) {
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
-	for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
-	{
-		cout << "Nome: " << ER.getUtentes().at(i)->getUtenteNome() << endl;
-		cout << "Tipo de Utente: " << ER.getUtentes().at(i)->getTipoUtente() << endl;
-		cout << "ID: " << ER.getUtentes().at(i)->getId() << endl;
-		cout << "Localização: " << endl << "    Nome: " << ER.getUtentes().at(i)->getLocalizacao().getNome() << endl;
-		cout << "    Coordenadas: (" << ER.getUtentes().at(i)->getLocalizacao().getX() << " , " << ER.getUtentes().at(i)->getLocalizacao().getY();
-		cout << ") " << endl << endl;
-	}
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
-void visualizaBikes(Sistema & ER) {
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
-	int numU{}, numUS{}, numC{}, numI{};
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		numU += ER.getPontosPartilha().at(i)->getBikes().at(0).size();
-		numUS += ER.getPontosPartilha().at(i)->getBikes().at(1).size();
-		numC += ER.getPontosPartilha().at(i)->getBikes().at(2).size();
-		numI += ER.getPontosPartilha().at(i)->getBikes().at(3).size();
-	}
-
-	cout << "Totalidade de bicicletas existentes no momento: " << endl << endl;
-	cout << "->  Bicicletas Urbanas: " << numU << endl;
-	cout << "->  Bicicletas Urbanas Simples: " << numUS << endl;
-	cout << "->  Bicicletas Corrida: " << numC << endl;
-	cout << "->  Bicicletas Infantil: " << numI << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
 //ESTOU AQUI
 void adicionaBike(Sistema & ER) {
 
@@ -1849,7 +1777,7 @@ void menu_interface(Sistema &ER){
 		cout << "6  - Efetuar pagamento das mensalidades" << endl;		//FALTA TERMINAR E VERIFICAR
 		cout << "7  - Ponto de partilha mais próximo" << endl;
 		cout << "8  - Mudar o tipo de utente" << endl;			//FALTA IMPLEMENTAR
-		cout << "9  - Obter informações sobre ECO RIDES" << endl;
+		cout << "9  - Informações sobre ECO_RIDES" << endl;
 		cout << "10 - Voltar" << endl << endl;
 
 		while(1)
@@ -2010,10 +1938,9 @@ void admin_interface(Sistema &ER) {
 		cout << "3 - Remove bicicleta" << endl;
 		cout << "4 - Remove ponto de partilha" << endl;
 		cout << "5 - Remove utente" << endl;
-		cout << "6 - Visualiza pontos de partilha" << endl;
-		cout << "7 - Visualiza bicicletas" << endl;
-		cout << "8 - Visualiza utentes" << endl;
-		cout << "9 - Sair" << endl << endl;
+		cout << "6 - Informações sobre ECO_RIDES" << endl;
+		cout << "7 - Sair" << endl;
+
 
 		while(1)
 		{
@@ -2075,19 +2002,12 @@ void admin_interface(Sistema &ER) {
 			break;
 		case 6:
 			system("cls");
-			visualizaPP(ER);
+			infoER(ER);
 			break;
 		case 7:
-			system("cls");
-			visualizaBikes(ER);
-			break;
-		case 8:
-			system("cls");
-			visualizaUtente(ER);
-			break;
-		case 9:
 			cout << endl;
 			break;
+
 		}
 	}while(value != 9);
 

@@ -1,3 +1,5 @@
+u1/Urbana/1
+u2/Urbana/1
 u3/Urbana/1
 u4/Urbana/1
 u5/Urbana/1
@@ -16,13 +18,11 @@ i2/Infantil/1
 i3/Infantil/1
 i4/Infantil/1
 i5/Infantil/1
-u2/Urbana/1
 u6/Urbana/1
 u7/Urbana/1
 u8/Urbana/1
 u9/Urbana/1
 u10/Urbana/1
-u1/Urbana/1
 us6/Urbana Simples/1
 us7/Urbana Simples/1
 us8/Urbana Simples/1
@@ -38,15 +38,16 @@ i7/Infantil/1
 i8/Infantil/1
 i9/Infantil/1
 i10/Infantil/1
+u11/Urbana/1
 u12/Urbana/1
 u13/Urbana/1
 u14/Urbana/1
-u11/Urbana/1
+u15/Urbana/1
+us11/Urbana Simples/1
+us12/Urbana Simples/1
 us13/Urbana Simples/1
 us14/Urbana Simples/1
 us15/Urbana Simples/1
-us11/Urbana Simples/1
-us12/Urbana Simples/1
 c11/Corrida/1
 c12/Corrida/1
 c13/Corrida/1
@@ -62,7 +63,6 @@ u17/Urbana/1
 u18/Urbana/1
 u19/Urbana/1
 u20/Urbana/1
-u15/Urbana/1
 us16/Urbana Simples/1
 us17/Urbana Simples/1
 us18/Urbana Simples/1
@@ -198,23 +198,3 @@ i47/Infantil/1
 i48/Infantil/1
 i49/Infantil/1
 i50/Infantil/1
-u51/Urbana/1
-u52/Urbana/1
-u53/Urbana/1
-u54/Urbana/1
-u55/Urbana/1
-us51/Urbana Simples/1
-us52/Urbana Simples/1
-us53/Urbana Simples/1
-us54/Urbana Simples/1
-us55/Urbana Simples/1
-c51/Corrida/1
-c52/Corrida/1
-c53/Corrida/1
-c54/Corrida/1
-c55/Corrida/1
-i51/Infantil/1
-i52/Infantil/1
-i53/Infantil/1
-i54/Infantil/1
-i55/Infantil/1

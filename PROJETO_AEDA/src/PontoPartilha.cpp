@@ -1,5 +1,7 @@
 #include "Sistema.h"
 
+int PontoPartilha::bikelastID = 56;
+
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
 	vector<Bicicleta *> v1,v2,v3,v4;
@@ -79,15 +81,19 @@ void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos) {
 		PontoPartilha tmp = *pontos[p];
 		int j;
 		for (j = p; j > 0 && local.distancia(tmp.getLocal()) < local.distancia(pontos[j-1]->getLocal()); j--)
-			*pontos[j] = *pontos[j-1];
-		*pontos[j] = tmp;
+ *pontos[j] = *pontos[j-1];
+ *pontos[j] = tmp;
 	}
 }
-*/
+ */
 
 /////////////////
 // METODOS GET //
 /////////////////
+
+int PontoPartilha::getBikeLastId() {
+	return bikelastID;
+}
 
 Localizacao PontoPartilha::getLocal() const {
 	return local;
@@ -141,5 +147,13 @@ void PontoPartilha::setNome(string name) {
 	nome = name;
 }
 
+void PontoPartilha::setBikeLastIdFoward() {
+	bikelastID++;
+	return;
+}
 
+void PontoPartilha::setBikeLastIdBackward() {
+	bikelastID--;
+	return;
+}
 
