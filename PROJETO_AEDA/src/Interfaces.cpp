@@ -855,9 +855,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																																																																											 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																																																																											 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																																																																											 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																																																																																					 << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																																																																																					 << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																																																																																					 << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -892,7 +892,7 @@ void infoER(Sistema &ER) {
 	return;
 
 }
-//ESTOU AQUI
+
 void addPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -940,6 +940,9 @@ void addPP(Sistema & ER) {
 		}
 	}
 
+	Localizacao spot{};
+	bool diffloc {true};
+
 	cout << endl << "Localizacao: " << endl << endl;
 
 	while(1)
@@ -949,6 +952,22 @@ void addPP(Sistema & ER) {
 			getline(cin , locname);
 			if(valid_word(locname) == false)
 				throw OpcaoInvalida<string>(nome);
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				if(ER.getPontosPartilha().at(i)->getLocal().getNome() == locname)
+				{
+					diffloc = false;
+					spot.setNome(locname);
+					spot.setX(ER.getPontosPartilha().at(i)->getLocal().getX());
+					spot.setY(ER.getPontosPartilha().at(i)->getLocal().getY());
+					cout << endl << "Coordenada X: " << spot.getX() << endl << endl;
+					cout << "Coordenada Y: " << spot.getY() << endl << endl;
+					break;
+				}
+			}
+
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
@@ -957,52 +976,71 @@ void addPP(Sistema & ER) {
 		}
 	}
 
-	cout << "Indique as cordenadas GPS:" << endl;
-
-	double coordX { }, coordY { };
-
-	while(1)
+	if(diffloc == true)
 	{
-		try{
-			cout << endl << "Coordenada X: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
+		bool newcord{true};
+		double coordX { }, coordY { };
 
-			coordX = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
+		do
+		{
+			newcord = true;
+			cout << "Indique as cordenadas GPS:" << endl;
 
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
+			while(1)
+			{
+				try{
+					cout << endl << "Coordenada X: ";
+					cin >> option;
+					cin.ignore(1000,'\n');
+					if(valid_number_double(option) == false)
+						throw OpcaoInvalida<string>(option);
 
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada Y: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
+					coordX = stod(option);
+					break;
+				}
+				catch (OpcaoInvalida<string> &op){
 
-			coordY = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
+					cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+				}
+			};
 
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
+			while(1)
+			{
+				try{
+					cout << endl << "Coordenada Y: ";
+					cin >> option;
+					cin.ignore(1000,'\n');
+					if(valid_number_double(option) == false)
+						throw OpcaoInvalida<string>(option);
 
-	Localizacao spot{};
-	spot.setNome(locname);
-	spot.setX(coordX);
-	spot.setY(coordY);
+					coordY = stod(option);
+					break;
+				}
+				catch (OpcaoInvalida<string> &op){
+
+					cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+				}
+			};
+
+
+			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+			{
+				if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
+				{
+					newcord = false;
+					cout << "Essas coordenadas já pertence à localização: " << ER.getPontosPartilha().at(i)->getLocal().getNome() << endl << endl;
+					break;
+				}
+			}
+
+		}while(newcord == false);
+
+		spot.setNome(locname);
+		spot.setX(coordX);
+		spot.setY(coordY);
+	}
 
 	while(1)
 	{
@@ -1029,7 +1067,30 @@ void addPP(Sistema & ER) {
 
 	PontoPartilha* pp = new PontoPartilha(spot,value,nome);
 
+	int lastNumBike = stoi(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).at(ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->getBikes().at(0).size()-1)->getBikeName().substr(1));
+	lastNumBike++;
+
 	ER.addPontoPartilha(pp);
+
+	for(unsigned int i = 0; i < 5; i++)
+	{
+		string u = "u" + to_string(lastNumBike);
+		string us = "us" + to_string(lastNumBike);
+		string c = "c" + to_string(lastNumBike);
+		string inf = "i" + to_string(lastNumBike);
+
+		Bicicleta* b1 = new Bicicleta("Urbana",u);
+		Bicicleta* b2 = new Bicicleta("Urbana Simples",us);
+		Bicicleta* b3 = new Bicicleta("Corrida",c);
+		Bicicleta* b4 = new Bicicleta("Infantil",inf);
+
+		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b1);
+		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b2);
+		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
+		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
+
+		lastNumBike++;
+	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
 
@@ -1061,12 +1122,15 @@ void removePP(Sistema & ER) {
 		return;
 	}
 
+	cin.ignore(1000,'\n');
+
 	//Verifica ponto de partilha que quer remover
 	while(1)
 	{
 		try {
 			cout << "Nome do Ponto Partilha: " ;
-			cin >> nomePP;
+			//cin >> nomePP;
+			getline(cin,nomePP);
 			if(valid_word(nomePP) == false)
 				throw OpcaoInvalida<string>(nomePP);
 
@@ -1084,7 +1148,6 @@ void removePP(Sistema & ER) {
 		catch (OpcaoInvalida<string> &op) {
 			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	}
 
