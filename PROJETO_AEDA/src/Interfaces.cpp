@@ -1227,7 +1227,7 @@ void visualizaBikes(Sistema & ER) {
 		numI += ER.getPontosPartilha().at(i)->getBikes().at(3).size();
 	}
 
-	cout << "No total existem no momento: " << endl;
+	cout << "Totalidade de bicicletas existentes no momento: " << endl << endl;
 	cout << "->  Bicicletas Urbanas: " << numU << endl;
 	cout << "->  Bicicletas Urbanas Simples: " << numUS << endl;
 	cout << "->  Bicicletas Corrida: " << numC << endl;
@@ -1238,7 +1238,7 @@ void visualizaBikes(Sistema & ER) {
 	return;
 
 }
-
+//ESTOU AQUI
 void adicionaBike(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
