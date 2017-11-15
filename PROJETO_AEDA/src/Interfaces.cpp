@@ -732,7 +732,7 @@ void NearestPP(Sistema &ER,int index) {
 		{
 			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
 			{
-				cout << setw(7) << left << (i+1) << "ECO_RIDES_" << setw(5) << ER.getPontosPartilha().at(k)->getNome();
+				cout << "  " << setw(5) << left << (i+1) << "ECO_RIDES_" << setw(5) << ER.getPontosPartilha().at(k)->getNome();
 				cout << ER.getPontosPartilha().at(k)->getLocal().getNome() << endl;
 			}
 
