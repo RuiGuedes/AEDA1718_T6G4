@@ -29,7 +29,7 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 		value = 0;
 	else if(bikeType == "Urbana Simples")
 		value = 1;
-	else if(bikeType == "Urbana Simples")
+	else if(bikeType == "Corrida")
 		value = 2;
 	else
 		value = 3;
@@ -41,9 +41,9 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 	{
 		if(i != index)
 		{
-			if(ER.getPontosPartilha().at(i)->getBikes().at(0).size() > 5)
+			if(ER.getPontosPartilha().at(i)->getBikes().at(value).size() > 5)
 				indicesSup5.push_back(i);
-			else if(ER.getPontosPartilha().at(i)->getBikes().at(0).size() < 5)
+			else if(ER.getPontosPartilha().at(i)->getBikes().at(value).size() < 5)
 				indicesInf5.push_back(i);
 		}
 
@@ -77,7 +77,7 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 		//Distribui bicicletas
 		for(unsigned int k = 0; k < indicesInf5.size(); k++)
 		{
-			while(ER.getPontosPartilha().at(indicesInf5.at(k))->getBikes().at(0).size() < 5)
+			while(ER.getPontosPartilha().at(indicesInf5.at(k))->getBikes().at(value).size() < 5)
 			{
 				if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
 					break;
@@ -703,8 +703,7 @@ void efetuaPag(Sistema &ER,int index) {
 	system("cls");
 	return;
 }
-//ESTOU AQUI
-//Adiciona o nome do ponto partilha
+
 void NearestPP(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -746,7 +745,7 @@ void NearestPP(Sistema &ER,int index) {
 	return;
 
 }
-
+//ESTOU AQUI
 void mudaTipoUT(Sistema &ER,int index){
 
 	/*
@@ -811,7 +810,7 @@ void mudaTipoUT(Sistema &ER,int index){
 	system("cls");
 	return;
 }
-//COMPLETO
+
 void infoER(Sistema &ER) {
 
 	//Informacao inicial apresentadada ao utilizador
