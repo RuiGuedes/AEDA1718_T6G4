@@ -14,11 +14,87 @@ int SequentialSearch(const vector<T> &v, T x)
 	return -1; // não encontrou
 }
 
-void registo_utente(Sistema & BS);
+/////////////////////////////////////////////////////
+// PROTOTIPOS DAS FUNCOES UTILIZADAS EM INTERFACES //
+/////////////////////////////////////////////////////
 void menu_interface(Sistema &BS);
 void admin_interface(Sistema &BS);
-vector<int> ExtraData(Sistema &ER,int index);
 
+
+/////////////////////////////////////
+// IMPLEMENTAÇÃO DE FUNCOES GERAIS //
+/////////////////////////////////////
+//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao ponto de partilha com indicie = index
+vector<int> ExtraData(Sistema &ER,int index) {
+
+	vector<double> distancias;
+	vector<int> indices;
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		distancias.push_back(ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(i)->getLocal()));
+	}
+
+	sort(distancias.begin(),distancias.end());
+
+	for(unsigned int i = 0; i < distancias.size(); i++)
+	{
+		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
+		{
+			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
+			{
+				indices.push_back(k);
+			}
+		}
+	}
+
+	return indices;
+
+}
+
+bool valid_number(string number)
+{
+	//Verifica se um número é positivo e contem apenas algarismos
+	for (unsigned int i = 0; i < number.size(); i++){
+		if (!(isdigit(number.at(i))))
+			return false;
+	}
+	return true;
+}
+
+bool valid_number_double(string number)
+{
+	//Verifica se um número é positivo/negativo e contem apenas algarismos ou apenas "." e "-"
+	for (unsigned int i = 0; i < number.size(); i++){
+		if ((!(isdigit(number.at(i)))) && (number.at(i) != '.') && (number.at(i) != '-'))
+			return false;
+	}
+	return true;
+}
+
+bool valid_word(string word)
+{
+	//Verifica se é a string não contem numeros
+	for (unsigned int i = 0; i < word.size(); i++){
+		if (isdigit(word.at(i)))
+			return false;
+	}
+	return true;
+}
+
+bool valid_bike(string bike)
+{
+	//Verifica se o nome da bicicleta é correto - não pode começar por um número
+	if (isdigit(bike.at(0)))
+		return false;
+
+	return true;
+}
+
+
+////////////////////////////////////////////////////////////
+// IMPLEMENTACAO DE FUNCOES COMUNS AS DIVERSAS INTERFACES //
+////////////////////////////////////////////////////////////
 void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
 	int value {-1};
@@ -94,6 +170,218 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 	return;
 }
 
+void registo_utente(Sistema & ER){
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+	cout << "Regista novo utente:" << endl << endl;
+
+	string nome, tipoUtente;
+	int value {};
+	string option {};
+	double coordX { }, coordY { };
+
+	while(1)
+	{
+		try {
+			cout << "Nome: " ;
+			getline(cin,nome);
+			if(valid_word(nome) == false)
+				throw OpcaoInvalida<string>(nome);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+	cout << endl << "Tipo de Utente :"<< endl ;
+	cout << "     1 - Regular" << endl;
+	cout << "     2 - Sócio" << endl << endl;
+
+	while(1)
+	{
+		try{
+			cout << endl << "Introduza uma opcao (1-2): ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			if(value < 1 || value > 2)
+				throw OpcaoInvalida<int>(value);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	if(value==1)
+		tipoUtente = "Regular";
+	else
+		tipoUtente = "Socio";
+
+	cout << endl << "Localizacao: " << endl << endl;
+
+	cout << "Indique as cordenadas GPS:" << endl;
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada X: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordX = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada Y: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordY = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	Localizacao spot;
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
+		{
+			spot.setNome(ER.getPontosPartilha().at(i)->getLocal().getNome());
+			break;
+		}
+	}
+
+	spot.setX(coordX);
+	spot.setY(coordY);
+
+	Utente* u12 = new Utente(nome,tipoUtente,spot);
+
+	ER.addNewUtente(u12);
+
+	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+}
+
+void infoER(Sistema &ER) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	cout << "Informações:" << endl << endl;
+
+	cout << "Nome da empresa: ECO RIDES" << endl << endl;
+	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
+	cout << "Pontos de Partilha:" << endl << endl;
+	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
+
+	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
+		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
+																														<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																														<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																														<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+
+		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
+
+		cout << setw(13) << numtypes.at(0);
+		cout << setw(15) << numtypes.at(1);
+		cout << setw(9) << numtypes.at(2);
+		cout << setw(11) << numtypes.at(3);
+		cout << ER.getPontosPartilha().at(i)->getCapacidade();
+
+		cout << endl;
+	}
+
+	cout << endl;
+
+	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
+
+	cout << left << setw(15) << "  Nome" << setw(6) << "ID" << setw(27) << "Tipo de utente" << setw (20) << "GPS" << endl;
+
+	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
+		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
+																												<< setw(10) << ER.getUtentes().at(i)->getId()
+																												<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+																												<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+																												<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+	}
+
+	cout << endl;
+
+	cout << "Tabela de Preços:" << endl << endl;
+
+	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
+	cout << setw(26) << "Urbana" << "4€" << endl <<
+			setw(26) << "Urbana Simples" << "3€" << endl <<
+			setw(26) << "Corrida" << "5€" << endl <<
+			setw(26) << "Infantil" << "2€" << endl << endl;
+
+	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
+	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
+	cout << setw(4) << " " << setw(11) << "30€" << "Infantil + Urbana Simples" << endl;
+	cout << setw(4) << " " << setw(11) << "40€" << "Infantil + Urbana Simples + Urbana" << endl;
+	cout << setw(4) << " " << setw(11) << "50€" << "Infantil + Urbana Simples + Urbana + Corrida" << endl << endl;
+
+	cout << "Fundadores: " << endl;
+	cout << "  - Rui Guedes" << endl;
+	cout << "  - César Pinho" << endl;
+	cout << "  - Bernardo Santos" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+
+}
+
+
+/////////////////////////////////////////////////
+// IMPLEMENTACAO DAS FUNCOES -> MENU INTERFACE //
+/////////////////////////////////////////////////
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -894,81 +1182,10 @@ void mudaTipoUT(Sistema &ER,int index){
 	return;
 }
 
-void infoER(Sistema &ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Informações:" << endl << endl;
-
-	cout << "Nome da empresa: ECO RIDES" << endl << endl;
-	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
-	cout << "Pontos de Partilha:" << endl << endl;
-	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
-	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
-			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
-
-	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
-		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																														<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																														<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																														<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
-
-		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
-
-		cout << setw(13) << numtypes.at(0);
-		cout << setw(15) << numtypes.at(1);
-		cout << setw(9) << numtypes.at(2);
-		cout << setw(11) << numtypes.at(3);
-		cout << ER.getPontosPartilha().at(i)->getCapacidade();
-
-		cout << endl;
-	}
-
-	cout << endl;
-
-	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
-
-	cout << left << setw(15) << "  Nome" << setw(6) << "ID" << setw(27) << "Tipo de utente" << setw (20) << "GPS" << endl;
-
-	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
-		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
-																												<< setw(10) << ER.getUtentes().at(i)->getId()
-																												<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
-																												<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
-																												<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
-	}
-
-	cout << endl;
-
-	cout << "Tabela de Preços:" << endl << endl;
-
-	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
-	cout << setw(26) << "Urbana" << "4€" << endl <<
-			setw(26) << "Urbana Simples" << "3€" << endl <<
-			setw(26) << "Corrida" << "5€" << endl <<
-			setw(26) << "Infantil" << "2€" << endl << endl;
-
-	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
-	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
-	cout << setw(4) << " " << setw(11) << "30€" << "Infantil + Urbana Simples" << endl;
-	cout << setw(4) << " " << setw(11) << "40€" << "Infantil + Urbana Simples + Urbana" << endl;
-	cout << setw(4) << " " << setw(11) << "50€" << "Infantil + Urbana Simples + Urbana + Corrida" << endl << endl;
-
-	cout << "Fundadores: " << endl;
-	cout << "  - Rui Guedes" << endl;
-	cout << "  - César Pinho" << endl;
-	cout << "  - Bernardo Santos" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
+//////////////////////////////////////////////////
+// IMPLEMENTACAO DAS FUNCOES -> ADMIN INTERFACE //
+//////////////////////////////////////////////////
 void addPP(Sistema & ER) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -1545,6 +1762,10 @@ void removeUT(Sistema & ER) {
 	return;
 }
 
+
+/////////////////////////
+// INTERFACES -> MENUS //
+/////////////////////////
 void openInterface(Sistema & ER){
 
 	int value { };
@@ -1611,139 +1832,6 @@ void openInterface(Sistema & ER){
 			break;
 		}
 	}while(value != 4);
-	return;
-}
-
-void registo_utente(Sistema & ER){
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
-	cout << "Regista novo utente:" << endl << endl;
-
-	string nome, tipoUtente;
-	int value {};
-	string option {};
-	double coordX { }, coordY { };
-
-	while(1)
-	{
-		try {
-			cout << "Nome: " ;
-			getline(cin,nome);
-			if(valid_word(nome) == false)
-				throw OpcaoInvalida<string>(nome);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-	cout << endl << "Tipo de Utente :"<< endl ;
-	cout << "     1 - Regular" << endl;
-	cout << "     2 - Sócio" << endl << endl;
-
-	while(1)
-	{
-		try{
-			cout << endl << "Introduza uma opcao (1-2): ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			value = stoi(option);
-			if(value < 1 || value > 2)
-				throw OpcaoInvalida<int>(value);
-
-			break;
-		}
-		catch (OpcaoInvalida<int> &op){
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	if(value==1)
-		tipoUtente = "Regular";
-	else
-		tipoUtente = "Socio";
-
-	cout << endl << "Localizacao: " << endl << endl;
-
-	cout << "Indique as cordenadas GPS:" << endl;
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada X: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordX = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada Y: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordY = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	Localizacao spot;
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
-		{
-			spot.setNome(ER.getPontosPartilha().at(i)->getLocal().getNome());
-			break;
-		}
-	}
-
-	spot.setX(coordX);
-	spot.setY(coordY);
-
-	Utente* u12 = new Utente(nome,tipoUtente,spot);
-
-	ER.addNewUtente(u12);
-
-	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
-
-	system("pause");
-	system("cls");
 	return;
 }
 
@@ -2075,71 +2163,3 @@ void admin_interface(Sistema &ER) {
 	system("cls");
 	return;
 }
-
-//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao ponto de partilha com indicie = index
-vector<int> ExtraData(Sistema &ER,int index) {
-
-	vector<double> distancias;
-	vector<int> indices;
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		distancias.push_back(ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(i)->getLocal()));
-	}
-
-	sort(distancias.begin(),distancias.end());
-
-	for(unsigned int i = 0; i < distancias.size(); i++)
-	{
-		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
-		{
-			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
-			{
-				indices.push_back(k);
-			}
-		}
-	}
-
-	return indices;
-
-}
-
-//Verifica se um número é positivo e contem apenas algarismos
-bool valid_number(string number)
-{
-	for (unsigned int i = 0; i < number.size(); i++){
-		if (!(isdigit(number.at(i))))
-			return false;
-	}
-	return true;
-}
-
-//Verifica se um número é positivo/negativo e contem apenas algarismos ou apenas "." e "-"
-bool valid_number_double(string number)
-{
-	for (unsigned int i = 0; i < number.size(); i++){
-		if ((!(isdigit(number.at(i)))) && (number.at(i) != '.') && (number.at(i) != '-'))
-			return false;
-	}
-	return true;
-}
-
-//Verifica se é a string não contem numeros
-bool valid_word(string word)
-{
-	for (unsigned int i = 0; i < word.size(); i++){
-		if (isdigit(word.at(i)))
-			return false;
-	}
-	return true;
-}
-
-//Verifica se o nome da bicicleta é correto - não pode começar por um número
-bool valid_bike(string bike)
-{
-	if (isdigit(bike.at(0)))
-		return false;
-
-	return true;
-}
-

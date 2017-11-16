@@ -4,6 +4,7 @@
 #include "Localizacao.h"
 #include "Bicicleta.h"
 #include "Utilizacao.h"
+
 class Utente;
 class PontoPartilha;
 
@@ -126,7 +127,6 @@ public:
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
 
 	void limpaVectorBike();
-	//friend void ordenaPorDistancia(Localizacao local, vector<PontoPartilha*> pontos);
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
 	void removeBike(Bicicleta *bike);

@@ -1,20 +1,12 @@
 #include "Includes.h"
 #include "Sistema.h"
 #include "Exceções.h"
-#include <Windows.h>
 
 using namespace std;
 
 void openInterface(Sistema & ER);
 void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
-
-/////////////////////////////////
-///César :: ver interfaces linha 674 e o pagamento de todas as utilizaçoes
-///Rui   :: adimin menu  implementar funçoes.
-///Bernardo  :: muda tipo utente
-////////////////////////////////
-
 
 int main()
 {
