@@ -1,5 +1,10 @@
 #include "Sistema.h"
 
+int PontoPartilha::UbikelastID;
+int PontoPartilha::USbikelastID;
+int PontoPartilha::CbikelastID;
+int PontoPartilha::IbikelastID;
+
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
 	vector<Bicicleta *> v1,v2,v3,v4;
