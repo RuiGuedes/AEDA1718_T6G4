@@ -161,23 +161,6 @@ void Utente::updateHistoric() {
 	}
 }
 
-void Utente::displayHistoric() {
-
-	if(this->historico.size() != 0)
-	{
-		for(unsigned int i = 0; i < this->historico.size(); i++)
-		{
-			cout << "Tipo de bicicleta: " << this->historico.at(i).getBikeType() << endl;
-			cout << "Número de horas: " << this->historico.at(i).getUseTime() << endl;
-			cout << "Data (dd/mm/aaaa): " << this->historico.at(i).getData() << endl << endl;
-
-		}
-	}
-	else
-	{
-		cout << "Este utente ainda não utilizou qualquer tipo de servico" << endl << endl;
-	}
-}
 
 /////////////////
 // METODOS GET //

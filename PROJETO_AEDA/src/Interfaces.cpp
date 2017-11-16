@@ -467,6 +467,30 @@ void displayPagPendentes(Sistema &ER,int index){
 	return;
 }
 
+void displayHistoric(Sistema &ER,int index) {
+
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+
+	cout << "Histórico: " << endl << endl;
+
+	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getHistorico().size(); i++)
+	{
+		ER.getUtentes().at(index)->getHistorico().at(i).displayUtilizacao();
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+			cout << "Montante: " << ER.getUtentes().at(index)->getHistorico().at(i).getPrice() << "€" << endl;
+		cout << endl;
+	}
+
+	system("pause");
+	system("cls");
+
+}
+
 void updateLocation(Sistema &ER,int index) {
 
 	//Informacao inicial apresentadada ao utilizador
@@ -551,6 +575,14 @@ void efetuaPag(Sistema &ER,int index) {
 	string option {};
 	vector<unsigned int> meses;
 
+
+	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
+		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+
 	if(ER.getUtentes().at(index)->getAvailable() == false)
 	{
 		cout << "Não é possível efetuar o pagamento uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
@@ -560,12 +592,6 @@ void efetuaPag(Sistema &ER,int index) {
 		return;
 	}
 
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
-		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
-		system("pause");
-		system("cls");
-		return;
-	}
 	else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0){
 		cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		system("pause");
@@ -855,9 +881,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-												<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-												<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-												<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																								<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																								<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																								<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -878,10 +904,10 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
 		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
-										<< setw(10) << ER.getUtentes().at(i)->getId()
-										<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
-										<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
-										<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+																						<< setw(10) << ER.getUtentes().at(i)->getId()
+																						<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+																						<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+																						<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
 	}
 
 	cout << endl;
@@ -1691,36 +1717,61 @@ void menu_interface(Sistema &ER){
 	int index {};	//Indice do utente no vector de utentes do sistema
 	string info;
 
-	while(attempts <= 3)
+	cout << "Utentes: " << endl << endl;
+
+	cout << left << setw(15) << "   Nome" << setw(6) << " ID" << setw(27) << " Tipo de utente" << setw (20) << " GPS" << endl;
+
+	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++)
+	{
+		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getUtenteNome()
+																							<< setw(10) << ER.getUtentes().at(i)->getId()
+																							<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+																							<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+																							<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+	}
+
+	cout << endl;
+
+	while(attempts < 3)
 	{
 		try{
-			cout << "Username (ID): ";
+			attempts++;
+			cout << "Login [Utente ID]: ";
 			cin >> info;
+			cin.ignore(1000,'\n');
 
 			if(valid_number(info) == false)
 				throw OpcaoInvalida<string>(info);
 
 			identificacao = stoi(info);
 
-			if(ExistID(ER,identificacao) == -1)
+			index = ExistID(ER,identificacao);
+
+			if(index == -1)
 				throw OpcaoInvalida<int>(identificacao);
 
-			index = ExistID(ER,identificacao);
 			break;
 		}
 		catch (OpcaoInvalida<int> &op){
 
-			cout << "Username inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cout << "ID inválido (" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
+
 		}
 		catch (OpcaoInvalida<string> &op){
 
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cout << "ID inválido (" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
-			cin.ignore(1000,'\n');
 		}
 	};
+
+	if(attempts >= 3)
+	{
+		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 
 	system("cls");
 
@@ -1732,7 +1783,7 @@ void menu_interface(Sistema &ER){
 		//Informacao inicial apresentadada ao utilizador
 		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
@@ -1740,14 +1791,14 @@ void menu_interface(Sistema &ER){
 
 		cout << "1  - Alugar bicicleta" << endl;
 		cout << "2  - Devolver bicicleta" << endl;
-		cout << "3  - Historial" << endl;				//CRIAR UMA FUNCAO
-		cout << "4  - Pagamentos pendentes" << endl;		//FALTA CALCULAR O PRECO DAS UTILIZACOES
-		cout << "5  - Atualiza Localização" << endl;		//ADICIONAR OPCAO PARA ADICIONAR LOCALIZACAO POR NOME
-		cout << "6  - Efetuar pagamento das mensalidades" << endl;		//FALTA TERMINAR E VERIFICAR
-		cout << "7  - Ponto de partilha mais próximo" << endl;
-		cout << "8  - Mudar o tipo de utente" << endl;			//FALTA IMPLEMENTAR
+		cout << "3  - Histórico" << endl;
+		cout << "4  - Pagamentos pendentes" << endl;
+		cout << "5  - Efetuar pagamento das mensalidades" << endl;
+		cout << "6  - Atualiza localização" << endl;
+		cout << "7  - Pontos de partilha mais próximos" << endl;
+		cout << "8  - Mudar o tipo de utente" << endl;
 		cout << "9  - Informações sobre ECO_RIDES" << endl;
-		cout << "10 - Voltar" << endl << endl;
+		cout << "10 - Logout" << endl << endl;
 
 		while(1)
 		{
@@ -1755,6 +1806,7 @@ void menu_interface(Sistema &ER){
 
 				cout << endl << "Introduza uma opcao (1-10): ";
 				cin >> option;
+				cin.ignore(1000,'\n');
 
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
@@ -1770,13 +1822,11 @@ void menu_interface(Sistema &ER){
 
 				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
-				cin.ignore(1000,'\n');
 			}
 			catch (OpcaoInvalida<string> &op){
 
 				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
 				cin.clear();
-				cin.ignore(1000,'\n');
 			}
 		};
 
@@ -1793,17 +1843,7 @@ void menu_interface(Sistema &ER){
 			break;
 		case 3:
 			system("cls");
-			//Informacao inicial apresentadada ao utilizador
-			cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-			cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-			cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-			cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-			cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
-			cout << "Histórico: " << endl << endl;
-			ER.getUtentes().at(index)->displayHistoric();
-			system("pause");
-			system("cls");
+			displayHistoric(ER,index);
 			break;
 		case 4:
 			system("cls");
@@ -1811,11 +1851,11 @@ void menu_interface(Sistema &ER){
 			break;
 		case 5:
 			system("cls");
-			updateLocation(ER,index);
+			efetuaPag(ER,index);
 			break;
 		case 6:
 			system("cls");
-			efetuaPag(ER,index);
+			updateLocation(ER,index);
 			break;
 		case 7:
 			system("cls");
@@ -1830,14 +1870,20 @@ void menu_interface(Sistema &ER){
 			infoER(ER);
 			break;
 		case 10:
-			///////////////////////////////////////////////////////////////
-			//antes de fazer check out , os utentes tem que devolver bike//
-			///////////////////////////////////////////////////////////////
-			cout << endl;
+			if(ER.getUtentes().at(index)->getAvailable() == false)
+			{
+				cout << endl << "Antes de efetuar logout o utente necessita primeiramente de devolver a bicicleta !" << endl << endl;
+				value = -1;
+			}
+			else
+				cout << endl;
+			system("pause");
+			system("cls");
 			break;
 		}
 	}while(value != 10);
 
+	cout << endl;
 	system("cls");
 	return;
 
@@ -1880,7 +1926,7 @@ void admin_interface(Sistema &ER) {
 
 	if(attempts > 3)
 	{
-		cout << endl << "Acesso negado: password incorreta" << endl << endl;
+		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
 		system("pause");
 		system("cls");
 		return;
