@@ -1899,12 +1899,13 @@ void admin_interface(Sistema &ER) {
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 
-	int attempts { 1 };
+	int attempts { 0 };
 	string info;
 
-	while(attempts <= 3)
+	while(attempts < 3)
 	{
 		try{
+			attempts++;
 			cout << "Admin (Password): ";
 			cin >> info;
 
@@ -1924,7 +1925,7 @@ void admin_interface(Sistema &ER) {
 		}
 	};
 
-	if(attempts > 3)
+	if(attempts >= 3)
 	{
 		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
 		system("pause");
@@ -1942,7 +1943,7 @@ void admin_interface(Sistema &ER) {
 		//Informacao inicial apresentadada ao utilizador
 		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+		cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
 		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
 		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
