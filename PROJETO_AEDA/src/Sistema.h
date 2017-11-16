@@ -143,7 +143,7 @@ public:
 	//Metodos Set
 	void setNome(string name);
 	static void setBikeLastId(string bike,const int value);
-	static void setBikeLastIdFoward(string bike);
+	static void setBikeLastIdForward(string bike);
 	static void setBikeLastIdBackward(string bike);
 };
 

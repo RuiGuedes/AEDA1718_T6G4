@@ -157,7 +157,7 @@ void PontoPartilha::setBikeLastId(string bike, const int value){
 		IbikelastID = value;
 }
 
-void PontoPartilha::setBikeLastIdFoward(string bike) {
+void PontoPartilha::setBikeLastIdForward(string bike) {
 
 	if(bike == "Urbana")
 		UbikelastID++;

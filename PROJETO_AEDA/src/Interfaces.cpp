@@ -1380,10 +1380,10 @@ void addPP(Sistema & ER) {
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
 
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana");
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana Simples");
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Corrida");
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Infantil");
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -1568,13 +1568,13 @@ void adicionaBike(Sistema & ER) {
 	}
 
 	if(biketype == "Urbana")
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Urbana");
 	else if(biketype == "Urbana Simples")
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Urbana Simples");
 	else if(biketype == "Corrida")
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Corrida");
 	else
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeLastIdForward("Infantil");
 
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->adicionaBike(bc);
