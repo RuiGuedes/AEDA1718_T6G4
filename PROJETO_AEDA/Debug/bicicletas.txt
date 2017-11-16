@@ -1,331 +1,220 @@
-u1/Urbana
-u2
-rbana
-u3/Urbana
-u4
-rbana
-u5/Urbana
-us1
-rbana Simples
-us2/Urbana Simples
-us3
-rbana Simples
-us4/Urbana Simples
-us5
-rbana Simples
-c1/Corrida
-c2
-orrida
-c3/Corrida
-c4
-orrida
-c5/Corrida
-i1
-nfantil
-i2/Infantil
-i3
-nfantil
-i4/Infantil
-i5
-nfantil
-u6/Urbana
-u7
-rbana
-u8/Urbana
-u9
-rbana
-u10/Urbana
-us6
-rbana Simples
-us7/Urbana Simples
-us8
-rbana Simples
-us9/Urbana Simples
-us10
-rbana Simples
-c6/Corrida
-c7
-orrida
-c8/Corrida
-c9
-orrida
-c10/Corrida
-i6
-nfantil
-i7/Infantil
-i8
-nfantil
-i9/Infantil
-i10
-nfantil
-u11/Urbana
-u12
-rbana
-u13/Urbana
-u14
-rbana
-u15/Urbana
-us11
-rbana Simples
-us12/Urbana Simples
-us13
-rbana Simples
-us14/Urbana Simples
-us15
-rbana Simples
-c11/Corrida
-c12
-orrida
-c13/Corrida
-c14
-orrida
-c15/Corrida
-i11
-nfantil
-i12/Infantil
-i13
-nfantil
-i14/Infantil
-i15
-nfantil
-u16/Urbana
-u17
-rbana
-u18/Urbana
-u19
-rbana
-u20/Urbana
-us16
-rbana Simples
-us17/Urbana Simples
-us18
-rbana Simples
-us19/Urbana Simples
-us20
-rbana Simples
-c16/Corrida
-c17
-orrida
-c18/Corrida
-c19
-orrida
-c20/Corrida
-i16
-nfantil
-i17/Infantil
-i18
-nfantil
-i19/Infantil
-i20
-nfantil
-u21/Urbana
-u22
-rbana
-u23/Urbana
-u24
-rbana
-u25/Urbana
-us21
-rbana Simples
-us22/Urbana Simples
-us23
-rbana Simples
-us24/Urbana Simples
-us25
-rbana Simples
-c21/Corrida
-c22
-orrida
-c23/Corrida
-c24
-orrida
-c25/Corrida
-i21
-nfantil
-i22/Infantil
-i23
-nfantil
-i24/Infantil
-i25
-nfantil
-u26/Urbana
-u27
-rbana
-u28/Urbana
-u29
-rbana
-u30/Urbana
-us26
-rbana Simples
-us27/Urbana Simples
-us28
-rbana Simples
-us29/Urbana Simples
-us30
-rbana Simples
-c26/Corrida
-c27
-orrida
-c28/Corrida
-c29
-orrida
-c30/Corrida
-i26
-nfantil
-i27/Infantil
-i28
-nfantil
-i29/Infantil
-i30
-nfantil
-u31/Urbana
-u32
-rbana
-u33/Urbana
-u34
-rbana
-u35/Urbana
-us31
-rbana Simples
-us32/Urbana Simples
-us33
-rbana Simples
-us34/Urbana Simples
-us35
-rbana Simples
-c31/Corrida
-c32
-orrida
-c33/Corrida
-c34
-orrida
-c35/Corrida
-i31
-nfantil
-i32/Infantil
-i33
-nfantil
-i34/Infantil
-i35
-nfantil
-u36/Urbana
-u37
-rbana
-u38/Urbana
-u39
-rbana
-u40/Urbana
-us36
-rbana Simples
-us37/Urbana Simples
-us38
-rbana Simples
-us39/Urbana Simples
-us40
-rbana Simples
-c36/Corrida
-c37
-orrida
-c38/Corrida
-c39
-orrida
-c40/Corrida
-i36
-nfantil
-i37/Infantil
-i38
-nfantil
-i39/Infantil
-i40
-nfantil
-u41/Urbana
-u42
-rbana
-u43/Urbana
-u44
-rbana
-u45/Urbana
-us41
-rbana Simples
-us42/Urbana Simples
-us43
-rbana Simples
-us44/Urbana Simples
-us45
-rbana Simples
-c41/Corrida
-c42
-orrida
-c43/Corrida
-c44
-orrida
-c45/Corrida
-i41
-nfantil
-i42/Infantil
-i43
-nfantil
-i44/Infantil
-i45
-nfantil
-u46/Urbana
-u47
-rbana
-u48/Urbana
-u49
-rbana
-u50/Urbana
-us46
-rbana Simples
-us47/Urbana Simples
-us48
-rbana Simples
-us49/Urbana Simples
-us50
-rbana Simples
-c46/Corrida
-c47
-orrida
-c48/Corrida
-c49
-orrida
-c50/Corrida
-i46
-nfantil
-i47/Infantil
-i48
-nfantil
-i49/Infantil
-i50
-nfantil
-u51/Urbana
-u52
-rbana
-u53/Urbana
-u54
-rbana
-u55/Urbana
-us51
-rbana Simples
-us52/Urbana Simples
-us53
-rbana Simples
-us54/Urbana Simples
-us55
-rbana Simples
-c51/Corrida
-c52
-orrida
-c53/Corrida
-c54
-orrida
-c55/Corrida
-i51
-nfantil
-i52/Infantil
-i53
-nfantil
-i54/Infantil
-i55
-nfantil
-/
+u1/Urbana/1
+u2/Urbana/1
+u3/Urbana/1
+u4/Urbana/1
+u5/Urbana/1
+us1/Urbana Simples/1
+us2/Urbana Simples/1
+us3/Urbana Simples/1
+us4/Urbana Simples/1
+us5/Urbana Simples/1
+c1/Corrida/1
+c2/Corrida/1
+c3/Corrida/1
+c4/Corrida/1
+c5/Corrida/1
+i1/Infantil/1
+i2/Infantil/1
+i3/Infantil/1
+i4/Infantil/1
+i5/Infantil/1
+u6/Urbana/1
+u7/Urbana/1
+u8/Urbana/1
+u9/Urbana/1
+u10/Urbana/1
+us6/Urbana Simples/1
+us7/Urbana Simples/1
+us8/Urbana Simples/1
+us9/Urbana Simples/1
+us10/Urbana Simples/1
+c6/Corrida/1
+c7/Corrida/1
+c8/Corrida/1
+c9/Corrida/1
+c10/Corrida/1
+i6/Infantil/1
+i7/Infantil/1
+i8/Infantil/1
+i9/Infantil/1
+i10/Infantil/1
+u11/Urbana/1
+u12/Urbana/1
+u13/Urbana/1
+u14/Urbana/1
+u15/Urbana/1
+us11/Urbana Simples/1
+us12/Urbana Simples/1
+us13/Urbana Simples/1
+us14/Urbana Simples/1
+us15/Urbana Simples/1
+c11/Corrida/1
+c12/Corrida/1
+c13/Corrida/1
+c14/Corrida/1
+c15/Corrida/1
+i11/Infantil/1
+i12/Infantil/1
+i13/Infantil/1
+i14/Infantil/1
+i15/Infantil/1
+u16/Urbana/1
+u17/Urbana/1
+u18/Urbana/1
+u19/Urbana/1
+u20/Urbana/1
+us16/Urbana Simples/1
+us17/Urbana Simples/1
+us18/Urbana Simples/1
+us19/Urbana Simples/1
+us20/Urbana Simples/1
+c16/Corrida/1
+c17/Corrida/1
+c18/Corrida/1
+c19/Corrida/1
+c20/Corrida/1
+i16/Infantil/1
+i17/Infantil/1
+i18/Infantil/1
+i19/Infantil/1
+i20/Infantil/1
+u21/Urbana/1
+u22/Urbana/1
+u23/Urbana/1
+u24/Urbana/1
+u25/Urbana/1
+us21/Urbana Simples/1
+us22/Urbana Simples/1
+us23/Urbana Simples/1
+us24/Urbana Simples/1
+us25/Urbana Simples/1
+c21/Corrida/1
+c22/Corrida/1
+c23/Corrida/1
+c24/Corrida/1
+c25/Corrida/1
+i21/Infantil/1
+i22/Infantil/1
+i23/Infantil/1
+i24/Infantil/1
+i25/Infantil/1
+u26/Urbana/1
+u27/Urbana/1
+u28/Urbana/1
+u29/Urbana/1
+u30/Urbana/1
+us26/Urbana Simples/1
+us27/Urbana Simples/1
+us28/Urbana Simples/1
+us29/Urbana Simples/1
+us30/Urbana Simples/1
+c26/Corrida/1
+c27/Corrida/1
+c28/Corrida/1
+c29/Corrida/1
+c30/Corrida/1
+i26/Infantil/1
+i27/Infantil/1
+i28/Infantil/1
+i29/Infantil/1
+i30/Infantil/1
+u31/Urbana/1
+u32/Urbana/1
+u33/Urbana/1
+u34/Urbana/1
+u35/Urbana/1
+us31/Urbana Simples/1
+us32/Urbana Simples/1
+us33/Urbana Simples/1
+us34/Urbana Simples/1
+us35/Urbana Simples/1
+c31/Corrida/1
+c32/Corrida/1
+c33/Corrida/1
+c34/Corrida/1
+c35/Corrida/1
+i31/Infantil/1
+i32/Infantil/1
+i33/Infantil/1
+i34/Infantil/1
+i35/Infantil/1
+u36/Urbana/1
+u37/Urbana/1
+u38/Urbana/1
+u39/Urbana/1
+u40/Urbana/1
+us36/Urbana Simples/1
+us37/Urbana Simples/1
+us38/Urbana Simples/1
+us39/Urbana Simples/1
+us40/Urbana Simples/1
+c36/Corrida/1
+c37/Corrida/1
+c38/Corrida/1
+c39/Corrida/1
+c40/Corrida/1
+i36/Infantil/1
+i37/Infantil/1
+i38/Infantil/1
+i39/Infantil/1
+i40/Infantil/1
+u41/Urbana/1
+u42/Urbana/1
+u43/Urbana/1
+u44/Urbana/1
+u45/Urbana/1
+us41/Urbana Simples/1
+us42/Urbana Simples/1
+us43/Urbana Simples/1
+us44/Urbana Simples/1
+us45/Urbana Simples/1
+c41/Corrida/1
+c42/Corrida/1
+c43/Corrida/1
+c44/Corrida/1
+c45/Corrida/1
+i41/Infantil/1
+i42/Infantil/1
+i43/Infantil/1
+i44/Infantil/1
+i45/Infantil/1
+u46/Urbana/1
+u47/Urbana/1
+u48/Urbana/1
+u49/Urbana/1
+u50/Urbana/1
+us46/Urbana Simples/1
+us47/Urbana Simples/1
+us48/Urbana Simples/1
+us49/Urbana Simples/1
+us50/Urbana Simples/1
+c46/Corrida/1
+c47/Corrida/1
+c48/Corrida/1
+c49/Corrida/1
+c50/Corrida/1
+i46/Infantil/1
+i47/Infantil/1
+i48/Infantil/1
+i49/Infantil/1
+i50/Infantil/1
+u51/Urbana/1
+u52/Urbana/1
+u53/Urbana/1
+u54/Urbana/1
+u55/Urbana/1
+us51/Urbana Simples/1
+us52/Urbana Simples/1
+us53/Urbana Simples/1
+us54/Urbana Simples/1
+us55/Urbana Simples/1
+c51/Corrida/1
+c52/Corrida/1
+c53/Corrida/1
+c54/Corrida/1
+c55/Corrida/1
+i51/Infantil/1
+i52/Infantil/1
+i53/Infantil/1
+i54/Infantil/1
+i55/Infantil/1
