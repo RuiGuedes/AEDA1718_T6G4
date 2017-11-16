@@ -574,7 +574,7 @@ void efetuaPag(Sistema &ER,int index) {
 	unsigned int ano{}, mes{};
 	string option {};
 	vector<unsigned int> meses;
-
+	vector<unsigned int> anos;
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
 		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
@@ -598,6 +598,38 @@ void efetuaPag(Sistema &ER,int index) {
 		system("cls");
 		return;
 	}
+
+	//Verifica os anos com mensalidades em atraso
+	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
+	{
+
+		if(anos.size() == 0)
+			anos.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno());
+
+		bool cond {false};
+		for(unsigned int k = 0; k < anos.size(); k++)
+		{
+			if(anos.at(k) == ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno())
+				cond = true;
+		}
+
+		if(cond == false)
+			anos.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno());
+
+		cond = false;
+
+	}
+
+	//Organiza o vetor "anos" por ordem crescente
+	sort(anos.begin(),anos.end());
+
+	cout << "Anos com mensalidades em atraso: " << endl;
+	for(unsigned int i = 0; i < anos.size(); i++)
+	{
+		cout << "-> " << anos.at(i) << endl;
+	}
+
+	cout << endl;
 
 	//Executa até obter um ano válido
 	while(1)
@@ -881,9 +913,9 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
 		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome()
-																								<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
-																								<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
-																								<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
+																														<< setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome()
+																														<< '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX()
+																														<< "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
 
 		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
 
@@ -904,10 +936,10 @@ void infoER(Sistema &ER) {
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
 		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome()
-																						<< setw(10) << ER.getUtentes().at(i)->getId()
-																						<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
-																						<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
-																						<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+																												<< setw(10) << ER.getUtentes().at(i)->getId()
+																												<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+																												<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+																												<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
 	}
 
 	cout << endl;
@@ -1441,6 +1473,19 @@ void removeUT(Sistema & ER) {
 		return;
 	}
 
+	cout << left << setw(15) << "   Nome" << setw(6) << " ID" << setw(27) << " Tipo de utente" << setw (20) << " GPS" << endl;
+
+	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++)
+	{
+		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getUtenteNome()
+																														<< setw(10) << ER.getUtentes().at(i)->getId()
+																														<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+																														<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+																														<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+	}
+
+	cout << endl;
+
 	string nomeUT;
 	int indexUT {-1};
 
@@ -1724,10 +1769,10 @@ void menu_interface(Sistema &ER){
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++)
 	{
 		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getUtenteNome()
-																							<< setw(10) << ER.getUtentes().at(i)->getId()
-																							<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
-																							<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
-																							<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
+																													<< setw(10) << ER.getUtentes().at(i)->getId()
+																													<< setw(14) <<ER.getUtentes().at(i)->getTipoUtente()
+																													<< '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX()
+																													<< "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
 	}
 
 	cout << endl;
@@ -1765,7 +1810,7 @@ void menu_interface(Sistema &ER){
 		}
 	};
 
-	if(attempts >= 3)
+	if(attempts > 3)
 	{
 		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
 		system("pause");
@@ -1925,7 +1970,7 @@ void admin_interface(Sistema &ER) {
 		}
 	};
 
-	if(attempts >= 3)
+	if(attempts > 3)
 	{
 		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
 		system("pause");
