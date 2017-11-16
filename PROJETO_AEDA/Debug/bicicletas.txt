@@ -198,23 +198,3 @@ i47/Infantil/
 i48/Infantil/
 i49/Infantil/
 i50/Infantil/
-u51/Urbana/
-u52/Urbana/
-u53/Urbana/
-u54/Urbana/
-u55/Urbana/
-us51/Urbana Simples/
-us52/Urbana Simples/
-us53/Urbana Simples/
-us54/Urbana Simples/
-us55/Urbana Simples/
-c51/Corrida/
-c52/Corrida/
-c53/Corrida/
-c54/Corrida/
-c55/Corrida/
-i51/Infantil/
-i52/Infantil/
-i53/Infantil/
-i54/Infantil/
-i55/Infantil/

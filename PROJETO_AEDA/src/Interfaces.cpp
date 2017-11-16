@@ -1566,6 +1566,15 @@ void adicionaBike(Sistema & ER) {
 		}
 	}
 
+	if(biketype == "Urbana")
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana");
+	else if(biketype == "Urbana Simples")
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana Simples");
+	else if(biketype == "Corrida")
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Corrida");
+	else
+		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Infantil");
+
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->adicionaBike(bc);
 
@@ -2123,9 +2132,6 @@ void admin_interface(Sistema &ER) {
 		};
 
 
-		//////////////////////////////////////////
-		////// - ADICIONA PONTO DE PARTILHA NUMA LOCALIZACAO EXISTENTE
-		//////////////////////////////////////////
 		//Opcões possiveis apresentadas no menu
 		switch (value)
 		{
