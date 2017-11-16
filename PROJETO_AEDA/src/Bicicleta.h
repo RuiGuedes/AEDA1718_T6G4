@@ -5,7 +5,6 @@
 class Bicicleta {
 	string bikeType;
 	string bikeName;
-	bool disponivel;  //True -> Disponivel || False -> Indisponivel
 public:
 	Bicicleta();
 	Bicicleta(string tipo, string name);
@@ -15,25 +14,18 @@ public:
 	//Metodos Get
 	string getBikeType() const;
 	string getBikeName() const;
-	bool getBikeAvailable() const;
-
-	//Metodos Set
-	void setBikeAvailable();
-
 };
 
 inline ostream& operator <<(ostream & o, const Bicicleta & b)
 {
-	o << b.bikeName << '/' << b.bikeType << '/' << b.disponivel;
+	o << b.bikeName << '/' << b.bikeType ;
 	return o;
-}
+};
 
 inline istream& operator >>(istream & i, Bicicleta & b)
 {
 	getline(i,b.bikeName,'/');
 	getline(i,b.bikeType,'/');
-	i >> b.disponivel;
 
 	return i;
-}
-
+};

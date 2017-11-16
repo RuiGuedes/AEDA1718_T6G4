@@ -1,11 +1,10 @@
 #include "Bicicleta.h"
 
-Bicicleta::Bicicleta(){disponivel = true;};
+Bicicleta::Bicicleta(){};
 
 Bicicleta::Bicicleta(string tipo, string name) {
 	bikeType = tipo;
 	bikeName = name;
-	disponivel = true;
 }
 
 /////////////////
@@ -20,19 +19,3 @@ string Bicicleta::getBikeName() const {
 	return bikeName;
 }
 
-bool Bicicleta::getBikeAvailable() const {
-	return disponivel;
-}
-
-/////////////////
-// METODOS SET //
-/////////////////
-void Bicicleta::setBikeAvailable() {
-
-	if(disponivel == true)
-		disponivel = false;
-	else
-		disponivel = true;
-
-	return;
-}
