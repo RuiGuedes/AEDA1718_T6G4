@@ -84,6 +84,19 @@ void checkinSys(Sistema & ER){
 		return;
 	}
 
+	int lastId;
+	char b;
+	f_bicicletas >> lastId >> b;
+	PontoPartilha::setBikeLastId("Urbana",lastId) ;
+	f_bicicletas >> lastId >> b;
+	PontoPartilha::setBikeLastId("Urbana Simples",lastId) ;
+	f_bicicletas >> lastId >> b;
+	PontoPartilha::setBikeLastId("Corrida",lastId) ;
+	f_bicicletas >> lastId;
+	PontoPartilha::setBikeLastId("Infantil",lastId) ;
+	f_bicicletas.ignore();
+
+
 	while(!f_pontos_partilha.eof()){
 		PontoPartilha p1;
 		f_pontos_partilha >> p1;
@@ -160,6 +173,11 @@ void checkoutSys(Sistema & ER){
 		cout << "Tente mais tarde./n";
 		return;
 	}
+
+	f_bicicletas << PontoPartilha::getBikeLastId("Urbana") << '/';
+	f_bicicletas << PontoPartilha::getBikeLastId("Urbana Simples") << '/';
+	f_bicicletas << PontoPartilha::getBikeLastId("Corrida") << '/';
+	f_bicicletas << PontoPartilha::getBikeLastId("Infantil") << endl;
 
 	for(unsigned int it=0 ; it<ER.getPontosPartilha().size() ; it++){
 		f_pontos_partilha << (*ER.getPontosPartilha().at(it)) << endl;

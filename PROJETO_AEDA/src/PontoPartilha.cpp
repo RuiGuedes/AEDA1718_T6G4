@@ -1,10 +1,5 @@
 #include "Sistema.h"
 
-int PontoPartilha::UbikelastID = 51;
-int PontoPartilha::USbikelastID = 51;
-int PontoPartilha::CbikelastID = 51;
-int PontoPartilha::IbikelastID = 51;
-
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
 	vector<Bicicleta *> v1,v2,v3,v4;
@@ -146,6 +141,17 @@ void PontoPartilha::setNome(string name) {
 	nome = name;
 }
 
+void PontoPartilha::setBikeLastId(string bike, const int value){
+	if(bike == "Urbana")
+		UbikelastID = value;
+	else if(bike == "Urbana Simples")
+		USbikelastID = value;
+	else if(bike == "Corrida")
+		CbikelastID = value;
+	else
+		IbikelastID = value;
+}
+
 void PontoPartilha::setBikeLastIdFoward(string bike) {
 
 	if(bike == "Urbana")
@@ -169,4 +175,3 @@ void PontoPartilha::setBikeLastIdBackward(string bike) {
 	else
 		IbikelastID--;
 }
-
