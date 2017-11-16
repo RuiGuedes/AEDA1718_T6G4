@@ -18,7 +18,7 @@ public:
 
 inline ostream& operator <<(ostream & o, const Bicicleta & b)
 {
-	o << b.bikeName << '/' << b.bikeType ;
+	o << b.bikeName << '/' << b.bikeType << '/';
 	return o;
 };
 
@@ -26,6 +26,5 @@ inline istream& operator >>(istream & i, Bicicleta & b)
 {
 	getline(i,b.bikeName,'/');
 	getline(i,b.bikeType,'/');
-
 	return i;
 };
