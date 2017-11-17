@@ -22,6 +22,7 @@ public:
 	//Metodos Get
 	vector<Utente* > getUtentes();
 	vector<PontoPartilha* > getPontosPartilha();
+	virtual string getNome() const {return "";};
 };
 
 
@@ -49,7 +50,7 @@ public:
 	//Metodos Get
 	static int getLastId();
 	int getId() const;
-	string getUtenteNome() const;
+	string getNome() const;
 	string getTipoUtente() const;
 	Localizacao getLocalizacao() const;
 	Bicicleta* getBike() const;
@@ -117,10 +118,10 @@ class PontoPartilha : public Sistema {
 	unsigned int capacidade;
 	vector <vector<Bicicleta *> > bicicletas;
 	string nome;
-	static int UbikelastID;
-	static int USbikelastID;
-	static int CbikelastID;
-	static int IbikelastID;
+	static int UbikeNextID;
+	static int USbikeNextID;
+	static int CbikeNextID;
+	static int IbikeNextID;
 public:
 	PontoPartilha();
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
@@ -132,7 +133,7 @@ public:
 	void adicionaBike(Bicicleta* bike);
 
 	//Metodos Get
-	static int getBikeLastId(string bike);
+	static int getBikeNextId(string bike);
 	Localizacao getLocal() const;
 	string getNome() const { return nome; }
 	int getCapacidade() const;
@@ -142,9 +143,9 @@ public:
 
 	//Metodos Set
 	void setNome(string name);
-	static void setBikeLastId(string bike,const int value);
-	static void setBikeLastIdFoward(string bike);
-	static void setBikeLastIdBackward(string bike);
+	static void setBikeNextId(string bike,const int value);
+	static void setBikeNextIdFoward(string bike);
+	static void setBikeNextIdBackward(string bike);
 };
 
 inline ostream& operator <<(ostream & o, const PontoPartilha & p)

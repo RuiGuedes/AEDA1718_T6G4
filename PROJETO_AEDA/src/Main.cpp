@@ -26,9 +26,11 @@ int main()
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 
 	Sistema sys;
+
 	cout << "APPLICATION LOADING";
 	cout << " .";checkinSys(sys) ; cout << "\b.."; Sleep(1000); cout << "\b\b...";Sleep(500);
 	system("cls");
+
 	openInterface(sys);
 
 	checkoutSys(sys);
@@ -53,7 +55,7 @@ void checkinSys(Sistema & ER){
 	while(!f_utentes.eof()){
 		Utente u1;
 		f_utentes >> u1;
-		if (u1.getUtenteNome()!=""){
+		if (u1.getNome()!=""){
 			Utente * u = new Utente(u1);
 			ER.addNewUtente(u);
 		}
@@ -84,18 +86,17 @@ void checkinSys(Sistema & ER){
 		return;
 	}
 
-	int lastId;
+	int nextId;
 	char b;
-	f_bicicletas >> lastId >> b;
-	PontoPartilha::setBikeLastId("Urbana",lastId) ;
-	f_bicicletas >> lastId >> b;
-	PontoPartilha::setBikeLastId("Urbana Simples",lastId) ;
-	f_bicicletas >> lastId >> b;
-	PontoPartilha::setBikeLastId("Corrida",lastId) ;
-	f_bicicletas >> lastId;
-	PontoPartilha::setBikeLastId("Infantil",lastId) ;
+	f_bicicletas >> nextId >> b;
+	PontoPartilha::setBikeNextId("Urbana",nextId) ;
+	f_bicicletas >> nextId >> b;
+	PontoPartilha::setBikeNextId("Urbana Simples",nextId) ;
+	f_bicicletas >> nextId >> b;
+	PontoPartilha::setBikeNextId("Corrida",nextId) ;
+	f_bicicletas >> nextId;
+	PontoPartilha::setBikeNextId("Infantil",nextId) ;
 	f_bicicletas.ignore();
-
 
 	while(!f_pontos_partilha.eof()){
 		PontoPartilha p1;
@@ -174,10 +175,10 @@ void checkoutSys(Sistema & ER){
 		return;
 	}
 
-	f_bicicletas << PontoPartilha::getBikeLastId("Urbana") << '/';
-	f_bicicletas << PontoPartilha::getBikeLastId("Urbana Simples") << '/';
-	f_bicicletas << PontoPartilha::getBikeLastId("Corrida") << '/';
-	f_bicicletas << PontoPartilha::getBikeLastId("Infantil") << endl;
+	f_bicicletas << PontoPartilha::getBikeNextId("Urbana") << '/';
+	f_bicicletas << PontoPartilha::getBikeNextId("Urbana Simples") << '/';
+	f_bicicletas << PontoPartilha::getBikeNextId("Corrida") << '/';
+	f_bicicletas << PontoPartilha::getBikeNextId("Infantil") << endl;
 
 	for(unsigned int it=0 ; it<ER.getPontosPartilha().size() ; it++){
 		f_pontos_partilha << (*ER.getPontosPartilha().at(it)) << endl;

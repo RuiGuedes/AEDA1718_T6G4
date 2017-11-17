@@ -1,9 +1,9 @@
 #include "Sistema.h"
 
-int PontoPartilha::UbikelastID;
-int PontoPartilha::USbikelastID;
-int PontoPartilha::CbikelastID;
-int PontoPartilha::IbikelastID;
+int PontoPartilha::UbikeNextID;
+int PontoPartilha::USbikeNextID;
+int PontoPartilha::CbikeNextID;
+int PontoPartilha::IbikeNextID;
 
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
@@ -82,16 +82,16 @@ void PontoPartilha::limpaVectorBike(){
 // METODOS GET //
 /////////////////
 
-int PontoPartilha::getBikeLastId(string bike) {
+int PontoPartilha::getBikeNextId(string bike) {
 
 	if(bike == "Urbana")
-		return UbikelastID;
+		return UbikeNextID;
 	else if(bike == "Urbana Simples")
-		return USbikelastID;
+		return USbikeNextID;
 	else if(bike == "Corrida")
-		return CbikelastID;
+		return CbikeNextID;
 	else
-		return IbikelastID;
+		return IbikeNextID;
 }
 
 Localizacao PontoPartilha::getLocal() const {
@@ -146,37 +146,37 @@ void PontoPartilha::setNome(string name) {
 	nome = name;
 }
 
-void PontoPartilha::setBikeLastId(string bike, const int value){
+void PontoPartilha::setBikeNextId(string bike, const int value){
 	if(bike == "Urbana")
-		UbikelastID = value;
+		UbikeNextID = value;
 	else if(bike == "Urbana Simples")
-		USbikelastID = value;
+		USbikeNextID = value;
 	else if(bike == "Corrida")
-		CbikelastID = value;
+		CbikeNextID = value;
 	else
-		IbikelastID = value;
+		IbikeNextID = value;
 }
 
-void PontoPartilha::setBikeLastIdFoward(string bike) {
+void PontoPartilha::setBikeNextIdFoward(string bike) {
 
 	if(bike == "Urbana")
-		UbikelastID++;
+		UbikeNextID++;
 	else if(bike == "Urbana Simples")
-		USbikelastID++;
+		USbikeNextID++;
 	else if(bike == "Corrida")
-		CbikelastID++;
+		CbikeNextID++;
 	else
-		IbikelastID++;
+		IbikeNextID++;
 }
 
-void PontoPartilha::setBikeLastIdBackward(string bike) {
+void PontoPartilha::setBikeNextIdBackward(string bike) {
 
 	if(bike == "Urbana")
-		UbikelastID--;
+		UbikeNextID--;
 	else if(bike == "Urbana Simples")
-		USbikelastID--;
+		USbikeNextID--;
 	else if(bike == "Corrida")
-		CbikelastID--;
+		CbikeNextID--;
 	else
-		IbikelastID--;
+		IbikeNextID--;
 }

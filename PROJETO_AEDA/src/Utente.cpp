@@ -175,7 +175,7 @@ int Utente::getId() const {
 	return id;
 }
 
-string Utente::getUtenteNome() const {
+string Utente::getNome() const {
 	return nome;
 }
 

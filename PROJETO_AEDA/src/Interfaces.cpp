@@ -345,7 +345,7 @@ void infoER(Sistema &ER) {
 	cout << left << setw(15) << "  Nome" << setw(6) << "ID" << setw(27) << "Tipo de utente" << setw (20) << "GPS" << endl;
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
-		cout << setw(15) << ER.getUtentes().at(i)->getUtenteNome();
+		cout << setw(15) << ER.getUtentes().at(i)->getNome();
 		cout << setw(10) << ER.getUtentes().at(i)->getId();
 		cout << setw(14) <<ER.getUtentes().at(i)->getTipoUtente();
 		cout << '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX();
@@ -1365,10 +1365,10 @@ void addPP(Sistema & ER) {
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
-		string u = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana"));
-		string us = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana Simples"));
-		string c = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Corrida"));
-		string inf = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Infantil"));
+		string u = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana"));
+		string us = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana Simples"));
+		string c = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Corrida"));
+		string inf = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Infantil"));
 
 		Bicicleta* b1 = new Bicicleta("Urbana",u);
 		Bicicleta* b2 = new Bicicleta("Urbana Simples",us);
@@ -1380,10 +1380,10 @@ void addPP(Sistema & ER) {
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
 
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana");
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana Simples");
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Corrida");
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Infantil");
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -1449,10 +1449,10 @@ void removePP(Sistema & ER) {
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
-		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Urbana");
-		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Urbana Simples");
-		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Corrida");
-		ER.getPontosPartilha().at(0)->setBikeLastIdBackward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Infantil");
 	}
 
 	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
@@ -1538,22 +1538,22 @@ void adicionaBike(Sistema & ER) {
 			if(biketype == "Urbana")
 			{
 				indexBB = 0;
-				nomePP = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana"));
+				nomePP = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana"));
 			}
 			else if(biketype == "Urbana Simples")
 			{
 				indexBB = 1;
-				nomePP = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Urbana Simples"));
+				nomePP = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana Simples"));
 			}
 			else if(biketype == "Corrida")
 			{
 				indexBB = 2;
-				nomePP = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Corrida"));
+				nomePP = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Corrida"));
 			}
 			else if(biketype == "Infantil")
 			{
 				indexBB = 3;
-				nomePP = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeLastId("Infantil"));
+				nomePP = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Infantil"));
 			}
 
 			if(indexBB == -1)
@@ -1568,13 +1568,13 @@ void adicionaBike(Sistema & ER) {
 	}
 
 	if(biketype == "Urbana")
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana");
 	else if(biketype == "Urbana Simples")
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana Simples");
 	else if(biketype == "Corrida")
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Corrida");
 	else
-		ER.getPontosPartilha().at(0)->setBikeLastIdFoward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Infantil");
 
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->adicionaBike(bc);
@@ -1668,7 +1668,7 @@ void removeBike(Sistema & ER) {
 		}
 	}
 
-	ER.getPontosPartilha().at(0)->setBikeLastIdBackward(biketype);
+	ER.getPontosPartilha().at(0)->setBikeNextIdBackward(biketype);
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->removeBike(bc);
 
@@ -1704,7 +1704,7 @@ void removeUT(Sistema & ER) {
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++)
 	{
-		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getUtenteNome();
+		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getNome();
 		cout << setw(10) << ER.getUtentes().at(i)->getId();
 		cout << setw(14) <<ER.getUtentes().at(i)->getTipoUtente();
 		cout << '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX();
@@ -1729,7 +1729,7 @@ void removeUT(Sistema & ER) {
 
 			for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
 			{
-				if(ER.getUtentes().at(i)->getUtenteNome() == nomeUT)
+				if(ER.getUtentes().at(i)->getNome() == nomeUT)
 					indexUT = i;
 			}
 
@@ -1866,7 +1866,7 @@ void menu_interface(Sistema &ER){
 
 	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++)
 	{
-		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getUtenteNome();
+		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getNome();
 		cout << setw(10) << ER.getUtentes().at(i)->getId();
 		cout << setw(14) <<ER.getUtentes().at(i)->getTipoUtente();
 		cout << '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX();
@@ -1908,7 +1908,7 @@ void menu_interface(Sistema &ER){
 		}
 	};
 
-	if(attempts > 3)
+	if(attempts >= 3)
 	{
 		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
 		system("pause");
@@ -2068,7 +2068,7 @@ void admin_interface(Sistema &ER) {
 		}
 	};
 
-	if(attempts > 3)
+	if(attempts >= 3)
 	{
 		cout << endl << "Acesso negado: número de tentativas esgotado" << endl << endl;
 		system("pause");
