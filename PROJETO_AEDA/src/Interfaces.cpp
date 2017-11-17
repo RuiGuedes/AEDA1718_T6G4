@@ -2,8 +2,8 @@
 #include "Sistema.h"
 #include "Exceções.h"
 
-/* Procura um valor xnum vetor vde elementos comparáveiscom os operadores de comparação.
- * Retorna o índice da primeira ocorrência de xem v, se encontrar; senão, retorna -1.
+/* Procura um valor x num vetor v de elementos comparáveis com os operadores de comparação.
+ * Retorna o índice da primeira ocorrência de x em v, se encontrar; senão, retorna -1.
  */
 template <class T>
 int SequentialSearch(const vector<T> &v, T x)
@@ -27,7 +27,7 @@ void admin_interface(Sistema &BS);
 /////////////////////////////////////
 vector<int> ExtraData(Sistema &ER,int index) {
 
-	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao ponto de partilha com indicie = index
+	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao ponto de partilha com indice = index
 	vector<double> distancias;
 	vector<int> indices;
 
@@ -75,7 +75,7 @@ bool valid_number_double(string number)
 
 bool valid_word(string word)
 {
-	//Verifica se é a string não contem numeros
+	//Verifica se é string e não contem numeros
 	for (unsigned int i = 0; i < word.size(); i++){
 		if (isdigit(word.at(i)))
 			return false;
@@ -90,6 +90,26 @@ bool valid_bike(string bike)
 		return false;
 
 	return true;
+}
+
+void mensagemInicial(){
+	//Informacao inicial apresentadada ao utilizador
+	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
+	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
+	cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
+	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
+	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+}
+
+int ExistID(Sistema & sys, int identificacao) {
+
+	for(unsigned int i = 0; i < sys.getUtentes().size() ; i++)
+	{
+		if(sys.getUtentes().at(i)->getId() == identificacao)
+			return i;
+	}
+
+	return -1;
 }
 
 
@@ -113,7 +133,7 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
 	tamanho = ER.getPontosPartilha().at(index)->getBikes().at(value).size();
 
-	//Guarda num vetor os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
+	//Guarda os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
 	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
 	{
 		if(i != index)
@@ -173,12 +193,7 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
 void registo_utente(Sistema & ER){
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	cout << "Regista novo utente:" << endl << endl;
 
@@ -208,7 +223,7 @@ void registo_utente(Sistema & ER){
 	while(1)
 	{
 		try{
-			cout << endl << "Introduza uma opcao (1-2): ";
+			cout << endl << "Introduza uma opção (1-2): ";
 			cin >> option;
 			cin.ignore(1000,'\n');
 			if(valid_number(option) == false)
@@ -237,9 +252,9 @@ void registo_utente(Sistema & ER){
 	else
 		tipoUtente = "Socio";
 
-	cout << endl << "Localizacao: " << endl << endl;
+	cout << endl << "Localização: " << endl << endl;
 
-	cout << "Indique as cordenadas GPS:" << endl;
+	cout << "Indique as coordenadas GPS:" << endl;
 
 	while(1)
 	{
@@ -306,16 +321,11 @@ void registo_utente(Sistema & ER){
 
 void infoER(Sistema &ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 	cout << "Informações:" << endl << endl;
 
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
-	cout << "Numero total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
+	cout << "Número total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
 	cout << "Pontos de Partilha:" << endl << endl;
 	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
 	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
@@ -340,7 +350,7 @@ void infoER(Sistema &ER) {
 
 	cout << endl;
 
-	cout << "Numero total de utentes registados: " << ER.getUtentes().size() << endl << endl;
+	cout << "Número total de utentes registados: " << ER.getUtentes().size() << endl << endl;
 
 	cout << left << setw(15) << "  Nome" << setw(6) << "ID" << setw(27) << "Tipo de utente" << setw (20) << "GPS" << endl;
 
@@ -385,13 +395,7 @@ void infoER(Sistema &ER) {
 /////////////////////////////////////////////////
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
+	mensagemInicial();
 
 	if(ER.getUtentes().at(index)->getAvailable() == false)
 	{
@@ -423,7 +427,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		while(1)
 		{
 			try{
-				cout << endl << "Introduza uma opcao [1-4]: ";
+				cout << endl << "Introduza uma opção [1-4]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
@@ -519,7 +523,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		while(1)
 		{
 			try{
-				cout << endl << "Mes [1-12]: ";
+				cout << endl << "Mês [1-12]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
@@ -597,7 +601,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 		int idPP {};
 		vector<string> bikesType;
 
-		//Verifica se tem o tipo de bicleta pretendida por ordem de distancia
+		//Verifica se tem o tipo de bicicleta pretendida por ordem de distância
 		for (unsigned int i=0 ; i < distancias.size(); i++)
 		{
 			bikesType = ER.getPontosPartilha().at(distancias.at(i))->getBikeTypes();
@@ -614,7 +618,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 		if(idPP == -1)
 		{
-			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponivel." << endl << endl;
+			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponível." << endl << endl;
 		}
 		else
 		{
@@ -633,12 +637,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			cout << endl;
 			system("cls");
 
-			//Informacao inicial apresentadada ao utilizador
-			cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-			cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-			cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-			cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-			cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+			mensagemInicial();
 
 			cout << "Aluga Bicicleta: " << endl << endl;
 			cout << "Resumo do aluger: " << endl << endl;
@@ -662,12 +661,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 void devolveBike(Sistema &ER,int index) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	if(ER.getUtentes().at(index)->getAvailable() == true)
 	{
@@ -711,28 +705,31 @@ void devolveBike(Sistema &ER,int index) {
 
 }
 
-int ExistID(Sistema & sys, int identificacao) {
+void displayHistoric(Sistema &ER,int index) {
 
-	for(unsigned int i = 0; i < sys.getUtentes().size() ; i++)
+	mensagemInicial();
+
+	cout << "Histórico: " << endl << endl;
+
+	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getHistorico().size(); i++)
 	{
-		if(sys.getUtentes().at(i)->getId() == identificacao)
-			return i;
+		ER.getUtentes().at(index)->getHistorico().at(i).displayUtilizacao();
+		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
+			cout << "Montante: " << ER.getUtentes().at(index)->getHistorico().at(i).getPrice() << "€" << endl;
+		cout << endl;
 	}
 
-	return -1;
+	system("pause");
+	system("cls");
+
 }
 
 void displayPagPendentes(Sistema &ER,int index){
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-		cout << "Neste tipo de utente [Regular] não é possivel ter pagamentos pendentes !" << endl << endl;
+		cout << "Neste tipo de utente [Regular] não é possível ter pagamentos pendentes !" << endl << endl;
 	else
 	{
 		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
@@ -756,108 +753,9 @@ void displayPagPendentes(Sistema &ER,int index){
 	return;
 }
 
-void displayHistoric(Sistema &ER,int index) {
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
-	cout << "Histórico: " << endl << endl;
-
-	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getHistorico().size(); i++)
-	{
-		ER.getUtentes().at(index)->getHistorico().at(i).displayUtilizacao();
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-			cout << "Montante: " << ER.getUtentes().at(index)->getHistorico().at(i).getPrice() << "€" << endl;
-		cout << endl;
-	}
-
-	system("pause");
-	system("cls");
-
-}
-
-void updateLocation(Sistema &ER,int index) {
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Localizacao: " << endl << endl;
-
-	cout << "Localização atual: (" << ER.getUtentes().at(index)->getLocalizacao().getX() << " , " << ER.getUtentes().at(index)->getLocalizacao().getY();
-	cout << ")" << endl << endl;
-
-	cout << "Indique as novas cordenadas GPS:" << endl;
-
-	string option;
-	double coordX { }, coordY { };
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada X: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordX = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada Y: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordY = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	Localizacao spot;
-	spot.setX(coordX);
-	spot.setY(coordY);
-
-	ER.getUtentes().at(index)->setUtenteLocation(spot);
-
-	cout << endl << "O utente encontra-se agora num novo local de coordenadas (" << coordX << " , " << coordY << ")" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
 void efetuaPag(Sistema &ER,int index) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 	cout << "Efetua pagamento" << endl << endl;
 
 	unsigned int ano{}, mes{};
@@ -1060,15 +958,74 @@ void efetuaPag(Sistema &ER,int index) {
 	return;
 }
 
+void updateLocation(Sistema &ER,int index) {
+
+	mensagemInicial();
+
+	cout << "Localização atual: (" << ER.getUtentes().at(index)->getLocalizacao().getX() << " , " << ER.getUtentes().at(index)->getLocalizacao().getY();
+	cout << ")" << endl << endl;
+
+	cout << "Indique as novas coordenadas GPS:" << endl;
+
+	string option;
+	double coordX { }, coordY { };
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada X: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordX = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada Y: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordY = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	Localizacao spot;
+	spot.setX(coordX);
+	spot.setY(coordY);
+
+	ER.getUtentes().at(index)->setUtenteLocation(spot);
+
+	cout << endl << "O utente encontra-se agora num novo local de coordenadas (" << coordX << " , " << coordY << ")" << endl << endl;
+
+	system("pause");
+	system("cls");
+	return;
+
+}
+
 void NearestPP(Sistema &ER,int index) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-	cout << "Pontos de partilha mais próximo: " << endl << endl;
+	mensagemInicial();
+	cout << "Pontos de partilha mais próximos: " << endl << endl;
 
 	vector<double> distancias;
 
@@ -1104,13 +1061,7 @@ void NearestPP(Sistema &ER,int index) {
 
 void mudaTipoUT(Sistema &ER,int index){
 
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 	cout << "Muda tipo de utente" << endl << endl;
 
 	string option;
@@ -1118,7 +1069,7 @@ void mudaTipoUT(Sistema &ER,int index){
 
 	if(ER.getUtentes().at(index)->getAvailable() == false)
 	{
-		cout << "Não é possível efetuar mudar o tipo de utente uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
+		cout << "Não é possível mudar o tipo de utente uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
 
 		system("pause");
 		system("cls");
@@ -1189,14 +1140,9 @@ void mudaTipoUT(Sistema &ER,int index){
 //////////////////////////////////////////////////
 void addPP(Sistema & ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
-	cout << "Adiciona Ponto Partilha:" << endl << endl;
+	cout << "Adiciona Ponto de Partilha:" << endl << endl;
 
 	string nome,locname;
 	int value {};
@@ -1237,7 +1183,7 @@ void addPP(Sistema & ER) {
 	Localizacao spot{};
 	bool diffloc {true};
 
-	cout << endl << "Localizacao: " << endl << endl;
+	cout << endl << "Localização: " << endl << endl;
 
 	while(1)
 	{
@@ -1278,7 +1224,7 @@ void addPP(Sistema & ER) {
 		do
 		{
 			newcord = true;
-			cout << "Indique as cordenadas GPS:" << endl;
+			cout << "Indique as coordenadas GPS:" << endl;
 
 			while(1)
 			{
@@ -1324,7 +1270,7 @@ void addPP(Sistema & ER) {
 				if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
 				{
 					newcord = false;
-					cout << "Essas coordenadas já pertence à localização: " << ER.getPontosPartilha().at(i)->getLocal().getNome() << endl << endl;
+					cout << "Essas coordenadas já pertencem à localização: " << ER.getPontosPartilha().at(i)->getLocal().getNome() << endl << endl;
 					break;
 				}
 			}
@@ -1380,10 +1326,10 @@ void addPP(Sistema & ER) {
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
 		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
 
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana");
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana Simples");
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Corrida");
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Infantil");
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -1395,14 +1341,9 @@ void addPP(Sistema & ER) {
 
 void removePP(Sistema & ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
-	cout << "Remove Ponto Partilha:" << endl << endl;
+	cout << "Remove Ponto de Partilha:" << endl << endl;
 
 	string nomePP;
 	int indexPP {-1};
@@ -1422,7 +1363,7 @@ void removePP(Sistema & ER) {
 	while(1)
 	{
 		try {
-			cout << "Nome do Ponto Partilha: " ;
+			cout << "Nome do Ponto de Partilha: " ;
 			//cin >> nomePP;
 			getline(cin,nomePP);
 			if(valid_word(nomePP) == false)
@@ -1464,12 +1405,7 @@ void removePP(Sistema & ER) {
 
 void adicionaBike(Sistema & ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	cout << "Adiciona bicicleta: " << endl << endl;
 
@@ -1485,7 +1421,7 @@ void adicionaBike(Sistema & ER) {
 	while(1)
 	{
 		try {
-			cout << "Nome do Ponto Partilha: " ;
+			cout << "Nome do Ponto de Partilha: " ;
 			getline(cin,nomePP);
 			//cin >> nomePP;
 			if(valid_word(nomePP) == false)
@@ -1518,7 +1454,7 @@ void adicionaBike(Sistema & ER) {
 
 	if(ER.getPontosPartilha().at(indexPP)->getCapacidade() == numberbikes)
 	{
-		cout << "A capacidade deste ponto de partilha já foi alcancada ! Tente adicionar a outro ponto de partilha." << endl << endl;
+		cout << "A capacidade deste ponto de partilha já foi alcançada ! Tente adicionar a outro ponto de partilha." << endl << endl;
 
 		system("pause");
 		system("cls");
@@ -1568,13 +1504,13 @@ void adicionaBike(Sistema & ER) {
 	}
 
 	if(biketype == "Urbana")
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana");
 	else if(biketype == "Urbana Simples")
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Urbana Simples");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana Simples");
 	else if(biketype == "Corrida")
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Corrida");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Corrida");
 	else
-		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Infantil");
+		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Infantil");
 
 
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
@@ -1590,12 +1526,7 @@ void adicionaBike(Sistema & ER) {
 
 void removeBike(Sistema & ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	cout << "Remove bicicleta " << endl << endl;
 
@@ -1635,7 +1566,7 @@ void removeBike(Sistema & ER) {
 		}
 	}
 
-	//Verifica se o nome da bicicleta a remover e verifica se existe
+	//Verifica se o nome da bicicleta a remover existe
 	while(1)
 	{
 		try {
@@ -1683,12 +1614,7 @@ void removeBike(Sistema & ER) {
 
 void removeUT(Sistema & ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	cout << "Remove utente " << endl << endl;
 
@@ -1784,12 +1710,7 @@ void openInterface(Sistema & ER){
 
 	do
 	{
-		//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+		mensagemInicial();
 
 		cout << "1 - Registar " << endl;
 		cout << "2 - Entrar" << endl;
@@ -1799,7 +1720,7 @@ void openInterface(Sistema & ER){
 		while(1)
 		{
 			try{
-				cout << endl << "Introduza uma opcao (1-4): ";
+				cout << endl << "Introduza uma opção (1-4): ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
@@ -1848,13 +1769,7 @@ void openInterface(Sistema & ER){
 
 void menu_interface(Sistema &ER){
 
-
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	int attempts { 0 };
 	int identificacao { };
@@ -1924,12 +1839,7 @@ void menu_interface(Sistema &ER){
 
 	do
 	{
-		//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+		mensagemInicial();
 
 		cout << "Bem-Vindo !" << endl << endl;
 
@@ -1948,7 +1858,7 @@ void menu_interface(Sistema &ER){
 		{
 			try {
 
-				cout << endl << "Introduza uma opcao (1-10): ";
+				cout << endl << "Introduza uma opção (1-10): ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 
@@ -2035,13 +1945,7 @@ void menu_interface(Sistema &ER){
 
 void admin_interface(Sistema &ER) {
 
-	//Informacao inicial apresentadada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
-
+	mensagemInicial();
 
 	int attempts { 0 };
 	string info;
@@ -2084,12 +1988,7 @@ void admin_interface(Sistema &ER) {
 
 	do
 	{
-		//Informacao inicial apresentadada ao utilizador
-		cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-		cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-		cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-		cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-		cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+		mensagemInicial();
 
 		cout << "Administração" << endl << endl;
 
@@ -2106,7 +2005,7 @@ void admin_interface(Sistema &ER) {
 		{
 			try {
 
-				cout << endl << "Introduza uma opcao (1-7): ";
+				cout << endl << "Introduza uma opção (1-7): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -2134,7 +2033,7 @@ void admin_interface(Sistema &ER) {
 		};
 
 
-		//Opcões possiveis apresentadas no menu
+		//Opcões possíveis apresentadas no menu
 		switch (value)
 		{
 		case 1:

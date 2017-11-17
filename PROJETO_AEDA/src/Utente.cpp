@@ -83,7 +83,7 @@ void Utente::pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes) {
 			//Soma as horas de uso do respetivo mes
 			numUseHours += getUtilizacoes().at(i).getUseTime();
 
-			//Verifica o tipo de prestacao a ser aplicada
+			//Verifica o tipo de prestação a ser aplicada
 			unsigned int tmp{};
 
 			if(getUtilizacoes().at(i).getBikeType() == "Urbana")
@@ -100,7 +100,7 @@ void Utente::pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes) {
 			else if(prestacao < tmp)
 				prestacao = tmp;
 
-			//Adiciona utilização ao historico e remove-a das utilizações
+			//Adiciona utilização ao histórico e remove-a das utilizações
 			historico.push_back(getUtilizacoes().at(i));
 			utilizacoes.erase(utilizacoes.begin() + i);
 			i--;
@@ -142,12 +142,12 @@ void Utente::pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes) {
 	else if(mes == 12)
 		mesName = "Dezembro";
 
-	cout << "Montante a pagar referente ao mes " << mesName << " do ano " << ano << ": ";
+	cout << "Montante a pagar referente ao mês " << mesName << " do ano " << ano << ": ";
 
 	if(numUseHours >= 20)
 		prestacao = prestacao*0.9;
 
-	cout << prestacao << endl << endl;
+	cout << prestacao << "€" << endl << endl;
 
 	return;
 }

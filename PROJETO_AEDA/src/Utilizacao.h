@@ -11,12 +11,12 @@ public:
 	friend ostream & operator<<(ostream & o, const Data & d);
 	friend istream & operator>>(istream & i, Data & d);
 
-	//Metodos Get
+	//Métodos Get
 	unsigned int getDia() const;
 	unsigned int getMes() const;
 	unsigned int getAno() const;
 
-	//Metodos Set
+	//Métodos Set
 	void setDia(unsigned int d);
 	void setMes(unsigned int m);
 	void setAno(unsigned int a);
@@ -43,14 +43,14 @@ private:
 	string pontoPartilha;
 	string localizacao;
 public:
-	Utilizacao(); // necessario para o overload do operador de extracao na classe utente
+	Utilizacao(); // necessário para o overload do operador de extração na classe utente
 	Utilizacao(string bikeType, unsigned int numHours, Data d);
 	Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc);
 	friend ostream & operator <<(ostream & o, const Utilizacao & u);
 	friend istream & operator >>(istream & i, Utilizacao & u);
 	void displayUtilizacao();
 
-	//Metodos Get
+	//Métodos Get
 	Data getData() const;
 	unsigned int getUseTime() const;
 	string getBikeType() const;

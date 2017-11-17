@@ -13,12 +13,12 @@ public:
 	friend ostream & operator <<(ostream & o, const Localizacao & l);
 	friend istream & operator >>(istream & i, Localizacao & l);
 
-	//Metodos Get
+	//Métodos Get
 	string getNome() const;
 	double getX() const;
 	double getY() const;
 
-	//Metodos Set
+	//Métodos Set
 	void setNome(string nome);
 	void setX(double x);
 	void setY(double y);

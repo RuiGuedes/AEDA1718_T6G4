@@ -11,7 +11,7 @@ public:
 	friend ostream & operator <<(ostream & o, const Bicicleta & b);
 	friend istream & operator >>(istream & i, Bicicleta & b);
 
-	//Metodos Get
+	//Métodos Get
 	string getBikeType() const;
 	string getBikeName() const;
 };

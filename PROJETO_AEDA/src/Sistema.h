@@ -14,12 +14,12 @@ class Sistema {
 	vector<Utente* > utentes;
 public:
 	Sistema() {}
-	void addPontoPartilha(PontoPartilha* spot); 	 //Criacao de uma nova loja
+	void addPontoPartilha(PontoPartilha* spot); 	 //Criação de uma nova loja
 	void addNewUtente(Utente* utente);	 		 	//Adiciona um novo utente
 	void removePonto(int indexPP);
 	void removeUtente(int indexUT);
 
-	//Metodos Get
+	//Métodos Get
 	vector<Utente* > getUtentes();
 	vector<PontoPartilha* > getPontosPartilha();
 	virtual string getNome() const {return "";};
@@ -31,7 +31,7 @@ class Utente : public Sistema{
 	int id;
 	string nome;
 	string tipoUtente;
-	Localizacao local;		//Localizacao é uma classe
+	Localizacao local;		//Localização é uma classe
 	Bicicleta* bike;		//Bicicleta é uma classe
 	vector<Utilizacao> utilizacoes;	//Apenas associadas aos sócios
 	vector<Utilizacao> historico;
@@ -40,14 +40,14 @@ public:
 	Utente();
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
 	void alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP);
-	int removeBicicleta(Sistema &ER, vector<int> index_distancias); 			//Retorna o indice do ponto de partilha afetado
+	int removeBicicleta(Sistema &ER, vector<int> index_distancias); 			//Retorna o índice do ponto de partilha afetado
 	void devolveBicicleta();
 	void pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes);
 	void updateHistoric();
 	friend ostream & operator <<(ostream & o, const Utente & u);
 	friend istream & operator >>(istream & i, Utente & u);
 
-	//Metodos Get
+	//Métodos Get
 	static int getLastId();
 	int getId() const;
 	string getNome() const;
@@ -58,12 +58,12 @@ public:
 	bool getAvailable() const;
 	vector<Utilizacao> getHistorico();
 
-	//Metodos Set
+	//Métodos Set
 	static void setLastId();
 	void setIDBackward();
 	void setID(int identificacao);
 	void setUtenteLocation(Localizacao spot);
-	void setTipoUtente(string tipo);  	//Necessita de pagar dividas anteriores antes de poder mudar de tipo
+	void setTipoUtente(string tipo);  	//Necessita de pagar dívidas anteriores antes de poder mudar de tipo
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
@@ -137,14 +137,14 @@ public:
 	Localizacao getLocal() const;
 	string getNome() const { return nome; }
 	int getCapacidade() const;
-	vector<int> getNumberOfBikes() const; // numero de bicicletas de cada tipo
+	vector<int> getNumberOfBikes() const; // número de bicicletas de cada tipo
 	vector <string> getBikeTypes();
 	vector <vector<Bicicleta *> > getBikes() const;
 
-	//Metodos Set
+	//Métodos Set
 	void setNome(string name);
 	static void setBikeNextId(string bike,const int value);
-	static void setBikeNextIdFoward(string bike);
+	static void setBikeNextIdForward(string bike);
 	static void setBikeNextIdBackward(string bike);
 };
 
@@ -162,7 +162,7 @@ inline istream& operator >>(istream & i, PontoPartilha & p)
 	vector<Bicicleta *> v1,v2,v3,v4;
 	vector <vector<Bicicleta *> > bikes{v1,v2,v3,v4};
 
-	Bicicleta * b; //apontador generico apenas para reservar espaco no vetor
+	Bicicleta * b; //apontador genérico apenas para reservar espaço no vetor
 
 	getline(i,p.nome,'/');
 	i >> p.local >> b1 >> p.capacidade >> b2 >> u >> b3 >> uc >> b4 >> c >> b5 >> inf >> b6;
