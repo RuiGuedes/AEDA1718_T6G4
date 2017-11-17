@@ -1576,6 +1576,7 @@ void adicionaBike(Sistema & ER) {
 	else
 		ER.getPontosPartilha().at(0)->setBikeNextIdFoward("Infantil");
 
+
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->adicionaBike(bc);
 
