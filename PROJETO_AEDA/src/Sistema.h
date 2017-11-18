@@ -8,14 +8,13 @@
 class Utente;
 class PontoPartilha;
 
-
 class Sistema {
 	vector<PontoPartilha* > pontosPartilha;
 	vector<Utente* > utentes;
 public:
 	Sistema() {}
-	void addPontoPartilha(PontoPartilha* spot); 	 //Criação de uma nova loja
-	void addNewUtente(Utente* utente);	 		 	//Adiciona um novo utente
+	void addPontoPartilha(PontoPartilha* spot);		/**< Criação de uma nova loja */
+	void addNewUtente(Utente* utente);		/**< Adiciona um novo utente */
 	void removePonto(int indexPP);
 	void removeUtente(int indexUT);
 
@@ -27,23 +26,21 @@ public:
 
 
 class Utente : public Sistema{
-	static int lastId;
-	int id;
-	string nome;
-	string tipoUtente;
-	Localizacao local;		//Localização é uma classe
-	Bicicleta* bike;		//Bicicleta é uma classe
-	vector<Utilizacao> utilizacoes;	//Apenas associadas aos sócios
-	vector<Utilizacao> historico;
-	bool disponivel = true;
+	static int lastId;		/**< Numero de Identificacao do ultimo utente registado */
+	int id;					/**< Numero de Identificacao do utente */
+	string nome;			/**< Nome do utente */
+	string tipoUtente;		/**< Tipo do utente (Socio ou Regular) */
+	Localizacao local;		/**< Localizacao atual do utente */
+	Bicicleta* bike;		/**< Bicicleta que o utente esta a usar, caso nao esteja a usar nenhuma, o valor de bike = 0 */
+	vector<Utilizacao> utilizacoes;	/**<Apenas associadas aos sócios, vetor de utilizacoes por pagar */
+	vector<Utilizacao> historico;	/**< Utilizacoes liquidadas do utente */
+	bool disponivel = true;			/**< Se o utente esta a usar uma bicicleta disponivel = false, caso contrario disponivel = true */
 public:
-	Utente();
+	Utente();	/**< Necessário para o overload do operador de extração na classe utente*/
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
-	void alugaBicicleta(Sistema &ER,string bikeType, Utilizacao ut, int idPP);
-	int removeBicicleta(Sistema &ER, vector<int> index_distancias); 			//Retorna o índice do ponto de partilha afetado
-	void devolveBicicleta();
-	void pagaMensalidade(Sistema &ER, unsigned int ano, unsigned int mes);
-	void updateHistoric();
+	void alugaBicicleta(string bikeType, Utilizacao ut, int idPP);
+	int removeBicicleta(vector<int> index_distancias);
+	void pagaMensalidade(unsigned int ano, unsigned int mes);
 	friend ostream & operator <<(ostream & o, const Utente & u);
 	friend istream & operator >>(istream & i, Utente & u);
 
@@ -63,13 +60,17 @@ public:
 	void setIDBackward();
 	void setID(int identificacao);
 	void setUtenteLocation(Localizacao spot);
-	void setTipoUtente(string tipo);  	//Necessita de pagar dívidas anteriores antes de poder mudar de tipo
+	void setTipoUtente(string tipo);	/**<Necessita de pagar dívidas anteriores antes de poder mudar de tipo (so se for socio)*/
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
 	void setUtilizacoes(Utilizacao ut);
 };
 
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Utente nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream& operator <<(ostream & o, const Utente & u)
 {
 	o << u.nome << ',' <<  u.tipoUtente << ',' << u.local << ',' ;
@@ -87,6 +88,10 @@ inline ostream& operator <<(ostream & o, const Utente & u)
 	return o;
 }
 
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utente,
+ * de modo a recriar o sistema da ultima execucao.
+ */
 inline istream& operator >>(istream & i, Utente & u)
 {
 	char b1, b2, b3, b4, b5;
@@ -114,16 +119,16 @@ inline istream& operator >>(istream & i, Utente & u)
 
 
 class PontoPartilha : public Sistema {
-	Localizacao local;
-	unsigned int capacidade;
-	vector <vector<Bicicleta *> > bicicletas;
-	string nome;
-	static int UbikeNextID;
-	static int USbikeNextID;
-	static int CbikeNextID;
-	static int IbikeNextID;
+	Localizacao local;			/**< Localizacao do ponto de partilha */
+	unsigned int capacidade;	/**< Capacidade do ponto de partilha */
+	vector <vector<Bicicleta *> > bicicletas;	/**< Bicicletas existentes no ponto de partilha */
+	string nome;				/**< Nome do ponto de partilha */
+	static int UbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Urbana */
+	static int USbikeNextID;	/**< Numero de identificacao da proxima bicicleta do tipo Urbana Simples */
+	static int CbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Corrida */
+	static int IbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Infantil */
 public:
-	PontoPartilha();
+	PontoPartilha();	/**< Necessário para o overload do operador de extração na classe utente*/
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
 
 	void limpaVectorBike();
@@ -135,7 +140,7 @@ public:
 	//Metodos Get
 	static int getBikeNextId(string bike);
 	Localizacao getLocal() const;
-	string getNome() const { return nome; }
+	string getNome() const;
 	int getCapacidade() const;
 	vector<int> getNumberOfBikes() const; // número de bicicletas de cada tipo
 	vector <string> getBikeTypes();
@@ -148,6 +153,10 @@ public:
 	static void setBikeNextIdBackward(string bike);
 };
 
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo PontoPartilha nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream& operator <<(ostream & o, const PontoPartilha & p)
 {
 	o << p.nome << '/' << p.local << '/' << p.capacidade << '[' << p.bicicletas.at(0).size() << ','
@@ -155,6 +164,10 @@ inline ostream& operator <<(ostream & o, const PontoPartilha & p)
 	return o;
 }
 
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo PontoPartilha,
+ * de modo a recriar o sistema da ultima execucao.
+ */
 inline istream& operator >>(istream & i, PontoPartilha & p)
 {
 	char b1, b2, b3, b4, b5, b6;

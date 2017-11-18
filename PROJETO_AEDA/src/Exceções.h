@@ -12,6 +12,13 @@ template<class T>
 class AberturaFalhada {
 	T ficheiro;
 public:
+	/**
+	 * Contrutor da classe AberturaFalhada
+	 */
 	AberturaFalhada(T file) { ficheiro = file;}
+	/**
+	 * Método get que o nome do ficheiro cuja abertura falhou
+	 * @return nome do ficheiro
+	 */
 	T getFicheiro() const {return ficheiro;}
 };

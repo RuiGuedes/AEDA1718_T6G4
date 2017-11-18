@@ -3,11 +3,13 @@
 #include "Includes.h"
 
 class Localizacao {
-	string nome;
-	double x, y;
+	string nome;	/**< Nome da localizacao */
+	double x;		/**< Coordenadas x da localizacao */
+	double y;		/**< Coordenadas y da localizacao */
 public:
-	Localizacao();  //default
+	Localizacao();	/**< Necessário para o overload do operador de extração na classe utente*/
 	Localizacao(string nome, double x, double y);
+
 	double distancia(Localizacao local) const;
 	Localizacao & operator =(Localizacao & l);
 	friend ostream & operator <<(ostream & o, const Localizacao & l);
@@ -25,12 +27,20 @@ public:
 
 };
 
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Localizacao nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream& operator <<(ostream & o, const Localizacao & l)
 {
 	o << l.nome << '/' << l.x << '/' <<  l.y;
 	return o;
 }
 
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Localizacao,
+ * de modo a recriar o sistema da ultima execucao.
+ */
 inline istream& operator >>(istream & i, Localizacao & l)
 {
 	char b1;

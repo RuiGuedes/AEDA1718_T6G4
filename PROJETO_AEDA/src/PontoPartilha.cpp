@@ -5,6 +5,9 @@ int PontoPartilha::USbikeNextID;
 int PontoPartilha::CbikeNextID;
 int PontoPartilha::IbikeNextID;
 
+/**
+ * Construtor padrao da classe PontoPartilha
+ */
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
 	vector<Bicicleta *> v1,v2,v3,v4;
@@ -14,6 +17,12 @@ PontoPartilha::PontoPartilha(){
 	bicicletas.push_back(v4);
 }
 
+/**
+ * Construtor da classe PontoPartilha
+ * @param name nome do ponto de partilha
+ * @param spot localizacao do ponto de partilha
+ * @param storage capacidade do ponto de partilha
+ */
 PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) {
 	local = spot;
 	capacidade = storage;
@@ -25,6 +34,10 @@ PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) 
 	bicicletas.push_back(v4);
 }
 
+/**
+ * Remove a bicicleta bike do ponto de partilha
+ * @param bike apontador de bicicleta que se pretende remover
+ */
 void  PontoPartilha::removeBike(Bicicleta *bike) {
 
 	vector<Bicicleta *> bikes;
@@ -50,6 +63,10 @@ void  PontoPartilha::removeBike(Bicicleta *bike) {
 
 }
 
+/**
+ * Adiciona a bicicleta bike do ponto de partilha
+ * @param bike apontador de bicicleta que se pretende adicionar
+ */
 void PontoPartilha::adicionaBike(Bicicleta* bike) {
 
 	int indicator;
@@ -70,6 +87,9 @@ void PontoPartilha::adicionaBike(Bicicleta* bike) {
 	return;
 }
 
+/**
+ * Limpa o vetor das bicicletas do ponto de partilha, de modo que o mesmo fica sem bicicletas
+ */
 void PontoPartilha::limpaVectorBike(){
 	bicicletas.at(0).clear();
 	bicicletas.at(1).clear();
@@ -82,6 +102,19 @@ void PontoPartilha::limpaVectorBike(){
 // METODOS GET //
 /////////////////
 
+/**
+ * @return Retorna o nome do ponto de partilha
+ */
+string PontoPartilha::getNome() const {
+	return nome;
+}
+
+/**
+ * Metodo usado para saber qual o numero da proxima bicicleta
+ *
+ * @param bike tipo de bicicleta
+ * @return Retorna o numero da proxima bicicleta do tipo "bike"
+ */
 int PontoPartilha::getBikeNextId(string bike) {
 
 	if(bike == "Urbana")
@@ -94,14 +127,30 @@ int PontoPartilha::getBikeNextId(string bike) {
 		return IbikeNextID;
 }
 
+/**
+ * @return Retorna a localizacao do ponto de partilha
+ */
 Localizacao PontoPartilha::getLocal() const {
 	return local;
 }
 
+/**
+ * @return Retorna a capacidade do ponto de partilha
+ */
 int PontoPartilha::getCapacidade() const {
 	return capacidade;
 }
 
+/**
+ * Retorna um vetor com a quantidade de cada tipo de bicicletas existentes no ponto de partilha
+ * O vetor e composto pelos 4 elementos segintes:
+ *  ->quantidade de bicicletas do tipo "Urbana"
+ *  ->quantidade de bicicletas do tipo "Urbana Simples"
+ *  ->quantidade de bicicletas do tipo "Corrida"
+ *  ->quantidade de bicicletas do tipo "Infantil"
+ *
+ * @return Retorna vetor de inteiros
+ */
 vector<int> PontoPartilha::getNumberOfBikes() const {
 
 	vector<int> number_bikes;
@@ -114,6 +163,9 @@ vector<int> PontoPartilha::getNumberOfBikes() const {
 	return number_bikes;
 }
 
+/**
+ * @return Retorna um vetor com os tipos de bicicletas existentes no ponto de partilha
+ */
 vector <string> PontoPartilha::getBikeTypes() {
 
 	vector <string> bikeTypes;
@@ -133,6 +185,9 @@ vector <string> PontoPartilha::getBikeTypes() {
 	return bikeTypes;
 }
 
+/**
+ * @return Retorna as bicicletas do ponto de partilha
+ */
 vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
 
 	return bicicletas;
@@ -142,10 +197,19 @@ vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
 // METODOS SET //
 /////////////////
 
+/**
+ * Altera o nome do ponto de partilha
+ * @param name novo nome
+ */
 void PontoPartilha::setNome(string name) {
 	nome = name;
 }
 
+/**
+ * Altera o numero de identificacao da proxima bicicleta
+ * @param bike tipo de bicicleta de que se pretende alterar o identificador
+ * @param value novo numero de identificacao
+ */
 void PontoPartilha::setBikeNextId(string bike, const int value){
 	if(bike == "Urbana")
 		UbikeNextID = value;
@@ -157,6 +221,10 @@ void PontoPartilha::setBikeNextId(string bike, const int value){
 		IbikeNextID = value;
 }
 
+/**
+ * Incrementa o numero de identificacao da proxima bicicleta
+ * @param bike tipo de bicicleta de que se pretende alterar o identificador
+ */
 void PontoPartilha::setBikeNextIdForward(string bike) {
 
 	if(bike == "Urbana")
@@ -169,6 +237,10 @@ void PontoPartilha::setBikeNextIdForward(string bike) {
 		IbikeNextID++;
 }
 
+/**
+ * Decrementa o numero de identificacao da proxima bicicleta
+ * @param bike tipo de bicicleta de que se pretende alterar o identificador
+ */
 void PontoPartilha::setBikeNextIdBackward(string bike) {
 
 	if(bike == "Urbana")

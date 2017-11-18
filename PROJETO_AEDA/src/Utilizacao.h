@@ -6,7 +6,7 @@ class Data {
 protected:
 	unsigned int dia, mes, ano;
 public:
-	Data();
+	Data();/**< Necessário para o overload do operador de extração na classe utente*/
 	Data(unsigned int dia,unsigned int mes,unsigned int ano);
 	friend ostream & operator<<(ostream & o, const Data & d);
 	friend istream & operator>>(istream & i, Data & d);
@@ -23,11 +23,19 @@ public:
 
 };
 
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Data nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream & operator<< (ostream & o, const Data & d){
 	o << d.dia << '/' << d.mes << '/' << d.ano;
 	return o;
 }
 
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Data,
+ * de modo a recriar o sistema da ultima execucao.
+ */
 inline istream & operator>> (istream & i, Data & d)
 {
 	char b1, b2;
@@ -38,13 +46,12 @@ inline istream & operator>> (istream & i, Data & d)
 class Utilizacao : protected Data{
 private:
 	Data data;
-	unsigned int useTime;
-	string bikeType;
-	string pontoPartilha;
-	string localizacao;
+	unsigned int useTime;/**< Numero de horas de uso da bicicleta*/
+	string bikeType;/**< Tipo de bicicleta*/
+	string pontoPartilha;/**< Nome do ponto de partilha onde a bicicleta foi alugada*/
+	string localizacao;/**< Nome da localizacao do ponto de partilha onde a bicicleta foi alugada*/
 public:
-	Utilizacao(); // necessário para o overload do operador de extração na classe utente
-	Utilizacao(string bikeType, unsigned int numHours, Data d);
+	Utilizacao(); /**< Necessário para o overload do operador de extração na classe utente*/
 	Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc);
 	friend ostream & operator <<(ostream & o, const Utilizacao & u);
 	friend istream & operator >>(istream & i, Utilizacao & u);
@@ -57,12 +64,20 @@ public:
 	double getPrice() const;
 };
 
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Utilizacao nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream& operator <<(ostream & o, const Utilizacao & u)
 {
 	o << u.bikeType << '-' <<  u.pontoPartilha << '-' <<  u.localizacao << '-' << u.useTime << '-' <<  u.data ;
 	return o;
 }
 
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utilizacao,
+ * de modo a recriar o sistema da ultima execucao.
+ */
 inline istream& operator >>(istream & i, Utilizacao & u)
 {
 	char b1;

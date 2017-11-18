@@ -2,8 +2,11 @@
 #include "Sistema.h"
 #include "Exceções.h"
 
-/* Procura um valor x num vetor v de elementos comparáveis com os operadores de comparação.
- * Retorna o índice da primeira ocorrência de x em v, se encontrar; senão, retorna -1.
+/**
+ * Procura um valor x num vetor v de elementos comparáveis com os operadores de comparação.
+ * @param v vetor de elementos
+ * @param x valor a procurar no vetor
+ * @return Retorna o índice da primeira ocorrência de x em v, se encontrar; senão, retorna -1.
  */
 template <class T>
 int SequentialSearch(const vector<T> &v, T x)
@@ -27,7 +30,7 @@ void admin_interface(Sistema &BS);
 /////////////////////////////////////
 vector<int> ExtraData(Sistema &ER,int index) {
 
-	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao ponto de partilha com indice = index
+	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao utente com indice = index
 	vector<double> distancias;
 	vector<int> indices;
 
@@ -626,7 +629,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			Utilizacao p(bikeType, numHours, d1,ER.getPontosPartilha().at(idPP)->getNome(),ER.getPontosPartilha().at(idPP)->getLocal().getNome());
 			double price {0};
 
-			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
+			ER.getUtentes().at(index)->alugaBicicleta(bikeType,p,idPP);
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
 			{
@@ -673,7 +676,7 @@ void devolveBike(Sistema &ER,int index) {
 
 	int index_pp {-1};
 
-	index_pp = ER.getUtentes().at(index)->removeBicicleta(ER,ExtraData(ER,index));
+	index_pp = ER.getUtentes().at(index)->removeBicicleta(ExtraData(ER,index));
 
 	cout << "Devolve bicicleta: " << endl << endl;
 	cout << "Resumo do último aluguer: " << endl << endl;
@@ -951,7 +954,7 @@ void efetuaPag(Sistema &ER,int index) {
 		};
 	}
 
-	ER.getUtentes().at(index)->pagaMensalidade(ER,ano,mes);
+	ER.getUtentes().at(index)->pagaMensalidade(ano,mes);
 
 	system("pause");
 	system("cls");
