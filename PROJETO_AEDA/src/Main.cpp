@@ -18,7 +18,7 @@ int main()
 	// Zona de inicialização do programa //
 	///////////////////////////////////////
 
-	//Informacao inicial apresentadada ao utilizador
+	//Informacao inicial apresentada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
 	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
