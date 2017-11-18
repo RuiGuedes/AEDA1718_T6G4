@@ -93,7 +93,7 @@ bool valid_bike(string bike)
 }
 
 void mensagemInicial(){
-	//Informacao inicial apresentadada ao utilizador
+	//Informação inicial apresentada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
 	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
 	cout << "#####   ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
@@ -640,7 +640,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			mensagemInicial();
 
 			cout << "Aluga Bicicleta: " << endl << endl;
-			cout << "Resumo do aluger: " << endl << endl;
+			cout << "Resumo do aluguer: " << endl << endl;
 
 			p.displayUtilizacao();
 
