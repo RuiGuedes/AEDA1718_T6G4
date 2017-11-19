@@ -1538,14 +1538,6 @@ void removePP(Sistema & ER) {
 
 	ER.removePonto(indexPP);
 
-//	for(unsigned int i = 0; i < 5; i++)
-//	{
-//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana");
-//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana Simples");
-//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Corrida");
-//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Infantil");
-//	}
-
 	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
 
 	system("pause");
@@ -1766,7 +1758,6 @@ void removeBike(Sistema & ER) {
 		}
 	}
 
-//	ER.getPontosPartilha().at(0)->setBikeNextIdBackward(biketype);
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->removeBike(bc);
 
