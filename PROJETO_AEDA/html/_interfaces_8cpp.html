@@ -147,7 +147,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta os passos necessarios para criacao de um novo ponto de partilha, pedindo para introduzir o nome, a localizacao e a capacidade. Invoca-se o metodo da classe <a class="el" href="class_sistema.html">Sistema</a> addPontoPartilha. Inclui 5 bicicletas de cada tipo no ponto de partilha criado. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta os passos necessarios para criacao de um novo ponto de partilha, pedindo para introduzir o nome, a localizacao e a capacidade. Invoca-se o metodo da classe <a class="el" href="class_sistema.html">Sistema</a> addPontoPartilha. Inclui 5 bicicletas de cada tipo no ponto de partilha criado. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -171,7 +171,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe <a class="el" href="class_ponto_partilha.html">PontoPartilha</a>, adicionaBike para adionar a bicicleta criada. Sea capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe <a class="el" href="class_ponto_partilha.html">PontoPartilha</a>, adicionaBike para adionar a bicicleta criada. Se a capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -195,7 +195,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Primeiramente pede ao utilizador que insira a senha ("1234") para aceder a opcoes administrativas. Apresenta no ecra os casos de utilizacao para aministrador escolher a opcao que pretende (7 opcoes no total). Depois de introduzida a opcao, e efetuado o procedimento que corresponde a opcao escolhida. Para cada uma das 6 primeiras opcoes e chamada uma outra funcao que executa o procedimento necessario para o que e pretendido, e a ultima opcao , 7 - Sair, retorna a funcao openInterfaces, onde esta foi invocada. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -235,7 +235,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta, numero de horas e data). E chamado o metodo da classe utente alugaBicicleta. O aluguer e feito no ponto de partilha mais proximo do utente. Caso o utente seja Regular e apresentado o total a pagar pelo aluguer. No final, chama a funcao Sistem_Manager para gerir as bicicletas. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta, numero de horas e data). E chamado o metodo da classe utente alugaBicicleta. O aluguer e feito no ponto de partilha mais proximo do utente. Caso o utente seja Regular e apresentado o total a pagar pelo aluguer. No final, chama a funcao Sistem_Manager para gerir as bicicletas. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
@@ -376,7 +376,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes por saldar, e depois do utente selecionar o ano, e-lhe apresentado os meses que pode tem em divida depos de selecionar chama-se o metodo da classe utente pagaMensalidade que calcula a mensalidade consoante o numero de horas de uso nesse mes (desconto) e consoante o tipo de bicicletas alugadas (ver tabela de mensalidades (infoER)). Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes por saldar, e depois do utente selecionar o ano, e-lhe apresentado os meses que pode tem em divida depos de selecionar chama-se o metodo da classe utente pagaMensalidade que calcula a mensalidade consoante o numero de horas de uso nesse mes (desconto) e consoante o tipo de bicicletas alugadas (ver tabela de mensalidades (infoER)). Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
@@ -516,7 +516,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Primeiramente imprime a informacao de todos os utentes e pede ao utente que insira um id para efetuar o login. Apresenta no ecra os casos de utilizacao para o utente escolher a opcao que pretende (10 opcoes no total). Depois de introduzida a opcao por parte do utente, e efetuado o procedimento que corresponde a opcao escolhida. Para cada uma das 9 primeiras opcoes e chamada uma outra funcao que executa o procedimento necessario para o que o utente pretende, e a ultima opcao , 10 - Logout, retorna a funcao openInterfaces, onde esta foi invocada. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -550,7 +550,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta o tipo de utente atual e pergunta para qual o tipo que pretende mudar, pede confirmacao da decisao e chama o metodo da classe utente setTipoUtente. Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta o tipo de utente atual e pergunta para qual o tipo que pretende mudar, pede confirmacao da decisao e chama o metodo da classe utente setTipoUtente. Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
@@ -610,7 +610,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta no ecra a pagina inicial do programa, e aguarda que o utente decida qual a opcao que deseja. Depois de introduzida a opcao por parte do utente, e efetuado o procedimento que corresponde a opcao escolhida. 1-Registar chama a funcao registaUtente; 2-Entrar chama a funcao menu_interfaces; 3- Administrador chama a funcao admin_interfaces; 4 - Sair retorna a funcao main, onde esta ,openinterfaces, e invocada. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -634,7 +634,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios para o registo (nome, tipo de utente e localizacao). Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios para o registo (nome, tipo de utente e localizacao). Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -658,7 +658,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo da classe <a class="el" href="class_ponto_partilha.html">PontoPartilha</a>, removeBike. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo da classe <a class="el" href="class_ponto_partilha.html">PontoPartilha</a>, removeBike. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -682,7 +682,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Pede o nome do ponto de partilha que se quer remover e chama o metodo da classe <a class="el" href="class_sistema.html">Sistema</a> removePonto. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Pede o nome do ponto de partilha que se quer remover e chama o metodo da classe <a class="el" href="class_sistema.html">Sistema</a> removePonto. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -706,7 +706,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta a informacao de todos os utentes registados (nome, id, tipo e localizacao) e pede para introduzir o id do utente que se pretende remover e chama o metodo removeUtente da classe <a class="el" href="class_sistema.html">Sistema</a>. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
   </table>
@@ -742,14 +742,14 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Procura um valor x num vetor v de elementos comparáveis com os operadores de comparação. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Procura um valor x num vetor v de elementos comparaveis com os operadores de comparacao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">v</td><td>vetor de elementos </td></tr>
     <tr><td class="paramname">x</td><td>valor a procurar no vetor </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Retorna o índice da primeira ocorrência de x em v, se encontrar; senão, retorna -1. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna o indice da primeira ocorrencia de x em v, se encontrar; senao, retorna -1. </dd></dl>
 
 </div>
 </div>
@@ -820,7 +820,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Mostar a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente. Chama o metodo da classe utente setUtenteLocation que altera a localizacao. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Mostar a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente. Chama o metodo da classe utente setUtenteLocation que altera a localizacao. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ER</td><td>sistema em execucao </td></tr>
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
@@ -845,7 +845,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Verifica se o nome da bicicleta é correto, não pode começar por um número </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Verifica se o nome da bicicleta e correto, nao pode comecar por um numero </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bike</td><td>string extraida da stream de input </td></tr>
   </table>
@@ -876,7 +876,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Retorna true se number e um numero e false se number contem alguma coisa para além de digitos </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna true se number e um numero e false se number contem alguma coisa para alem de digitos </dd></dl>
 
 </div>
 </div>
@@ -901,7 +901,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para além de digitos </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para alem de digitos </dd></dl>
 
 </div>
 </div>
@@ -920,7 +920,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Verifica se a string word não contem numeros </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Verifica se a string word nao contem numeros </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">word</td><td>string extraida da stream de input </td></tr>
   </table>

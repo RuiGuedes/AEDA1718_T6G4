@@ -3,10 +3,10 @@
 #include "Exceções.h"
 
 /**
- * Procura um valor x num vetor v de elementos comparáveis com os operadores de comparação.
+ * Procura um valor x num vetor v de elementos comparaveis com os operadores de comparacao.
  * @param v vetor de elementos
  * @param x valor a procurar no vetor
- * @return Retorna o índice da primeira ocorrência de x em v, se encontrar; senão, retorna -1.
+ * @return Retorna o indice da primeira ocorrencia de x em v, se encontrar; senao, retorna -1.
  */
 template <class T>
 int SequentialSearch(const vector<T> &v, T x)
@@ -69,7 +69,7 @@ vector<int> ExtraData(Sistema &ER,int index) {
  * Verifica se a string number contem apenas digitos ou se contem simbolos ou caracteres nao
  * aceites para a situacao.
  * @param number string extraida da stream de input
- * @return Retorna true se number e um numero e false se number contem alguma coisa para além de digitos
+ * @return Retorna true se number e um numero e false se number contem alguma coisa para alem de digitos
  */
 bool valid_number(string number)
 {
@@ -85,7 +85,7 @@ bool valid_number(string number)
  * Verifica se a string number contem apenas digitos e um ponto ou um hifen,
  * ou se contem simbolos ou caracteres nao aceites para a situacao.
  * @param number string extraida da stream de input
- * @return Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para além de digitos
+ * @return Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para alem de digitos
  */
 bool valid_number_double(string number)
 {
@@ -98,7 +98,7 @@ bool valid_number_double(string number)
 }
 
 /**
- * Verifica se a string word não contem numeros
+ * Verifica se a string word nao contem numeros
  * @param word string extraida da stream de input
  * @return Retorna true se nao contem numeros e false caso contrario
  */
@@ -113,7 +113,7 @@ bool valid_word(string word)
 }
 
 /**
- * Verifica se o nome da bicicleta é correto, não pode começar por um número
+ * Verifica se o nome da bicicleta e correto, nao pode comecar por um numero
  * @param bike string extraida da stream de input
  * @return Retorna true se nao comeca por um numero e false caso contrario
  */
@@ -245,8 +245,9 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
 /**
  * Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios
- * para o registo (nome, tipo de utente e localizacao). Para cada introducao do utente e verificado
- * se o mesmo introduziu o formato de dados pedido e se os dados sao validos.
+ * para o registo (nome, tipo de utente e localizacao).
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void registo_utente(Sistema & ER){
@@ -468,7 +469,7 @@ void infoER(Sistema &ER) {
  * Caso o utente seja Regular e apresentado o total a pagar pelo aluguer.
  * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  * @param distancias vetor de indices dos pontos de partilha por ordem crescente de distancia ao utente
@@ -861,7 +862,7 @@ void displayPagPendentes(Sistema &ER,int index){
  * consoante o numero de horas de uso nesse mes (desconto) e consoante o tipo de bicicletas alugadas
  * (ver tabela de mensalidades (infoER)).
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -1074,7 +1075,7 @@ void efetuaPag(Sistema &ER,int index) {
  * Mostar a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente.
  * Chama o metodo da classe utente setUtenteLocation que altera a localizacao.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -1189,7 +1190,7 @@ void NearestPP(Sistema &ER,int index) {
  * chama o metodo da classe utente setTipoUtente.
  * Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -1278,7 +1279,7 @@ void mudaTipoUT(Sistema &ER,int index){
  * o nome, a localizacao e a capacidade. Invoca-se o metodo da classe Sistema addPontoPartilha.
  * Inclui 5 bicicletas de cada tipo no ponto de partilha criado.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void addPP(Sistema & ER) {
@@ -1486,7 +1487,7 @@ void addPP(Sistema & ER) {
  * Pede o nome do ponto de partilha que se quer remover e chama o metodo da
  * classe Sistema removePonto.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void removePP(Sistema & ER) {
@@ -1556,9 +1557,9 @@ void removePP(Sistema & ER) {
  * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
  * pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe
  * PontoPartilha, adicionaBike para adionar a bicicleta criada.
- * Sea capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
+ * Se a capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void adicionaBike(Sistema & ER) {
@@ -1685,6 +1686,8 @@ void adicionaBike(Sistema & ER) {
 /**
  * Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo
  * da classe PontoPartilha, removeBike.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void removeBike(Sistema & ER) {
@@ -1776,7 +1779,11 @@ void removeBike(Sistema & ER) {
 }
 
 /**
- *
+ * Apresenta a informacao de todos os utentes registados (nome, id, tipo e localizacao) e  pede para
+ * introduzir o id do utente que se pretende remover e chama o metodo removeUtente
+ * da classe Sistema.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void removeUT(Sistema & ER) {
@@ -1807,7 +1814,8 @@ void removeUT(Sistema & ER) {
 
 	cout << endl;
 
-	string nomeUT;
+	string id;
+	int idUT {};
 	int indexUT {-1};
 
 	cin.ignore(1000,'\n');
@@ -1816,24 +1824,32 @@ void removeUT(Sistema & ER) {
 	while(1)
 	{
 		try {
-			cout << "Nome do Utente: " ;
-			getline(cin,nomeUT);
-			if(valid_word(nomeUT) == false)
-				throw OpcaoInvalida<string>(nomeUT);
+			cout << "ID do Utente: " ;
+			getline(cin,id);
+			if(valid_number(id) == false)
+				throw OpcaoInvalida<string>(id);
 
+			idUT = stoi(id);
 			for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
 			{
-				if(ER.getUtentes().at(i)->getNome() == nomeUT)
+				if(ER.getUtentes().at(i)->getId() == idUT)
 					indexUT = i;
 			}
 
 			if(indexUT == -1)
-				throw OpcaoInvalida<string>(nomeUT);
+				throw OpcaoInvalida<int>(idUT);
 
 			break;
 		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Utente inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "ID inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "ID inválido (" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
 		}
 	}
@@ -1872,6 +1888,13 @@ void removeUT(Sistema & ER) {
 /////////////////////////
 
 /**
+ * Apresenta no ecra a pagina inicial do programa, e aguarda que o utente decida qual a opcao
+ * que deseja. Depois de introduzida a opcao por parte do utente, e efetuado o procedimento que
+ * corresponde a opcao escolhida. 1-Registar chama a funcao registaUtente; 2-Entrar chama a funcao
+ * menu_interfaces; 3- Administrador chama a funcao admin_interfaces; 4 - Sair retorna a funcao main,
+ * onde esta ,openinterfaces, e invocada.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void openInterface(Sistema & ER){
@@ -1939,6 +1962,15 @@ void openInterface(Sistema & ER){
 }
 
 /**
+ * Primeiramente imprime a informacao de todos os utentes e pede ao utente que insira um id
+ * para efetuar o login.
+ * Apresenta no ecra os casos de utilizacao para o utente escolher a opcao que pretende (10 opcoes no total).
+ * Depois de introduzida a opcao por parte do utente, e efetuado o procedimento que
+ * corresponde a opcao escolhida. Para cada uma das 9 primeiras opcoes e chamada uma outra funcao que
+ * executa o procedimento necessario para o que o utente pretende, e a ultima opcao , 10 - Logout,
+ * retorna a funcao openInterfaces, onde esta foi invocada.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void menu_interface(Sistema &ER){
@@ -2118,6 +2150,14 @@ void menu_interface(Sistema &ER){
 }
 
 /**
+ * Primeiramente pede ao utilizador que insira a senha ("1234") para aceder a opcoes administrativas.
+ * Apresenta no ecra os casos de utilizacao para aministrador escolher a opcao que pretende (7 opcoes no total).
+ * Depois de introduzida a opcao, e efetuado o procedimento que corresponde a opcao escolhida.
+ * Para cada uma das 6 primeiras opcoes e chamada uma outra funcao que
+ * executa o procedimento necessario para o que e pretendido, e a ultima opcao , 7 - Sair,
+ * retorna a funcao openInterfaces, onde esta foi invocada.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
  */
 void admin_interface(Sistema &ER) {
