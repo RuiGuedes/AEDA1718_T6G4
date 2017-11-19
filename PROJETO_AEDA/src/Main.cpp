@@ -8,6 +8,10 @@ void openInterface(Sistema & ER);
 void checkinSys(Sistema & ER);
 void checkoutSys(Sistema & ER);
 
+/**
+ * Inicializacao do programa, checkin do sistema , apresentacao de interface ,
+ * execucao das funcoes selecionadas e no final checkout do sistema.
+ */
 int main()
 {
 	//Códigos para aceitação de caracteres da língua portuguesa
@@ -38,6 +42,14 @@ int main()
 	return 0;
 }
 
+/**
+ * Efetua a leitura dos 3 ficheiros se texto que contem a informacao sobre o sistema
+ * e coloca-a corretamente no sistema.
+ * Para efetuar a extracao da informacao, a funcao recorre ao operador de extracao >>
+ * que foi redefenido para todas as classes usadas no sistema.
+ *
+ * @param ER sistema que se pretende completar
+ */
 void checkinSys(Sistema & ER){
 	ifstream f_utentes;
 
@@ -135,6 +147,13 @@ void checkinSys(Sistema & ER){
 	return;
 };
 
+/**
+ * Insere nos ficheiros de texto a informacao contida no sistema formatadamente.
+ * Para efetuar a insercao da informacao, a funcao recorre ao operador de insercao <<
+ * que foi redefenido para todas as classes usadas no sistema.
+ *
+ * @param ER sistema que se pretende guardar
+ */
 void checkoutSys(Sistema & ER){
 
 	ofstream f_utentes;

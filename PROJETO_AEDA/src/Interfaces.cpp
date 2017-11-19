@@ -28,6 +28,15 @@ void admin_interface(Sistema &BS);
 /////////////////////////////////////
 // IMPLEMENTAÇÃO DE FUNCOES GERAIS //
 /////////////////////////////////////
+
+/**
+ * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
+ * de distancia ao utente com indice = index.
+ *
+ * @param ER sistema em execucao
+ * @param index indice do utente
+ * @return Retorna um vetor com os indices dos pontos de partilha
+ */
 vector<int> ExtraData(Sistema &ER,int index) {
 
 	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao utente com indice = index
@@ -56,6 +65,12 @@ vector<int> ExtraData(Sistema &ER,int index) {
 
 }
 
+/**
+ * Verifica se a string number contem apenas digitos ou se contem simbolos ou caracteres nao
+ * aceites para a situacao.
+ * @param number string extraida da stream de input
+ * @return Retorna true se number e um numero e false se number contem alguma coisa para além de digitos
+ */
 bool valid_number(string number)
 {
 	//Verifica se um número é positivo e contem apenas algarismos
@@ -66,6 +81,12 @@ bool valid_number(string number)
 	return true;
 }
 
+/**
+ * Verifica se a string number contem apenas digitos e um ponto ou um hifen,
+ * ou se contem simbolos ou caracteres nao aceites para a situacao.
+ * @param number string extraida da stream de input
+ * @return Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para além de digitos
+ */
 bool valid_number_double(string number)
 {
 	//Verifica se um número é positivo/negativo e contem apenas algarismos ou apenas "." e "-"
@@ -76,6 +97,11 @@ bool valid_number_double(string number)
 	return true;
 }
 
+/**
+ * Verifica se a string word não contem numeros
+ * @param word string extraida da stream de input
+ * @return Retorna true se nao contem numeros e false caso contrario
+ */
 bool valid_word(string word)
 {
 	//Verifica se é string e não contem numeros
@@ -86,6 +112,11 @@ bool valid_word(string word)
 	return true;
 }
 
+/**
+ * Verifica se o nome da bicicleta é correto, não pode começar por um número
+ * @param bike string extraida da stream de input
+ * @return Retorna true se nao comeca por um numero e false caso contrario
+ */
 bool valid_bike(string bike)
 {
 	//Verifica se o nome da bicicleta é correto - não pode começar por um número
@@ -95,6 +126,10 @@ bool valid_bike(string bike)
 	return true;
 }
 
+/**
+ * Funcao que imprime no ecra o logotipo da empresa ECO RIDES
+ * (nome defenido pelo grupo)
+ */
 void mensagemInicial(){
 	//Informacao inicial apresentada ao utilizador
 	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
@@ -104,6 +139,12 @@ void mensagemInicial(){
 	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
 }
 
+/**
+ * Verifica se existe o utente com numero de identificacao =identificacao no sistema ER
+ * @param sys sistema em execucao
+ * @param identificacao numero de identificacao de um utente
+ * @return Retorna o indice do utente no vetor de utentes do sistema se este existir e -1 caso contrario
+ */
 int ExistID(Sistema & sys, int identificacao) {
 
 	for(unsigned int i = 0; i < sys.getUtentes().size() ; i++)
@@ -119,6 +160,14 @@ int ExistID(Sistema & sys, int identificacao) {
 ////////////////////////////////////////////////////////////
 // IMPLEMENTACAO DE FUNCOES COMUNS AS DIVERSAS INTERFACES //
 ////////////////////////////////////////////////////////////
+
+/**
+ * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
+ * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
+ * @param ER sistema em execucao
+ * @param index indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao)
+ * @param bikeType tipo de bicicleta que se pretende verificar
+ */
 void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 
 	int value {-1};
@@ -194,6 +243,12 @@ void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
 	return;
 }
 
+/**
+ * Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios
+ * para o registo (nome, tipo de utente e localizacao). Para cada introducao do utente e verificado
+ * se o mesmo introduziu o formato de dados pedido e se os dados sao validos.
+ * @param ER sistema em execucao
+ */
 void registo_utente(Sistema & ER){
 
 	mensagemInicial();
@@ -322,6 +377,13 @@ void registo_utente(Sistema & ER){
 	return;
 }
 
+/**
+ * Imprime no ecra toda a informacao referente ao sistema, nome da empresa, pontos de partilha
+ * (incluindo nome, localizacao (nome e coordenadas) e quantidades de cada tipo de bicicletas),
+ *  utentes (incluindo nome, id, tipo e coordenadas GPS), tabela de precos por hora e mensalidades
+ *  e por fim, os fundadores.
+ * @param ER sistema em execucao
+ */
 void infoER(Sistema &ER) {
 
 	mensagemInicial();
@@ -396,6 +458,21 @@ void infoER(Sistema &ER) {
 /////////////////////////////////////////////////
 // IMPLEMENTACAO DAS FUNCOES -> MENU INTERFACE //
 /////////////////////////////////////////////////
+
+/**
+ * Apresenta os passos e pede ao utente que preencha os campos apresentados
+ * de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta,
+ * numero de horas e data).
+ * E chamado o metodo da classe utente alugaBicicleta.
+ * O aluguer e feito no ponto de partilha mais proximo do utente.
+ * Caso o utente seja Regular e apresentado o total a pagar pelo aluguer.
+ * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ * @param distancias vetor de indices dos pontos de partilha por ordem crescente de distancia ao utente
+ */
 void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 	mensagemInicial();
@@ -662,6 +739,13 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 	}
 }
 
+/**
+ * Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta.
+ * A devolucao e feita no ponto de partilha mais proximo do utente.
+ * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void devolveBike(Sistema &ER,int index) {
 
 	mensagemInicial();
@@ -708,6 +792,13 @@ void devolveBike(Sistema &ER,int index) {
 
 }
 
+/**
+ * Imprime no ecra o historico do utente.
+ * Caso  o historico esteja vazio e apresentada uma mensagem
+ * Se o utente é Regular, tambem e apresentado o total pago por cada utilizacao.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void displayHistoric(Sistema &ER,int index) {
 
 	mensagemInicial();
@@ -727,6 +818,13 @@ void displayHistoric(Sistema &ER,int index) {
 
 }
 
+/**
+ * Imprime no ecra as utilizacoes por pagar do utente.
+ * Esta opcao e apenas para socios. Se um utente regular acede a esta opcao,
+ * e-lhe apresentada uma mensagem.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void displayPagPendentes(Sistema &ER,int index){
 
 	mensagemInicial();
@@ -756,6 +854,17 @@ void displayPagPendentes(Sistema &ER,int index){
 	return;
 }
 
+/**
+ * Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes
+ * por saldar, e depois do utente selecionar o ano, e-lhe apresentado os meses que pode tem em divida
+ * depos de selecionar chama-se o metodo da classe utente pagaMensalidade que calcula a mensalidade
+ * consoante o numero de horas de uso nesse mes (desconto) e consoante o tipo de bicicletas alugadas
+ * (ver tabela de mensalidades (infoER)).
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void efetuaPag(Sistema &ER,int index) {
 
 	mensagemInicial();
@@ -961,6 +1070,14 @@ void efetuaPag(Sistema &ER,int index) {
 	return;
 }
 
+/**
+ * Mostar a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente.
+ * Chama o metodo da classe utente setUtenteLocation que altera a localizacao.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void updateLocation(Sistema &ER,int index) {
 
 	mensagemInicial();
@@ -1025,6 +1142,11 @@ void updateLocation(Sistema &ER,int index) {
 
 }
 
+/**
+ * Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void NearestPP(Sistema &ER,int index) {
 
 	mensagemInicial();
@@ -1062,6 +1184,15 @@ void NearestPP(Sistema &ER,int index) {
 
 }
 
+/**
+ * Apresenta o tipo de utente atual e pergunta para qual o tipo que pretende mudar, pede confirmacao da decisao e
+ * chama o metodo da classe utente setTipoUtente.
+ * Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void mudaTipoUT(Sistema &ER,int index){
 
 	mensagemInicial();
@@ -1141,6 +1272,15 @@ void mudaTipoUT(Sistema &ER,int index){
 //////////////////////////////////////////////////
 // IMPLEMENTACAO DAS FUNCOES -> ADMIN INTERFACE //
 //////////////////////////////////////////////////
+
+/**
+ * Apresenta os passos necessarios para criacao de um novo ponto de partilha, pedindo para introduzir
+ * o nome, a localizacao e a capacidade. Invoca-se o metodo da classe Sistema addPontoPartilha.
+ * Inclui 5 bicicletas de cada tipo no ponto de partilha criado.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ */
 void addPP(Sistema & ER) {
 
 	mensagemInicial();
@@ -1342,6 +1482,13 @@ void addPP(Sistema & ER) {
 	return;
 }
 
+/**
+ * Pede o nome do ponto de partilha que se quer remover e chama o metodo da
+ * classe Sistema removePonto.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ */
 void removePP(Sistema & ER) {
 
 	mensagemInicial();
@@ -1367,7 +1514,6 @@ void removePP(Sistema & ER) {
 	{
 		try {
 			cout << "Nome do Ponto de Partilha: " ;
-			//cin >> nomePP;
 			getline(cin,nomePP);
 			if(valid_word(nomePP) == false)
 				throw OpcaoInvalida<string>(nomePP);
@@ -1391,13 +1537,13 @@ void removePP(Sistema & ER) {
 
 	ER.removePonto(indexPP);
 
-	for(unsigned int i = 0; i < 5; i++)
-	{
-		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana");
-		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana Simples");
-		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Corrida");
-		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Infantil");
-	}
+//	for(unsigned int i = 0; i < 5; i++)
+//	{
+//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana");
+//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Urbana Simples");
+//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Corrida");
+//		ER.getPontosPartilha().at(0)->setBikeNextIdBackward("Infantil");
+//	}
 
 	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
 
@@ -1406,6 +1552,15 @@ void removePP(Sistema & ER) {
 	return;
 }
 
+/**
+ * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
+ * pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe
+ * PontoPartilha, adicionaBike para adionar a bicicleta criada.
+ * Sea capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos.
+ * @param ER sistema em execucao
+ */
 void adicionaBike(Sistema & ER) {
 
 	mensagemInicial();
@@ -1527,6 +1682,11 @@ void adicionaBike(Sistema & ER) {
 
 }
 
+/**
+ * Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo
+ * da classe PontoPartilha, removeBike.
+ * @param ER sistema em execucao
+ */
 void removeBike(Sistema & ER) {
 
 	mensagemInicial();
@@ -1603,7 +1763,7 @@ void removeBike(Sistema & ER) {
 		}
 	}
 
-	ER.getPontosPartilha().at(0)->setBikeNextIdBackward(biketype);
+//	ER.getPontosPartilha().at(0)->setBikeNextIdBackward(biketype);
 	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	ER.getPontosPartilha().at(indexPP)->removeBike(bc);
 
@@ -1615,6 +1775,10 @@ void removeBike(Sistema & ER) {
 
 }
 
+/**
+ *
+ * @param ER sistema em execucao
+ */
 void removeUT(Sistema & ER) {
 
 	mensagemInicial();
@@ -1706,6 +1870,10 @@ void removeUT(Sistema & ER) {
 /////////////////////////
 // INTERFACES -> MENUS //
 /////////////////////////
+
+/**
+ * @param ER sistema em execucao
+ */
 void openInterface(Sistema & ER){
 
 	int value { };
@@ -1770,6 +1938,9 @@ void openInterface(Sistema & ER){
 	return;
 }
 
+/**
+ * @param ER sistema em execucao
+ */
 void menu_interface(Sistema &ER){
 
 	mensagemInicial();
@@ -1946,6 +2117,9 @@ void menu_interface(Sistema &ER){
 
 }
 
+/**
+ * @param ER sistema em execucao
+ */
 void admin_interface(Sistema &ER) {
 
 	mensagemInicial();
