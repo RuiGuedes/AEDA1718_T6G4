@@ -39,11 +39,11 @@ i7/Infantil/
 i8/Infantil/
 i9/Infantil/
 i10/Infantil/
-u11/Urbana/
 u12/Urbana/
 u13/Urbana/
 u14/Urbana/
 u15/Urbana/
+u11/Urbana/
 us11/Urbana Simples/
 us12/Urbana Simples/
 us13/Urbana Simples/

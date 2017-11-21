@@ -1,11 +1,201 @@
-3/4/2/1
+51/51/51/51
 u1/Urbana/
 u2/Urbana/
 u3/Urbana/
+u4/Urbana/
+u5/Urbana/
 us1/Urbana Simples/
 us2/Urbana Simples/
 us3/Urbana Simples/
 us4/Urbana Simples/
+us5/Urbana Simples/
 c1/Corrida/
 c2/Corrida/
+c3/Corrida/
+c4/Corrida/
+c5/Corrida/
 i1/Infantil/
+i2/Infantil/
+i3/Infantil/
+i4/Infantil/
+i5/Infantil/
+u6/Urbana/
+u7/Urbana/
+u8/Urbana/
+u9/Urbana/
+u10/Urbana/
+us6/Urbana Simples/
+us7/Urbana Simples/
+us8/Urbana Simples/
+us9/Urbana Simples/
+us10/Urbana Simples/
+c6/Corrida/
+c7/Corrida/
+c8/Corrida/
+c9/Corrida/
+c10/Corrida/
+i6/Infantil/
+i7/Infantil/
+i8/Infantil/
+i9/Infantil/
+i10/Infantil/
+u11/Urbana/
+u12/Urbana/
+u13/Urbana/
+u14/Urbana/
+u15/Urbana/
+us11/Urbana Simples/
+us12/Urbana Simples/
+us13/Urbana Simples/
+us14/Urbana Simples/
+us15/Urbana Simples/
+c11/Corrida/
+c12/Corrida/
+c13/Corrida/
+c14/Corrida/
+c15/Corrida/
+i11/Infantil/
+i12/Infantil/
+i13/Infantil/
+i14/Infantil/
+i15/Infantil/
+u16/Urbana/
+u17/Urbana/
+u18/Urbana/
+u19/Urbana/
+u20/Urbana/
+us16/Urbana Simples/
+us17/Urbana Simples/
+us18/Urbana Simples/
+us19/Urbana Simples/
+us20/Urbana Simples/
+c16/Corrida/
+c17/Corrida/
+c18/Corrida/
+c19/Corrida/
+c20/Corrida/
+i16/Infantil/
+i17/Infantil/
+i18/Infantil/
+i19/Infantil/
+i20/Infantil/
+u21/Urbana/
+u22/Urbana/
+u23/Urbana/
+u24/Urbana/
+u25/Urbana/
+us21/Urbana Simples/
+us22/Urbana Simples/
+us23/Urbana Simples/
+us24/Urbana Simples/
+us25/Urbana Simples/
+c21/Corrida/
+c22/Corrida/
+c23/Corrida/
+c24/Corrida/
+c25/Corrida/
+i21/Infantil/
+i22/Infantil/
+i23/Infantil/
+i24/Infantil/
+i25/Infantil/
+u26/Urbana/
+u27/Urbana/
+u28/Urbana/
+u29/Urbana/
+u30/Urbana/
+us26/Urbana Simples/
+us27/Urbana Simples/
+us28/Urbana Simples/
+us29/Urbana Simples/
+us30/Urbana Simples/
+c26/Corrida/
+c27/Corrida/
+c28/Corrida/
+c29/Corrida/
+c30/Corrida/
+i26/Infantil/
+i27/Infantil/
+i28/Infantil/
+i29/Infantil/
+i30/Infantil/
+u31/Urbana/
+u32/Urbana/
+u33/Urbana/
+u34/Urbana/
+u35/Urbana/
+us31/Urbana Simples/
+us32/Urbana Simples/
+us33/Urbana Simples/
+us34/Urbana Simples/
+us35/Urbana Simples/
+c31/Corrida/
+c32/Corrida/
+c33/Corrida/
+c34/Corrida/
+c35/Corrida/
+i31/Infantil/
+i32/Infantil/
+i33/Infantil/
+i34/Infantil/
+i35/Infantil/
+u36/Urbana/
+u37/Urbana/
+u38/Urbana/
+u39/Urbana/
+u40/Urbana/
+us36/Urbana Simples/
+us37/Urbana Simples/
+us38/Urbana Simples/
+us39/Urbana Simples/
+us40/Urbana Simples/
+c36/Corrida/
+c37/Corrida/
+c38/Corrida/
+c39/Corrida/
+c40/Corrida/
+i36/Infantil/
+i37/Infantil/
+i38/Infantil/
+i39/Infantil/
+i40/Infantil/
+u41/Urbana/
+u42/Urbana/
+u43/Urbana/
+u44/Urbana/
+u45/Urbana/
+us41/Urbana Simples/
+us42/Urbana Simples/
+us43/Urbana Simples/
+us44/Urbana Simples/
+us45/Urbana Simples/
+c41/Corrida/
+c42/Corrida/
+c43/Corrida/
+c44/Corrida/
+c45/Corrida/
+i41/Infantil/
+i42/Infantil/
+i43/Infantil/
+i44/Infantil/
+i45/Infantil/
+u46/Urbana/
+u47/Urbana/
+u48/Urbana/
+u49/Urbana/
+u50/Urbana/
+us46/Urbana Simples/
+us47/Urbana Simples/
+us48/Urbana Simples/
+us49/Urbana Simples/
+us50/Urbana Simples/
+c46/Corrida/
+c47/Corrida/
+c48/Corrida/
+c49/Corrida/
+c50/Corrida/
+i46/Infantil/
+i47/Infantil/
+i48/Infantil/
+i49/Infantil/
+i50/Infantil/

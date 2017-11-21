@@ -38,8 +38,8 @@ class Utente : public Sistema{
 public:
 	Utente();	/**< Necessário para o overload do operador de extração na classe utente*/
 	explicit Utente(string nome, string tipoUtente,Localizacao spot);
-	void alugaBicicleta(string bikeType, Utilizacao ut, int idPP);
-	int removeBicicleta(vector<int> index_distancias);
+	void alugaBicicleta(Sistema &ER, string bikeType, Utilizacao ut, int idPP);
+	int removeBicicleta(Sistema &ER, vector<int> index_distancias);
 	void pagaMensalidade(unsigned int ano, unsigned int mes);
 	friend ostream & operator <<(ostream & o, const Utente & u);
 	friend istream & operator >>(istream & i, Utente & u);

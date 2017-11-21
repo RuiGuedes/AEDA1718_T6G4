@@ -28,20 +28,20 @@ Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
  * @param ut utilizacao = aluger da bicicleta em questao
  * @param bikeType tipo de bicicleta a alugar
  */
-void Utente::alugaBicicleta(string bikeType, Utilizacao ut, int idPP) {
+void Utente::alugaBicicleta(Sistema &ER, string bikeType, Utilizacao ut, int idPP) {
 
 	if(bikeType == "Urbana")
-		setBike(getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
 	else if(bikeType == "Urbana Simples")
-		setBike(getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
 	else if(bikeType == "Corrida")
-		setBike(getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
 	else
-		setBike(getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
+		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
 
 	setAvailable();
 
-	getPontosPartilha().at(idPP)->removeBike(getBike());
+	ER.getPontosPartilha().at(idPP)->removeBike(getBike());
 
 
 	if(getTipoUtente() == "Socio")
@@ -62,7 +62,7 @@ void Utente::alugaBicicleta(string bikeType, Utilizacao ut, int idPP) {
  * @param index_distancias vetor de indice dos pontos de partilha ordenados por distancia
  * @return Retorna o índice do ponto de partilha afetado
  */
-int Utente::removeBicicleta(vector<int> index_distancias) {
+int Utente::removeBicicleta(Sistema &ER, vector<int> index_distancias) {
 
 	int index_pp {-1};
 
@@ -72,15 +72,15 @@ int Utente::removeBicicleta(vector<int> index_distancias) {
 	{
 		int lotacao {0};
 
-		for(unsigned int k = 0; k < getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
+		for(unsigned int k = 0; k < ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
 		{
-			lotacao += getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
+			lotacao += ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
 		}
 
-		if(getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
+		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
 		{
 			index_pp = index_distancias.at(i);
-			getPontosPartilha().at(index_distancias.at(i))->adicionaBike(getBike());
+			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(getBike());
 			setBike(0);
 			break;
 		}

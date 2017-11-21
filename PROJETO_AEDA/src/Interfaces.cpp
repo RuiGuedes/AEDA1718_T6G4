@@ -706,8 +706,8 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 
 			Utilizacao p(bikeType, numHours, d1,ER.getPontosPartilha().at(idPP)->getNome(),ER.getPontosPartilha().at(idPP)->getLocal().getNome());
 			double price {0};
-
-			ER.getUtentes().at(index)->alugaBicicleta(bikeType,p,idPP);
+			cout << idPP <<endl;
+			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
 			{
@@ -728,7 +728,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			if(price !=0)
 				cout << "Montante: " << price << "€" << endl;
 
-			System_Manager(ER,idPP,bikeType);
+			//System_Manager(ER,idPP,bikeType);
 
 			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
 
@@ -761,7 +761,7 @@ void devolveBike(Sistema &ER,int index) {
 
 	int index_pp {-1};
 
-	index_pp = ER.getUtentes().at(index)->removeBicicleta(ExtraData(ER,index));
+	index_pp = ER.getUtentes().at(index)->removeBicicleta(ER,ExtraData(ER,index));
 
 	cout << "Devolve bicicleta: " << endl << endl;
 	cout << "Resumo do último aluguer: " << endl << endl;
