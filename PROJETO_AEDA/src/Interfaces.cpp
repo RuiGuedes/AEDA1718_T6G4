@@ -708,6 +708,9 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			double price {0};
 			cout << idPP <<endl;
 			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
+			Utente *u = ER.getUtentes().at(index);
+			u->alugaBicicleta();
+			ER.retiraBicicleta();
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
 			{
