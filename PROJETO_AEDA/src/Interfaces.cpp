@@ -161,304 +161,53 @@ int ExistID(Sistema & sys, int identificacao) {
 // IMPLEMENTACAO DE FUNCOES COMUNS AS DIVERSAS INTERFACES //
 ////////////////////////////////////////////////////////////
 
-/**
- * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
- * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
- * @param ER sistema em execucao
- * @param index indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao)
- * @param bikeType tipo de bicicleta que se pretende verificar
- */
-void System_Manager(Sistema &ER,unsigned int index, string bikeType) {
-
-	int value {-1};
-	int tamanho{-1};
-	vector<int> indicesSup5, indicesInf5;
-
-	if(bikeType == "Urbana")
-		value = 0;
-	else if(bikeType == "Urbana Simples")
-		value = 1;
-	else if(bikeType == "Corrida")
-		value = 2;
-	else
-		value = 3;
-
-	tamanho = ER.getPontosPartilha().at(index)->getBikes().at(value).size();
-
-	//Guarda os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		if(i != index)
-		{
-			if(ER.getPontosPartilha().at(i)->getBikes().at(value).size() > 5)
-				indicesSup5.push_back(i);
-			else if(ER.getPontosPartilha().at(i)->getBikes().at(value).size() < 5)
-				indicesInf5.push_back(i);
-		}
-
-	}
-
-	//Ordena os vectores por ordem crescente
-	sort(indicesSup5.begin(), indicesSup5.end());
-	sort(indicesInf5.begin(), indicesInf5.end());
-
-	//Necessita de receber bicicletas
-	if(tamanho <= 2)
-	{
-		//Distribui bicicletas
-		for(int k = indicesSup5.size() - 1; k >= 0; k--)
-		{
-			while(ER.getPontosPartilha().at(indicesSup5.at(k))->getBikes().at(value).size() > 5)
-			{
-				if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
-					break;
-
-				ER.getPontosPartilha().at(index)->adicionaBike(ER.getPontosPartilha().at(indicesSup5.at(k))->getBikes().at(value).at(0));
-				ER.getPontosPartilha().at(indicesSup5.at(k))->removeBike(ER.getPontosPartilha().at(indicesSup5.at(k))->getBikes().at(value).at(0));
-			}
-
-			if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
-				break;
-		}
-	}
-	else if(tamanho >= 8)	//Necessita de fornecer bicicletas
-	{
-		//Distribui bicicletas
-		for(unsigned int k = 0; k < indicesInf5.size(); k++)
-		{
-			while(ER.getPontosPartilha().at(indicesInf5.at(k))->getBikes().at(value).size() < 5)
-			{
-				if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
-					break;
-
-				ER.getPontosPartilha().at(indicesInf5.at(k))->adicionaBike(ER.getPontosPartilha().at(index)->getBikes().at(value).at(0));
-				ER.getPontosPartilha().at(index)->removeBike(ER.getPontosPartilha().at(index)->getBikes().at(value).at(0));
-			}
-
-			if(ER.getPontosPartilha().at(index)->getBikes().at(value).size() == 5)
-				break;
-		}
-	}
-
-	return;
-}
-
-/**
- * Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios
- * para o registo (nome, tipo de utente e localizacao).
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void registo_utente(Sistema & ER){
-
-	mensagemInicial();
-
-	cout << "Regista novo utente:" << endl << endl;
-
-	string nome, tipoUtente;
-	int value {};
-	string option {};
-	double coordX { }, coordY { };
-
-	while(1)
-	{
-		try {
-			cout << "Nome: " ;
-			getline(cin,nome);
-			if(valid_word(nome) == false)
-				throw OpcaoInvalida<string>(nome);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-	cout << endl << "Tipo de Utente :"<< endl ;
-	cout << "     1 - Regular" << endl;
-	cout << "     2 - Sócio" << endl << endl;
-
-	while(1)
-	{
-		try{
-			cout << endl << "Introduza uma opção (1-2): ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			value = stoi(option);
-			if(value < 1 || value > 2)
-				throw OpcaoInvalida<int>(value);
-
-			break;
-		}
-		catch (OpcaoInvalida<int> &op){
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	if(value==1)
-		tipoUtente = "Regular";
-	else
-		tipoUtente = "Socio";
-
-	cout << endl << "Localização: " << endl << endl;
-
-	cout << "Indique as coordenadas GPS:" << endl;
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada X: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordX = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada Y: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordY = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	Localizacao spot;
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
-		{
-			spot.setNome(ER.getPontosPartilha().at(i)->getLocal().getNome());
-			break;
-		}
-	}
-
-	spot.setX(coordX);
-	spot.setY(coordY);
-
-	Utente* u12 = new Utente(nome,tipoUtente,spot);
-
-	ER.addNewUtente(u12);
-
-	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-}
-
-/**
- * Imprime no ecra toda a informacao referente ao sistema, nome da empresa, pontos de partilha
- * (incluindo nome, localizacao (nome e coordenadas) e quantidades de cada tipo de bicicletas),
- *  utentes (incluindo nome, id, tipo e coordenadas GPS), tabela de precos por hora e mensalidades
- *  e por fim, os fundadores.
- * @param ER sistema em execucao
- */
-void infoER(Sistema &ER) {
-
-	mensagemInicial();
-	cout << "Informações:" << endl << endl;
-
-	cout << "Nome da empresa: ECO RIDES" << endl << endl;
-	cout << "Número total de pontos de Partilha: " << ER.getPontosPartilha().size() << endl << endl;
-	cout << "Pontos de Partilha:" << endl << endl;
-	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
-	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
-			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
-
-	for (unsigned int i=0 ; i<ER.getPontosPartilha().size() ; i++){
-		cout << setw(5) << ER.getPontosPartilha().at(i)->getNome();
-		cout << setw(23) << ER.getPontosPartilha().at(i)->getLocal().getNome();
-		cout << '(' << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getX();
-		cout << "," << setw(9) << ER.getPontosPartilha().at(i)->getLocal().getY() << setw(5) << ')';
-
-		vector<int> numtypes = ER.getPontosPartilha().at(i)->getNumberOfBikes();
-
-		cout << setw(13) << numtypes.at(0);
-		cout << setw(15) << numtypes.at(1);
-		cout << setw(9) << numtypes.at(2);
-		cout << setw(11) << numtypes.at(3);
-		cout << ER.getPontosPartilha().at(i)->getCapacidade();
-
-		cout << endl;
-	}
-
-	cout << endl;
-
-	cout << "Número total de utentes registados: " << ER.getUtentes().size() << endl << endl;
-
-	cout << left << setw(15) << "  Nome" << setw(6) << "ID" << setw(27) << "Tipo de utente" << setw (20) << "GPS" << endl;
-
-	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++){
-		cout << setw(15) << ER.getUtentes().at(i)->getNome();
-		cout << setw(10) << ER.getUtentes().at(i)->getId();
-		cout << setw(14) <<ER.getUtentes().at(i)->getTipoUtente();
-		cout << '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX();
-		cout << "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
-	}
-
-	cout << endl;
-
-	cout << "Tabela de Preços:" << endl << endl;
-
-	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
-	cout << setw(26) << "Urbana" << "4€" << endl <<
-			setw(26) << "Urbana Simples" << "3€" << endl <<
-			setw(26) << "Corrida" << "5€" << endl <<
-			setw(26) << "Infantil" << "2€" << endl << endl;
-
-	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
-	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
-	cout << setw(4) << " " << setw(11) << "30€" << "Infantil + Urbana Simples" << endl;
-	cout << setw(4) << " " << setw(11) << "40€" << "Infantil + Urbana Simples + Urbana" << endl;
-	cout << setw(4) << " " << setw(11) << "50€" << "Infantil + Urbana Simples + Urbana + Corrida" << endl << endl;
-
-	cout << "Fundadores: " << endl;
-	cout << "  - Rui Guedes" << endl;
-	cout << "  - César Pinho" << endl;
-	cout << "  - Bernardo Santos" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
 
 /////////////////////////////////////////////////
 // IMPLEMENTACAO DAS FUNCOES -> MENU INTERFACE //
 /////////////////////////////////////////////////
+
+/**
+ * Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
+void NearestPP(Sistema &ER,int index) {
+
+	mensagemInicial();
+	cout << "Pontos de partilha mais próximos: " << endl << endl;
+
+	vector<double> distancias;
+
+	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
+	{
+		distancias.push_back(ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(i)->getLocal()));
+	}
+
+	sort(distancias.begin(),distancias.end());
+
+	cout << "Ordem  Nome" << setw(16) << "Local"<< endl;
+
+	for(unsigned int i = 0; i < distancias.size(); i++)
+	{
+		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
+		{
+			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
+			{
+				cout << "  " << setw(5) << left << (i+1) << "ECO_RIDES_" << setw(5) << ER.getPontosPartilha().at(k)->getNome();
+				cout << ER.getPontosPartilha().at(k)->getLocal().getNome() << endl;
+			}
+
+		}
+	}
+
+	cout << endl;
+
+	system("pause");
+	system("cls");
+	return;
+
+}
+
 
 /**
  * Apresenta os passos e pede ao utente que preencha os campos apresentados
@@ -708,9 +457,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			double price {0};
 			cout << idPP <<endl;
 			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
-			Utente *u = ER.getUtentes().at(index);
-			u->alugaBicicleta();
-			ER.retiraBicicleta();
+
 
 			if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
 			{
@@ -731,7 +478,7 @@ void alugaBike(Sistema &ER,int index,vector<int> distancias) {
 			if(price !=0)
 				cout << "Montante: " << price << "€" << endl;
 
-			//System_Manager(ER,idPP,bikeType);
+			ER.System_Manager(idPP,bikeType);
 
 			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
 
@@ -788,7 +535,7 @@ void devolveBike(Sistema &ER,int index) {
 
 	cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << ER.getPontosPartilha().at(index_pp)->getNome() << " !" << endl << endl;
 
-	System_Manager(ER,index_pp,bikeType);
+	ER.System_Manager(index_pp,bikeType);
 
 	system("pause");
 	system("cls");
@@ -1147,48 +894,6 @@ void updateLocation(Sistema &ER,int index) {
 }
 
 /**
- * Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void NearestPP(Sistema &ER,int index) {
-
-	mensagemInicial();
-	cout << "Pontos de partilha mais próximos: " << endl << endl;
-
-	vector<double> distancias;
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		distancias.push_back(ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(i)->getLocal()));
-	}
-
-	sort(distancias.begin(),distancias.end());
-
-	cout << "Ordem  Nome" << setw(16) << "Local"<< endl;
-
-	for(unsigned int i = 0; i < distancias.size(); i++)
-	{
-		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
-		{
-			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
-			{
-				cout << "  " << setw(5) << left << (i+1) << "ECO_RIDES_" << setw(5) << ER.getPontosPartilha().at(k)->getNome();
-				cout << ER.getPontosPartilha().at(k)->getLocal().getNome() << endl;
-			}
-
-		}
-	}
-
-	cout << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
-/**
  * Apresenta o tipo de utente atual e pergunta para qual o tipo que pretende mudar, pede confirmacao da decisao e
  * chama o metodo da classe utente setTipoUtente.
  * Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem
@@ -1276,277 +981,6 @@ void mudaTipoUT(Sistema &ER,int index){
 //////////////////////////////////////////////////
 // IMPLEMENTACAO DAS FUNCOES -> ADMIN INTERFACE //
 //////////////////////////////////////////////////
-
-/**
- * Apresenta os passos necessarios para criacao de um novo ponto de partilha, pedindo para introduzir
- * o nome, a localizacao e a capacidade. Invoca-se o metodo da classe Sistema addPontoPartilha.
- * Inclui 5 bicicletas de cada tipo no ponto de partilha criado.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void addPP(Sistema & ER) {
-
-	mensagemInicial();
-
-	cout << "Adiciona Ponto de Partilha:" << endl << endl;
-
-	string nome,locname;
-	int value {};
-	string option {};
-	bool cond {false};
-
-	cin.ignore(1000,'\n');
-
-	while(1)
-	{
-		try {
-			cout << "Nome: " ;
-			getline(cin,nome);
-			if(valid_word(nome) == false)
-				throw OpcaoInvalida<string>(nome);
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				if(ER.getPontosPartilha().at(i)->getNome() == nome)
-					cond = true;
-			}
-
-			if(cond == true)
-				throw OpcaoInvalida<string>(nome);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			if(cond == true)
-				cout << "Já existe esse nome (" << op.opcao << ") ! Tente novamente." << endl;
-			else
-				cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
-			cond = false;
-			cin.clear();
-		}
-	}
-
-	Localizacao spot{};
-	bool diffloc {true};
-
-	cout << endl << "Localização: " << endl << endl;
-
-	while(1)
-	{
-		try {
-			cout << "Nome: " ;
-			getline(cin , locname);
-			if(valid_word(locname) == false)
-				throw OpcaoInvalida<string>(nome);
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				if(ER.getPontosPartilha().at(i)->getLocal().getNome() == locname)
-				{
-					diffloc = false;
-					spot.setNome(locname);
-					spot.setX(ER.getPontosPartilha().at(i)->getLocal().getX());
-					spot.setY(ER.getPontosPartilha().at(i)->getLocal().getY());
-					cout << endl << "Coordenada X: " << spot.getX() << endl << endl;
-					cout << "Coordenada Y: " << spot.getY() << endl << endl;
-					break;
-				}
-			}
-
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome inválido (" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	if(diffloc == true)
-	{
-		bool newcord{true};
-		double coordX { }, coordY { };
-
-		do
-		{
-			newcord = true;
-			cout << "Indique as coordenadas GPS:" << endl;
-
-			while(1)
-			{
-				try{
-					cout << endl << "Coordenada X: ";
-					cin >> option;
-					cin.ignore(1000,'\n');
-					if(valid_number_double(option) == false)
-						throw OpcaoInvalida<string>(option);
-
-					coordX = stod(option);
-					break;
-				}
-				catch (OpcaoInvalida<string> &op){
-
-					cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-					cin.clear();
-				}
-			};
-
-			while(1)
-			{
-				try{
-					cout << endl << "Coordenada Y: ";
-					cin >> option;
-					cin.ignore(1000,'\n');
-					if(valid_number_double(option) == false)
-						throw OpcaoInvalida<string>(option);
-
-					coordY = stod(option);
-					break;
-				}
-				catch (OpcaoInvalida<string> &op){
-
-					cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-					cin.clear();
-				}
-			};
-
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				if((ER.getPontosPartilha().at(i)->getLocal().getX() == coordX) && (ER.getPontosPartilha().at(i)->getLocal().getY() == coordY))
-				{
-					newcord = false;
-					cout << "Essas coordenadas já pertencem à localização: " << ER.getPontosPartilha().at(i)->getLocal().getNome() << endl << endl;
-					break;
-				}
-			}
-
-		}while(newcord == false);
-
-		spot.setNome(locname);
-		spot.setX(coordX);
-		spot.setY(coordY);
-	}
-
-	while(1)
-	{
-		try{
-			cout << endl << "Capacidade [20,30]: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			value = stoi(option);
-
-			if((value < 20) || (value > 30))
-				throw OpcaoInvalida<string>(option);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Capacidade inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	PontoPartilha* pp = new PontoPartilha(spot,value,nome);
-
-	ER.addPontoPartilha(pp);
-
-	for(unsigned int i = 0; i < 5; i++)
-	{
-		string u = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana"));
-		string us = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana Simples"));
-		string c = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Corrida"));
-		string inf = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Infantil"));
-
-		Bicicleta* b1 = new Bicicleta("Urbana",u);
-		Bicicleta* b2 = new Bicicleta("Urbana Simples",us);
-		Bicicleta* b3 = new Bicicleta("Corrida",c);
-		Bicicleta* b4 = new Bicicleta("Infantil",inf);
-
-		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b1);
-		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b2);
-		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b3);
-		ER.getPontosPartilha().at(ER.getPontosPartilha().size() - 1)->adicionaBike(b4);
-
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana");
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana Simples");
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Corrida");
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Infantil");
-	}
-
-	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-}
-
-/**
- * Pede o nome do ponto de partilha que se quer remover e chama o metodo da
- * classe Sistema removePonto.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void removePP(Sistema & ER) {
-
-	mensagemInicial();
-
-	cout << "Remove Ponto de Partilha:" << endl << endl;
-
-	string nomePP;
-	int indexPP {-1};
-
-	if(ER.getPontosPartilha().size() == 0)
-	{
-		cout << "Neste momento não existem pontos de partilha !" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	cin.ignore(1000,'\n');
-
-	//Verifica ponto de partilha que quer remover
-	while(1)
-	{
-		try {
-			cout << "Nome do Ponto de Partilha: " ;
-			getline(cin,nomePP);
-			if(valid_word(nomePP) == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				if(ER.getPontosPartilha().at(i)->getNome() == nomePP)
-					indexPP = i;
-			}
-
-			if(indexPP == -1)
-				throw OpcaoInvalida<string>(nomePP);
-			cout << endl;
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	ER.removePonto(indexPP);
-
-	cout << "Ponto de partilha removido com sucesso !" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-}
 
 /**
  * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
@@ -1772,111 +1206,6 @@ void removeBike(Sistema & ER) {
 
 }
 
-/**
- * Apresenta a informacao de todos os utentes registados (nome, id, tipo e localizacao) e  pede para
- * introduzir o id do utente que se pretende remover e chama o metodo removeUtente
- * da classe Sistema.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void removeUT(Sistema & ER) {
-
-	mensagemInicial();
-
-	cout << "Remove utente " << endl << endl;
-
-	if(ER.getUtentes().size() == 0)
-	{
-		cout << "Neste momento não existem utentes !" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	cout << left << setw(15) << "   Nome" << setw(6) << " ID" << setw(27) << " Tipo de utente" << setw (20) << " GPS" << endl;
-
-	for (unsigned int i=0 ; i<ER.getUtentes().size() ; i++)
-	{
-		cout << "-> " << setw(13) << ER.getUtentes().at(i)->getNome();
-		cout << setw(10) << ER.getUtentes().at(i)->getId();
-		cout << setw(14) <<ER.getUtentes().at(i)->getTipoUtente();
-		cout << '(' << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getX();
-		cout << "," << setw(9) << ER.getUtentes().at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
-	}
-
-	cout << endl;
-
-	string id;
-	int idUT {};
-	int indexUT {-1};
-
-	cin.ignore(1000,'\n');
-
-	//Verifica o nome do utente que quer remover
-	while(1)
-	{
-		try {
-			cout << "ID do Utente: " ;
-			getline(cin,id);
-			if(valid_number(id) == false)
-				throw OpcaoInvalida<string>(id);
-
-			idUT = stoi(id);
-			for(unsigned int i = 0; i < ER.getUtentes().size(); i++)
-			{
-				if(ER.getUtentes().at(i)->getId() == idUT)
-					indexUT = i;
-			}
-
-			if(indexUT == -1)
-				throw OpcaoInvalida<int>(idUT);
-
-			break;
-		}
-		catch (OpcaoInvalida<int> &op){
-
-			cout << "ID inválido (" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "ID inválido (" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	ER.removeUtente(indexUT);
-
-	if((unsigned int)indexUT == ER.getUtentes().size())
-	{
-
-		ER.getUtentes().at(0)->setLastId();
-
-		cout << endl << "Utente removido com sucesso !" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	for(unsigned int i = indexUT; i < ER.getUtentes().size(); i++)
-	{
-		ER.getUtentes().at(i)->setIDBackward();
-	}
-
-	ER.getUtentes().at(0)->setLastId();
-
-	cout << endl << "Utente removido com sucesso !" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-}
-
-
 /////////////////////////
 // INTERFACES -> MENUS //
 /////////////////////////
@@ -1937,7 +1266,8 @@ void openInterface(Sistema & ER){
 		{
 		case 1:
 			system("cls");
-			registo_utente(ER);
+			mensagemInicial();
+			ER.addNewUtente();
 			break;
 		case 2:
 			system("cls");
@@ -2121,7 +1451,7 @@ void menu_interface(Sistema &ER){
 			break;
 		case 9:
 			system("cls");
-			infoER(ER);
+			ER.infoER();
 			break;
 		case 10:
 			if(ER.getUtentes().at(index)->getAvailable() == false)
@@ -2253,23 +1583,27 @@ void admin_interface(Sistema &ER) {
 			break;
 		case 2:
 			system("cls");
-			addPP(ER);
+			mensagemInicial();
+			ER.addPontoPartilha();
 			break;
 		case 3:
 			system("cls");
+			mensagemInicial();
 			removeBike(ER);
 			break;
 		case 4:
 			system("cls");
-			removePP(ER);
+			ER.removePonto();
 			break;
 		case 5:
 			system("cls");
-			removeUT(ER);
+			mensagemInicial();
+			ER.removeUtente();
 			break;
 		case 6:
 			system("cls");
-			infoER(ER);
+			mensagemInicial();
+			ER.infoER();
 			break;
 		case 7:
 			cout << endl;

@@ -20,3 +20,8 @@
 
 
 using namespace std;
+
+//Prototipos
+bool valid_word(string word);
+bool valid_number_double(string number);
+bool valid_number(string number);
