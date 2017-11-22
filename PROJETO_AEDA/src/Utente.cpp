@@ -2,8 +2,13 @@
 
 int Utente::lastId = 0;
 
+
+///////////////////////
+//// CLASSE UTENTE ////
+///////////////////////
+
 /**
- * Construtor padrao da classe Bicicleta
+ * Construtor padrao da classe Utente
  */
 Utente::Utente() : id(++lastId){this->bike = 0;}
 
@@ -13,10 +18,9 @@ Utente::Utente() : id(++lastId){this->bike = 0;}
  * @param tipoUtente tipo de utente (socio ou regular)
  * @param spot localizacao atual do utente
  */
-Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
+Utente::Utente(string nome,Localizacao spot) : id(++lastId)
 {
 	this->nome = nome;
-	this->tipoUtente = tipoUtente;
 	this->bike = 0;
 	local = spot;
 
@@ -28,65 +32,202 @@ Utente::Utente(string nome, string tipoUtente,Localizacao spot) : id(++lastId)
  * @param ut utilizacao = aluger da bicicleta em questao
  * @param bikeType tipo de bicicleta a alugar
  */
-void Utente::alugaBicicleta(Sistema &ER, string bikeType, Utilizacao ut, int idPP) {
-
-	if(bikeType == "Urbana")
-		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
-	else if(bikeType == "Urbana Simples")
-		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
-	else if(bikeType == "Corrida")
-		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
-	else
-		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
-
-	setAvailable();
-
-	ER.getPontosPartilha().at(idPP)->removeBike(getBike());
-
-
-	if(getTipoUtente() == "Socio")
-	{
-		setUtilizacoes(ut);
-
-	}
-	else
-	{
-		setHistoric(ut);
-	}
-
-	return;
-}
+//void Utente::alugaBicicleta(Sistema &ER, string bikeType, Utilizacao ut, int idPP) {
+//
+//	if(bikeType == "Urbana")
+//		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(0).at(0));
+//	else if(bikeType == "Urbana Simples")
+//		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(1).at(0));
+//	else if(bikeType == "Corrida")
+//		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(2).at(0));
+//	else
+//		setBike(ER.getPontosPartilha().at(idPP)->getBikes().at(3).at(0));
+//
+//	setAvailable();
+//
+//	ER.getPontosPartilha().at(idPP)->removeBike(getBike());
+//
+//
+//	if(getTipoUtente() == "Socio")
+//	{
+//		setUtilizacoes(ut);
+//
+//	}
+//	else
+//	{
+//		setHistoric(ut);
+//	}
+//
+//	return;
+//}
 
 /**
  * Remove a bicicleta do utente e coloca-a no ponto de partilha, nao lotado, mais proximo do utente
  * @param index_distancias vetor de indice dos pontos de partilha ordenados por distancia
  * @return Retorna o índice do ponto de partilha afetado
  */
-int Utente::removeBicicleta(Sistema &ER, vector<int> index_distancias) {
+//int Utente::removeBicicleta(Sistema &ER, vector<int> index_distancias) {
+//
+//	int index_pp {-1};
+//
+//	setAvailable();
+//
+//	for(unsigned int i = 0; i < index_distancias.size(); i++)
+//	{
+//		int lotacao {0};
+//
+//		for(unsigned int k = 0; k < ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
+//		{
+//			lotacao += ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
+//		}
+//
+//		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
+//		{
+//			index_pp = index_distancias.at(i);
+//			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(getBike());
+//			setBike(0);
+//			break;
+//		}
+//	}
+//	return index_pp;
+//}
 
-	int index_pp {-1};
 
-	setAvailable();
+/////////////////
+// METODOS GET //
+/////////////////
 
-	for(unsigned int i = 0; i < index_distancias.size(); i++)
-	{
-		int lotacao {0};
-
-		for(unsigned int k = 0; k < ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
-		{
-			lotacao += ER.getPontosPartilha().at(index_distancias.at(i))->getNumberOfBikes().at(k);
-		}
-
-		if(ER.getPontosPartilha().at(index_distancias.at(i))->getCapacidade() > lotacao)
-		{
-			index_pp = index_distancias.at(i);
-			ER.getPontosPartilha().at(index_distancias.at(i))->adicionaBike(getBike());
-			setBike(0);
-			break;
-		}
-	}
-	return index_pp;
+/**
+ * @return Retorna o identificador do ultimo utente criado
+ */
+int Utente::getLastId()
+{
+	return lastId;
 }
+
+/**
+ * @return Retorna o identificador do utente
+ */
+int Utente::getId() const {
+	return id;
+}
+
+/**
+ * @return Retorna o nome do utente
+ */
+string Utente::getNome() const {
+	return nome;
+}
+
+/**
+ * @return Retorna localizacao do utente
+ */
+Localizacao Utente::getLocalizacao() const {
+	return local;
+}
+
+/**
+ * Retorna um apontador para bicicleta que o utente está a usar.
+ * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0
+ *
+ * @return Retorna um apontador para bicicleta
+ */
+Bicicleta* Utente::getBike() const {
+	return bike;
+}
+
+/**
+ * @return Retorna valor do atributo disponivel do utente
+ */
+bool Utente::getAvailable() const {
+	return disponivel;
+}
+
+/**
+ * @return Retorna vetor de utilizacoes ja liquidadas do utente
+ */
+vector<Utilizacao> Utente::getHistorico() {
+	return this->historico;
+}
+
+/////////////////
+// METODOS SET //
+/////////////////
+
+/**
+ * Decrementa o numero de identificacao do ultimo utente
+ */
+void Utente::setLastId()
+{
+	lastId--;
+}
+
+/**
+ * Decrementa o numero de identificacao do utente
+ */
+void Utente::setIDBackward() {
+	this->id--;
+}
+
+/**
+ * Altera o numero de identificacao do utente
+ * @param identificacao novo numero de identificacao
+ */
+void Utente::setID(int identificacao)
+{
+	id = identificacao;
+}
+
+/**
+ * Altera a localizacao do utente
+ * @param spot nova localizacao
+ */
+void Utente::setUtenteLocation(Localizacao spot) {
+	local = spot;
+	return;
+}
+
+
+void Utente::setAvailable() {
+
+	if(disponivel == false)
+		disponivel = true;
+	else
+		disponivel = false;
+}
+
+/**
+ * Atribui a bicicleta ao utente
+ * @param bike bicicleta que vai usar
+ */
+void Utente::setBike(Bicicleta* bike) {
+	this->bike = bike;
+}
+
+/**
+ * Acrescenta uma utilizcao ao historico do utente
+ * @param ut utilizacao a acrescentar
+ */
+void Utente::setHistoric(Utilizacao ut) {
+	this->historico.push_back(ut);
+}
+
+
+
+
+
+
+
+
+
+//////////////////////
+//// CLASSE SOCIO ////
+//////////////////////
+
+Socio::Socio() : Utente{} {}
+
+Socio::Socio(string nome,Localizacao spot) : Utente{nome, spot} {}
+
 
 /**
  * Paga a mensalidade do mes selecionedo, removendo as ulizacoes correspondestes a esse mes do vetor utilizacoes
@@ -94,7 +235,7 @@ int Utente::removeBicicleta(Sistema &ER, vector<int> index_distancias) {
  * @param ano do qual pretende pagar um mes
  * @param mes que pretende pagar
  */
-void Utente::pagaMensalidade(unsigned int ano, unsigned int mes) {
+void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 
 	unsigned int numUseHours{0};
 	double prestacao{-1};
@@ -177,159 +318,53 @@ void Utente::pagaMensalidade(unsigned int ano, unsigned int mes) {
 }
 
 
-/////////////////
-// METODOS GET //
-/////////////////
-
 /**
- * @return Retorna o identificador do ultimo utente criado
+ * @return Retorna o tipo do utente (socio)
  */
-int Utente::getLastId()
-{
-	return lastId;
-}
-
-/**
- * @return Retorna o identificador do utente
- */
-int Utente::getId() const {
-	return id;
-}
-
-/**
- * @return Retorna o nome do utente
- */
-string Utente::getNome() const {
-	return nome;
-}
-
-/**
- * @return Retorna o tipo do utente (socio ou regular)
- */
-string Utente::getTipoUtente() const {
-
-	return tipoUtente;
-}
-
-/**
- * @return Retorna localizacao do utente
- */
-Localizacao Utente::getLocalizacao() const {
-	return local;
-}
-
-/**
- * Retorna um apontador para bicicleta que o utente está a usar.
- * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0
- *
- * @return Retorna um apontador para bicicleta
- */
-Bicicleta* Utente::getBike() const {
-	return bike;
+string Socio::getTipoUtente() const {
+	return "Socio";
 }
 
 /**
  * @return Retorna vetor de utilizacoes por pagar do utente (so para socios)
  */
-vector<Utilizacao> Utente::getUtilizacoes() {
+vector<Utilizacao> Socio::getUtilizacoes() {
 	return utilizacoes;
 }
 
-/**
- * @return Retorna valor do atributo disponivel do utente
- */
-bool Utente::getAvailable() const {
-	return disponivel;
-}
-
-/**
- * @return Retorna vetor de utilizacoes ja liquidadas do utente
- */
-vector<Utilizacao> Utente::getHistorico() {
-	return this->historico;
-}
-
-/////////////////
-// METODOS SET //
-/////////////////
-
-/**
- * Decrementa o numero de identificacao do ultimo utente
- */
-void Utente::setLastId()
-{
-	lastId--;
-}
-
-/**
- * Decrementa o numero de identificacao do utente
- */
-void Utente::setIDBackward() {
-	this->id--;
-}
-
-/**
- * Altera o numero de identificacao do utente
- * @param identificacao novo numero de identificacao
- */
-void Utente::setID(int identificacao)
-{
-	id = identificacao;
-}
-
-/**
- * Altera a localizacao do utente
- * @param spot nova localizacao
- */
-void Utente::setUtenteLocation(Localizacao spot) {
-	local = spot;
-	return;
-}
-
-/**
- * Altera o tipo do utente
- * @param tipo novo tipo de utente
- */
-void Utente::setTipoUtente(string tipo) {
-
-	this->tipoUtente = tipo;
-
-	return;
-}
-
-void Utente::setAvailable() {
-
-	if(disponivel == false)
-		disponivel = true;
-	else
-		disponivel = false;
-}
-
-/**
- * Atribui a bicicleta ao utente
- * @param bike bicicleta que vai usar
- */
-void Utente::setBike(Bicicleta* bike) {
-	this->bike = bike;
-}
-
-/**
- * Acrescenta uma utilizcao ao historico do utente
- * @param ut utilizacao a acrescentar
- */
-void Utente::setHistoric(Utilizacao ut) {
-	this->historico.push_back(ut);
-}
 
 /**
  * Acrescenta uma utilizcao as utilizacoes do utente
  * @param ut utilizacao a acrescentar
  */
-void Utente::setUtilizacoes(Utilizacao ut) {
+void Socio::setUtilizacoes(Utilizacao ut) {
 
 	this->utilizacoes.push_back(ut);
 }
 
+
+
+
+
+
+////////////////////////
+//// CLASSE REGULAR ////
+////////////////////////
+
+/**
+ * Construtor padrao da classe Bicicleta
+ */
+Regular::Regular() : Utente{} {}
+
+Regular::Regular(string nome,Localizacao spot) : Utente{nome, spot} {}
+
+
+/**
+ * @return Retorna o tipo do utente (regular)
+ */
+string Regular::getTipoUtente() const {
+	return "Regular";
+}
 
 
 

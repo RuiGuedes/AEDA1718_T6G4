@@ -1,6 +1,5 @@
 #include "Includes.h"
 #include "Sistema.h"
-#include "Exceções.h"
 
 using namespace std;
 
@@ -65,15 +64,33 @@ void checkinSys(Sistema & ER){
 	}
 
 	while(!f_utentes.eof()){
-		Utente u1;
-		f_utentes >> u1;
-		if (u1.getNome()!=""){
-			Utente * u = new Utente(u1);
-			ER.addNewUtente(u);
+		char tipoUtente ,b;
+		tipoUtente = f_utentes.get();
+		b = f_utentes.get();
+
+		if(tipoUtente == 'R'){
+			Regular u1;
+			f_utentes >> u1;
+			if (u1.getNome()!=""){
+				Utente * u = new Regular(u1);
+				ER.addNewUtente(u);
+			}
+			else{
+				Utente::setLastId();
+			}
 		}
-		else{
-			Utente::setLastId();
+		else {
+			Socio u1;
+			f_utentes >> u1;
+			if (u1.getNome()!=""){
+				Utente * u = new Socio(u1);
+				ER.addNewUtente(u);
+			}
+			else{
+				Utente::setLastId();
+			}
 		}
+
 		f_utentes.ignore(100,'\n');
 	}
 
@@ -170,7 +187,14 @@ void checkoutSys(Sistema & ER){
 	}
 
 	for(unsigned int it=0 ; it<ER.getUtentes().size() ; it++){
-		f_utentes << *(ER.getUtentes().at(it)) << endl;
+		if(*(ER.getUtentes().at(it))->getTipoUtente() == "Socio" ){
+			Socio s = *(ER.getUtentes().at(it));
+			f_utentes << s << endl;
+		}
+		else {
+			Regular r = *(ER.getUtentes().at(it));
+			f_utentes << r << endl;
+		}
 	}
 
 	f_utentes.close();

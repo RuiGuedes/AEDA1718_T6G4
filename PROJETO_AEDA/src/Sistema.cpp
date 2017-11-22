@@ -125,7 +125,11 @@ void Sistema::addNewUtente() {
 	spot.setX(coordX);
 	spot.setY(coordY);
 
-	Utente* u12 = new Utente(nome,tipoUtente,spot);
+	Utente* u12;
+	if(tipoUtente == "Socio")
+		u12 = new Socio(nome, spot);
+	else
+		u12 = new Regular(nome, spot);
 
 	utentes.push_back(u12);
 
@@ -611,7 +615,7 @@ void Sistema::System_Manager(unsigned int index, string bikeType) {
  *  e por fim, os fundadores.
  * @param ER sistema em execucao
  */
-void Sistema::infoER() {
+void Sistema::infoER(){
 
 	cout << "Informações:" << endl << endl;
 
@@ -681,6 +685,13 @@ void Sistema::infoER() {
 }
 
 
+void Sistema::addNewUtente(Utente* u1){
+	utentes.push_back(u1);
+}
+
+void Sistema::addPontoPartilha(PontoPartilha* p){
+	pontosPartilha.push_back(p);
+}
 
 
 /////////////////

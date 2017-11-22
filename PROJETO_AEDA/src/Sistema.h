@@ -16,7 +16,11 @@ public:
 	void removePonto();
 	void removeUtente();
 	void System_Manager(unsigned int index, string bikeType);
-	void infoER() const;
+	void infoER();
+	//Metodos para extracao dos ficheiros
+	void addNewUtente(Utente* u1);
+	void addPontoPartilha(PontoPartilha* p);
+
 
 	//Métodos Get
 	vector<Utente* > getUtentes();

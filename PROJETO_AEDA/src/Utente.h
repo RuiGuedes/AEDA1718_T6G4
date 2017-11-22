@@ -13,28 +13,23 @@ protected:
 	static int lastId;		/**< Numero de Identificacao do ultimo utente registado */
 	int id;					/**< Numero de Identificacao do utente */
 	string nome;			/**< Nome do utente */
-	string tipoUtente;		/**< Tipo do utente (Socio ou Regular) */
 	Localizacao local;		/**< Localizacao atual do utente */
 	Bicicleta* bike;		/**< Bicicleta que o utente esta a usar, caso nao esteja a usar nenhuma, o valor de bike = 0 */
 	vector<Utilizacao> historico;	/**< Utilizacoes liquidadas do utente */
 	bool disponivel = true;			/**< Se o utente esta a usar uma bicicleta disponivel = false, caso contrario disponivel = true */
 public:
 	Utente();	/**< Necessário para o overload do operador de extração na classe utente*/
-	explicit Utente(string nome, string tipoUtente,Localizacao spot);
-	void alugaBicicleta(Sistema &ER, string bikeType, Utilizacao ut, int idPP);
-	int removeBicicleta(Sistema &ER, vector<int> index_distancias);
-	void pagaMensalidade(unsigned int ano, unsigned int mes);
-	friend ostream & operator <<(ostream & o, const Utente & u);
-	friend istream & operator >>(istream & i, Utente & u);
+	explicit Utente(string nome, Localizacao spot);
+//	void alugaBicicleta(string bikeType, Utilizacao ut, int idPP);
+//	int removeBicicleta(vector<int> index_distancias);
 
 	//Métodos Get
 	static int getLastId();
 	int getId() const;
 	string getNome() const;
-	string getTipoUtente() const;
+	virtual string getTipoUtente() const;
 	Localizacao getLocalizacao() const;
 	Bicicleta* getBike() const;
-	vector<Utilizacao> getUtilizacoes();
 	bool getAvailable() const;
 	vector<Utilizacao> getHistorico();
 
@@ -47,22 +42,34 @@ public:
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
+};
+
+
+
+
+class Socio : protected Utente {
+	vector<Utilizacao> utilizacoes;	/**<Vetor de utilizacoes por pagar */
+public:
+	Socio();
+	Socio(string nome,Localizacao spot);
+	void pagaMensalidade(unsigned int ano, unsigned int mes);
+
+	friend ostream & operator <<(ostream & o, const Socio & u);
+	friend istream & operator >>(istream & i, Socio & u);
+
+	string getTipoUtente() const;
+	vector<Utilizacao> getUtilizacoes();
+
 	void setUtilizacoes(Utilizacao ut);
 };
 
-class Socio : protected Utente {
-	vector<Utilizacao> utilizacoes;	/**<Apenas associadas aos sócios, vetor de utilizacoes por pagar */
-};
-
-
-
 /**
- * Overload do operador de insercao usado para escrever os objetos do tipo Utente nos ficheiros,
+ * Overload do operador de insercao usado para escrever os objetos do tipo Socio nos ficheiros,
  * de modo a guardar a informacao do sistema.
  */
-inline ostream& operator <<(ostream & o, const Utente & u)
+inline ostream& operator <<(ostream & o, const Socio & u)
 {
-	o << u.nome << ',' <<  u.tipoUtente << ',' << u.local << ',' ;
+	o << 'S' << ',' <<  u.nome << ',' << u.local << ',' ;
 
 	o << u.utilizacoes.size() << ',' ;
 	for (unsigned int k=0 ; k< u.utilizacoes.size() ; k++){
@@ -78,17 +85,16 @@ inline ostream& operator <<(ostream & o, const Utente & u)
 }
 
 /**
- * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utente,
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Socio,
  * de modo a recriar o sistema da ultima execucao.
  */
-inline istream& operator >>(istream & i, Utente & u)
+inline istream& operator >>(istream & i, Socio & u)
 {
 	char b1, b2, b3, b4, b5;
 	unsigned int utiliz, hist;
 	Utilizacao ut;
 
 	getline(i,u.nome,',');
-	getline(i,u.tipoUtente,',');
 	i >> u.local >> b1 >> utiliz >> b2;
 
 	for(unsigned int k=0 ; k < utiliz ; k++){
@@ -105,3 +111,58 @@ inline istream& operator >>(istream & i, Utente & u)
 
 	return i;
 }
+
+
+
+
+class Regular : protected Utente {
+public:
+	Regular();
+	Regular(string nome,Localizacao spot);
+	friend ostream & operator <<(ostream & o, const Regular & u);
+	friend istream & operator >>(istream & i, Regular & u);
+
+	int pagamento();
+	string getTipoUtente() const;
+};
+
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Regular nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
+inline ostream& operator <<(ostream & o, const Regular & u)
+{
+	o << 'R' << ',' <<  u.nome << ',' << u.local << ',' ;
+
+	o << u.historico.size() << ',' ;
+	for (unsigned int k=0 ; k< u.historico.size() ; k++){
+		o << u.historico.at(k) << ';' ;
+	}
+
+	return o;
+}
+
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Regular,
+ * de modo a recriar o sistema da ultima execucao.
+ */
+inline istream& operator >>(istream & i, Regular & u)
+{
+	char b1, b2, b3, b4;
+	unsigned int utiliz, hist;
+	Utilizacao ut;
+
+	getline(i,u.nome,',');
+	i >> u.local >> b1 >> utiliz >> b2;
+
+	i >> hist >> b3;
+
+	for(unsigned int k=0 ; k < hist ; k++){
+		i >> ut >> b4;
+		u.historico.push_back(ut);
+	}
+
+	return i;
+}
+
+
