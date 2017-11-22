@@ -20,8 +20,8 @@ protected:
 public:
 	Utente();	/**< Necessário para o overload do operador de extração na classe utente*/
 	explicit Utente(string nome, Localizacao spot);
-//	void alugaBicicleta(string bikeType, Utilizacao ut, int idPP);
-//	int removeBicicleta(vector<int> index_distancias);
+	void alugaBicicleta(Bicicleta* b, Utilizacao ut);
+	Bicicleta* removeBicicleta(vector<int> index_distancias);
 
 	//Métodos Get
 	static int getLastId();
@@ -31,7 +31,10 @@ public:
 	Localizacao getLocalizacao() const;
 	Bicicleta* getBike() const;
 	bool getAvailable() const;
-	vector<Utilizacao> getHistorico();
+	vector<Utilizacao> getHistorico() const;
+	virtual vector<Utilizacao> getUtilizacoes() const =0;
+	void displayHistoric() const;
+	virtual void displayPagPendentes(int index);
 
 	//Métodos Set
 	static void setLastId();
@@ -42,25 +45,29 @@ public:
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
+	virtual void setUtilizacoes(Utilizacao ut){};
+	virtual void efetuaPag(int index);
+	void updateLocation(int index);
 };
 
 
 
-
-class Socio : protected Utente {
+class Socio : public Utente {
 	vector<Utilizacao> utilizacoes;	/**<Vetor de utilizacoes por pagar */
 public:
 	Socio();
 	Socio(string nome,Localizacao spot);
 	void pagaMensalidade(unsigned int ano, unsigned int mes);
+	void displayPagPendentes(int index);
 
 	friend ostream & operator <<(ostream & o, const Socio & u);
 	friend istream & operator >>(istream & i, Socio & u);
 
 	string getTipoUtente() const;
-	vector<Utilizacao> getUtilizacoes();
+	vector<Utilizacao> getUtilizacoes() const;
 
 	void setUtilizacoes(Utilizacao ut);
+	void efetuaPag(int index);
 };
 
 /**
@@ -115,14 +122,16 @@ inline istream& operator >>(istream & i, Socio & u)
 
 
 
-class Regular : protected Utente {
+class Regular : public Utente {
 public:
 	Regular();
 	Regular(string nome,Localizacao spot);
+	void displayPagPendentes(int index);
+	void efetuaPag(int index);
+
 	friend ostream & operator <<(ostream & o, const Regular & u);
 	friend istream & operator >>(istream & i, Regular & u);
 
-	int pagamento();
 	string getTipoUtente() const;
 };
 

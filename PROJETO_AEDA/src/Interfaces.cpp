@@ -1,20 +1,20 @@
 #include "Includes.h"
 #include "Sistema.h"
 
-/**
- * Procura um valor x num vetor v de elementos comparaveis com os operadores de comparacao.
- * @param v vetor de elementos
- * @param x valor a procurar no vetor
- * @return Retorna o indice da primeira ocorrencia de x em v, se encontrar; senao, retorna -1.
- */
-template <class T>
-int SequentialSearch(const vector<T> &v, T x)
-{
-	for (unsigned int i = 0; i < v.size(); i++)
-		if (v[i] == x)
-			return i;// encontrou
-	return -1; // não encontrou
-}
+///**
+// * Procura um valor x num vetor v de elementos comparaveis com os operadores de comparacao.
+// * @param v vetor de elementos
+// * @param x valor a procurar no vetor
+// * @return Retorna o indice da primeira ocorrencia de x em v, se encontrar; senao, retorna -1.
+// */
+//template <class T>
+//int SequentialSearch(const vector<T> &v, T x)
+//{
+//	for (unsigned int i = 0; i < v.size(); i++)
+//		if (v[i] == x)
+//			return i;// encontrou
+//	return -1; // não encontrou
+//}
 
 
 /////////////////////////////////////////////////////
@@ -27,42 +27,6 @@ void admin_interface(Sistema &BS);
 /////////////////////////////////////
 // IMPLEMENTAÇÃO DE FUNCOES GERAIS //
 /////////////////////////////////////
-
-/**
- * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
- * de distancia ao utente com indice = index.
- *
- * @param ER sistema em execucao
- * @param index indice do utente
- * @return Retorna um vetor com os indices dos pontos de partilha
- */
-vector<int> ExtraData(Sistema &ER,int index) {
-
-	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao utente com indice = index
-	vector<double> distancias;
-	vector<int> indices;
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-	{
-		distancias.push_back(ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(i)->getLocal()));
-	}
-
-	sort(distancias.begin(),distancias.end());
-
-	for(unsigned int i = 0; i < distancias.size(); i++)
-	{
-		for(unsigned int k = 0; k < ER.getPontosPartilha().size(); k++)
-		{
-			if(distancias.at(i) == ER.getUtentes().at(index)->getLocalizacao().distancia(ER.getPontosPartilha().at(k)->getLocal()))
-			{
-				indices.push_back(k);
-			}
-		}
-	}
-
-	return indices;
-
-}
 
 /**
  * Verifica se a string number contem apenas digitos ou se contem simbolos ou caracteres nao
@@ -172,7 +136,6 @@ int ExistID(Sistema & sys, int identificacao) {
  */
 void NearestPP(Sistema &ER,int index) {
 
-	mensagemInicial();
 	cout << "Pontos de partilha mais próximos: " << endl << endl;
 
 	vector<double> distancias;
@@ -201,1009 +164,15 @@ void NearestPP(Sistema &ER,int index) {
 
 	cout << endl;
 
-	system("pause");
-	system("cls");
-	return;
-
-}
-
-
-/**
- * Apresenta os passos e pede ao utente que preencha os campos apresentados
- * de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta,
- * numero de horas e data).
- * E chamado o metodo da classe utente alugaBicicleta.
- * O aluguer e feito no ponto de partilha mais proximo do utente.
- * Caso o utente seja Regular e apresentado o total a pagar pelo aluguer.
- * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- * @param distancias vetor de indices dos pontos de partilha por ordem crescente de distancia ao utente
- */
-void alugaBike(Sistema &ER,int index,vector<int> distancias) {
-
-	mensagemInicial();
-
-	if(ER.getUtentes().at(index)->getAvailable() == false)
-	{
-		cout << "Não é possível alugar duas bicicletas em simultâneo !"  << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-
-	}
-	else
-	{
-		cout << "Aluga Bicicleta: " << endl << endl;
-
-		cout << "Preencha os seguintes campos: " << endl << endl;
-		string bikeType;
-		Data d1;
-		int numHours{};
-		int value {};
-		string option {};
-
-		cout << "Tipos de bicicleta: " << endl;
-		cout << "     1 - Urbana" << endl;
-		cout << "     2 - Urbana Simples" << endl;
-		cout << "     3 - Corrida" << endl;
-		cout << "     4 - Infantil" << endl << endl;
-
-		//Executa até obter um tipo de bicicleta válido
-		while(1)
-		{
-			try{
-				cout << endl << "Introduza uma opção [1-4]: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				value = stoi(option);
-				if(value < 1 || value > 4)
-					throw OpcaoInvalida<int>(value);
-
-				break;
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
-
-		//Verifica o tipo de bicicleta selecionada
-		if(value == 1)
-			bikeType = "Urbana";
-		else if(value == 2)
-			bikeType = "Urbana Simples";
-		else if(value == 3)
-			bikeType = "Corrida";
-		else
-			bikeType = "Infantil";
-
-		//Executa até obter um número de horas válido
-		while(1)
-		{
-			try{
-				cout << endl << "Número de horas [1-24]: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				value = stoi(option);
-				if(value < 1 || value > 24)
-					throw OpcaoInvalida<int>(value);
-
-				numHours = value;
-				break;
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Número de horas inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Número de horas inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
-
-		//Executa até obter um ano válido
-		while(1)
-		{
-			try{
-				cout << endl << "Ano [2017 - ...]: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				value = stoi(option);
-				if(value < 2017)
-					throw OpcaoInvalida<int>(value);
-
-				d1.setAno(value);
-				break;
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
-
-		//Executa até obter um mês válido
-		while(1)
-		{
-			try{
-				cout << endl << "Mês [1-12]: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				value = stoi(option);
-				if(value < 1 || value > 12)
-					throw OpcaoInvalida<int>(value);
-
-				d1.setMes(value);
-				break;
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
-
-		/* Executa até obter um dia válido
-		 * Considera que fevereiro tem 28 dias
-		 */
-		while(1)
-		{
-			try{
-				cout << endl << "Dia: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				value = stoi(option);
-				if(d1.getMes() == 2)
-				{
-					if(value < 1 || value > 28)
-						throw OpcaoInvalida<int>(value);
-
-					d1.setDia(value);
-					break;
-				}
-				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
-				{
-					if(value < 1 || value > 31)
-						throw OpcaoInvalida<int>(value);
-
-					d1.setDia(value);
-					break;
-				}
-				else
-				{
-					if(value < 1 || value > 30)
-						throw OpcaoInvalida<int>(value);
-
-					d1.setDia(value);
-					break;
-				}
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Dia inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Dia inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
-
-		int idPP {};
-		vector<string> bikesType;
-
-		//Verifica se tem o tipo de bicicleta pretendida por ordem de distância
-		for (unsigned int i=0 ; i < distancias.size(); i++)
-		{
-			bikesType = ER.getPontosPartilha().at(distancias.at(i))->getBikeTypes();
-
-			idPP = SequentialSearch(bikesType,bikeType);
-
-			if(idPP != -1)
-			{
-				idPP = distancias.at(i);
-				break;
-			}
-
-		}
-
-		if(idPP == -1)
-		{
-			cout << endl << "Neste momento não existe nenhuma bicicleta do tipo " << bikeType << " disponível." << endl << endl;
-		}
-		else
-		{
-
-			Utilizacao p(bikeType, numHours, d1,ER.getPontosPartilha().at(idPP)->getNome(),ER.getPontosPartilha().at(idPP)->getLocal().getNome());
-			double price {0};
-			cout << idPP <<endl;
-			ER.getUtentes().at(index)->alugaBicicleta(ER,bikeType,p,idPP);
-
-
-			if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-			{
-				price = p.getPrice();
-
-			}
-
-			cout << endl;
-			system("cls");
-
-			mensagemInicial();
-
-			cout << "Aluga Bicicleta: " << endl << endl;
-			cout << "Resumo do aluguer: " << endl << endl;
-
-			p.displayUtilizacao();
-
-			if(price !=0)
-				cout << "Montante: " << price << "€" << endl;
-
-			ER.System_Manager(idPP,bikeType);
-
-			cout << endl << "Bicicleta alugada com sucesso !" << endl << endl;
-
-		}
-
-		system("pause");
-		system("cls");
-		return;
-	}
-}
-
-/**
- * Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta.
- * A devolucao e feita no ponto de partilha mais proximo do utente.
- * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void devolveBike(Sistema &ER,int index) {
-
-	mensagemInicial();
-
-	if(ER.getUtentes().at(index)->getAvailable() == true)
-	{
-		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	int index_pp {-1};
-
-	index_pp = ER.getUtentes().at(index)->removeBicicleta(ER,ExtraData(ER,index));
-
-	cout << "Devolve bicicleta: " << endl << endl;
-	cout << "Resumo do último aluguer: " << endl << endl;
-
-	string bikeType;
-
-	//Verifica o tipo de utente e apresenta a respetiva informação
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Socio")
-	{
-		Utilizacao ut = ER.getUtentes().at(index)->getUtilizacoes().at(ER.getUtentes().at(index)->getUtilizacoes().size() - 1);
-		bikeType = ut.getBikeType();
-		ut.displayUtilizacao();
-	}
-	else
-	{
-		Utilizacao ut = ER.getUtentes().at(index)->getHistorico().at(ER.getUtentes().at(index)->getHistorico().size() - 1);
-		ut.displayUtilizacao();
-		bikeType = ut.getBikeType();
-		cout << "Montante: " << ut.getPrice() << "€" << endl;
-	}
-
-	cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << ER.getPontosPartilha().at(index_pp)->getNome() << " !" << endl << endl;
-
-	ER.System_Manager(index_pp,bikeType);
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
-/**
- * Imprime no ecra o historico do utente.
- * Caso  o historico esteja vazio e apresentada uma mensagem
- * Se o utente é Regular, tambem e apresentado o total pago por cada utilizacao.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void displayHistoric(Sistema &ER,int index) {
-
-	mensagemInicial();
-
-	cout << "Histórico: " << endl << endl;
-
-	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getHistorico().size(); i++)
-	{
-		ER.getUtentes().at(index)->getHistorico().at(i).displayUtilizacao();
-		if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-			cout << "Montante: " << ER.getUtentes().at(index)->getHistorico().at(i).getPrice() << "€" << endl;
-		cout << endl;
-	}
-
-	system("pause");
-	system("cls");
-
-}
-
-/**
- * Imprime no ecra as utilizacoes por pagar do utente.
- * Esta opcao e apenas para socios. Se um utente regular acede a esta opcao,
- * e-lhe apresentada uma mensagem.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void displayPagPendentes(Sistema &ER,int index){
-
-	mensagemInicial();
-
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular")
-		cout << "Neste tipo de utente [Regular] não é possível ter pagamentos pendentes !" << endl << endl;
-	else
-	{
-		if(ER.getUtentes().at(index)->getUtilizacoes().size() != 0)
-		{
-			cout << "Pagamentos pendentes:" << endl << endl;
-
-			for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-			{
-				ER.getUtentes().at(index)->getUtilizacoes().at(i).displayUtilizacao();
-				cout << endl;
-			}
-		}
-		else
-		{
-			cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
-		}
-	}
-
-	system("pause");
-	system("cls");
 	return;
 }
 
-/**
- * Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes
- * por saldar, e depois do utente selecionar o ano, e-lhe apresentado os meses que pode tem em divida
- * depos de selecionar chama-se o metodo da classe utente pagaMensalidade que calcula a mensalidade
- * consoante o numero de horas de uso nesse mes (desconto) e consoante o tipo de bicicletas alugadas
- * (ver tabela de mensalidades (infoER)).
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void efetuaPag(Sistema &ER,int index) {
-
-	mensagemInicial();
-	cout << "Efetua pagamento" << endl << endl;
-
-	unsigned int ano{}, mes{};
-	string option {};
-	vector<unsigned int> meses;
-	vector<unsigned int> anos;
-
-	if(ER.getUtentes().at(index)->getTipoUtente() == "Regular"){
-		cout << "O pagamento já foi feito na altura do aluguer!" << endl << endl;
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	if(ER.getUtentes().at(index)->getAvailable() == false)
-	{
-		cout << "Não é possível efetuar o pagamento uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	else if(ER.getUtentes().at(index)->getUtilizacoes().size() == 0){
-		cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	//Verifica os anos com mensalidades em atraso
-	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-	{
-
-		if(anos.size() == 0)
-			anos.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno());
-
-		bool cond {false};
-		for(unsigned int k = 0; k < anos.size(); k++)
-		{
-			if(anos.at(k) == ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno())
-				cond = true;
-		}
-
-		if(cond == false)
-			anos.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno());
-
-		cond = false;
-
-	}
-
-	//Organiza o vetor "anos" por ordem crescente
-	sort(anos.begin(),anos.end());
-
-	cout << "Anos com mensalidades em atraso: " << endl;
-	for(unsigned int i = 0; i < anos.size(); i++)
-	{
-		cout << "-> " << anos.at(i) << endl;
-	}
-
-	cout << endl;
-
-	//Executa até obter um ano válido
-	while(1)
-	{
-		try{
-			cout << "Liquidação de mensalidades do ano: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			ano = stoi(option);
-			if(ano < 2017)
-				throw OpcaoInvalida<int>(ano);
-
-			cout << endl;
-			break;
-		}
-		catch (OpcaoInvalida<int> &op){
-
-			cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	//Verifica meses de utilização do respetivo ano
-	for(unsigned int i = 0; i < ER.getUtentes().at(index)->getUtilizacoes().size(); i++)
-	{
-		if(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getAno() == ano)
-		{
-			if(meses.size() == 0)
-				meses.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes());
-
-			bool cond {false};
-			for(unsigned int k = 0; k < meses.size(); k++)
-			{
-				if(meses.at(k) == ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes())
-					cond = true;
-			}
-
-			if(cond == false)
-				meses.push_back(ER.getUtentes().at(index)->getUtilizacoes().at(i).getData().getMes());
-
-			cond = false;
-		}
-	}
-
-	if(meses.size() == 0)
-	{
-		cout << "Este utente não possui qualquer pagamento pendente no ano " << ano << " ! " << endl << endl;
-		system("pause");
-		system("cls");
-		return;
-	}
-	else
-	{
-		cout << "Meses com mensalidades em atraso: " << endl;
-		for(unsigned int i = 0; i < meses.size(); i++)
-		{
-			if(meses.at(i) == 1)
-				cout << "1 - Janeiro" << endl;
-			else if(meses.at(i) == 2)
-				cout << "2 - Fevereiro" << endl;
-			else if(meses.at(i) == 3)
-				cout << "3 - Março" << endl;
-			else if(meses.at(i) == 4)
-				cout << "4 - Abril" << endl;
-			else if(meses.at(i) == 5)
-				cout << "5 - Maio" << endl;
-			else if(meses.at(i) == 6)
-				cout << "6 - Junho" << endl;
-			else if(meses.at(i) == 7)
-				cout << "7 - Julho" << endl;
-			else if(meses.at(i) == 8)
-				cout << "8 - Agosto" << endl;
-			else if(meses.at(i) == 9)
-				cout << "9 - Setembro" << endl;
-			else if(meses.at(i) == 10)
-				cout << "10 - Outubro" << endl;
-			else if(meses.at(i) == 11)
-				cout << "11 - Novembro" << endl;
-			else if(meses.at(i) == 12)
-				cout << "12 - Dezembro" << endl;
-		}
-
-		cout << endl;
-
-		//Executa até obter um ano válido
-		while(1)
-		{
-			try{
-				cout << "Liquidação de mensalidades do mês: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				mes = stoi(option);
-
-				bool cond {false};
-
-				for(unsigned int i = 0; i < meses.size(); i++)
-				{
-					if(meses.at(i) == mes)
-					{
-						cond = true;
-						break;
-					}
-				}
-
-				if(cond == false)
-					throw OpcaoInvalida<int>(mes);
-
-				cout << endl;
-				break;
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
-	}
-
-	ER.getUtentes().at(index)->pagaMensalidade(ano,mes);
-
-	system("pause");
-	system("cls");
-	return;
-}
-
-/**
- * Mostar a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente.
- * Chama o metodo da classe utente setUtenteLocation que altera a localizacao.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void updateLocation(Sistema &ER,int index) {
-
-	mensagemInicial();
-
-	cout << "Localização atual: (" << ER.getUtentes().at(index)->getLocalizacao().getX() << " , " << ER.getUtentes().at(index)->getLocalizacao().getY();
-	cout << ")" << endl << endl;
-
-	cout << "Indique as novas coordenadas GPS:" << endl;
-
-	string option;
-	double coordX { }, coordY { };
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada X: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordX = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada Y: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordY = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	Localizacao spot;
-	spot.setX(coordX);
-	spot.setY(coordY);
-
-	ER.getUtentes().at(index)->setUtenteLocation(spot);
-
-	cout << endl << "O utente encontra-se agora num novo local de coordenadas (" << coordX << " , " << coordY << ")" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
-/**
- * Apresenta o tipo de utente atual e pergunta para qual o tipo que pretende mudar, pede confirmacao da decisao e
- * chama o metodo da classe utente setTipoUtente.
- * Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void mudaTipoUT(Sistema &ER,int index){
-
-	mensagemInicial();
-	cout << "Muda tipo de utente" << endl << endl;
-
-	string option;
-	string tipo = ER.getUtentes().at(index)->getTipoUtente();
-
-	if(ER.getUtentes().at(index)->getAvailable() == false)
-	{
-		cout << "Não é possível mudar o tipo de utente uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	if((tipo == "Regular") || (ER.getUtentes().at(index)->getUtilizacoes().size() == 0))
-	{
-		cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
-
-		while(1)
-		{
-			try {
-				if(tipo == "Regular")
-					cout << "Tem a certeza que pretende mudar para Sócio [Y/N]: ";
-				else
-					cout << "Tem a certeza que pretende mudar para Regular [Y/N]: ";
-
-				cin >> option;
-				cin.ignore(1000,'\n');
-
-				if(valid_word(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				if((option == "Y") || (option == "N"))
-					break;
-
-				throw OpcaoInvalida<string>(option);
-
-			}
-			catch (OpcaoInvalida<string> &op) {
-				cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		}
-
-		if(option == "Y")
-		{
-			if(tipo == "Regular")
-			{
-				ER.getUtentes().at(index)->setTipoUtente("Socio");
-				cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Sócio" << endl << endl;
-			}
-			else
-			{
-				ER.getUtentes().at(index)->setTipoUtente("Regular");
-				cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Regular" << endl << endl;
-			}
-
-		}
-		else
-			cout << endl << "Mudança cancelada com sucesso " << endl << endl;
-
-	}
-	else
-	{
-		cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
-	}
-
-	system("pause");
-	system("cls");
-	return;
-}
 
 
 //////////////////////////////////////////////////
 // IMPLEMENTACAO DAS FUNCOES -> ADMIN INTERFACE //
 //////////////////////////////////////////////////
 
-/**
- * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
- * pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe
- * PontoPartilha, adicionaBike para adionar a bicicleta criada.
- * Se a capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void adicionaBike(Sistema & ER) {
-
-	mensagemInicial();
-
-	cout << "Adiciona bicicleta: " << endl << endl;
-
-	string biketype;
-	string nomePP;
-	int indexPP {-1};
-	int indexBB {-1};
-	int numberbikes {0};
-
-	cin.ignore(1000,'\n');
-
-	//Verifica ponto de partilha ao qual quer adicionar
-	while(1)
-	{
-		try {
-			cout << "Nome do Ponto de Partilha: " ;
-			getline(cin,nomePP);
-			//cin >> nomePP;
-			if(valid_word(nomePP) == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				if(ER.getPontosPartilha().at(i)->getNome() == nomePP)
-					indexPP = i;
-			}
-
-			if(indexPP == -1)
-				throw OpcaoInvalida<string>(nomePP);
-			cout << endl;
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	for(unsigned int i = 0; i < ER.getPontosPartilha().at(indexPP)->getBikes().size(); i++)
-	{
-
-		numberbikes += ER.getPontosPartilha().at(indexPP)->getBikes().at(i).size();
-
-	}
-
-	if(ER.getPontosPartilha().at(indexPP)->getCapacidade() == numberbikes)
-	{
-		cout << "A capacidade deste ponto de partilha já foi alcançada ! Tente adicionar a outro ponto de partilha." << endl << endl;
-
-		system("pause");
-		system("cls");
-		return;
-	}
-
-	//Verifica tipo de bicicleta a adicionar
-	while(1)
-	{
-		try {
-			cout << "Tipo de Bicicleta: " ;
-			getline(cin,biketype);
-			if(valid_word(biketype) == false)
-				throw OpcaoInvalida<string>(biketype);
-
-
-			if(biketype == "Urbana")
-			{
-				indexBB = 0;
-				nomePP = "u" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana"));
-			}
-			else if(biketype == "Urbana Simples")
-			{
-				indexBB = 1;
-				nomePP = "us" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Urbana Simples"));
-			}
-			else if(biketype == "Corrida")
-			{
-				indexBB = 2;
-				nomePP = "c" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Corrida"));
-			}
-			else if(biketype == "Infantil")
-			{
-				indexBB = 3;
-				nomePP = "i" + to_string(ER.getPontosPartilha().at(0)->getBikeNextId("Infantil"));
-			}
-
-			if(indexBB == -1)
-				throw OpcaoInvalida<string>(biketype);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	if(biketype == "Urbana")
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana");
-	else if(biketype == "Urbana Simples")
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Urbana Simples");
-	else if(biketype == "Corrida")
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Corrida");
-	else
-		ER.getPontosPartilha().at(0)->setBikeNextIdForward("Infantil");
-
-
-	Bicicleta * bc = new Bicicleta(biketype,nomePP);
-	ER.getPontosPartilha().at(indexPP)->adicionaBike(bc);
-
-	cout << endl << "Bicicleta adicionada com sucesso !" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
-
-/**
- * Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo
- * da classe PontoPartilha, removeBike.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void removeBike(Sistema & ER) {
-
-	mensagemInicial();
-
-	cout << "Remove bicicleta " << endl << endl;
-
-	string nomePP, biketype;
-	bool cond {false};
-	int indexPP {-1};
-	int indexBB {-1};
-
-	cin.ignore(1000,'\n');
-
-	//Verifica tipo de bicicleta a remover
-	while(1)
-	{
-		try {
-			cout << "Tipo de Bicicleta: " ;
-			getline(cin,biketype);
-			if(valid_word(biketype) == false)
-				throw OpcaoInvalida<string>(biketype);
-
-			if(biketype == "Urbana")
-				indexBB = 0;
-			else if(biketype == "Urbana Simples")
-				indexBB = 1;
-			else if(biketype == "Corrida")
-				indexBB = 2;
-			else if(biketype == "Infantil")
-				indexBB = 3;
-
-			if(indexBB == -1)
-				throw OpcaoInvalida<string>(biketype);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	//Verifica se o nome da bicicleta a remover existe
-	while(1)
-	{
-		try {
-			cout << "Nome da Bicicleta: " ;
-			getline(cin,nomePP);
-
-			if(valid_bike(nomePP) == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			for(unsigned int i = 0; i < ER.getPontosPartilha().size(); i++)
-			{
-				for(unsigned int k = 0; k < ER.getPontosPartilha().at(i)->getBikes().at(indexBB).size(); k++)
-				{
-					if(ER.getPontosPartilha().at(i)->getBikes().at(indexBB).at(k)->getBikeName() == nomePP)
-					{
-						indexPP = i;
-						cond = true;
-					}
-				}
-			}
-
-			if(cond == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Bicicleta inexistente(" << op.opcao << ") ! Tente novamente." << endl;
-			cond = false;
-			cin.clear();
-		}
-	}
-
-	Bicicleta * bc = new Bicicleta(biketype,nomePP);
-	ER.getPontosPartilha().at(indexPP)->removeBike(bc);
-
-	cout << endl << "Bicicleta removida com sucesso !" << endl << endl;
-
-	system("pause");
-	system("cls");
-	return;
-
-}
 
 /////////////////////////
 // INTERFACES -> MENUS //
@@ -1363,6 +332,8 @@ void menu_interface(Sistema &ER){
 
 	system("cls");
 
+	Utente* utente = ER.getUtentes().at(index);
+
 	string option;
 	int value {};
 
@@ -1418,52 +389,63 @@ void menu_interface(Sistema &ER){
 		{
 		case 1:
 			system("cls");
-			alugaBike(ER,index,ExtraData(ER,index));
+			mensagemInicial();
+			ER.alugaBike(index);
 			break;
 		case 2:
 			system("cls");
-			devolveBike(ER,index);
+			mensagemInicial();
+			ER.devolveBike(index);
 			break;
 		case 3:
 			system("cls");
-			displayHistoric(ER,index);
+			mensagemInicial();
+			utente->displayHistoric();
 			break;
 		case 4:
 			system("cls");
-			displayPagPendentes(ER,index);
+			mensagemInicial();
+			utente->displayPagPendentes(index);
 			break;
 		case 5:
 			system("cls");
-			efetuaPag(ER,index);
+			mensagemInicial();
+			utente->efetuaPag(index);
 			break;
 		case 6:
 			system("cls");
-			updateLocation(ER,index);
+			mensagemInicial();
+			utente->updateLocation(index);
 			break;
 		case 7:
 			system("cls");
+			mensagemInicial();
 			NearestPP(ER,index);
 			break;
 		case 8:
 			system("cls");
-			mudaTipoUT(ER,index);
+			mensagemInicial();
+			ER.mudaTipoUT(index);
 			break;
 		case 9:
 			system("cls");
+			mensagemInicial();
 			ER.infoER();
 			break;
 		case 10:
-			if(ER.getUtentes().at(index)->getAvailable() == false)
+			if(utente->getAvailable() == false)
 			{
 				cout << endl << "Antes de efetuar logout o utente necessita primeiramente de devolver a bicicleta !" << endl << endl;
 				value = -1;
 			}
 			else
 				cout << endl;
-			system("pause");
-			system("cls");
 			break;
 		}
+
+		system("pause");
+		system("cls");
+
 	}while(value != 10);
 
 	cout << endl;
@@ -1578,7 +560,8 @@ void admin_interface(Sistema &ER) {
 		{
 		case 1:
 			system("cls");
-			adicionaBike(ER);
+			mensagemInicial();
+			ER.adicionaBike();
 			break;
 		case 2:
 			system("cls");
@@ -1588,10 +571,11 @@ void admin_interface(Sistema &ER) {
 		case 3:
 			system("cls");
 			mensagemInicial();
-			removeBike(ER);
+			ER.removeBike();
 			break;
 		case 4:
 			system("cls");
+			mensagemInicial();
 			ER.removePonto();
 			break;
 		case 5:
@@ -1607,8 +591,9 @@ void admin_interface(Sistema &ER) {
 		case 7:
 			cout << endl;
 			break;
-
 		}
+		system("pause");
+		system("cls");
 	}while(value != 7);
 
 	system("cls");

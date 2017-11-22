@@ -64,14 +64,14 @@ void checkinSys(Sistema & ER){
 	}
 
 	while(!f_utentes.eof()){
-		char tipoUtente ,b;
+		char tipoUtente, b;
 		tipoUtente = f_utentes.get();
 		b = f_utentes.get();
 
 		if(tipoUtente == 'R'){
 			Regular u1;
 			f_utentes >> u1;
-			if (u1.getNome()!=""){
+			if (u1.getNome() != ""){
 				Utente * u = new Regular(u1);
 				ER.addNewUtente(u);
 			}
@@ -187,12 +187,12 @@ void checkoutSys(Sistema & ER){
 	}
 
 	for(unsigned int it=0 ; it<ER.getUtentes().size() ; it++){
-		if(*(ER.getUtentes().at(it))->getTipoUtente() == "Socio" ){
-			Socio s = *(ER.getUtentes().at(it));
+		if(ER.getUtentes().at(it)->getTipoUtente() == "Socio" ){
+			Socio s = *static_cast<Socio *> (ER.getUtentes().at(it));
 			f_utentes << s << endl;
 		}
 		else {
-			Regular r = *(ER.getUtentes().at(it));
+			Regular r = *static_cast<Regular *> (ER.getUtentes().at(it));
 			f_utentes << r << endl;
 		}
 	}

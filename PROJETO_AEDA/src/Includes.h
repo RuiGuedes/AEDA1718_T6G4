@@ -25,3 +25,8 @@ using namespace std;
 bool valid_word(string word);
 bool valid_number_double(string number);
 bool valid_number(string number);
+bool valid_bike(string bike);
+void mensagemInicial();
+
+template <class T>
+int SequentialSearch(const vector<T> &v, T x);
