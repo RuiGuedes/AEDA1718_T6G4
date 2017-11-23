@@ -31,7 +31,7 @@ Utilizacao::Utilizacao(string bikeType, unsigned int numHours, Data d, string pp
 /**
  * Mostra a utilizacao no ecra de modo formatado
  */
-void Utilizacao::displayUtilizacao() {
+void Utilizacao::displayUtilizacao() const{
 
 	cout << "Tipo de bicicleta: " << bikeType << endl;
 	cout << "Número de horas: " << useTime << endl;

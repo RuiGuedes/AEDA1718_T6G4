@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pontopartilha',['PontoPartilha',['../class_ponto_partilha.html',1,'']]]
+  ['localizacao',['Localizacao',['../class_localizacao.html',1,'']]]
 ];

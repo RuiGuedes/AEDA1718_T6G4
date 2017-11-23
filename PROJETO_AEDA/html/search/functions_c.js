@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['registo_5futente',['registo_utente',['../_interfaces_8cpp.html#a046ceb04d37ce2dd45193b08b066780a',1,'Interfaces.cpp']]],
-  ['removebicicleta',['removeBicicleta',['../class_utente.html#a27bd0437fc8af581a9ef853d596d5886',1,'Utente']]],
-  ['removebike',['removeBike',['../class_ponto_partilha.html#ab804a5350b00288b17b146e973d44784',1,'PontoPartilha::removeBike()'],['../_interfaces_8cpp.html#a59419cd97599373986d19fac6c8de3ae',1,'removeBike():&#160;Interfaces.cpp']]],
-  ['removeponto',['removePonto',['../class_sistema.html#a438250bd726ac2fab684a1bd420fa9f1',1,'Sistema']]],
-  ['removepp',['removePP',['../_interfaces_8cpp.html#a2fb1edf52f64f975469304ffddf6ee40',1,'Interfaces.cpp']]],
-  ['removeut',['removeUT',['../_interfaces_8cpp.html#a427fa485202a314a974ab9cbd0227a1d',1,'Interfaces.cpp']]],
-  ['removeutente',['removeUtente',['../class_sistema.html#a490268059eafd36ebbe709be6e879ae1',1,'Sistema']]]
+  ['pagamensalidade',['pagaMensalidade',['../class_socio.html#a2414b4ed278380db2c6e148f31ac2209',1,'Socio']]],
+  ['pontopartilha',['PontoPartilha',['../class_ponto_partilha.html#a0a5a17a5290153e997b3a498651b7cfd',1,'PontoPartilha::PontoPartilha()'],['../class_ponto_partilha.html#ac6af1ae38bf57cf3f85f81d6e38f4ba3',1,'PontoPartilha::PontoPartilha(Localizacao spot, unsigned int storage, string name)']]]
 ];

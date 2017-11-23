@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['utente',['Utente',['../class_utente.html',1,'']]],
-  ['utilizacao',['Utilizacao',['../class_utilizacao.html',1,'']]]
+  ['pontopartilha',['PontoPartilha',['../class_ponto_partilha.html',1,'']]]
 ];

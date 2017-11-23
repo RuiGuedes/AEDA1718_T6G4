@@ -1,11 +1,11 @@
 var searchData=
 [
   ['aberturafalhada',['AberturaFalhada',['../class_abertura_falhada.html#ac2ce07b798e39356bbbf0d2230aff2af',1,'AberturaFalhada']]],
-  ['addnewutente',['addNewUtente',['../class_sistema.html#a737da50df175c1dafff6e50dec8d499c',1,'Sistema']]],
-  ['addpontopartilha',['addPontoPartilha',['../class_sistema.html#a5282654e95b219cc81afbc7e6ae90099',1,'Sistema']]],
-  ['addpp',['addPP',['../_interfaces_8cpp.html#a08340956ddf59f8971e813b8f3004697',1,'Interfaces.cpp']]],
-  ['adicionabike',['adicionaBike',['../class_ponto_partilha.html#ae0f687be1d9c2902c58b90db1fd1419c',1,'PontoPartilha::adicionaBike()'],['../_interfaces_8cpp.html#a35f156a6ba97e44bd016df91694f9bf3',1,'adicionaBike():&#160;Interfaces.cpp']]],
+  ['addnewutente',['addNewUtente',['../class_sistema.html#ab7190740f1162f77185e025b009819af',1,'Sistema::addNewUtente()'],['../class_sistema.html#a967750316eb4f84aee274ca061a60bde',1,'Sistema::addNewUtente(Utente *u1)']]],
+  ['addpontopartilha',['addPontoPartilha',['../class_sistema.html#a2c0287a7bca4bdc71844f165356b6bef',1,'Sistema::addPontoPartilha()'],['../class_sistema.html#a891fab47f3ed199082d9da42ea98bfd9',1,'Sistema::addPontoPartilha(PontoPartilha *p)']]],
+  ['adduse',['addUse',['../class_utente.html#a4c72036b4ad60845aaeebfaeb7bd6151',1,'Utente::addUse()'],['../class_socio.html#a3134ebdbdd0b7186825ad357c7c5fc01',1,'Socio::addUse()'],['../class_regular.html#a956eba845afc4331daee5989fde4b8d6',1,'Regular::addUse()']]],
+  ['adicionabike',['adicionaBike',['../class_ponto_partilha.html#ae0f687be1d9c2902c58b90db1fd1419c',1,'PontoPartilha::adicionaBike()'],['../class_sistema.html#a447157e5b25edbe24328c015f8d936e8',1,'Sistema::adicionaBike()']]],
   ['admin_5finterface',['admin_interface',['../_interfaces_8cpp.html#a148c2774f037559c95a71a86d0cd3363',1,'Interfaces.cpp']]],
-  ['alugabicicleta',['alugaBicicleta',['../class_utente.html#a011b083713c37d9769dd68d6b5c77f47',1,'Utente']]],
-  ['alugabike',['alugaBike',['../_interfaces_8cpp.html#a91c8129a50c6c37d93bcd6a41aa1d6d6',1,'Interfaces.cpp']]]
+  ['alugabicicleta',['alugaBicicleta',['../class_utente.html#abf08b89f6d65634331bb96d34c6e5de7',1,'Utente']]],
+  ['alugabike',['alugaBike',['../class_sistema.html#acc10d44308e0941ff130628a16c27264',1,'Sistema']]]
 ];

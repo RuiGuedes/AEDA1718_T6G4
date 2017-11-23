@@ -5,8 +5,6 @@
 #include "Bicicleta.h"
 #include "Utilizacao.h"
 #include "PontoPartilha.h"
-//#include "Sistema.h"
-
 
 class Utente {
 protected:
@@ -18,7 +16,7 @@ protected:
 	vector<Utilizacao> historico;	/**< Utilizacoes liquidadas do utente */
 	bool disponivel = true;			/**< Se o utente esta a usar uma bicicleta disponivel = false, caso contrario disponivel = true */
 public:
-	Utente();		/**< Necessário para o overload do operador de extração na classe utente*/
+	Utente();
 	explicit Utente(string nome, Localizacao spot);
 
 	//Métodos Get
@@ -36,7 +34,6 @@ public:
 	void setIDBackward();
 	void setID(int identificacao);
 	void setUtenteLocation(Localizacao spot);
-	void setTipoUtente(string tipo);			/**<Necessita de pagar dívidas anteriores antes de poder mudar de tipo (so se for socio)*/
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
@@ -47,7 +44,7 @@ public:
 	virtual Utilizacao getLastUse() = 0;
 	virtual void addUse(Utilizacao use) = 0;
 	virtual void displayPagPendentes(int index) = 0;
-	virtual ~Utente() {};
+	virtual ~Utente() {}; 	/**<Destrutor virtual */
 
 	//Others
 	void alugaBicicleta(Bicicleta* b, Utilizacao ut);
@@ -58,12 +55,11 @@ public:
 };
 
 
-
 class Socio : public Utente {
 	vector<Utilizacao> utilizacoes;		/**<Vetor de utilizacoes por pagar */
 public:
 	Socio();
-	~Socio() {};
+	~Socio() {};	/**<Destrutor da classe Socio */
 	Socio(string nome,Localizacao spot);
 
 	//Friend functions
@@ -82,7 +78,6 @@ public:
 	void addUse(Utilizacao use);
 	void efetuaPag(int index);
 	void displayHistoric() const;
-
 };
 
 /**
@@ -102,7 +97,6 @@ inline ostream& operator <<(ostream & o, const Socio & u)
 	for (unsigned int k=0 ; k< u.historico.size() ; k++){
 		o << u.historico.at(k) << ';' ;
 	}
-
 	return o;
 }
 
@@ -130,7 +124,6 @@ inline istream& operator >>(istream & i, Socio & u)
 		i >> ut >> b5;
 		u.historico.push_back(ut);
 	}
-
 	return i;
 }
 
@@ -138,7 +131,7 @@ inline istream& operator >>(istream & i, Socio & u)
 class Regular : public Utente {
 public:
 	Regular();
-	~Regular() {};
+	~Regular() {};	/**<Destrutor da classe Regular */
 	Regular(string nome,Localizacao spot);
 
 	//Others
@@ -154,8 +147,6 @@ public:
 
 	friend ostream & operator <<(ostream & o, const Regular & u);
 	friend istream & operator >>(istream & i, Regular & u);
-
-
 };
 
 /**
@@ -178,8 +169,7 @@ inline ostream& operator <<(ostream & o, const Regular & u)
  * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Regular,
  * de modo a recriar o sistema da ultima execucao.
  */
-inline istream& operator >>(istream & i, Regular & u)
-{
+inline istream& operator >>(istream & i, Regular & u) {
 	char b2, b3, b4;
 	unsigned int hist;
 	Utilizacao ut;

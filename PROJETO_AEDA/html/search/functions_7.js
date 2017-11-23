@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['limpavectorbike',['limpaVectorBike',['../class_ponto_partilha.html#acc08e56e4b7424415332061cda27ca6a',1,'PontoPartilha']]],
-  ['localizacao',['Localizacao',['../class_localizacao.html#aef7d8fcaecdcfebd82c7b41547ff34af',1,'Localizacao::Localizacao()'],['../class_localizacao.html#ab16c9daf21919162e5b6dfb9fe7cdcf3',1,'Localizacao::Localizacao(string nome, double x, double y)']]]
+  ['infantil',['Infantil',['../class_infantil.html#a8378982452f3212b0a890de673f40b97',1,'Infantil']]],
+  ['infoer',['infoER',['../class_sistema.html#a16276e5f4e93efe039ad3bc2bbd087e3',1,'Sistema']]]
 ];
