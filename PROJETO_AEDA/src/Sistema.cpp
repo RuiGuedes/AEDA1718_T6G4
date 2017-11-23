@@ -401,8 +401,8 @@ void Sistema::adicionaBike() {
 
 	string biketype;
 	string nomePP;
+	string bikeName = "";
 	int indexPP {-1};
-	int indexBB {-1};
 	int numberbikes {0};
 
 	cin.ignore(1000,'\n');
@@ -447,6 +447,7 @@ void Sistema::adicionaBike() {
 		return;
 	}
 
+
 	//Verifica tipo de bicicleta a adicionar
 	while(1)
 	{
@@ -456,29 +457,16 @@ void Sistema::adicionaBike() {
 			if(valid_word(biketype) == false)
 				throw OpcaoInvalida<string>(biketype);
 
-
 			if(biketype == "Urbana")
-			{
-				indexBB = 0;
-				nomePP = "u" + to_string(Urbana::getID());
-			}
+				bikeName = "u" + to_string(Urbana::getID());
 			else if(biketype == "Urbana Simples")
-			{
-				indexBB = 1;
-				nomePP = "us" + to_string(UrbanaSimples::getID());
-			}
+				bikeName = "us" + to_string(UrbanaSimples::getID());
 			else if(biketype == "Corrida")
-			{
-				indexBB = 2;
-				nomePP = "c" + to_string(Corrida::getID());
-			}
+				bikeName = "c" + to_string(Corrida::getID());
 			else if(biketype == "Infantil")
-			{
-				indexBB = 3;
-				nomePP = "i" + to_string(Infantil::getID());
-			}
+				bikeName = "i" + to_string(Infantil::getID());
 
-			if(indexBB == -1)
+			if(bikeName == "")
 				throw OpcaoInvalida<string>(biketype);
 
 			break;
@@ -489,18 +477,16 @@ void Sistema::adicionaBike() {
 		}
 	}
 
-	//pontosPartilha.at(0)->setBikeNextIdForward("Urbana");
-
 	Bicicleta* bc;
 
 	if(biketype == "Urbana")
-		bc = new Urbana(nomePP);
+		bc = new Urbana(bikeName);
 	else if(biketype == "Urbana Simples")
-		bc = new UrbanaSimples(nomePP);
+		bc = new UrbanaSimples(bikeName);
 	else if(biketype == "Corrida")
-		bc = new Corrida(nomePP);
+		bc = new Corrida(bikeName);
 	else
-		bc = new Infantil(nomePP);
+		bc = new Infantil(bikeName);
 
 
 	pontosPartilha.at(indexPP)->adicionaBike(bc);

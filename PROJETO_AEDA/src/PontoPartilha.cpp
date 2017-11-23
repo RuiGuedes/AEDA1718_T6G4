@@ -73,17 +73,16 @@ void PontoPartilha::adicionaBike(Bicicleta* bike) {
 	string name = bike->getBikeName();
 
 	if(name.at(0) == 'u')
-		{
-			if(name.at(1) == 's')
-				indicator = 1;
-			else
-				indicator = 0;
-		}
-		else if(name.at(0) == 'c')
-			indicator = 2;
+	{
+		if(name.at(1) == 's')
+			indicator = 1;
 		else
-			indicator = 3;
-
+			indicator = 0;
+	}
+	else if(name.at(0) == 'c')
+		indicator = 2;
+	else
+		indicator = 3;
 
 	bicicletas.at(indicator).push_back(bike);
 
