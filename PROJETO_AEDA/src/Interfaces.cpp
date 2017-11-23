@@ -85,9 +85,9 @@ void mensagemInicial(){
  * para efetuar o login.
  * Apresenta no ecra os casos de utilizacao para o utente escolher a opcao que pretende (10 opcoes no total).
  * Depois de introduzida a opcao por parte do utente, e efetuado o procedimento que
- * corresponde a opcao escolhida. Para cada uma das 9 primeiras opcoes e chamada uma outra funcao que
- * executa o procedimento necessario para o que o utente pretende, e a ultima opcao , 10 - Logout,
- * retorna a funcao openInterfaces, onde esta foi invocada.
+ * corresponde a opcao escolhida. Para cada uma das 9 primeiras opcoes e chamado um metodo da classe Sistema
+ * ou Utente, que executa o procedimento necessario para o que o utente pretende, e a ultima opcao ,
+ * 10 - Logout, retorna a funcao openInterfaces, onde esta foi invocada.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param ER sistema em execucao
@@ -252,14 +252,13 @@ void menu_interface(Sistema &ER){
 	cout << endl;
 	system("cls");
 	return;
-
 }
 
 /**
  * Primeiramente pede ao utilizador que insira a senha ("1234") para aceder a opcoes administrativas.
  * Apresenta no ecra os casos de utilizacao para aministrador escolher a opcao que pretende (7 opcoes no total).
  * Depois de introduzida a opcao, e efetuado o procedimento que corresponde a opcao escolhida.
- * Para cada uma das 6 primeiras opcoes e chamada uma outra funcao que
+ * Para cada uma das 6 primeiras opcoes e chamado um metodo da classe Sistema que
  * executa o procedimento necessario para o que e pretendido, e a ultima opcao , 7 - Sair,
  * retorna a funcao openInterfaces, onde esta foi invocada.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido

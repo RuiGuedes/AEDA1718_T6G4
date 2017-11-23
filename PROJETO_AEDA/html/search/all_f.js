@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['sequentialsearch',['SequentialSearch',['../_includes_8h.html#a70be04bbcb7878f7308beefa9e7e3197',1,'SequentialSearch(const vector&lt; T &gt; &amp;v, T x):&#160;Sistema.cpp'],['../_sistema_8cpp.html#a70be04bbcb7878f7308beefa9e7e3197',1,'SequentialSearch(const vector&lt; T &gt; &amp;v, T x):&#160;Sistema.cpp']]],
+  ['sequentialsearch',['SequentialSearch',['../_sistema_8h.html#a70be04bbcb7878f7308beefa9e7e3197',1,'Sistema.h']]],
   ['setano',['setAno',['../class_data.html#a2bd4dc06459131fc3b1472bd1b1789e9',1,'Data']]],
   ['setavailable',['setAvailable',['../class_utente.html#ab975dcdb77a2ba8642cada2a1534587b',1,'Utente']]],
   ['setbike',['setBike',['../class_utente.html#aa4ecf2674fa015502dd3a07afb1b3fe3',1,'Utente']]],
-  ['setbikenextid',['setBikeNextId',['../class_ponto_partilha.html#a52768d770c3b25c07dce5b321d897a2c',1,'PontoPartilha']]],
-  ['setbikenextidbackward',['setBikeNextIdBackward',['../class_ponto_partilha.html#aba00c9599646d5ea0fb2393f9737b782',1,'PontoPartilha']]],
-  ['setbikenextidforward',['setBikeNextIdForward',['../class_ponto_partilha.html#a18bb74e93b8274a0adb62970c5d21e39',1,'PontoPartilha']]],
   ['setdia',['setDia',['../class_data.html#ab73b87a5afc1146e962e06c8bf1b5495',1,'Data']]],
   ['sethistoric',['setHistoric',['../class_utente.html#a5fc0271466dc97e89083f272606b0d35',1,'Utente']]],
   ['setid',['setID',['../class_utente.html#a321094475fdd783cbb60c192f5539aa0',1,'Utente']]],
@@ -21,5 +18,5 @@ var searchData=
   ['sistema_2ecpp',['Sistema.cpp',['../_sistema_8cpp.html',1,'']]],
   ['sistema_2eh',['Sistema.h',['../_sistema_8h.html',1,'']]],
   ['socio',['Socio',['../class_socio.html',1,'Socio'],['../class_socio.html#a71ea1f6d0146cf86f83325bd9ebbe59a',1,'Socio::Socio()'],['../class_socio.html#ad0c5a88aeb7964f3b2d76f9d5c92fac1',1,'Socio::Socio(string nome, Localizacao spot)']]],
-  ['system_5fmanager',['System_Manager',['../class_sistema.html#a60ee1e70b9a464a28ca6383a216444de',1,'Sistema']]]
+  ['system_5fmanager',['system_Manager',['../class_sistema.html#a344ccc3110caa6d3bcfdad8da3ae3f8a',1,'Sistema']]]
 ];

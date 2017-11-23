@@ -165,7 +165,7 @@ Localizacao Utente::getLocalizacao() const {
 }
 
 /**
- * Retorna um apontador para bicicleta que o utente está a usar.
+ * Retorna um apontador para bicicleta que o utente esta a usar.
  * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0
  * @return Retorna um apontador para bicicleta
  */

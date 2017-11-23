@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['valid_5fbike',['valid_bike',['../_includes_8h.html#a80f72cf291e97ac4d62362036c0605a1',1,'valid_bike(string bike):&#160;Interfaces.cpp'],['../_interfaces_8cpp.html#a80f72cf291e97ac4d62362036c0605a1',1,'valid_bike(string bike):&#160;Interfaces.cpp']]],
-  ['valid_5fnumber',['valid_number',['../_includes_8h.html#ac07e12701cbf731daa62c486de3c5b94',1,'valid_number(string number):&#160;Interfaces.cpp'],['../_interfaces_8cpp.html#ac07e12701cbf731daa62c486de3c5b94',1,'valid_number(string number):&#160;Interfaces.cpp']]],
-  ['valid_5fnumber_5fdouble',['valid_number_double',['../_includes_8h.html#a46c25d341ac9478a51c8741a27b9c559',1,'valid_number_double(string number):&#160;Interfaces.cpp'],['../_interfaces_8cpp.html#a46c25d341ac9478a51c8741a27b9c559',1,'valid_number_double(string number):&#160;Interfaces.cpp']]],
-  ['valid_5fword',['valid_word',['../_includes_8h.html#a1effa16e707eef2942eecb00019b9013',1,'valid_word(string word):&#160;Interfaces.cpp'],['../_interfaces_8cpp.html#a1effa16e707eef2942eecb00019b9013',1,'valid_word(string word):&#160;Interfaces.cpp']]]
+  ['_7ebicicleta',['~Bicicleta',['../class_bicicleta.html#aa1cd0fb565e8c30a3c8c4f9b6b7ca579',1,'Bicicleta']]],
+  ['_7ecorrida',['~Corrida',['../class_corrida.html#ac307c46d186eb20b4bc6f600bd7c575a',1,'Corrida']]],
+  ['_7einfantil',['~Infantil',['../class_infantil.html#a54c6f66d453c99175c7b0eb776028cbd',1,'Infantil']]],
+  ['_7eregular',['~Regular',['../class_regular.html#ac2c0682dc500d13cf3e8027bfc3babe4',1,'Regular']]],
+  ['_7esocio',['~Socio',['../class_socio.html#aba48b9766cebaf306597663fa12c6924',1,'Socio']]],
+  ['_7eurbana',['~Urbana',['../class_urbana.html#a11add01c72aacd0f287809742deb0807',1,'Urbana']]],
+  ['_7eurbanasimples',['~UrbanaSimples',['../class_urbana_simples.html#aef6136d50db60e89c8c6715906849270',1,'UrbanaSimples']]],
+  ['_7eutente',['~Utente',['../class_utente.html#a92c447c365ab39911fa1eddb2e3218b3',1,'Utente']]]
 ];
