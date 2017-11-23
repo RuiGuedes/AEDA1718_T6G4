@@ -28,23 +28,8 @@ Utilizacao::Utilizacao(string bikeType, unsigned int numHours, Data d, string pp
 	this->localizacao = loc;
 }
 
-/**
- * Mostra a utilizacao no ecra de modo formatado
- */
-void Utilizacao::displayUtilizacao() const{
 
-	cout << "Tipo de bicicleta: " << bikeType << endl;
-	cout << "Número de horas: " << useTime << endl;
-	cout << "Data (DD/MM/AAAA): " << data << endl;
-	cout << "Ponto de Partilha: ECO_RIDES_" << pontoPartilha << endl;
-	cout << "Localização: " << localizacao << endl;
-
-	return;
-}
-
-/////////////////
 // METODOS GET //
-/////////////////
 
 /**
  * @return Retorna a data da utilizacao
@@ -82,9 +67,27 @@ double Utilizacao::getPrice() const {
 		return useTime*2;
 }
 
-//////////
-// DATA //
-//////////
+
+// OTHERS //
+
+/**
+ * Mostra a utilizacao no ecra de modo formatado
+ */
+void Utilizacao::displayUtilizacao() const{
+
+	cout << "Tipo de bicicleta: " << bikeType << endl;
+	cout << "Número de horas: " << useTime << endl;
+	cout << "Data (DD/MM/AAAA): " << data << endl;
+	cout << "Ponto de Partilha: ECO_RIDES_" << pontoPartilha << endl;
+	cout << "Localização: " << localizacao << endl;
+
+	return;
+}
+
+
+////////////
+/// DATA ///
+////////////
 
 /**
  * Construtor padrao da classe Data
@@ -103,9 +106,8 @@ Data::Data(unsigned int dia,unsigned int mes,unsigned int ano){
 	this->ano=ano;
 }
 
-/////////////////
+
 // METODOS GET //
-/////////////////
 
 /**
  * @return Retorna o dia
@@ -122,9 +124,8 @@ unsigned int Data::getMes() const { return mes; }
  */
 unsigned int Data::getAno() const { return ano; }
 
-/////////////////
+
 // METODOS SET //
-/////////////////
 
 /**
  * Altera o dia

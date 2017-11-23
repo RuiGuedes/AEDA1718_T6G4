@@ -6,7 +6,7 @@ class Data {
 protected:
 	unsigned int dia, mes, ano;
 public:
-	Data();/**< Necessário para o overload do operador de extração na classe utente*/
+	Data();		/**< Necessário para o overload do operador de extração na classe utente*/
 	Data(unsigned int dia,unsigned int mes,unsigned int ano);
 	friend ostream & operator<<(ostream & o, const Data & d);
 	friend istream & operator>>(istream & i, Data & d);
@@ -20,7 +20,6 @@ public:
 	void setDia(unsigned int d);
 	void setMes(unsigned int m);
 	void setAno(unsigned int a);
-
 };
 
 /**
@@ -43,7 +42,7 @@ inline istream & operator>> (istream & i, Data & d)
 }
 
 
-class Utilizacao : protected Data{
+class Utilizacao {
 private:
 	Data data;
 	unsigned int useTime;	/**< Numero de horas de uso da bicicleta*/
@@ -51,7 +50,7 @@ private:
 	string pontoPartilha;	/**< Nome do ponto de partilha onde a bicicleta foi alugada*/
 	string localizacao;		/**< Nome da localizacao do ponto de partilha onde a bicicleta foi alugada*/
 public:
-	Utilizacao(); /**< Necessário para o overload do operador de extração na classe utente*/
+	Utilizacao();			/**< Necessário para o overload do operador de extração na classe utente*/
 	Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc);
 
 	//Métodos Get
@@ -64,6 +63,8 @@ public:
 	void displayUtilizacao() const;
 	friend ostream & operator <<(ostream & o, const Utilizacao & u);
 	friend istream & operator >>(istream & i, Utilizacao & u);
+
+	friend class Data;
 };
 
 /**
@@ -80,8 +81,7 @@ inline ostream& operator <<(ostream & o, const Utilizacao & u)
  * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utilizacao,
  * de modo a recriar o sistema da ultima execucao.
  */
-inline istream& operator >>(istream & i, Utilizacao & u)
-{
+inline istream& operator >>(istream & i, Utilizacao & u) {
 	char b1;
 	getline(i,u.bikeType,'-');
 	getline(i,u.pontoPartilha,'-');
