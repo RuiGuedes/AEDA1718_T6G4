@@ -62,7 +62,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="class_bicicleta-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Bicicleta Class Reference</div>  </div>
@@ -102,13 +101,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af839fed5e45dd2219d3115b7f3bf9224"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9df467fd6ee506b427b59673caa9112c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a9df467fd6ee506b427b59673caa9112c">price</a></td></tr>
 <tr class="separator:a9df467fd6ee506b427b59673caa9112c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ac191ed7b1811f0e46ddaee99e48658e3"><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#ac191ed7b1811f0e46ddaee99e48658e3">operator&lt;&lt;</a> (ostream &amp;o, const <a class="el" href="class_bicicleta.html">Bicicleta</a> &amp;b)</td></tr>
-<tr class="separator:ac191ed7b1811f0e46ddaee99e48658e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2260c72df8fa871feff92c71686b18c"><td class="memItemLeft" align="right" valign="top">istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#ab2260c72df8fa871feff92c71686b18c">operator&gt;&gt;</a> (istream &amp;i, <a class="el" href="class_bicicleta.html">Bicicleta</a> &amp;b)</td></tr>
-<tr class="separator:ab2260c72df8fa871feff92c71686b18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad1af58c3a03f2b8dc081da7b7757c653"></a>
@@ -147,7 +139,6 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 <p>Construtor da classe <a class="el" href="class_bicicleta.html">Bicicleta</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tipo</td><td>tipo de bicicleta </td></tr>
     <tr><td class="paramname">name</td><td>nome da bicicleta </td></tr>
   </table>
   </dd>
@@ -195,6 +186,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Destrutor virtual</p>
 <dl class="section return"><dt>Returns</dt><dd>Retorna o nome da bicicleta </dd></dl>
 
 </div>
@@ -213,81 +205,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="ac191ed7b1811f0e46ddaee99e48658e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac191ed7b1811f0e46ddaee99e48658e3">&#9670;&nbsp;</a></span>operator<<</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">ostream &amp;&#160;</td>
-          <td class="paramname"><em>o</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="class_bicicleta.html">Bicicleta</a> &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Overload do operador de insercao usado para escrever os objetos do tipo <a class="el" href="class_bicicleta.html">Bicicleta</a> nos ficheiros, de modo a guardar a informacao do sistema. </p>
-
-</div>
-</div>
-<a id="ab2260c72df8fa871feff92c71686b18c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2260c72df8fa871feff92c71686b18c">&#9670;&nbsp;</a></span>operator>></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">istream&amp; operator&gt;&gt; </td>
-          <td>(</td>
-          <td class="paramtype">istream &amp;&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_bicicleta.html">Bicicleta</a> &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo <a class="el" href="class_bicicleta.html">Bicicleta</a>, de modo a recriar o sistema da ultima execucao. </p>
+<dl class="section return"><dt>Returns</dt><dd>Retorna o preco associado a um determinado tipo de bicicleta </dd></dl>
 
 </div>
 </div>
@@ -334,6 +252,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Preco referente ao valor de uma mensalidade associada a um tipo de bicicleta </p>
 
 </div>
 </div>

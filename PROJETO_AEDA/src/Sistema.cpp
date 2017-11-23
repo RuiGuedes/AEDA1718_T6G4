@@ -1221,7 +1221,6 @@ void Sistema::devolveBike(int index) {
  * apresentada uma mensagem e a decisao nao e permitida.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
- * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Sistema::mudaTipoUT(int index){
