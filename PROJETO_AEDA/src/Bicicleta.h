@@ -9,7 +9,7 @@ protected:
 public:
 	Bicicleta();				/**< Necessário para o overload do operador de extração na classe utente*/
 	Bicicleta(string name);
-	virtual ~Bicicleta() {};
+	virtual ~Bicicleta() {}; 	/**<Destrutor virtual */
 
 	//Métodos Get
 	string getBikeName() const;
@@ -17,40 +17,40 @@ public:
 };
 
 class Urbana : public Bicicleta {
-	static int id;
+	static int id;				/**< Identificador da proxima bicicleta do tipo urbana */
 public :
 	Urbana(string bikeName);
-	~Urbana(){};
+	~Urbana(){};				/**<Destrutor da classe Urbana */
 
 	//Métodos Get
 	static int getID();
 };
 
 class UrbanaSimples : public Bicicleta {
-	static int id;
+	static int id;				/**< Identificador da proxima bicicleta do tipo urbana simples */
 public :
-	~UrbanaSimples(){};
 	UrbanaSimples(string bikeName);
+	~UrbanaSimples(){};			/**<Destrutor da classe UrbanaSimples */
 
 	//Métodos Get
 	static int getID();
 };
 
 class Corrida : public Bicicleta {
-	static int id;
+	static int id;				/**< Identificador da proxima bicicleta do tipo corrida */
 public :
-	~Corrida(){};
 	Corrida(string bikeName);
+	~Corrida(){};				/**<Destrutor da classe Corrida */
 
 	//Métodos Get
 	static int getID();
 };
 
 class Infantil : public Bicicleta {
-	static int id;
+	static int id;				/**< Identificador da proxima bicicleta do tipo infantil */
 public :
-	~Infantil(){};
 	Infantil(string bikeName);
+	~Infantil(){};				/**<Destrutor da classe Infantil */
 
 	//Métodos Get
 	static int getID();
