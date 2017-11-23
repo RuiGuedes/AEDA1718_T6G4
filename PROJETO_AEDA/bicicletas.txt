@@ -1,201 +1,201 @@
 51/51/51/51
-u1/Urbana/
-u2/Urbana/
-u3/Urbana/
-u4/Urbana/
-u5/Urbana/
-us1/Urbana Simples/
-us2/Urbana Simples/
-us3/Urbana Simples/
-us4/Urbana Simples/
-us5/Urbana Simples/
-c1/Corrida/
-c2/Corrida/
-c3/Corrida/
-c4/Corrida/
-c5/Corrida/
-i1/Infantil/
-i2/Infantil/
-i3/Infantil/
-i4/Infantil/
-i5/Infantil/
-u6/Urbana/
-u7/Urbana/
-u8/Urbana/
-u9/Urbana/
-u10/Urbana/
-us6/Urbana Simples/
-us7/Urbana Simples/
-us8/Urbana Simples/
-us9/Urbana Simples/
-us10/Urbana Simples/
-c6/Corrida/
-c7/Corrida/
-c8/Corrida/
-c9/Corrida/
-c10/Corrida/
-i6/Infantil/
-i7/Infantil/
-i8/Infantil/
-i9/Infantil/
-i10/Infantil/
-u11/Urbana/
-u12/Urbana/
-u13/Urbana/
-u14/Urbana/
-u15/Urbana/
-us11/Urbana Simples/
-us12/Urbana Simples/
-us13/Urbana Simples/
-us14/Urbana Simples/
-us15/Urbana Simples/
-c11/Corrida/
-c12/Corrida/
-c13/Corrida/
-c14/Corrida/
-c15/Corrida/
-i11/Infantil/
-i12/Infantil/
-i13/Infantil/
-i14/Infantil/
-i15/Infantil/
-u16/Urbana/
-u17/Urbana/
-u18/Urbana/
-u19/Urbana/
-u20/Urbana/
-us16/Urbana Simples/
-us17/Urbana Simples/
-us18/Urbana Simples/
-us19/Urbana Simples/
-us20/Urbana Simples/
-c16/Corrida/
-c17/Corrida/
-c18/Corrida/
-c19/Corrida/
-c20/Corrida/
-i16/Infantil/
-i17/Infantil/
-i18/Infantil/
-i19/Infantil/
-i20/Infantil/
-u21/Urbana/
-u22/Urbana/
-u23/Urbana/
-u24/Urbana/
-u25/Urbana/
-us21/Urbana Simples/
-us22/Urbana Simples/
-us23/Urbana Simples/
-us24/Urbana Simples/
-us25/Urbana Simples/
-c21/Corrida/
-c22/Corrida/
-c23/Corrida/
-c24/Corrida/
-c25/Corrida/
-i21/Infantil/
-i22/Infantil/
-i23/Infantil/
-i24/Infantil/
-i25/Infantil/
-u26/Urbana/
-u27/Urbana/
-u28/Urbana/
-u29/Urbana/
-u30/Urbana/
-us26/Urbana Simples/
-us27/Urbana Simples/
-us28/Urbana Simples/
-us29/Urbana Simples/
-us30/Urbana Simples/
-c26/Corrida/
-c27/Corrida/
-c28/Corrida/
-c29/Corrida/
-c30/Corrida/
-i26/Infantil/
-i27/Infantil/
-i28/Infantil/
-i29/Infantil/
-i30/Infantil/
-u31/Urbana/
-u32/Urbana/
-u33/Urbana/
-u34/Urbana/
-u35/Urbana/
-us31/Urbana Simples/
-us32/Urbana Simples/
-us33/Urbana Simples/
-us34/Urbana Simples/
-us35/Urbana Simples/
-c31/Corrida/
-c32/Corrida/
-c33/Corrida/
-c34/Corrida/
-c35/Corrida/
-i31/Infantil/
-i32/Infantil/
-i33/Infantil/
-i34/Infantil/
-i35/Infantil/
-u36/Urbana/
-u37/Urbana/
-u38/Urbana/
-u39/Urbana/
-u40/Urbana/
-us36/Urbana Simples/
-us37/Urbana Simples/
-us38/Urbana Simples/
-us39/Urbana Simples/
-us40/Urbana Simples/
-c36/Corrida/
-c37/Corrida/
-c38/Corrida/
-c39/Corrida/
-c40/Corrida/
-i36/Infantil/
-i37/Infantil/
-i38/Infantil/
-i39/Infantil/
-i40/Infantil/
-u41/Urbana/
-u42/Urbana/
-u43/Urbana/
-u44/Urbana/
-u45/Urbana/
-us41/Urbana Simples/
-us42/Urbana Simples/
-us43/Urbana Simples/
-us44/Urbana Simples/
-us45/Urbana Simples/
-c41/Corrida/
-c42/Corrida/
-c43/Corrida/
-c44/Corrida/
-c45/Corrida/
-i41/Infantil/
-i42/Infantil/
-i43/Infantil/
-i44/Infantil/
-i45/Infantil/
-u46/Urbana/
-u47/Urbana/
-u48/Urbana/
-u49/Urbana/
-u50/Urbana/
-us46/Urbana Simples/
-us47/Urbana Simples/
-us48/Urbana Simples/
-us49/Urbana Simples/
-us50/Urbana Simples/
-c46/Corrida/
-c47/Corrida/
-c48/Corrida/
-c49/Corrida/
-c50/Corrida/
-i46/Infantil/
-i47/Infantil/
-i48/Infantil/
-i49/Infantil/
-i50/Infantil/
+u1
+u2
+u3
+u4
+u5
+us1
+us2
+us3
+us4
+us5
+c1
+c2
+c3
+c4
+c5
+i1
+i2
+i3
+i4
+i5
+u6
+u7
+u8
+u9
+u10
+us6
+us7
+us8
+us9
+us10
+c6
+c7
+c8
+c9
+c10
+i6
+i7
+i8
+i9
+i10
+u11
+u12
+u13
+u14
+u15
+us11
+us12
+us13
+us14
+us15
+c11
+c12
+c13
+c14
+c15
+i11
+i12
+i13
+i14
+i15
+u16
+u17
+u18
+u19
+u20
+us16
+us17
+us18
+us19
+us20
+c16
+c17
+c18
+c19
+c20
+i16
+i17
+i18
+i19
+i20
+u21
+u22
+u23
+u24
+u25
+us21
+us22
+us23
+us24
+us25
+c21
+c22
+c23
+c24
+c25
+i21
+i22
+i23
+i24
+i25
+u26
+u27
+u28
+u29
+u30
+us26
+us27
+us28
+us29
+us30
+c26
+c27
+c28
+c29
+c30
+i26
+i27
+i28
+i29
+i30
+u31
+u32
+u33
+u34
+u35
+us31
+us32
+us33
+us34
+us35
+c31
+c32
+c33
+c34
+c35
+i31
+i32
+i33
+i34
+i35
+u36
+u37
+u38
+u39
+u40
+us36
+us37
+us38
+us39
+us40
+c36
+c37
+c38
+c39
+c40
+i36
+i37
+i38
+i39
+i40
+u41
+u42
+u43
+u44
+u45
+us41
+us42
+us43
+us44
+us45
+c41
+c42
+c43
+c44
+c45
+i41
+i42
+i43
+i44
+i45
+u46
+u47
+u48
+u49
+u50
+us46
+us47
+us48
+us49
+us50
+c46
+c47
+c48
+c49
+c50
+i46
+i47
+i48
+i49
+i50

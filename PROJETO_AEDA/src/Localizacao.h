@@ -9,6 +9,7 @@ class Localizacao {
 public:
 	Localizacao();	/**< Necessário para o overload do operador de extração na classe utente*/
 	Localizacao(string nome, double x, double y);
+	Localizacao(double x, double y);
 
 	double distancia(Localizacao local) const;
 	Localizacao & operator =(Localizacao & l);

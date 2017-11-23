@@ -64,10 +64,10 @@ void checkinSys(Sistema & ER){
 	}
 
 	while(!f_utentes.eof()){
-		char tipoUtente, b;
+		char tipoUtente;
 		tipoUtente = f_utentes.get();
-		b = f_utentes.get();
-
+		//b = f_utentes.get();
+		f_utentes.get();
 		if(tipoUtente == 'R'){
 			Regular u1;
 			f_utentes >> u1;
@@ -95,6 +95,8 @@ void checkinSys(Sistema & ER){
 	}
 
 	f_utentes.close();
+
+	cout << "leu utentes \n";
 
 	ifstream f_pontos_partilha;
 
@@ -141,15 +143,32 @@ void checkinSys(Sistema & ER){
 
 		for (unsigned int j=0 ; j<numType.size() ; j++){
 			for (int k=0 ; k < numType.at(j) ; k++){
-				Bicicleta* b = new Bicicleta();
 
-				f_bicicletas >> (*b);
-				if(b->getBikeName()==""){
+				string b;
+				Bicicleta* bike;
+				getline(f_bicicletas, b,'/');
+
+				if(b.at(0) == 'u')
+				{
+					if(b.at(1) == 's')
+					{
+						bike = new UrbanaSimples(b);
+					}
+					else
+						bike = new Urbana(b);
+				}
+				else if(b.at(0) == 'c')
+					bike = new Corrida(b);
+				else
+					bike = new Infantil(b);
+
+				if(bike->getBikeName()==""){
 					continue;
 				}
-				f_bicicletas.ignore();
 
-				p1.adicionaBike(b);
+				f_bicicletas.ignore(1000,'\n');
+
+				p1.adicionaBike(bike);
 			}
 		}
 
@@ -230,7 +249,7 @@ void checkoutSys(Sistema & ER){
 
 		for(unsigned int j=0 ; j<p.getBikes().size() ; j++)
 			for(unsigned int k=0 ; k <p.getBikes().at(j).size() ; k++){
-				f_bicicletas << (*p.getBikes().at(j).at(k)) << endl;
+				f_bicicletas << (*p.getBikes().at(j).at(k)).getBikeName() << endl;
 			}
 	}
 

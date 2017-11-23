@@ -38,22 +38,25 @@ PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) 
  * Remove a bicicleta bike do ponto de partilha
  * @param bike apontador de bicicleta que se pretende remover
  */
-void  PontoPartilha::removeBike(Bicicleta *bike) {
+void PontoPartilha::removeBike(string name) {
 
 	vector<Bicicleta *> bikes;
 
 	int indicator;
-	string tipo = bike->getBikeType();
-	string name = bike->getBikeName();
 
-	if(tipo == "Urbana")
-		indicator = 0;
-	else if(tipo == "Urbana Simples")
-		indicator = 1;
-	else if(tipo == "Corrida")
+
+	if(name.at(0) == 'u')
+	{
+		if(name.at(1) == 's')
+			indicator = 1;
+		else
+			indicator = 0;
+	}
+	else if(name.at(0) == 'c')
 		indicator = 2;
-	else if(tipo == "Infantil")
+	else
 		indicator = 3;
+
 
 	for(unsigned int i = 0; i < bicicletas.at(indicator).size(); i++)
 	{

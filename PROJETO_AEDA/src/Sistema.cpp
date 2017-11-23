@@ -343,10 +343,10 @@ void Sistema::addPontoPartilha() {
 		string c = "c" + to_string(pontosPartilha.at(0)->getBikeNextId("Corrida"));
 		string inf = "i" + to_string(pontosPartilha.at(0)->getBikeNextId("Infantil"));
 
-		Bicicleta* b1 = new Bicicleta("Urbana",u);
-		Bicicleta* b2 = new Bicicleta("Urbana Simples",us);
-		Bicicleta* b3 = new Bicicleta("Corrida",c);
-		Bicicleta* b4 = new Bicicleta("Infantil",inf);
+		Bicicleta* b1 = new Urbana(u);
+		Bicicleta* b2 = new UrbanaSimples(us);
+		Bicicleta* b3 = new Corrida(c);
+		Bicicleta* b4 = new Infantil(inf);
 
 		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(b1);
 		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(b2);
@@ -577,7 +577,7 @@ void Sistema::System_Manager(unsigned int index, string bikeType) {
 					break;
 
 				pontosPartilha.at(index)->adicionaBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0));
-				pontosPartilha.at(indicesSup5.at(k))->removeBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0));
+				pontosPartilha.at(indicesSup5.at(k))->removeBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0)->getBikeName());
 			}
 
 			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
@@ -595,7 +595,7 @@ void Sistema::System_Manager(unsigned int index, string bikeType) {
 					break;
 
 				pontosPartilha.at(indicesInf5.at(k))->adicionaBike(pontosPartilha.at(index)->getBikes().at(value).at(0));
-				pontosPartilha.at(index)->removeBike(pontosPartilha.at(index)->getBikes().at(value).at(0));
+				pontosPartilha.at(index)->removeBike(pontosPartilha.at(index)->getBikes().at(value).at(0)->getBikeName());
 			}
 
 			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
@@ -793,17 +793,20 @@ void Sistema::adicionaBike() {
 		}
 	}
 
+	//pontosPartilha.at(0)->setBikeNextIdForward("Urbana");
+
+	Bicicleta* bc;
+
 	if(biketype == "Urbana")
-		pontosPartilha.at(0)->setBikeNextIdForward("Urbana");
+		bc = new Urbana(nomePP);
 	else if(biketype == "Urbana Simples")
-		pontosPartilha.at(0)->setBikeNextIdForward("Urbana Simples");
+		bc = new UrbanaSimples(nomePP);
 	else if(biketype == "Corrida")
-		pontosPartilha.at(0)->setBikeNextIdForward("Corrida");
+		bc = new Corrida(nomePP);
 	else
-		pontosPartilha.at(0)->setBikeNextIdForward("Infantil");
+		bc = new Infantil(nomePP);
 
 
-	Bicicleta * bc = new Bicicleta(biketype,nomePP);
 	pontosPartilha.at(indexPP)->adicionaBike(bc);
 
 	cout << endl << "Bicicleta adicionada com sucesso !" << endl << endl;
@@ -893,8 +896,7 @@ void Sistema::removeBike() {
 		}
 	}
 
-	Bicicleta * bc = new Bicicleta(biketype,nomePP);
-	pontosPartilha.at(indexPP)->removeBike(bc);
+	pontosPartilha.at(indexPP)->removeBike(nomePP);
 
 	cout << endl << "Bicicleta removida com sucesso !" << endl << endl;
 
@@ -1155,7 +1157,7 @@ void Sistema::alugaBike(int index) {
 
 			utentes.at(index)->alugaBicicleta(bike,p);
 
-			pontosPartilha.at(idPP)->removeBike(bike);
+			pontosPartilha.at(idPP)->removeBike(bike->getBikeName());
 
 			if(utentes.at(index)->getTipoUtente() == "Regular")
 			{
@@ -1232,18 +1234,14 @@ void Sistema::devolveBike(int index) {
 
 	//Verifica o tipo de utente e apresenta a respetiva informação
 
+	Utilizacao ut = utentes.at(index)->getLastUse();
+	bikeType = ut.getBikeType();
+	ut.displayUtilizacao();
 
-	if(utentes.at(index)->getTipoUtente() == "Socio")
+	if(utentes.at(index)->getTipoUtente() == "Regular")
 	{
-		Utilizacao ut = utentes.at(index)->getUtilizacoes().at(utentes.at(index)->getUtilizacoes().size() - 1);
-		bikeType = ut.getBikeType();
-		ut.displayUtilizacao();
-	}
-	else {
-		Utilizacao ut = utentes.at(index)->getHistorico().at(utentes.at(index)->getHistorico().size() - 1);
-		ut.displayUtilizacao();
-		bikeType = ut.getBikeType();
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
+
 	}
 
 	cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << pontosPartilha.at(index_pp)->getNome() << " !" << endl << endl;
@@ -1275,82 +1273,88 @@ void Sistema::mudaTipoUT(int index){
 		return;
 	}
 
-	if(tipo == "Socio")
-		if(utentes.at(index)->getUtilizacoes().size() != 0){
-			cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
-			return;
-		}
-
-	cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
-
-	while(1)
+	if(utentes.at(index)->hasPendingPay())
 	{
-		try {
-			if(tipo == "Regular")
-				cout << "Tem a certeza que pretende mudar para Sócio [Y/N]: ";
-			else
-				cout << "Tem a certeza que pretende mudar para Regular [Y/N]: ";
-
-			cin >> option;
-			cin.ignore(1000,'\n');
-
-			if(valid_word(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			if((option == "Y") || (option == "N"))
-				break;
-
-			throw OpcaoInvalida<string>(option);
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
+		cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
+		return;
 	}
 
-	if(option == "Y")
-	{
-		if(tipo == "Regular") {
-			int id = utentes.at(index)->getId();
-			string nome = utentes.at(index)->getNome();
-			Localizacao local = utentes.at(index)->getLocalizacao();
-			vector<Utilizacao> hist = utentes.at(index)->getHistorico();
-			utentes.erase(utentes.begin()+index);
+//if(tipo == "Socio")
+//	if(utentes.at(index)->getUtilizacoes().size() != 0){
+//		cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
+//		return;
+//	}
 
-			Utente* u = new Socio(nome,local);
-			u->setID(id);
-			u->setLastId();
-			for(unsigned int i=0; i < hist.size() ; i++){
-				u->setHistoric(hist.at(i));
-			}
+cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
 
-			utentes.at(index)=u;
-
-			cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Sócio" << endl << endl;
-		}
+while(1)
+{
+	try {
+		if(tipo == "Regular")
+			cout << "Tem a certeza que pretende mudar para Sócio [Y/N]: ";
 		else
-		{
-			int id = utentes.at(index)->getId();
-			string nome = utentes.at(index)->getNome();
-			Localizacao local = utentes.at(index)->getLocalizacao();
-			vector<Utilizacao> hist = utentes.at(index)->getHistorico();
-			utentes.erase(utentes.begin()+index);
+			cout << "Tem a certeza que pretende mudar para Regular [Y/N]: ";
 
-			Utente* u = new Regular(nome,local);
-			u->setID(id);
-			u->setLastId();
-			for(unsigned int i=0; i < hist.size() ; i++){
-				u->setHistoric(hist.at(i));
-			}
+		cin >> option;
+		cin.ignore(1000,'\n');
 
-			utentes.at(index)=u;
-			cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Regular" << endl << endl;
+		if(valid_word(option) == false)
+			throw OpcaoInvalida<string>(option);
+
+		if((option == "Y") || (option == "N"))
+			break;
+
+		throw OpcaoInvalida<string>(option);
+	}
+	catch (OpcaoInvalida<string> &op) {
+		cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
+		cin.clear();
+	}
+}
+
+if(option == "Y")
+{
+	if(tipo == "Regular") {
+		int id = utentes.at(index)->getId();
+		string nome = utentes.at(index)->getNome();
+		Localizacao local = utentes.at(index)->getLocalizacao();
+		vector<Utilizacao> hist = utentes.at(index)->getHistorico();
+		utentes.erase(utentes.begin()+index);
+
+		Utente* u = new Socio(nome,local);
+		u->setID(id);
+		u->setLastId();
+		for(unsigned int i=0; i < hist.size() ; i++){
+			u->setHistoric(hist.at(i));
 		}
+
+		utentes.at(index)=u;
+
+		cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Sócio" << endl << endl;
 	}
 	else
-		cout << endl << "Mudança cancelada com sucesso " << endl << endl;
+	{
+		int id = utentes.at(index)->getId();
+		string nome = utentes.at(index)->getNome();
+		Localizacao local = utentes.at(index)->getLocalizacao();
+		vector<Utilizacao> hist = utentes.at(index)->getHistorico();
+		utentes.erase(utentes.begin()+index);
 
-	return;
+		Utente* u = new Regular(nome,local);
+		u->setID(id);
+		u->setLastId();
+		for(unsigned int i=0; i < hist.size() ; i++){
+			u->setHistoric(hist.at(i));
+		}
+
+		utentes.at(index)=u;
+		cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Regular" << endl << endl;
+	}
+}
+else
+	cout << endl << "Mudança cancelada com sucesso " << endl << endl;
+
+return;
 }
 
 

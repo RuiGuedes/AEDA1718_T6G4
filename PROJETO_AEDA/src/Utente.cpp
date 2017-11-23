@@ -37,25 +37,11 @@ Utente::Utente(string nome,Localizacao spot) : id(++lastId)
  */
 void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
 
-	string bikeType = b->getBikeType();
-
-	if(bikeType == "Urbana")
-		setBike(b);
-	else if(bikeType == "Urbana Simples")
-		setBike(b);
-	else if(bikeType == "Corrida")
-		setBike(b);
-	else
-		setBike(b);
+	setBike(b);
 
 	setAvailable();
 
-	if(getTipoUtente() == "Socio") {
-		setUtilizacoes(ut);
-	}
-	else {
-		setHistoric(ut);
-	}
+	addUse(ut);
 
 	return;
 }
@@ -77,9 +63,7 @@ Bicicleta* Utente::removeBicicleta(vector<int> index_distancias) {
 }
 
 
-
 // METODOS GET //
-
 
 /**
  * @return Retorna o identificador do ultimo utente criado
@@ -131,36 +115,11 @@ bool Utente::getAvailable() const {
  * @return Retorna vetor de utilizacoes ja liquidadas do utente
  */
 vector<Utilizacao> Utente::getHistorico() const{
-	return this->historico;
-}
-
-/**
- * Imprime no ecra o historico do utente.
- * Caso  o historico esteja vazio e apresentada uma mensagem
- * Se o utente é Regular, tambem e apresentado o total pago por cada utilizacao.
- * @param ER sistema em execucao
- * @param index indice do utente no vetor de utentes do sistema
- */
-void Utente::displayHistoric() const{
-
-	vector<Utilizacao> hist = this->getHistorico();
-
-	cout << "Histórico: " << endl << endl;
-
-	for(unsigned int i = 0; i < hist.size(); i++)
-	{
-		hist.at(i).displayUtilizacao();
-		if(getTipoUtente() == "Regular")
-			cout << "Montante: " << hist.at(i).getPrice() << "€" << endl;
-		cout << endl;
-	}
-
-	return;
+	return historico;
 }
 
 
 // METODOS SET //
-
 
 /**
  * Decrementa o numero de identificacao do ultimo utente
@@ -197,10 +156,8 @@ void Utente::setUtenteLocation(Localizacao spot) {
 
 void Utente::setAvailable() {
 
-	if(disponivel == false)
-		disponivel = true;
-	else
-		disponivel = false;
+	disponivel = !disponivel;
+
 }
 
 /**
@@ -275,9 +232,7 @@ void Utente::updateLocation(int index) {
 		}
 	};
 
-	Localizacao spot;
-	spot.setX(coordX);
-	spot.setY(coordY);
+	Localizacao spot(coordX,coordY);
 
 	setUtenteLocation(spot);
 
@@ -287,8 +242,6 @@ void Utente::updateLocation(int index) {
 }
 
 
-
-
 //////////////////////
 //// CLASSE SOCIO ////
 //////////////////////
@@ -296,7 +249,6 @@ void Utente::updateLocation(int index) {
 Socio::Socio() : Utente{} {}
 
 Socio::Socio(string nome,Localizacao spot) : Utente{nome, spot} {}
-
 
 /**
  * Paga a mensalidade do mes selecionedo, removendo as ulizacoes correspondestes a esse mes do vetor utilizacoes
@@ -319,6 +271,7 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 
 			//Verifica o tipo de prestação a ser aplicada
 			unsigned int tmp{};
+
 
 			if(getUtilizacoes().at(i).getBikeType() == "Urbana")
 				tmp = 0;
@@ -388,6 +341,30 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 
 
 /**
+ * Imprime no ecra o historico do utente.
+ * Caso  o historico esteja vazio e apresentada uma mensagem
+ * Se o utente é Regular, tambem e apresentado o total pago por cada utilizacao.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
+void Socio::displayHistoric() const{
+
+	vector<Utilizacao> hist = getHistorico();
+
+	cout << "Histórico: " << endl << endl;
+
+	for(unsigned int i = 0; i < hist.size(); i++)
+	{
+		hist.at(i).displayUtilizacao();
+		cout << endl;
+	}
+
+	return;
+}
+
+
+
+/**
  * @return Retorna o tipo do utente (socio)
  */
 string Socio::getTipoUtente() const {
@@ -431,10 +408,11 @@ vector<Utilizacao> Socio::getUtilizacoes() const {
  * Acrescenta uma utilizcao as utilizacoes do utente
  * @param ut utilizacao a acrescentar
  */
-void Socio::setUtilizacoes(Utilizacao ut) {
+/*void Socio::setUtilizacoes(Utilizacao ut) {
 
 	this->utilizacoes.push_back(ut);
 }
+ */
 
 /**
  * Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes
@@ -446,7 +424,7 @@ void Socio::setUtilizacoes(Utilizacao ut) {
  * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
  * @param index indice do utente no vetor de utentes do sistema
  */
-void Socio::efetuaPag(int index) {
+void Socio::efetuaPag(int index){
 
 	cout << "Efetua pagamento" << endl << endl;
 
@@ -619,20 +597,56 @@ void Socio::efetuaPag(int index) {
 			}
 		};
 	}
+
 	pagaMensalidade(ano,mes);
 
 	return;
 }
 
+Utilizacao Socio::getLastUse() {
 
+	return utilizacoes.back();
+}
 
+bool Socio::hasPendingPay() {
 
+	return utilizacoes.size() > 0;
+}
 
+void Socio::addUse(Utilizacao use) {
+
+	utilizacoes.push_back(use);
+	return;
+
+}
 
 
 ////////////////////////
 //// CLASSE REGULAR ////
 ////////////////////////
+
+/**
+ * Imprime no ecra o historico do utente.
+ * Caso  o historico esteja vazio e apresentada uma mensagem
+ * Se o utente é Regular, tambem e apresentado o total pago por cada utilizacao.
+ * @param ER sistema em execucao
+ * @param index indice do utente no vetor de utentes do sistema
+ */
+void Regular::displayHistoric() const{
+
+	vector<Utilizacao> hist = getHistorico();
+
+	cout << "Histórico: " << endl << endl;
+
+	for(unsigned int i = 0; i < hist.size(); i++)
+	{
+		hist.at(i).displayUtilizacao();
+		cout << "Montante: " << hist.at(i).getPrice() << "€" << endl << endl;
+	}
+
+	return;
+}
+
 
 /**
  * Construtor padrao da classe Bicicleta
@@ -655,7 +669,7 @@ void Regular::displayPagPendentes(int index){
 	return;
 }
 
-void Regular::efetuaPag(int index) {
+void Regular::efetuaPag(int index){
 
 	cout << "Efetua pagamento" << endl << endl;
 
@@ -664,4 +678,18 @@ void Regular::efetuaPag(int index) {
 	return;
 }
 
+bool Regular::hasPendingPay()
+{
+	return false;
+}
 
+void Regular::addUse(Utilizacao use) {
+
+	historico.push_back(use);
+
+}
+
+Utilizacao Regular::getLastUse() {
+
+	return historico.back();
+}

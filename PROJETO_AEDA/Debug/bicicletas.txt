@@ -24,7 +24,6 @@ u7/Urbana/
 u8/Urbana/
 u9/Urbana/
 u10/Urbana/
-us6/Urbana Simples/
 us7/Urbana Simples/
 us8/Urbana Simples/
 us9/Urbana Simples/
@@ -189,6 +188,7 @@ us47/Urbana Simples/
 us48/Urbana Simples/
 us49/Urbana Simples/
 us50/Urbana Simples/
+us6/Urbana Simples/
 c46/Corrida/
 c47/Corrida/
 c48/Corrida/

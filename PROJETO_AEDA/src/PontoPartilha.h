@@ -21,7 +21,7 @@ public:
 	void limpaVectorBike();
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
-	void removeBike(Bicicleta *bike);
+	void removeBike(string name);
 	void adicionaBike(Bicicleta* bike);
 
 	//Metodos Get
