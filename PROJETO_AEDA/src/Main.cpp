@@ -98,8 +98,6 @@ void checkinSys(Sistema & ER){
 
 	f_utentes.close();
 
-	cout << "leu utentes \n";
-
 	ifstream f_pontos_partilha;
 
 	ifstream f_bicicletas;
@@ -142,7 +140,7 @@ void checkinSys(Sistema & ER){
 
 		vector<int> numType = p1.getNumberOfBikes();
 		p1.limpaVectorBike();
-cout<<" pp \n";
+
 		for (unsigned int j=0 ; j<numType.size() ; j++){
 			for (int k=0 ; k < numType.at(j) ; k++){
 				string b;
@@ -166,8 +164,6 @@ cout<<" pp \n";
 				if(bike->getBikeName()==""){
 					continue;
 				}
-
-//				f_bicicletas.ignore();
 
 				p1.adicionaBike(bike);
 			}
