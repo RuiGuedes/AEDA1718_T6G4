@@ -2,25 +2,22 @@
 
 #include "Includes.h"
 
-enum Biketype {
-	URBANA = 0, URBANA_SIMPLES = 1, CORRIDA = 2, INFANTIL = 3
-};
-
 class Bicicleta {
 protected:
-	string bikeName; /**< Nome da bicicleta, composto pelas iniciais do tipo e um numero (ex: "u5" = bicicleta Urbana numero 5 (existem 4 antes desta)) */
+	string bikeName; 			/**< Nome da bicicleta, composto pelas iniciais do tipo e um numero (ex: "u5" = bicicleta Urbana numero 5 (existem 4 antes desta)) */
 	int price;
 public:
-	Bicicleta();/**< Necessário para o overload do operador de extração na classe utente*/
+	Bicicleta();				/**< Necessário para o overload do operador de extração na classe utente*/
 	Bicicleta(string name);
 	virtual ~Bicicleta() {};
-	friend ostream & operator <<(ostream & o, const Bicicleta & b);
-	friend istream & operator >>(istream & i, Bicicleta & b);
 
 	//Métodos Get
 	string getBikeName() const;
-
 	int getPrice() const;
+
+	//Others
+	friend ostream & operator <<(ostream & o, const Bicicleta & b);
+	friend istream & operator >>(istream & i, Bicicleta & b);
 };
 
 /**
@@ -49,6 +46,7 @@ public :
 	Urbana(string bikeName);
 	~Urbana(){};
 
+	//Métodos Get
 	static int getID();
 };
 
@@ -58,6 +56,7 @@ public :
 	~UrbanaSimples(){};
 	UrbanaSimples(string bikeName);
 
+	//Métodos Get
 	static int getID();
 };
 
@@ -67,6 +66,7 @@ public :
 	~Corrida(){};
 	Corrida(string bikeName);
 
+	//Métodos Get
 	static int getID();
 };
 
@@ -76,6 +76,7 @@ public :
 	~Infantil(){};
 	Infantil(string bikeName);
 
+	//Métodos Get
 	static int getID();
 };
 

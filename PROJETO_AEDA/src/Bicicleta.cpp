@@ -1,5 +1,17 @@
 #include "Bicicleta.h"
 
+// ATRIBUTOS ESTATICOS //
+
+int Urbana::id = 1;
+int UrbanaSimples::id = 1;
+int Corrida::id = 1;
+int Infantil::id = 1;
+
+
+//////////////////////
+// CLASSE BICICLETA //
+//////////////////////
+
 /**
  * Construtor padrao da classe Bicicleta
  */
@@ -11,15 +23,11 @@ Bicicleta::Bicicleta(){};
  * @param name nome da bicicleta
  */
 Bicicleta::Bicicleta(string name) {
-
 	bikeName = name;
-
 }
 
-/////////////////
-// METODOS GET //
-/////////////////
 
+// METODOS GET //
 
 /**
  * @return Retorna o nome da bicicleta
@@ -32,7 +40,9 @@ int Bicicleta::getPrice() const {
 	return price;
 }
 
-int Urbana::id = 1;
+///////////////////
+// CLASSE URBANA //
+///////////////////
 
 Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
 
@@ -41,44 +51,57 @@ Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
 
 }
 
+
+// METODOS GET //
+
 int Urbana::getID() {
 	return id;
 }
 
-int UrbanaSimples::id = 1;
+
+///////////////////////////
+// CLASSE URBANA_SIMPLES //
+///////////////////////////
 
 UrbanaSimples::UrbanaSimples(string bikeName) : Bicicleta(bikeName){
-
 	id++;
 	price = 30;
-
 }
+
+
+// METODOS GET //
 
 int UrbanaSimples::getID() {
 	return id++;
 }
 
-int Corrida::id = 1;
+////////////////////
+// CLASSE CORRIDA //
+////////////////////
 
 Corrida::Corrida(string bikeName) : Bicicleta(bikeName){
-
 	id++;
 	price = 50;
-
 }
+
+
+// METODOS GET //
 
 int Corrida::getID() {
 	return id;
 }
 
-int Infantil::id = 1;
+/////////////////////
+// CLASSE INFANTIL //
+/////////////////////
 
 Infantil::Infantil(string bikeName) : Bicicleta(bikeName){
-
 	id++;
 	price = 20;
-
 }
+
+
+// METODOS GET //
 
 int Infantil::getID() {
 	return id;
