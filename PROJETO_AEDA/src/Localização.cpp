@@ -22,7 +22,6 @@ Localizacao::Localizacao(string nome, double x, double y){
 }
 
 Localizacao::Localizacao(double x, double y) {
-
 	this->nome = "";
 	this->x = x;
 	this->y = y;

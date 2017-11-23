@@ -11,11 +11,6 @@ public:
 	Localizacao(string nome, double x, double y);
 	Localizacao(double x, double y);
 
-	double distancia(Localizacao local) const;
-	Localizacao & operator =(Localizacao & l);
-	friend ostream & operator <<(ostream & o, const Localizacao & l);
-	friend istream & operator >>(istream & i, Localizacao & l);
-
 	//Métodos Get
 	string getNome() const;
 	double getX() const;
@@ -25,6 +20,13 @@ public:
 	void setNome(string nome);
 	void setX(double x);
 	void setY(double y);
+
+	//Others
+	double distancia(Localizacao local) const;
+	Localizacao & operator =(Localizacao & l);
+	friend ostream & operator <<(ostream & o, const Localizacao & l);
+	friend istream & operator >>(istream & i, Localizacao & l);
+
 
 };
 
