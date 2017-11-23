@@ -51,7 +51,6 @@ public:
 	Bicicleta* removeBicicleta(vector<int> index_distancias);
 	void updateLocation(int index);
 	virtual void displayHistoric() const = 0;
-
 };
 
 

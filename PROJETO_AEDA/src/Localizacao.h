@@ -7,9 +7,9 @@ class Localizacao {
 	double x;		/**< Coordenadas x da localizacao */
 	double y;		/**< Coordenadas y da localizacao */
 public:
-	Localizacao();	/**< Necessário para o overload do operador de extração na classe utente*/
-	Localizacao(string nome, double x, double y);
+	Localizacao();		/**< Necessário para o overload do operador de extração na classe utente*/
 	Localizacao(double x, double y);
+	Localizacao(string nome, double x, double y);
 
 	//Métodos Get
 	string getNome() const;
@@ -26,9 +26,8 @@ public:
 	Localizacao & operator =(Localizacao & l);
 	friend ostream & operator <<(ostream & o, const Localizacao & l);
 	friend istream & operator >>(istream & i, Localizacao & l);
-
-
 };
+
 
 /**
  * Overload do operador de insercao usado para escrever os objetos do tipo Localizacao nos ficheiros,

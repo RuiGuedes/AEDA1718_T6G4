@@ -41,7 +41,6 @@ int main()
  * e coloca-a corretamente no sistema.
  * Para efetuar a extracao da informacao, a funcao recorre ao operador de extracao >>
  * que foi redefenido para todas as classes usadas no sistema.
- *
  * @param ER sistema que se pretende completar
  */
 void checkinSys(Sistema & ER){
@@ -167,7 +166,6 @@ void checkinSys(Sistema & ER){
  * Insere nos ficheiros de texto a informacao contida no sistema formatadamente.
  * Para efetuar a insercao da informacao, a funcao recorre ao operador de insercao <<
  * que foi redefenido para todas as classes usadas no sistema.
- *
  * @param ER sistema que se pretende guardar
  */
 void checkoutSys(Sistema & ER){
@@ -234,5 +232,3 @@ void checkoutSys(Sistema & ER){
 
 	return;
 }
-
-

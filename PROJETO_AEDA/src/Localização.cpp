@@ -11,6 +11,17 @@ Localizacao::Localizacao(){
 
 /**
  * Construtor da classe Localizacao
+ * @param x coordenada x da localizacao
+ * @param y coordenada y da localizacao
+ */
+Localizacao::Localizacao(double x, double y) {
+	this->nome = "";
+	this->x = x;
+	this->y = y;
+}
+
+/**
+ * Construtor da classe Localizacao
  * @param nome nome da localizacao
  * @param x coordenada x da localizacao
  * @param y coordenada y da localizacao
@@ -19,30 +30,6 @@ Localizacao::Localizacao(string nome, double x, double y){
 	this->nome = nome;
 	this->x = x;
 	this->y = y;
-}
-
-Localizacao::Localizacao(double x, double y) {
-	this->nome = "";
-	this->x = x;
-	this->y = y;
-}
-
-/**
- * Construtor de copia
- */
-Localizacao & Localizacao::operator =(Localizacao & l) {
-	setNome(l.nome);
-	setX(l.x);
-	setY(l.y);
-	return *this;
-}
-
-/**
- * Metodo para calcular a distancia entre duas Localizacoes
- * @param local localizacao
- */
-double Localizacao::distancia(Localizacao local) const{
-	return sqrt(pow((local.x - x),2) + pow((local.y - y),2));
 }
 
 /////////////////
@@ -99,3 +86,24 @@ void Localizacao::setY(double y) {
 	this->y = y;
 }
 
+////////////
+// OTHERS //
+////////////
+
+/**
+ * Construtor de copia
+ */
+Localizacao & Localizacao::operator =(Localizacao & l) {
+	setNome(l.nome);
+	setX(l.x);
+	setY(l.y);
+	return *this;
+}
+
+/**
+ * Metodo para calcular a distancia entre duas Localizacoes
+ * @param local localizacao
+ */
+double Localizacao::distancia(Localizacao local) const{
+	return sqrt(pow((local.x - x),2) + pow((local.y - y),2));
+}
