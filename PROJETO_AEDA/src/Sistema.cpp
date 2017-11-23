@@ -592,8 +592,6 @@ void Sistema::removeUtente() {
 
 	displayUtentes();
 
-	cout << endl;
-
 	string id;
 	int idUT {};
 	int indexUT {-1};
@@ -1004,7 +1002,7 @@ void Sistema::alugaBike(int index) {
 		while(1)
 		{
 			try{
-				cout << endl << "Ano [2017 - ...]: ";
+				cout << endl << "Ano [2017 ->]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
@@ -1079,7 +1077,8 @@ void Sistema::alugaBike(int index) {
 					d1.setDia(value);
 					break;
 				}
-				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
+						(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
 				{
 					if(value < 1 || value > 31)
 						throw OpcaoInvalida<int>(value);
@@ -1229,7 +1228,6 @@ void Sistema::devolveBike(int index) {
 	if(utentes.at(index)->getTipoUtente() == "Regular")
 	{
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
-
 	}
 
 	cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << pontosPartilha.at(index_pp)->getNome() << " !" << endl << endl;
@@ -1267,12 +1265,6 @@ void Sistema::mudaTipoUT(int index){
 		return;
 	}
 
-	//if(tipo == "Socio")
-	//	if(utentes.at(index)->getUtilizacoes().size() != 0){
-	//		cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
-	//		return;
-	//	}
-
 	cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
 
 	while(1)
@@ -1302,40 +1294,33 @@ void Sistema::mudaTipoUT(int index){
 
 	if(option == "Y")
 	{
-		if(tipo == "Regular") {
-			int id = utentes.at(index)->getId();
-			string nome = utentes.at(index)->getNome();
-			Localizacao local = utentes.at(index)->getLocalizacao();
-			vector<Utilizacao> hist = utentes.at(index)->getHistorico();
+		int id = utentes.at(index)->getId();
+		string nome = utentes.at(index)->getNome();
+		Localizacao local = utentes.at(index)->getLocalizacao();
+		vector<Utilizacao> hist = utentes.at(index)->getHistorico();
+		Utente* u;
 
-			Utente* u = new Socio(nome,local);
-			u->setID(id);
-			u->setLastId();
-			for(unsigned int i=0; i < hist.size() ; i++){
-				u->setHistoric(hist.at(i));
-			}
-
-			utentes.at(index)=u;
-
-			cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Sócio" << endl << endl;
-		}
+		if(tipo == "Regular")
+			u = new Socio(nome,local);
 		else
-		{
-			int id = utentes.at(index)->getId();
-			string nome = utentes.at(index)->getNome();
-			Localizacao local = utentes.at(index)->getLocalizacao();
-			vector<Utilizacao> hist = utentes.at(index)->getHistorico();
+			u = new Regular(nome,local);
 
-			Utente* u = new Regular(nome,local);
-			u->setID(id);
-			u->setLastId();
-			for(unsigned int i=0; i < hist.size() ; i++){
-				u->setHistoric(hist.at(i));
-			}
+		u->setID(id);
+		u->setLastId();
 
-			utentes.at(index)=u;
-			cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: Regular" << endl << endl;
+		for(unsigned int i=0; i < hist.size() ; i++){
+			u->setHistoric(hist.at(i));
 		}
+
+		utentes.at(index)=u;
+
+		cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: ";
+
+		if(tipo == "Regular")
+			cout << "Sócio" << endl << endl;
+		else
+			cout << "Regular" << endl << endl;
+
 	}
 	else
 		cout << endl << "Mudança cancelada com sucesso " << endl << endl;
@@ -1395,8 +1380,10 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
 					break;
 
-				pontosPartilha.at(index)->adicionaBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0));
-				pontosPartilha.at(indicesSup5.at(k))->removeBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0)->getBikeName());
+				Bicicleta* bike = pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0);
+
+				pontosPartilha.at(index)->adicionaBike(bike);
+				pontosPartilha.at(indicesSup5.at(k))->removeBike(bike->getBikeName());
 			}
 
 			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
@@ -1413,8 +1400,10 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
 					break;
 
-				pontosPartilha.at(indicesInf5.at(k))->adicionaBike(pontosPartilha.at(index)->getBikes().at(value).at(0));
-				pontosPartilha.at(index)->removeBike(pontosPartilha.at(index)->getBikes().at(value).at(0)->getBikeName());
+				Bicicleta* bike = pontosPartilha.at(index)->getBikes().at(value).at(0);
+
+				pontosPartilha.at(indicesInf5.at(k))->adicionaBike(bike);
+				pontosPartilha.at(index)->removeBike(bike->getBikeName());
 			}
 
 			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
@@ -1435,7 +1424,7 @@ void Sistema::displayNearestPP(int index) const {
 
 	vector<int> distancias = getOrderedPP(index);
 
-	cout << "Ordem  Nome" << setw(16) << "Local"<< endl;
+	cout << "Ordem   Nome" << setw(16) << "Local"<< endl;
 
 	for(unsigned int i = 0; i < distancias.size(); i++)
 	{
