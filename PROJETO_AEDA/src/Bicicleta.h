@@ -5,7 +5,7 @@
 class Bicicleta {
 protected:
 	string bikeName; 			/**< Nome da bicicleta, composto pelas iniciais do tipo e um numero (ex: "u5" = bicicleta Urbana numero 5 (existem 4 antes desta)) */
-	int price;
+	int price;					/**< Preco referente ao valor de uma mensalidade associada a um tipo de bicicleta */
 public:
 	Bicicleta();				/**< Necessário para o overload do operador de extração na classe utente*/
 	Bicicleta(string name);
@@ -14,30 +14,6 @@ public:
 	//Métodos Get
 	string getBikeName() const;
 	int getPrice() const;
-
-	//Others
-	friend ostream & operator <<(ostream & o, const Bicicleta & b);
-	friend istream & operator >>(istream & i, Bicicleta & b);
-};
-
-/**
- * Overload do operador de insercao usado para escrever os objetos do tipo Bicicleta nos ficheiros,
- * de modo a guardar a informacao do sistema.
- */
-inline ostream& operator <<(ostream & o, const Bicicleta & b)
-{
-	o << b.bikeName;
-	return o;
-};
-
-/**
- * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Bicicleta,
- * de modo a recriar o sistema da ultima execucao.
- */
-inline istream& operator >>(istream & i, Bicicleta & b)
-{
-	getline(i,b.bikeName,'\n');
-	return i;
 };
 
 class Urbana : public Bicicleta {
