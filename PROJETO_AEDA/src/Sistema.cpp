@@ -71,19 +71,20 @@ void Sistema::addPontoPartilha() {
 
 			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
 			{
-				if(pontosPartilha.at(i)->getLocal().getNome() == locname)
-				{
+				Localizacao loc = pontosPartilha.at(i)->getLocal();
+
+				if(loc.getNome() == locname){
 					diffloc = false;
+
 					spot.setNome(locname);
-					spot.setX(pontosPartilha.at(i)->getLocal().getX());
-					spot.setY(pontosPartilha.at(i)->getLocal().getY());
+					spot.setX(loc.getX());
+					spot.setY(loc.getY());
+
 					cout << endl << "Coordenada X: " << spot.getX() << endl << endl;
 					cout << "Coordenada Y: " << spot.getY() << endl << endl;
 					break;
 				}
 			}
-
-
 			break;
 		}
 		catch (OpcaoInvalida<string> &op) {
@@ -161,10 +162,12 @@ void Sistema::addPontoPartilha() {
 
 			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
 			{
-				if((pontosPartilha.at(i)->getLocal().getX() == coordX) && (pontosPartilha.at(i)->getLocal().getY() == coordY))
+				Localizacao loc = pontosPartilha.at(i)->getLocal();
+
+				if((loc.getX() == coordX) && (loc.getY() == coordY))
 				{
 					newcord = false;
-					cout << "Essas coordenadas já pertencem à localização: " << pontosPartilha.at(i)->getLocal().getNome() << endl << endl;
+					cout << "Essas coordenadas já pertencem à localização: " << loc.getNome() << endl << endl;
 					break;
 				}
 			}
@@ -199,9 +202,7 @@ void Sistema::addPontoPartilha() {
 		}
 	};
 
-	PontoPartilha* pp = new PontoPartilha(spot,value,nome);
-
-	pontosPartilha.push_back(pp);
+	addPontoPartilha(new PontoPartilha(spot,value,nome));
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
@@ -300,13 +301,17 @@ void Sistema::addNewUtente() {
 	while(1)
 	{
 		try{
-			cout << endl << "Coordenada X: ";
+			cout << endl << "Coordenada X [-90 , 90]: ";
 			cin >> option;
 			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
 			coordX = stod(option);
+
+			if((coordX > 90) || (coordX < -90))
+				throw OpcaoInvalida<double>(coordX);
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op){
@@ -314,23 +319,37 @@ void Sistema::addNewUtente() {
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
 		}
+		catch (OpcaoInvalida<double> &op){
+
+			cout << "Fora de alcance (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
 	};
 
 	while(1)
 	{
 		try{
-			cout << endl << "Coordenada Y: ";
+			cout << endl << "Coordenada Y [-180 , 180]: ";
 			cin >> option;
 			cin.ignore(1000,'\n');
 			if(valid_number_double(option) == false)
 				throw OpcaoInvalida<string>(option);
 
 			coordY = stod(option);
+
+			if((coordY > 180) || (coordY < -180))
+				throw OpcaoInvalida<double>(coordY);
+
 			break;
 		}
 		catch (OpcaoInvalida<string> &op){
 
 			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<double> &op){
+
+			cout << "Fora de alcance (" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
 		}
 	};
@@ -339,9 +358,11 @@ void Sistema::addNewUtente() {
 
 	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
 	{
-		if((pontosPartilha.at(i)->getLocal().getX() == coordX) && (pontosPartilha.at(i)->getLocal().getY() == coordY))
+		Localizacao loc = pontosPartilha.at(i)->getLocal();
+
+		if((loc.getX() == coordX) && (loc.getY() == coordY))
 		{
-			spot.setNome(pontosPartilha.at(i)->getLocal().getNome());
+			spot.setNome(loc.getNome());
 			break;
 		}
 	}
@@ -350,12 +371,13 @@ void Sistema::addNewUtente() {
 	spot.setY(coordY);
 
 	Utente* u12;
+
 	if(tipoUtente == "Socio")
 		u12 = new Socio(nome, spot);
 	else
 		u12 = new Regular(nome, spot);
 
-	utentes.push_back(u12);
+	addNewUtente(u12);
 
 	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
 
