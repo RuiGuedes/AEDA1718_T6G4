@@ -180,14 +180,12 @@ inline ostream& operator <<(ostream & o, const Regular & u)
  */
 inline istream& operator >>(istream & i, Regular & u)
 {
-	char b1, b2, b3, b4;
-	unsigned int utiliz, hist;
+	char b2, b3, b4;
+	unsigned int hist;
 	Utilizacao ut;
 
 	getline(i,u.nome,',');
-	i >> u.local >> b1 >> utiliz >> b2;
-
-	i >> hist >> b3;
+	i >> u.local >> b2 >> hist >> b3;
 
 	for(unsigned int k=0 ; k < hist ; k++){
 		i >> ut >> b4;

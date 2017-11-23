@@ -44,7 +44,6 @@ void PontoPartilha::removeBike(string name) {
 
 	int indicator;
 
-
 	if(name.at(0) == 'u')
 	{
 		if(name.at(1) == 's')
@@ -57,13 +56,11 @@ void PontoPartilha::removeBike(string name) {
 	else
 		indicator = 3;
 
-
 	for(unsigned int i = 0; i < bicicletas.at(indicator).size(); i++)
 	{
 		if(bicicletas.at(indicator).at(i)->getBikeName() == name)
 			bicicletas.at(indicator).erase(bicicletas.at(indicator).begin() + i);
 	}
-
 }
 
 /**
@@ -73,16 +70,19 @@ void PontoPartilha::removeBike(string name) {
 void PontoPartilha::adicionaBike(Bicicleta* bike) {
 
 	int indicator;
-	string tipo = bike->getBikeType();
+	string name = bike->getBikeName();
 
-	if(tipo == "Urbana")
-		indicator = 0;
-	else if(tipo == "Urbana Simples")
-		indicator = 1;
-	else if(tipo == "Corrida")
-		indicator = 2;
-	else if(tipo == "Infantil")
-		indicator = 3;
+	if(name.at(0) == 'u')
+		{
+			if(name.at(1) == 's')
+				indicator = 1;
+			else
+				indicator = 0;
+		}
+		else if(name.at(0) == 'c')
+			indicator = 2;
+		else
+			indicator = 3;
 
 
 	bicicletas.at(indicator).push_back(bike);

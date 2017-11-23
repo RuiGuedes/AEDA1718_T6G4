@@ -66,8 +66,8 @@ void checkinSys(Sistema & ER){
 	while(!f_utentes.eof()){
 		char tipoUtente;
 		tipoUtente = f_utentes.get();
-		//b = f_utentes.get();
 		f_utentes.get();
+
 		if(tipoUtente == 'R'){
 			Regular u1;
 			f_utentes >> u1;
@@ -77,6 +77,7 @@ void checkinSys(Sistema & ER){
 			}
 			else{
 				Utente::setLastId();
+				break;
 			}
 		}
 		else {
@@ -88,6 +89,7 @@ void checkinSys(Sistema & ER){
 			}
 			else{
 				Utente::setLastId();
+				break;
 			}
 		}
 
@@ -140,13 +142,12 @@ void checkinSys(Sistema & ER){
 
 		vector<int> numType = p1.getNumberOfBikes();
 		p1.limpaVectorBike();
-
+cout<<" pp \n";
 		for (unsigned int j=0 ; j<numType.size() ; j++){
 			for (int k=0 ; k < numType.at(j) ; k++){
-
 				string b;
 				Bicicleta* bike;
-				getline(f_bicicletas, b,'/');
+				getline(f_bicicletas, b,'\n');
 
 				if(b.at(0) == 'u')
 				{
@@ -166,7 +167,7 @@ void checkinSys(Sistema & ER){
 					continue;
 				}
 
-				f_bicicletas.ignore(1000,'\n');
+//				f_bicicletas.ignore();
 
 				p1.adicionaBike(bike);
 			}
