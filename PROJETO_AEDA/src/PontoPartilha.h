@@ -18,7 +18,7 @@ public:
 	Localizacao getLocal() const;
 	string getNome() const;
 	int getCapacidade() const;
-	vector<int> getNumberOfBikes() const; // número de bicicletas de cada tipo
+	vector<int> getNumberOfBikes() const;
 	vector <string> getBikeTypes();
 	vector <vector<Bicicleta *> > getBikes() const;
 
@@ -31,7 +31,6 @@ public:
 	void adicionaBike(Bicicleta* bike);
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
-
 };
 
 /**

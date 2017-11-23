@@ -31,12 +31,11 @@ PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) 
 
 /**
  * Remove a bicicleta bike do ponto de partilha
- * @param bike apontador de bicicleta que se pretende remover
+ * @param name nome da bicicleta que se pretende remover
  */
 void PontoPartilha::removeBike(string name) {
 
 	vector<Bicicleta *> bikes;
-
 	int indicator{};
 
 	if(name.at(0) == 'u')
@@ -127,15 +126,13 @@ int PontoPartilha::getCapacidade() const {
  *  ->quantidade de bicicletas do tipo "Urbana Simples"
  *  ->quantidade de bicicletas do tipo "Corrida"
  *  ->quantidade de bicicletas do tipo "Infantil"
- *
  * @return Retorna vetor de inteiros
  */
 vector<int> PontoPartilha::getNumberOfBikes() const {
 
 	vector<int> number_bikes;
 
-	for(unsigned int i = 0; i < bicicletas.size(); i++)
-	{
+	for(unsigned int i = 0; i < bicicletas.size(); i++){
 		number_bikes.push_back(bicicletas.at(i).size());
 	}
 
@@ -146,7 +143,6 @@ vector<int> PontoPartilha::getNumberOfBikes() const {
  * @return Retorna um vetor com os tipos de bicicletas existentes no ponto de partilha
  */
 vector <string> PontoPartilha::getBikeTypes() {
-
 	vector <string> bikeTypes;
 
 	if(bicicletas.at(0).size() != 0)
