@@ -1,162 +1,9 @@
 #include "Sistema.h"
 
-/**
- * Procura um valor x num vetor v de elementos comparaveis com os operadores de comparacao.
- * @param v vetor de elementos
- * @param x valor a procurar no vetor
- * @return Retorna o indice da primeira ocorrencia de x em v, se encontrar; senao, retorna -1.
- */
-template <class T>
-int SequentialSearch(const vector<T> &v, T x)
-{
-	for (unsigned int i = 0; i < v.size(); i++)
-		if (v[i] == x)
-			return i;// encontrou
-	return -1; // não encontrou
-}
 
-
-
-/**
- * Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios
- * para o registo (nome, tipo de utente e localizacao).
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- *
- * Adiciona um novo utente ao sistema
- * @param utente utente que pretende adicionar
- */
-void Sistema::addNewUtente() {
-
-	mensagemInicial();
-
-	cout << "Regista novo utente:" << endl << endl;
-
-	string nome, tipoUtente;
-	int value {};
-	string option {};
-	double coordX { }, coordY { };
-
-	while(1)
-	{
-		try {
-			cout << "Nome: " ;
-			getline(cin,nome);
-			if(valid_word(nome) == false)
-				throw OpcaoInvalida<string>(nome);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-	cout << endl << "Tipo de Utente :"<< endl ;
-	cout << "     1 - Regular" << endl;
-	cout << "     2 - Sócio" << endl << endl;
-
-	while(1)
-	{
-		try{
-			cout << endl << "Introduza uma opção (1-2): ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			value = stoi(option);
-			if(value < 1 || value > 2)
-				throw OpcaoInvalida<int>(value);
-
-			break;
-		}
-		catch (OpcaoInvalida<int> &op){
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	if(value==1)
-		tipoUtente = "Regular";
-	else
-		tipoUtente = "Socio";
-
-	cout << endl << "Localização: " << endl << endl;
-
-	cout << "Indique as coordenadas GPS:" << endl;
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada X: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordX = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	while(1)
-	{
-		try{
-			cout << endl << "Coordenada Y: ";
-			cin >> option;
-			cin.ignore(1000,'\n');
-			if(valid_number_double(option) == false)
-				throw OpcaoInvalida<string>(option);
-
-			coordY = stod(option);
-			break;
-		}
-		catch (OpcaoInvalida<string> &op){
-
-			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	};
-
-	Localizacao spot;
-
-	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
-	{
-		if((pontosPartilha.at(i)->getLocal().getX() == coordX) && (pontosPartilha.at(i)->getLocal().getY() == coordY))
-		{
-			spot.setNome(pontosPartilha.at(i)->getLocal().getNome());
-			break;
-		}
-	}
-
-	spot.setX(coordX);
-	spot.setY(coordY);
-
-	Utente* u12;
-	if(tipoUtente == "Socio")
-		u12 = new Socio(nome, spot);
-	else
-		u12 = new Regular(nome, spot);
-
-	utentes.push_back(u12);
-
-	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
-
-	return;
-}
-
+/////////////////
+// METODOS ADD //
+/////////////////
 
 /**
  * Apresenta os passos necessarios para criacao de um novo ponto de partilha, pedindo para introduzir
@@ -366,6 +213,281 @@ void Sistema::addPontoPartilha() {
 	return;
 }
 
+/**
+ * Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios
+ * para o registo (nome, tipo de utente e localizacao).
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * @param ER sistema em execucao
+ *
+ * Adiciona um novo utente ao sistema
+ * @param utente utente que pretende adicionar
+ */
+void Sistema::addNewUtente() {
+
+	mensagemInicial();
+
+	cout << "Regista novo utente:" << endl << endl;
+
+	string nome, tipoUtente;
+	int value {};
+	string option {};
+	double coordX { }, coordY { };
+
+	while(1)
+	{
+		try {
+			cout << "Nome: " ;
+			getline(cin,nome);
+			if(valid_word(nome) == false)
+				throw OpcaoInvalida<string>(nome);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Nome inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+	cout << endl << "Tipo de Utente :"<< endl ;
+	cout << "     1 - Regular" << endl;
+	cout << "     2 - Sócio" << endl << endl;
+
+	while(1)
+	{
+		try{
+			cout << endl << "Introduza uma opção (1-2): ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			if(value < 1 || value > 2)
+				throw OpcaoInvalida<int>(value);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	if(value==1)
+		tipoUtente = "Regular";
+	else
+		tipoUtente = "Socio";
+
+	cout << endl << "Localização: " << endl << endl;
+
+	cout << "Indique as coordenadas GPS:" << endl;
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada X: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordX = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	while(1)
+	{
+		try{
+			cout << endl << "Coordenada Y: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number_double(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			coordY = stod(option);
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	Localizacao spot;
+
+	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+	{
+		if((pontosPartilha.at(i)->getLocal().getX() == coordX) && (pontosPartilha.at(i)->getLocal().getY() == coordY))
+		{
+			spot.setNome(pontosPartilha.at(i)->getLocal().getNome());
+			break;
+		}
+	}
+
+	spot.setX(coordX);
+	spot.setY(coordY);
+
+	Utente* u12;
+	if(tipoUtente == "Socio")
+		u12 = new Socio(nome, spot);
+	else
+		u12 = new Regular(nome, spot);
+
+	utentes.push_back(u12);
+
+	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
+
+	return;
+}
+
+/**
+ * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
+ * pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe
+ * PontoPartilha, adicionaBike para adionar a bicicleta criada.
+ * Se a capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * @param ER sistema em execucao
+ */
+void Sistema::adicionaBike() {
+
+	cout << "Adiciona bicicleta: " << endl << endl;
+
+	string biketype;
+	string nomePP;
+	int indexPP {-1};
+	int indexBB {-1};
+	int numberbikes {0};
+
+	cin.ignore(1000,'\n');
+
+	//Verifica ponto de partilha ao qual quer adicionar
+	while(1)
+	{
+		try {
+			cout << "Nome do Ponto de Partilha: " ;
+			getline(cin,nomePP);
+
+			if(valid_word(nomePP) == false)
+				throw OpcaoInvalida<string>(nomePP);
+
+			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+			{
+				if(pontosPartilha.at(i)->getNome() == nomePP)
+					indexPP = i;
+			}
+
+			if(indexPP == -1)
+				throw OpcaoInvalida<string>(nomePP);
+			cout << endl;
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+
+	for(unsigned int i = 0; i < pontosPartilha.at(indexPP)->getBikes().size(); i++)
+	{
+		numberbikes += pontosPartilha.at(indexPP)->getBikes().at(i).size();
+	}
+
+	if(pontosPartilha.at(indexPP)->getCapacidade() == numberbikes)
+	{
+		cout << "A capacidade deste ponto de partilha já foi alcançada ! Tente adicionar a outro ponto de partilha." << endl << endl;
+
+		return;
+	}
+
+	//Verifica tipo de bicicleta a adicionar
+	while(1)
+	{
+		try {
+			cout << "Tipo de Bicicleta: " ;
+			getline(cin,biketype);
+			if(valid_word(biketype) == false)
+				throw OpcaoInvalida<string>(biketype);
+
+
+			if(biketype == "Urbana")
+			{
+				indexBB = 0;
+				nomePP = "u" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana"));
+			}
+			else if(biketype == "Urbana Simples")
+			{
+				indexBB = 1;
+				nomePP = "us" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana Simples"));
+			}
+			else if(biketype == "Corrida")
+			{
+				indexBB = 2;
+				nomePP = "c" + to_string(pontosPartilha.at(0)->getBikeNextId("Corrida"));
+			}
+			else if(biketype == "Infantil")
+			{
+				indexBB = 3;
+				nomePP = "i" + to_string(pontosPartilha.at(0)->getBikeNextId("Infantil"));
+			}
+
+			if(indexBB == -1)
+				throw OpcaoInvalida<string>(biketype);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+
+	//pontosPartilha.at(0)->setBikeNextIdForward("Urbana");
+
+	Bicicleta* bc;
+
+	if(biketype == "Urbana")
+		bc = new Urbana(nomePP);
+	else if(biketype == "Urbana Simples")
+		bc = new UrbanaSimples(nomePP);
+	else if(biketype == "Corrida")
+		bc = new Corrida(nomePP);
+	else
+		bc = new Infantil(nomePP);
+
+
+	pontosPartilha.at(indexPP)->adicionaBike(bc);
+
+	cout << endl << "Bicicleta adicionada com sucesso !" << endl << endl;
+
+	return;
+}
+
+void Sistema::addNewUtente(Utente* u1){
+	utentes.push_back(u1);
+}
+
+void Sistema::addPontoPartilha(PontoPartilha* p){
+	pontosPartilha.push_back(p);
+}
+
+////////////////////
+// METODOS REMOVE //
+////////////////////
 
 /**
  * Pede o nome do ponto de partilha que se quer remover e chama o metodo da
@@ -525,290 +647,6 @@ void Sistema::removeUtente() {
 	return;
 }
 
-
-/**
- * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
- * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
- * @param ER sistema em execucao
- * @param index indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao)
- * @param bikeType tipo de bicicleta que se pretende verificar
- */
-void Sistema::system_Manager(unsigned int index, string bikeType) {
-
-	int value {-1};
-	int tamanho{-1};
-	vector<int> indicesSup5, indicesInf5;
-
-	if(bikeType == "Urbana")
-		value = 0;
-	else if(bikeType == "Urbana Simples")
-		value = 1;
-	else if(bikeType == "Corrida")
-		value = 2;
-	else
-		value = 3;
-
-	tamanho = pontosPartilha.at(index)->getBikes().at(value).size();
-
-	//Guarda os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
-	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
-	{
-		if(i != index)
-		{
-			if(pontosPartilha.at(i)->getBikes().at(value).size() > 5)
-				indicesSup5.push_back(i);
-			else if(pontosPartilha.at(i)->getBikes().at(value).size() < 5)
-				indicesInf5.push_back(i);
-		}
-
-	}
-
-	//Ordena os vectores por ordem crescente
-	sort(indicesSup5.begin(), indicesSup5.end());
-	sort(indicesInf5.begin(), indicesInf5.end());
-
-	//Necessita de receber bicicletas
-	if(tamanho <= 2)
-	{
-		//Distribui bicicletas
-		for(int k = indicesSup5.size() - 1; k >= 0; k--)
-		{
-			while(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).size() > 5)
-			{
-				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
-					break;
-
-				pontosPartilha.at(index)->adicionaBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0));
-				pontosPartilha.at(indicesSup5.at(k))->removeBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0)->getBikeName());
-			}
-
-			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
-				break;
-		}
-	}
-	else if(tamanho >= 8)	//Necessita de fornecer bicicletas
-	{
-		//Distribui bicicletas
-		for(unsigned int k = 0; k < indicesInf5.size(); k++)
-		{
-			while(pontosPartilha.at(indicesInf5.at(k))->getBikes().at(value).size() < 5)
-			{
-				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
-					break;
-
-				pontosPartilha.at(indicesInf5.at(k))->adicionaBike(pontosPartilha.at(index)->getBikes().at(value).at(0));
-				pontosPartilha.at(index)->removeBike(pontosPartilha.at(index)->getBikes().at(value).at(0)->getBikeName());
-			}
-
-			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
-				break;
-		}
-	}
-
-	return;
-}
-
-
-/**
- * Imprime no ecra toda a informacao referente ao sistema, nome da empresa, pontos de partilha
- * (incluindo nome, localizacao (nome e coordenadas) e quantidades de cada tipo de bicicletas),
- *  utentes (incluindo nome, id, tipo e coordenadas GPS), tabela de precos por hora e mensalidades
- *  e por fim, os fundadores.
- * @param ER sistema em execucao
- */
-void Sistema::getInfo(){
-
-	cout << "Informações:" << endl << endl;
-
-	cout << "Nome da empresa: ECO RIDES" << endl << endl;
-	cout << "Número total de pontos de Partilha: " << pontosPartilha.size() << endl << endl;
-	cout << "Pontos de Partilha:" << endl << endl;
-	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
-	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
-			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
-
-	for (unsigned int i=0 ; i<pontosPartilha.size() ; i++){
-		cout << setw(5) << pontosPartilha.at(i)->getNome();
-		cout << setw(23) << pontosPartilha.at(i)->getLocal().getNome();
-		cout << '(' << setw(9) << pontosPartilha.at(i)->getLocal().getX();
-		cout << "," << setw(9) << pontosPartilha.at(i)->getLocal().getY() << setw(5) << ')';
-
-		vector<int> numtypes = pontosPartilha.at(i)->getNumberOfBikes();
-
-		cout << setw(13) << numtypes.at(0);
-		cout << setw(15) << numtypes.at(1);
-		cout << setw(9) << numtypes.at(2);
-		cout << setw(11) << numtypes.at(3);
-		cout << pontosPartilha.at(i)->getCapacidade();
-
-		cout << endl;
-	}
-
-	cout << endl;
-
-	cout << "Número total de utentes registados: " << utentes.size() << endl << endl;
-
-	displayUtentes();
-
-	cout << endl;
-
-	cout << "Tabela de Preços:" << endl << endl;
-
-	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
-	cout << setw(26) << "Urbana" << "4€" << endl <<
-			setw(26) << "Urbana Simples" << "3€" << endl <<
-			setw(26) << "Corrida" << "5€" << endl <<
-			setw(26) << "Infantil" << "2€" << endl << endl;
-
-	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
-	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
-	cout << setw(4) << " " << setw(11) << "30€" << "Infantil + Urbana Simples" << endl;
-	cout << setw(4) << " " << setw(11) << "40€" << "Infantil + Urbana Simples + Urbana" << endl;
-	cout << setw(4) << " " << setw(11) << "50€" << "Infantil + Urbana Simples + Urbana + Corrida" << endl << endl;
-
-	cout << "Fundadores: " << endl;
-	cout << "  - Rui Guedes" << endl;
-	cout << "  - César Pinho" << endl;
-	cout << "  - Bernardo Santos" << endl << endl;
-
-	return;
-}
-
-
-void Sistema::addNewUtente(Utente* u1){
-	utentes.push_back(u1);
-}
-
-void Sistema::addPontoPartilha(PontoPartilha* p){
-	pontosPartilha.push_back(p);
-}
-
-
-/**
- * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
- * pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe
- * PontoPartilha, adicionaBike para adionar a bicicleta criada.
- * Se a capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- */
-void Sistema::adicionaBike() {
-
-	cout << "Adiciona bicicleta: " << endl << endl;
-
-	string biketype;
-	string nomePP;
-	int indexPP {-1};
-	int indexBB {-1};
-	int numberbikes {0};
-
-	cin.ignore(1000,'\n');
-
-	//Verifica ponto de partilha ao qual quer adicionar
-	while(1)
-	{
-		try {
-			cout << "Nome do Ponto de Partilha: " ;
-			getline(cin,nomePP);
-
-			if(valid_word(nomePP) == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
-			{
-				if(pontosPartilha.at(i)->getNome() == nomePP)
-					indexPP = i;
-			}
-
-			if(indexPP == -1)
-				throw OpcaoInvalida<string>(nomePP);
-			cout << endl;
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Ponto de partilha inexistente(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	for(unsigned int i = 0; i < pontosPartilha.at(indexPP)->getBikes().size(); i++)
-	{
-		numberbikes += pontosPartilha.at(indexPP)->getBikes().at(i).size();
-	}
-
-	if(pontosPartilha.at(indexPP)->getCapacidade() == numberbikes)
-	{
-		cout << "A capacidade deste ponto de partilha já foi alcançada ! Tente adicionar a outro ponto de partilha." << endl << endl;
-
-		return;
-	}
-
-	//Verifica tipo de bicicleta a adicionar
-	while(1)
-	{
-		try {
-			cout << "Tipo de Bicicleta: " ;
-			getline(cin,biketype);
-			if(valid_word(biketype) == false)
-				throw OpcaoInvalida<string>(biketype);
-
-
-			if(biketype == "Urbana")
-			{
-				indexBB = 0;
-				nomePP = "u" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana"));
-			}
-			else if(biketype == "Urbana Simples")
-			{
-				indexBB = 1;
-				nomePP = "us" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana Simples"));
-			}
-			else if(biketype == "Corrida")
-			{
-				indexBB = 2;
-				nomePP = "c" + to_string(pontosPartilha.at(0)->getBikeNextId("Corrida"));
-			}
-			else if(biketype == "Infantil")
-			{
-				indexBB = 3;
-				nomePP = "i" + to_string(pontosPartilha.at(0)->getBikeNextId("Infantil"));
-			}
-
-			if(indexBB == -1)
-				throw OpcaoInvalida<string>(biketype);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	//pontosPartilha.at(0)->setBikeNextIdForward("Urbana");
-
-	Bicicleta* bc;
-
-	if(biketype == "Urbana")
-		bc = new Urbana(nomePP);
-	else if(biketype == "Urbana Simples")
-		bc = new UrbanaSimples(nomePP);
-	else if(biketype == "Corrida")
-		bc = new Corrida(nomePP);
-	else
-		bc = new Infantil(nomePP);
-
-
-	pontosPartilha.at(indexPP)->adicionaBike(bc);
-
-	cout << endl << "Bicicleta adicionada com sucesso !" << endl << endl;
-
-	return;
-}
-
-
 /**
  * Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo
  * da classe PontoPartilha, removeBike.
@@ -898,6 +736,149 @@ void Sistema::removeBike() {
 
 }
 
+
+/////////////////
+// METODOS GET //
+/////////////////
+
+/**
+ * Imprime no ecra toda a informacao referente ao sistema, nome da empresa, pontos de partilha
+ * (incluindo nome, localizacao (nome e coordenadas) e quantidades de cada tipo de bicicletas),
+ *  utentes (incluindo nome, id, tipo e coordenadas GPS), tabela de precos por hora e mensalidades
+ *  e por fim, os fundadores.
+ * @param ER sistema em execucao
+ */
+void Sistema::getInfo() const {
+
+	cout << "Informações:" << endl << endl;
+
+	cout << "Nome da empresa: ECO RIDES" << endl << endl;
+	cout << "Número total de pontos de Partilha: " << pontosPartilha.size() << endl << endl;
+	cout << "Pontos de Partilha:" << endl << endl;
+	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
+
+	for (unsigned int i=0 ; i<pontosPartilha.size() ; i++){
+		cout << setw(5) << pontosPartilha.at(i)->getNome();
+		cout << setw(23) << pontosPartilha.at(i)->getLocal().getNome();
+		cout << '(' << setw(9) << pontosPartilha.at(i)->getLocal().getX();
+		cout << "," << setw(9) << pontosPartilha.at(i)->getLocal().getY() << setw(5) << ')';
+
+		vector<int> numtypes = pontosPartilha.at(i)->getNumberOfBikes();
+
+		cout << setw(13) << numtypes.at(0);
+		cout << setw(15) << numtypes.at(1);
+		cout << setw(9) << numtypes.at(2);
+		cout << setw(11) << numtypes.at(3);
+		cout << pontosPartilha.at(i)->getCapacidade();
+
+		cout << endl;
+	}
+
+	cout << endl;
+
+	cout << "Número total de utentes registados: " << utentes.size() << endl << endl;
+
+	displayUtentes();
+
+	cout << endl;
+
+	cout << "Tabela de Preços:" << endl << endl;
+
+	cout << setw(20) << left << "Tipo de bicicleta" << "Preço por hora" << endl;
+	cout << setw(26) << "Urbana" << "4€" << endl <<
+			setw(26) << "Urbana Simples" << "3€" << endl <<
+			setw(26) << "Corrida" << "5€" << endl <<
+			setw(26) << "Infantil" << "2€" << endl << endl;
+
+	cout << setw(18) << left << "Mensalidade" << "Acessos" << endl;
+	cout << setw(4) << " " << setw(11) << "20€" << "Infantil" << endl;
+	cout << setw(4) << " " << setw(11) << "30€" << "Infantil + Urbana Simples" << endl;
+	cout << setw(4) << " " << setw(11) << "40€" << "Infantil + Urbana Simples + Urbana" << endl;
+	cout << setw(4) << " " << setw(11) << "50€" << "Infantil + Urbana Simples + Urbana + Corrida" << endl << endl;
+
+	cout << "Fundadores: " << endl;
+	cout << "  - Rui Guedes" << endl;
+	cout << "  - César Pinho" << endl;
+	cout << "  - Bernardo Santos" << endl << endl;
+
+	return;
+}
+
+/**
+ * Retorna o vetor de apontadores para os utentes registados no sistema
+ *
+ * @return Retorna um vetor de utentes
+ */
+vector<Utente* > Sistema::getUtentes() const{
+	return utentes;
+}
+
+/**
+ * Retorna o vetor de apontadores para os pontos de partilha existentes no sistema
+ *
+ * @return Retorna um vetor de pontos de partilha
+ */
+vector<PontoPartilha* > Sistema::getPontosPartilha() const {
+	return pontosPartilha;
+}
+
+/**
+ * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
+ * de distancia ao utente com indice = index.
+ *
+ * @param ER sistema em execucao
+ * @param index indice do utente
+ * @return Retorna um vetor com os indices dos pontos de partilha
+ */
+vector<int> Sistema::getOrderedPP(int index) const {
+
+	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao utente com indice = index
+	vector<double> distancias;
+	vector<int> indices;
+
+	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+	{
+		distancias.push_back(utentes.at(index)->getLocalizacao().distancia(pontosPartilha.at(i)->getLocal()));
+	}
+
+	sort(distancias.begin(),distancias.end());
+
+	for(unsigned int i = 0; i < distancias.size(); i++)
+	{
+		for(unsigned int k = 0; k < pontosPartilha.size(); k++)
+		{
+			if(distancias.at(i) == utentes.at(index)->getLocalizacao().distancia(pontosPartilha.at(k)->getLocal()))
+			{
+				indices.push_back(k);
+			}
+		}
+	}
+	return indices;
+}
+
+/**
+ * Verifica se existe o utente com numero de identificacao = identificacao no sistema ER
+ * @param sys sistema em execucao
+ * @param identificacao numero de identificacao de um utente
+ * @return Retorna o indice do utente no vetor de utentes do sistema se este existir e -1 caso contrario
+ */
+int Sistema::getUtenteIndex(int identificacao) const {
+
+	for(unsigned int i = 0; i < utentes.size() ; i++)
+	{
+		if(utentes.at(i)->getId() == identificacao)
+			return i;
+	}
+
+	return -1;
+}
+
+
+////////////
+// OTHERS //
+////////////
 
 /**
  * Apresenta os passos e pede ao utente que preencha os campos apresentados
@@ -1351,85 +1332,93 @@ void Sistema::mudaTipoUT(int index){
 	return;
 }
 
-
-/////////////////
-// METODOS GET //
-/////////////////
-
 /**
- * Retorna o vetor de apontadores para os utentes registados no sistema
- *
- * @return Retorna um vetor de utentes
- */
-vector<Utente* > Sistema::getUtentes(){
-	return utentes;
-}
-
-/**
- * Retorna o vetor de apontadores para os pontos de partilha existentes no sistema
- *
- * @return Retorna um vetor de pontos de partilha
- */
-vector<PontoPartilha* > Sistema::getPontosPartilha() {
-	return pontosPartilha;
-}
-
-/**
- * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
- * de distancia ao utente com indice = index.
- *
+ * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
+ * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
  * @param ER sistema em execucao
- * @param index indice do utente
- * @return Retorna um vetor com os indices dos pontos de partilha
+ * @param index indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao)
+ * @param bikeType tipo de bicicleta que se pretende verificar
  */
-vector<int> Sistema::getOrderedPP(int index) {
+void Sistema::system_Manager(unsigned int index, string bikeType) {
 
-	//Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente de distancia ao utente com indice = index
-	vector<double> distancias;
-	vector<int> indices;
+	int value {-1};
+	int tamanho{-1};
+	vector<int> indicesSup5, indicesInf5;
 
+	if(bikeType == "Urbana")
+		value = 0;
+	else if(bikeType == "Urbana Simples")
+		value = 1;
+	else if(bikeType == "Corrida")
+		value = 2;
+	else
+		value = 3;
+
+	tamanho = pontosPartilha.at(index)->getBikes().at(value).size();
+
+	//Guarda os indices dos pontos de partilha nos vetores indicesSup5 e indicesInf5
 	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
 	{
-		distancias.push_back(utentes.at(index)->getLocalizacao().distancia(pontosPartilha.at(i)->getLocal()));
+		if(i != index)
+		{
+			if(pontosPartilha.at(i)->getBikes().at(value).size() > 5)
+				indicesSup5.push_back(i);
+			else if(pontosPartilha.at(i)->getBikes().at(value).size() < 5)
+				indicesInf5.push_back(i);
+		}
+
 	}
 
-	sort(distancias.begin(),distancias.end());
+	//Ordena os vectores por ordem crescente
+	sort(indicesSup5.begin(), indicesSup5.end());
+	sort(indicesInf5.begin(), indicesInf5.end());
 
-	for(unsigned int i = 0; i < distancias.size(); i++)
+	//Necessita de receber bicicletas
+	if(tamanho <= 2)
 	{
-		for(unsigned int k = 0; k < pontosPartilha.size(); k++)
+		//Distribui bicicletas
+		for(int k = indicesSup5.size() - 1; k >= 0; k--)
 		{
-			if(distancias.at(i) == utentes.at(index)->getLocalizacao().distancia(pontosPartilha.at(k)->getLocal()))
+			while(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).size() > 5)
 			{
-				indices.push_back(k);
+				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
+					break;
+
+				pontosPartilha.at(index)->adicionaBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0));
+				pontosPartilha.at(indicesSup5.at(k))->removeBike(pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0)->getBikeName());
 			}
+
+			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
+				break;
 		}
 	}
-	return indices;
-}
-
-/**
- * Verifica se existe o utente com numero de identificacao = identificacao no sistema ER
- * @param sys sistema em execucao
- * @param identificacao numero de identificacao de um utente
- * @return Retorna o indice do utente no vetor de utentes do sistema se este existir e -1 caso contrario
- */
-int Sistema::getUtenteIndex(int identificacao) {
-
-	for(unsigned int i = 0; i < utentes.size() ; i++)
+	else if(tamanho >= 8)	//Necessita de fornecer bicicletas
 	{
-		if(utentes.at(i)->getId() == identificacao)
-			return i;
+		//Distribui bicicletas
+		for(unsigned int k = 0; k < indicesInf5.size(); k++)
+		{
+			while(pontosPartilha.at(indicesInf5.at(k))->getBikes().at(value).size() < 5)
+			{
+				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
+					break;
+
+				pontosPartilha.at(indicesInf5.at(k))->adicionaBike(pontosPartilha.at(index)->getBikes().at(value).at(0));
+				pontosPartilha.at(index)->removeBike(pontosPartilha.at(index)->getBikes().at(value).at(0)->getBikeName());
+			}
+
+			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
+				break;
+		}
 	}
 
-	return -1;
+	return;
 }
 
 /** Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
  * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
-void Sistema::displayNearestPP(int index) {
+void Sistema::displayNearestPP(int index) const {
 
 	cout << "Pontos de partilha mais próximos: " << endl << endl;
 
@@ -1451,7 +1440,7 @@ void Sistema::displayNearestPP(int index) {
 	return;
 }
 
-void Sistema::displayUtentes() {
+void Sistema::displayUtentes() const {
 
 	cout << left << setw(15) << "   Nome" << setw(6) << " ID" << setw(27) << " Tipo de utente" << setw (20) << " GPS" << endl;
 
