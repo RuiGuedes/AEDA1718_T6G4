@@ -1,9 +1,9 @@
 #include "Sistema.h"
 
-int PontoPartilha::UbikeNextID;
-int PontoPartilha::USbikeNextID;
-int PontoPartilha::CbikeNextID;
-int PontoPartilha::IbikeNextID;
+//int PontoPartilha::UbikeNextID;
+//int PontoPartilha::USbikeNextID;
+//int PontoPartilha::CbikeNextID;
+//int PontoPartilha::IbikeNextID;
 
 /**
  * Construtor padrao da classe PontoPartilha
@@ -112,23 +112,23 @@ string PontoPartilha::getNome() const {
 	return nome;
 }
 
-/**
- * Metodo usado para saber qual o numero da proxima bicicleta
- *
- * @param bike tipo de bicicleta
- * @return Retorna o numero da proxima bicicleta do tipo "bike"
- */
-int PontoPartilha::getBikeNextId(string bike) {
-
-	if(bike == "Urbana")
-		return UbikeNextID;
-	else if(bike == "Urbana Simples")
-		return USbikeNextID;
-	else if(bike == "Corrida")
-		return CbikeNextID;
-	else
-		return IbikeNextID;
-}
+///**
+// * Metodo usado para saber qual o numero da proxima bicicleta
+// *
+// * @param bike tipo de bicicleta
+// * @return Retorna o numero da proxima bicicleta do tipo "bike"
+// */
+//int PontoPartilha::getBikeNextId(string bike) {
+//
+//	if(bike == "Urbana")
+//		return UbikeNextID;
+//	else if(bike == "Urbana Simples")
+//		return USbikeNextID;
+//	else if(bike == "Corrida")
+//		return CbikeNextID;
+//	else
+//		return IbikeNextID;
+//}
 
 /**
  * @return Retorna a localizacao do ponto de partilha
@@ -208,50 +208,50 @@ void PontoPartilha::setNome(string name) {
 	nome = name;
 }
 
-/**
- * Altera o numero de identificacao da proxima bicicleta
- * @param bike tipo de bicicleta de que se pretende alterar o identificador
- * @param value novo numero de identificacao
- */
-void PontoPartilha::setBikeNextId(string bike, const int value){
-	if(bike == "Urbana")
-		UbikeNextID = value;
-	else if(bike == "Urbana Simples")
-		USbikeNextID = value;
-	else if(bike == "Corrida")
-		CbikeNextID = value;
-	else
-		IbikeNextID = value;
-}
+///**
+// * Altera o numero de identificacao da proxima bicicleta
+// * @param bike tipo de bicicleta de que se pretende alterar o identificador
+// * @param value novo numero de identificacao
+// */
+//void PontoPartilha::setBikeNextId(string bike, const int value){
+//	if(bike == "Urbana")
+//		UbikeNextID = value;
+//	else if(bike == "Urbana Simples")
+//		USbikeNextID = value;
+//	else if(bike == "Corrida")
+//		CbikeNextID = value;
+//	else
+//		IbikeNextID = value;
+//}
 
 /**
- * Incrementa o numero de identificacao da proxima bicicleta
- * @param bike tipo de bicicleta de que se pretende alterar o identificador
- */
-void PontoPartilha::setBikeNextIdForward(string bike) {
-
-	if(bike == "Urbana")
-		UbikeNextID++;
-	else if(bike == "Urbana Simples")
-		USbikeNextID++;
-	else if(bike == "Corrida")
-		CbikeNextID++;
-	else
-		IbikeNextID++;
-}
-
-/**
- * Decrementa o numero de identificacao da proxima bicicleta
- * @param bike tipo de bicicleta de que se pretende alterar o identificador
- */
-void PontoPartilha::setBikeNextIdBackward(string bike) {
-
-	if(bike == "Urbana")
-		UbikeNextID--;
-	else if(bike == "Urbana Simples")
-		USbikeNextID--;
-	else if(bike == "Corrida")
-		CbikeNextID--;
-	else
-		IbikeNextID--;
-}
+// * Incrementa o numero de identificacao da proxima bicicleta
+// * @param bike tipo de bicicleta de que se pretende alterar o identificador
+// */
+//void PontoPartilha::setBikeNextIdForward(string bike) {
+//
+//	if(bike == "Urbana")
+//		UbikeNextID++;
+//	else if(bike == "Urbana Simples")
+//		USbikeNextID++;
+//	else if(bike == "Corrida")
+//		CbikeNextID++;
+//	else
+//		IbikeNextID++;
+//}
+//
+///**
+// * Decrementa o numero de identificacao da proxima bicicleta
+// * @param bike tipo de bicicleta de que se pretende alterar o identificador
+// */
+//void PontoPartilha::setBikeNextIdBackward(string bike) {
+//
+//	if(bike == "Urbana")
+//		UbikeNextID--;
+//	else if(bike == "Urbana Simples")
+//		USbikeNextID--;
+//	else if(bike == "Corrida")
+//		CbikeNextID--;
+//	else
+//		IbikeNextID--;
+//}

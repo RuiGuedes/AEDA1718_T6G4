@@ -112,18 +112,6 @@ void checkinSys(Sistema & ER){
 		return;
 	}
 
-	int nextId;
-	char b;
-	f_bicicletas >> nextId >> b;
-	PontoPartilha::setBikeNextId("Urbana",nextId) ;
-	f_bicicletas >> nextId >> b;
-	PontoPartilha::setBikeNextId("Urbana Simples",nextId) ;
-	f_bicicletas >> nextId >> b;
-	PontoPartilha::setBikeNextId("Corrida",nextId) ;
-	f_bicicletas >> nextId;
-	PontoPartilha::setBikeNextId("Infantil",nextId) ;
-	f_bicicletas.ignore();
-
 	while(!f_pontos_partilha.eof()){
 		PontoPartilha p1;
 		f_pontos_partilha >> p1;
@@ -228,11 +216,6 @@ void checkoutSys(Sistema & ER){
 		cout << "Tente mais tarde./n";
 		return;
 	}
-
-	f_bicicletas << PontoPartilha::getBikeNextId("Urbana") << '/';
-	f_bicicletas << PontoPartilha::getBikeNextId("Urbana Simples") << '/';
-	f_bicicletas << PontoPartilha::getBikeNextId("Corrida") << '/';
-	f_bicicletas << PontoPartilha::getBikeNextId("Infantil") << endl;
 
 	for(unsigned int it=0 ; it<ER.getPontosPartilha().size() ; it++){
 		f_pontos_partilha << (*ER.getPontosPartilha().at(it)) << endl;

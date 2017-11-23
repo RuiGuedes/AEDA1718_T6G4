@@ -48,6 +48,8 @@ class Urbana : public Bicicleta {
 public :
 	Urbana(string bikeName);
 	~Urbana(){};
+
+	static int getID();
 };
 
 class UrbanaSimples : public Bicicleta {
@@ -56,6 +58,7 @@ public :
 	~UrbanaSimples(){};
 	UrbanaSimples(string bikeName);
 
+	static int getID();
 };
 
 class Corrida : public Bicicleta {
@@ -64,7 +67,7 @@ public :
 	~Corrida(){};
 	Corrida(string bikeName);
 
-
+	static int getID();
 };
 
 class Infantil : public Bicicleta {
@@ -73,5 +76,6 @@ public :
 	~Infantil(){};
 	Infantil(string bikeName);
 
+	static int getID();
 };
 

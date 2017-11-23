@@ -105,18 +105,27 @@ void Sistema::addPontoPartilha() {
 			while(1)
 			{
 				try{
-					cout << endl << "Coordenada X: ";
+					cout << endl << "Coordenada X [-90 , 90]: ";
 					cin >> option;
 					cin.ignore(1000,'\n');
 					if(valid_number_double(option) == false)
 						throw OpcaoInvalida<string>(option);
 
 					coordX = stod(option);
+
+					if((coordX > 90) || (coordX < -90))
+						throw OpcaoInvalida<double>(coordX);
+
 					break;
 				}
 				catch (OpcaoInvalida<string> &op){
 
-					cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cout << "Coordenada inválida (" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+				}
+				catch (OpcaoInvalida<double> &op){
+
+					cout << "Fora de alcance (" << op.opcao << ") ! Tente novamente." << endl;
 					cin.clear();
 				}
 			};
@@ -124,18 +133,27 @@ void Sistema::addPontoPartilha() {
 			while(1)
 			{
 				try{
-					cout << endl << "Coordenada Y: ";
+					cout << endl << "Coordenada Y [-180 , 180]: ";
 					cin >> option;
 					cin.ignore(1000,'\n');
 					if(valid_number_double(option) == false)
 						throw OpcaoInvalida<string>(option);
 
 					coordY = stod(option);
+
+					if((coordY < -180) || (coordY > 180))
+						throw OpcaoInvalida<double>(coordY);
+
 					break;
 				}
 				catch (OpcaoInvalida<string> &op){
 
 					cout << "Coordenada inválida(" << op.opcao << ") ! Tente novamente." << endl;
+					cin.clear();
+				}
+				catch (OpcaoInvalida<double> &op){
+
+					cout << "Fora de alcance (" << op.opcao << ") ! Tente novamente." << endl;
 					cin.clear();
 				}
 			};
@@ -187,25 +205,16 @@ void Sistema::addPontoPartilha() {
 
 	for(unsigned int i = 0; i < 5; i++)
 	{
-		string u = "u" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana"));
-		string us = "us" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana Simples"));
-		string c = "c" + to_string(pontosPartilha.at(0)->getBikeNextId("Corrida"));
-		string inf = "i" + to_string(pontosPartilha.at(0)->getBikeNextId("Infantil"));
+		string u = "u" + to_string(Urbana::getID());
+		string us = "us" + to_string(UrbanaSimples::getID());
+		string c = "c" + to_string(Corrida::getID());
+		string inf = "i" + to_string(Infantil::getID());
 
-		Bicicleta* b1 = new Urbana(u);
-		Bicicleta* b2 = new UrbanaSimples(us);
-		Bicicleta* b3 = new Corrida(c);
-		Bicicleta* b4 = new Infantil(inf);
+		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new Urbana(u));
+		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new UrbanaSimples(us));
+		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new Corrida(c));
+		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new Infantil(inf));
 
-		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(b1);
-		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(b2);
-		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(b3);
-		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(b4);
-
-		pontosPartilha.at(0)->setBikeNextIdForward("Urbana");
-		pontosPartilha.at(0)->setBikeNextIdForward("Urbana Simples");
-		pontosPartilha.at(0)->setBikeNextIdForward("Corrida");
-		pontosPartilha.at(0)->setBikeNextIdForward("Infantil");
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -350,6 +359,8 @@ void Sistema::addNewUtente() {
 
 	cout << endl << "Utente #" << u12->getId() << " registado com sucesso." << endl << endl;
 
+	system("pause");
+	system("cls");
 	return;
 }
 
@@ -427,22 +438,22 @@ void Sistema::adicionaBike() {
 			if(biketype == "Urbana")
 			{
 				indexBB = 0;
-				nomePP = "u" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana"));
+				nomePP = "u" + to_string(Urbana::getID());
 			}
 			else if(biketype == "Urbana Simples")
 			{
 				indexBB = 1;
-				nomePP = "us" + to_string(pontosPartilha.at(0)->getBikeNextId("Urbana Simples"));
+				nomePP = "us" + to_string(UrbanaSimples::getID());
 			}
 			else if(biketype == "Corrida")
 			{
 				indexBB = 2;
-				nomePP = "c" + to_string(pontosPartilha.at(0)->getBikeNextId("Corrida"));
+				nomePP = "c" + to_string(Corrida::getID());
 			}
 			else if(biketype == "Infantil")
 			{
 				indexBB = 3;
-				nomePP = "i" + to_string(pontosPartilha.at(0)->getBikeNextId("Infantil"));
+				nomePP = "i" + to_string(Infantil::getID());
 			}
 
 			if(indexBB == -1)
@@ -1294,7 +1305,6 @@ void Sistema::mudaTipoUT(int index){
 			string nome = utentes.at(index)->getNome();
 			Localizacao local = utentes.at(index)->getLocalizacao();
 			vector<Utilizacao> hist = utentes.at(index)->getHistorico();
-			utentes.erase(utentes.begin()+index);
 
 			Utente* u = new Socio(nome,local);
 			u->setID(id);
@@ -1313,7 +1323,6 @@ void Sistema::mudaTipoUT(int index){
 			string nome = utentes.at(index)->getNome();
 			Localizacao local = utentes.at(index)->getLocalizacao();
 			vector<Utilizacao> hist = utentes.at(index)->getHistorico();
-			utentes.erase(utentes.begin()+index);
 
 			Utente* u = new Regular(nome,local);
 			u->setID(id);

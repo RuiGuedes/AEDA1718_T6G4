@@ -10,10 +10,10 @@ class PontoPartilha {
 	unsigned int capacidade;	/**< Capacidade do ponto de partilha */
 	vector <vector<Bicicleta *> > bicicletas;	/**< Bicicletas existentes no ponto de partilha */
 	string nome;				/**< Nome do ponto de partilha */
-	static int UbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Urbana */
-	static int USbikeNextID;	/**< Numero de identificacao da proxima bicicleta do tipo Urbana Simples */
-	static int CbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Corrida */
-	static int IbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Infantil */
+//	static int UbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Urbana */
+//	static int USbikeNextID;	/**< Numero de identificacao da proxima bicicleta do tipo Urbana Simples */
+//	static int CbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Corrida */
+//	static int IbikeNextID;		/**< Numero de identificacao da proxima bicicleta do tipo Infantil */
 public:
 	PontoPartilha();	/**< Necessário para o overload do operador de extração na classe utente*/
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
@@ -25,7 +25,7 @@ public:
 	void adicionaBike(Bicicleta* bike);
 
 	//Metodos Get
-	static int getBikeNextId(string bike);
+	//static int getBikeNextId(string bike);
 	Localizacao getLocal() const;
 	string getNome() const;
 	int getCapacidade() const;
@@ -35,9 +35,9 @@ public:
 
 	//Métodos Set
 	void setNome(string name);
-	static void setBikeNextId(string bike,const int value);
-	static void setBikeNextIdForward(string bike);
-	static void setBikeNextIdBackward(string bike);
+	//static void setBikeNextId(string bike,const int value);
+	//static void setBikeNextIdForward(string bike);
+	//static void setBikeNextIdBackward(string bike);
 };
 
 /**

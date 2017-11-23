@@ -32,7 +32,7 @@ int Bicicleta::getPrice() const {
 	return price;
 }
 
-int Urbana::id = 0;
+int Urbana::id = 1;
 
 Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
 
@@ -41,7 +41,11 @@ Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
 
 }
 
-int UrbanaSimples::id = 0;
+int Urbana::getID() {
+	return id;
+}
+
+int UrbanaSimples::id = 1;
 
 UrbanaSimples::UrbanaSimples(string bikeName) : Bicicleta(bikeName){
 
@@ -50,7 +54,11 @@ UrbanaSimples::UrbanaSimples(string bikeName) : Bicicleta(bikeName){
 
 }
 
-int Corrida::id = 0;
+int UrbanaSimples::getID() {
+	return id++;
+}
+
+int Corrida::id = 1;
 
 Corrida::Corrida(string bikeName) : Bicicleta(bikeName){
 
@@ -59,11 +67,19 @@ Corrida::Corrida(string bikeName) : Bicicleta(bikeName){
 
 }
 
-int Infantil::id = 0;
+int Corrida::getID() {
+	return id;
+}
+
+int Infantil::id = 1;
 
 Infantil::Infantil(string bikeName) : Bicicleta(bikeName){
 
 	id++;
 	price = 20;
 
+}
+
+int Infantil::getID() {
+	return id;
 }
