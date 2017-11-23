@@ -51,10 +51,8 @@ int Bicicleta::getPrice() const {
  * @param bikeName nome da bicicleta
  */
 Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
-
 	id++;
 	price = 40;
-
 }
 
 

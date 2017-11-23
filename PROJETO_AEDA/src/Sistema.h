@@ -16,8 +16,8 @@ public:
 	void addPontoPartilha();
 	void addNewUtente();
 	void adicionaBike();
-	void addNewUtente(Utente* u1);
-	void addPontoPartilha(PontoPartilha* p);
+	void addNewUtente(Utente* u1);				/**< Necessario para inclusao direta no sistema dos utente extraidos do ficheiro*/
+	void addPontoPartilha(PontoPartilha* p);	/**< Necessario para inclusao direta no sistema dos pontos de partilha extraidos do ficheiro*/
 
 	//Métodos remove
 	void removePonto();
@@ -38,7 +38,6 @@ public:
 	void system_Manager(unsigned int index, string bikeType);
 	void displayNearestPP(int index) const;
 	void displayUtentes() const;
-
 };
 
 /**

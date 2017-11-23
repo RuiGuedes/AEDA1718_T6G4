@@ -1,8 +1,7 @@
 var searchData=
 [
   ['updatelocation',['updateLocation',['../class_utente.html#a51d6ffa94b7d2a382b67f7c929dbe648',1,'Utente']]],
-  ['urbana',['Urbana',['../class_urbana.html',1,'Urbana'],['../class_urbana.html#ad5cc3f0030488b29359a80c7f93a09e5',1,'Urbana::Urbana()'],['../_bicicleta_8h.html#a93f98918a9312a8d4b28ccc300fe0556a4789759ef3bfec8c05beed052fdb98c5',1,'URBANA():&#160;Bicicleta.h']]],
-  ['urbana_5fsimples',['URBANA_SIMPLES',['../_bicicleta_8h.html#a93f98918a9312a8d4b28ccc300fe0556a28b72a680fa35ffd49f90ec430b8a2d7',1,'Bicicleta.h']]],
+  ['urbana',['Urbana',['../class_urbana.html',1,'Urbana'],['../class_urbana.html#ad5cc3f0030488b29359a80c7f93a09e5',1,'Urbana::Urbana()']]],
   ['urbanasimples',['UrbanaSimples',['../class_urbana_simples.html',1,'UrbanaSimples'],['../class_urbana_simples.html#acb0a3d168f49a294ac014a1c429644b1',1,'UrbanaSimples::UrbanaSimples()']]],
   ['usetime',['useTime',['../class_utilizacao.html#a2fd7fd4362e3f9bc7c82469edfcb4369',1,'Utilizacao']]],
   ['utente',['Utente',['../class_utente.html',1,'Utente'],['../class_utente.html#a387f9b8358c4a8e99b9ce54332632ba5',1,'Utente::Utente()'],['../class_utente.html#a201c1e72920d55f34ca4b33e576f4226',1,'Utente::Utente(string nome, Localizacao spot)']]],

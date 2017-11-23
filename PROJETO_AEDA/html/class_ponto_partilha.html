@@ -77,12 +77,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0a5a17a5290153e997b3a498651b7cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6af1ae38bf57cf3f85f81d6e38f4ba3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#ac6af1ae38bf57cf3f85f81d6e38f4ba3">PontoPartilha</a> (<a class="el" href="class_localizacao.html">Localizacao</a> spot, unsigned int storage, string name)</td></tr>
 <tr class="separator:ac6af1ae38bf57cf3f85f81d6e38f4ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc08e56e4b7424415332061cda27ca6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#acc08e56e4b7424415332061cda27ca6a">limpaVectorBike</a> ()</td></tr>
-<tr class="separator:acc08e56e4b7424415332061cda27ca6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedf9aa394993a4dd76122e0b8aa28b78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#aedf9aa394993a4dd76122e0b8aa28b78">removeBike</a> (string name)</td></tr>
-<tr class="separator:aedf9aa394993a4dd76122e0b8aa28b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0f687be1d9c2902c58b90db1fd1419c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#ae0f687be1d9c2902c58b90db1fd1419c">adicionaBike</a> (<a class="el" href="class_bicicleta.html">Bicicleta</a> *bike)</td></tr>
-<tr class="separator:ae0f687be1d9c2902c58b90db1fd1419c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6bf50637890161386bfaa87906cf37f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_localizacao.html">Localizacao</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#ab6bf50637890161386bfaa87906cf37f">getLocal</a> () const</td></tr>
 <tr class="separator:ab6bf50637890161386bfaa87906cf37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac64afb46b232cddbefc49c48d862342b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#ac64afb46b232cddbefc49c48d862342b">getNome</a> () const</td></tr>
@@ -97,6 +91,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4c60e5865ce1e0b2d97b04e680060f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afabf2e8f22f452c42c9b85cb229d4e42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#afabf2e8f22f452c42c9b85cb229d4e42">setNome</a> (string name)</td></tr>
 <tr class="separator:afabf2e8f22f452c42c9b85cb229d4e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc08e56e4b7424415332061cda27ca6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#acc08e56e4b7424415332061cda27ca6a">limpaVectorBike</a> ()</td></tr>
+<tr class="separator:acc08e56e4b7424415332061cda27ca6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedf9aa394993a4dd76122e0b8aa28b78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#aedf9aa394993a4dd76122e0b8aa28b78">removeBike</a> (string name)</td></tr>
+<tr class="separator:aedf9aa394993a4dd76122e0b8aa28b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f687be1d9c2902c58b90db1fd1419c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ponto_partilha.html#ae0f687be1d9c2902c58b90db1fd1419c">adicionaBike</a> (<a class="el" href="class_bicicleta.html">Bicicleta</a> *bike)</td></tr>
+<tr class="separator:ae0f687be1d9c2902c58b90db1fd1419c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -271,16 +271,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Metodo usado para saber qual o numero da proxima bicicleta</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bike</td><td>tipo de bicicleta </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Retorna o numero da proxima bicicleta do tipo "bike" </dd>
-<dd>
-Retorna a localizacao do ponto de partilha </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna a localizacao do ponto de partilha </dd></dl>
 
 </div>
 </div>
@@ -316,8 +307,7 @@ Retorna a localizacao do ponto de partilha </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Retorna um vetor com a quantidade de cada tipo de bicicletas existentes no ponto de partilha O vetor e composto pelos 4 elementos segintes: -&gt;quantidade de bicicletas do tipo "Urbana" -&gt;quantidade de bicicletas do tipo "Urbana Simples" -&gt;quantidade de bicicletas do tipo "Corrida" -&gt;quantidade de bicicletas do tipo "Infantil"</p>
-<dl class="section return"><dt>Returns</dt><dd>Retorna vetor de inteiros </dd></dl>
+<p>Retorna um vetor com a quantidade de cada tipo de bicicletas existentes no ponto de partilha O vetor e composto pelos 4 elementos segintes: -&gt;quantidade de bicicletas do tipo "Urbana" -&gt;quantidade de bicicletas do tipo "Urbana Simples" -&gt;quantidade de bicicletas do tipo "Corrida" -&gt;quantidade de bicicletas do tipo "Infantil" </p><dl class="section return"><dt>Returns</dt><dd>Retorna vetor de inteiros </dd></dl>
 
 </div>
 </div>
@@ -356,7 +346,7 @@ Retorna a localizacao do ponto de partilha </dd></dl>
 </div><div class="memdoc">
 <p>Remove a bicicleta bike do ponto de partilha </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bike</td><td>apontador de bicicleta que se pretende remover </td></tr>
+    <tr><td class="paramname">name</td><td>nome da bicicleta que se pretende remover </td></tr>
   </table>
   </dd>
 </dl>

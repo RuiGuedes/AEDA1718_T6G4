@@ -7,14 +7,10 @@
 
 /**
  * Apresenta os passos necessarios para criacao de um novo ponto de partilha, pedindo para introduzir
- * o nome, a localizacao e a capacidade. Invoca-se o metodo da classe Sistema addPontoPartilha.
- * Inclui 5 bicicletas de cada tipo no ponto de partilha criado.
+ * o nome, a localizacao e a capacidade, por fim, adiciona-o ao sistema.
+ * Adiciona 5 bicicletas de cada tipo no ponto de partilha criado.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- *
- * Adiciona um novo ponto de partilha ao sistema
- * @param spot ponto de partilha que pretende adicionar
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
 void Sistema::addPontoPartilha() {
 
@@ -215,7 +211,6 @@ void Sistema::addPontoPartilha() {
 		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new UrbanaSimples(us));
 		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new Corrida(c));
 		pontosPartilha.at(pontosPartilha.size() - 1)->adicionaBike(new Infantil(inf));
-
 	}
 
 	cout << endl << "Novo ponto de partilha adicionado ao sistema" << endl << endl;
@@ -227,11 +222,7 @@ void Sistema::addPontoPartilha() {
  * Adiciona um utente ao sistema, pedindo ao utente que introduza os seus dados necessarios
  * para o registo (nome, tipo de utente e localizacao).
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- *
- * Adiciona um novo utente ao sistema
- * @param utente utente que pretende adicionar
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
 void Sistema::addNewUtente() {
 
@@ -388,12 +379,10 @@ void Sistema::addNewUtente() {
 
 /**
  * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
- * pretende adicionar. Cria uma bicicleta com do tipo pedido e chama o metodo da classe
- * PontoPartilha, adicionaBike para adionar a bicicleta criada.
- * Se a capaciadade do ponto de partilha esteja no maximo e apresentada uma mensagem.
+ * pretende adicionar. Cria uma bicicleta com do tipo pedido e adionar-a ao ponto de partilha.
+ * Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
 void Sistema::adicionaBike() {
 
@@ -496,10 +485,17 @@ void Sistema::adicionaBike() {
 	return;
 }
 
+/**
+ * Adiciona um utente ao sistema
+ * @param u1 apontador para o utente a adicionar
+ */
 void Sistema::addNewUtente(Utente* u1){
 	utentes.push_back(u1);
 }
 
+/** Adiciona um ponto de partilha ao sistema
+ * @param p apontador para o ponto de partilha a adicionar
+ */
 void Sistema::addPontoPartilha(PontoPartilha* p){
 	pontosPartilha.push_back(p);
 }
@@ -509,14 +505,9 @@ void Sistema::addPontoPartilha(PontoPartilha* p){
 ////////////////////
 
 /**
- * Pede o nome do ponto de partilha que se quer remover e chama o metodo da
- * classe Sistema removePonto.
+ * Pede o nome do ponto de partilha que se quer remover e remove do sistema o ponto de partilha com esse nome.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- *
- * Remove um novo ponto de partilha do sistema
- * @param indexPP indice do ponto de partilha que pretende remover
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
 void Sistema::removePonto() {
 
@@ -569,15 +560,10 @@ void Sistema::removePonto() {
 }
 
 /**
- * Apresenta a informacao de todos os utentes registados (nome, id, tipo e localizacao) e  pede para
- * introduzir o id do utente que se pretende remover e chama o metodo removeUtente
- * da classe Sistema.
+ * Apresenta a informacao de todos os utentes registados (nome, id, tipo e localizacao) e pede para
+ * introduzir o id do utente que se pretende remover e remove-o do sistema
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
- *
- * Remove um novo utente ao sistema
- * @param indexUT indice do utente que pretende remover
  */
 void Sistema::removeUtente() {
 
@@ -659,11 +645,9 @@ void Sistema::removeUtente() {
 }
 
 /**
- * Pede o tipo e o nome da bicicleta que se pretende remover e chama-se o metodo
- * da classe PontoPartilha, removeBike.
+ * Pede o tipo e o nome da bicicleta que se pretende remover e remove do sistema a bicicleta com esse nome.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
- * @param ER sistema em execucao
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
 void Sistema::removeBike() {
 
@@ -755,9 +739,8 @@ void Sistema::removeBike() {
 /**
  * Imprime no ecra toda a informacao referente ao sistema, nome da empresa, pontos de partilha
  * (incluindo nome, localizacao (nome e coordenadas) e quantidades de cada tipo de bicicletas),
- *  utentes (incluindo nome, id, tipo e coordenadas GPS), tabela de precos por hora e mensalidades
- *  e por fim, os fundadores.
- * @param ER sistema em execucao
+ * utentes (incluindo nome, id, tipo e coordenadas GPS), tabela de precos por hora e mensalidades
+ * e por fim, os fundadores.
  */
 void Sistema::getInfo() const {
 
@@ -819,7 +802,6 @@ void Sistema::getInfo() const {
 
 /**
  * Retorna o vetor de apontadores para os utentes registados no sistema
- *
  * @return Retorna um vetor de utentes
  */
 vector<Utente* > Sistema::getUtentes() const{
@@ -828,7 +810,6 @@ vector<Utente* > Sistema::getUtentes() const{
 
 /**
  * Retorna o vetor de apontadores para os pontos de partilha existentes no sistema
- *
  * @return Retorna um vetor de pontos de partilha
  */
 vector<PontoPartilha* > Sistema::getPontosPartilha() const {
@@ -838,8 +819,6 @@ vector<PontoPartilha* > Sistema::getPontosPartilha() const {
 /**
  * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
  * de distancia ao utente com indice = index.
- *
- * @param ER sistema em execucao
  * @param index indice do utente
  * @return Retorna um vetor com os indices dos pontos de partilha
  */
@@ -871,8 +850,7 @@ vector<int> Sistema::getOrderedPP(int index) const {
 }
 
 /**
- * Verifica se existe o utente com numero de identificacao = identificacao no sistema ER
- * @param sys sistema em execucao
+ * Verifica se existe o utente com numero de identificacao igual ao parametro identificacao no sistema.
  * @param identificacao numero de identificacao de um utente
  * @return Retorna o indice do utente no vetor de utentes do sistema se este existir e -1 caso contrario
  */
@@ -895,13 +873,13 @@ int Sistema::getUtenteIndex(int identificacao) const {
 /**
  * Apresenta os passos e pede ao utente que preencha os campos apresentados
  * de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta,
- * numero de horas e data).
- * E chamado o metodo da classe utente alugaBicicleta.
- * O aluguer e feito no ponto de partilha mais proximo do utente.
+ * numero de horas e data). Chama o metodo da classe utente alugaBicicleta e o metodo
+ * classe pontoPartilha removeBike para remover a bicicleta do ponto de partilha e atribui-la
+ * ao utente. O aluguer e feito no ponto de partilha mais proximo do utente.
  * Caso o utente seja Regular e apresentado o total a pagar pelo aluguer.
- * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
+ * No final, chama o metodo Sistem_Manager para gerir as bicicletas.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Sistema::alugaBike(int index) {
@@ -1175,10 +1153,11 @@ void Sistema::alugaBike(int index) {
 }
 
 /**
- * Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta.
+ * Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta
+ * e o metodo adicionaBike da classe pontoPartilha para remover a bicicleta do utente e
+ * coloca-la no ponto de partilha.
  * A devolucao e feita no ponto de partilha mais proximo do utente.
  * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
- * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Sistema::devolveBike(int index) {
@@ -1209,7 +1188,6 @@ void Sistema::devolveBike(int index) {
 		{
 			index_pp = index_distancias.at(i);
 			pontosPartilha.at(index_distancias.at(i))->adicionaBike(bike);
-
 			break;
 		}
 	}
@@ -1238,11 +1216,11 @@ void Sistema::devolveBike(int index) {
 }
 
 /**
- * Apresenta o tipo de utente atual e pergunta para qual o tipo que pretende mudar, pede confirmacao da decisao e
- * chama o metodo da classe utente setTipoUtente.
- * Se o utente Socio tentar mudar para Regular e ainda tiver pagamentos pendentes e-lhe apresentada uma mensagem
+ * Apresenta o tipo de utente atual e pede confirmacao da decisao de mudar de tipo de utente.
+ * Se o utente Socio tentar mudar o tipo de utente e ainda tiver pagamentos pendentes e-lhe
+ * apresentada uma mensagem e a decisao nao e permitida.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param ER sistema em execucao
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -1331,7 +1309,6 @@ void Sistema::mudaTipoUT(int index){
 /**
  * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
  * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
- * @param ER sistema em execucao
  * @param index indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao)
  * @param bikeType tipo de bicicleta que se pretende verificar
  */
@@ -1414,8 +1391,8 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 	return;
 }
 
-/** Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
- * @param ER sistema em execucao
+/**
+ * Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Sistema::displayNearestPP(int index) const {
@@ -1440,6 +1417,9 @@ void Sistema::displayNearestPP(int index) const {
 	return;
 }
 
+/**
+ * Imprime no ecra a informacao dos utentes (nome, id, tipo de utente e coordenadas da localizacao).
+ */
 void Sistema::displayUtentes() const {
 
 	cout << left << setw(15) << "   Nome" << setw(6) << " ID" << setw(27) << " Tipo de utente" << setw (20) << " GPS" << endl;

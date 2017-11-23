@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data',['Data',['../class_data.html',1,'Data'],['../class_utilizacao.html#a9ff238a40f71fc523e43f28328fc67a2',1,'Utilizacao::data()'],['../class_data.html#af11f741cb7f587e2e495452a8905a22a',1,'Data::Data()'],['../class_data.html#af9780637b441d0c28d8c4b8a86cdf37b',1,'Data::Data(unsigned int dia, unsigned int mes, unsigned int ano)']]],
+  ['data',['Data',['../class_data.html',1,'Data'],['../class_utilizacao.html#a9ff238a40f71fc523e43f28328fc67a2',1,'Utilizacao::data()'],['../class_utilizacao.html#a242d9fdd7c3ba48097582a2662b6f48d',1,'Utilizacao::Data()'],['../class_data.html#af11f741cb7f587e2e495452a8905a22a',1,'Data::Data()'],['../class_data.html#af9780637b441d0c28d8c4b8a86cdf37b',1,'Data::Data(unsigned int dia, unsigned int mes, unsigned int ano)']]],
   ['devolvebike',['devolveBike',['../class_sistema.html#a1c8123a665ba2382eca625221cfbfcbe',1,'Sistema']]],
   ['dia',['dia',['../class_data.html#a71a904380d17858da0b902e9a2563546',1,'Data']]],
   ['displayhistoric',['displayHistoric',['../class_utente.html#a0ca2e311413f7428d209773eac79cc2d',1,'Utente::displayHistoric()'],['../class_socio.html#af2a7aecde0ba0d0df9f5864389d137eb',1,'Socio::displayHistoric()'],['../class_regular.html#a5f271329d7a1baab77addfbca684d6a9',1,'Regular::displayHistoric()']]],
