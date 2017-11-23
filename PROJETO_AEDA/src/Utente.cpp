@@ -21,12 +21,10 @@ Utente::Utente() : id(++lastId){
  * @param tipoUtente tipo de utente (socio ou regular)
  * @param spot localizacao atual do utente
  */
-Utente::Utente(string nome,Localizacao spot) : id(++lastId)
-{
+Utente::Utente(string nome,Localizacao spot) : id(++lastId) {
 	this->nome = nome;
 	this->bike = 0;
 	local = spot;
-
 }
 
 /**
@@ -36,11 +34,8 @@ Utente::Utente(string nome,Localizacao spot) : id(++lastId)
  * @param bikeType tipo de bicicleta a alugar
  */
 void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
-
 	setBike(b);
-
 	setAvailable();
-
 	addUse(ut);
 
 	return;
@@ -54,126 +49,10 @@ void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
 Bicicleta* Utente::removeBicicleta(vector<int> index_distancias) {
 
 	Bicicleta* b = bike;
-
 	setAvailable();
-
 	setBike(0);
 
 	return b;
-}
-
-
-// METODOS GET //
-
-/**
- * @return Retorna o identificador do ultimo utente criado
- */
-int Utente::getLastId()
-{
-	return lastId;
-}
-
-/**
- * @return Retorna o identificador do utente
- */
-int Utente::getId() const {
-	return id;
-}
-
-/**
- * @return Retorna o nome do utente
- */
-string Utente::getNome() const {
-	return nome;
-}
-
-/**
- * @return Retorna localizacao do utente
- */
-Localizacao Utente::getLocalizacao() const {
-	return local;
-}
-
-/**
- * Retorna um apontador para bicicleta que o utente está a usar.
- * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0
- *
- * @return Retorna um apontador para bicicleta
- */
-Bicicleta* Utente::getBike() const {
-	return bike;
-}
-
-/**
- * @return Retorna valor do atributo disponivel do utente
- */
-bool Utente::getAvailable() const {
-	return disponivel;
-}
-
-/**
- * @return Retorna vetor de utilizacoes ja liquidadas do utente
- */
-vector<Utilizacao> Utente::getHistorico() const{
-	return historico;
-}
-
-
-// METODOS SET //
-
-/**
- * Decrementa o numero de identificacao do ultimo utente
- */
-void Utente::setLastId()
-{
-	lastId--;
-}
-
-/**
- * Decrementa o numero de identificacao do utente
- */
-void Utente::setIDBackward() {
-	this->id--;
-}
-
-/**
- * Altera o numero de identificacao do utente
- * @param identificacao novo numero de identificacao
- */
-void Utente::setID(int identificacao)
-{
-	id = identificacao;
-}
-
-/**
- * Altera a localizacao do utente
- * @param spot nova localizacao
- */
-void Utente::setUtenteLocation(Localizacao spot) {
-	local = spot;
-	return;
-}
-
-void Utente::setAvailable() {
-
-	disponivel = !disponivel;
-
-}
-
-/**
- * Atribui a bicicleta ao utente
- * @param bike bicicleta que vai usar
- */
-void Utente::setBike(Bicicleta* bike) {
-	this->bike = bike;
-}
-
-/**
- * Acrescenta uma utilizcao ao historico do utente
- * @param ut utilizacao a acrescentar
- */
-void Utente::setHistoric(Utilizacao ut) {
-	this->historico.push_back(ut);
 }
 
 /**
@@ -242,11 +121,121 @@ void Utente::updateLocation(int index) {
 }
 
 
+// METODOS GET //
+
+/**
+ * @return Retorna o identificador do ultimo utente criado
+ */
+int Utente::getLastId(){
+	return lastId;
+}
+
+/**
+ * @return Retorna o identificador do utente
+ */
+int Utente::getId() const {
+	return id;
+}
+
+/**
+ * @return Retorna o nome do utente
+ */
+string Utente::getNome() const {
+	return nome;
+}
+
+/**
+ * @return Retorna localizacao do utente
+ */
+Localizacao Utente::getLocalizacao() const {
+	return local;
+}
+
+/**
+ * Retorna um apontador para bicicleta que o utente está a usar.
+ * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0
+ *
+ * @return Retorna um apontador para bicicleta
+ */
+Bicicleta* Utente::getBike() const {
+	return bike;
+}
+
+/**
+ * @return Retorna valor do atributo disponivel do utente
+ */
+bool Utente::getAvailable() const {
+	return disponivel;
+}
+
+/**
+ * @return Retorna vetor de utilizacoes ja liquidadas do utente
+ */
+vector<Utilizacao> Utente::getHistorico() const{
+	return historico;
+}
+
+
+// METODOS SET //
+
+/**
+ * Decrementa o numero de identificacao do ultimo utente
+ */
+void Utente::setLastId(){
+	lastId--;
+}
+
+/**
+ * Decrementa o numero de identificacao do utente
+ */
+void Utente::setIDBackward() {
+	this->id--;
+}
+
+/**
+ * Altera o numero de identificacao do utente
+ * @param identificacao novo numero de identificacao
+ */
+void Utente::setID(int identificacao){
+	id = identificacao;
+}
+
+/**
+ * Altera a localizacao do utente
+ * @param spot nova localizacao
+ */
+void Utente::setUtenteLocation(Localizacao spot) {
+	local = spot;
+	return;
+}
+
+void Utente::setAvailable() {
+	disponivel = !disponivel;
+}
+
+/**
+ * Atribui a bicicleta ao utente
+ * @param bike bicicleta que vai usar
+ */
+void Utente::setBike(Bicicleta* bike) {
+	this->bike = bike;
+}
+
+/**
+ * Acrescenta uma utilizcao ao historico do utente
+ * @param ut utilizacao a acrescentar
+ */
+void Utente::setHistoric(Utilizacao ut) {
+	this->historico.push_back(ut);
+}
+
+
 //////////////////////
 //// CLASSE SOCIO ////
 //////////////////////
 
-Socio::Socio() : Utente{} {}
+Socio::Socio() : Utente{}
+{}
 
 Socio::Socio(string nome,Localizacao spot) : Utente{nome, spot} {}
 
@@ -262,72 +251,41 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 	double prestacao{-1};
 	string mesName;
 
-	for(unsigned int i = 0; i < getUtilizacoes().size(); i++)
+	for(unsigned int i = 0; i < utilizacoes.size(); i++)
 	{
-		if((getUtilizacoes().at(i).getData().getAno() == ano) && (getUtilizacoes().at(i).getData().getMes() == mes))
+		if((utilizacoes.at(i).getData().getAno() == ano) && (utilizacoes.at(i).getData().getMes() == mes))
 		{
 			//Soma as horas de uso do respetivo mes
-			numUseHours += getUtilizacoes().at(i).getUseTime();
+			numUseHours += utilizacoes.at(i).getUseTime();
 
 			//Verifica o tipo de prestação a ser aplicada
 			unsigned int tmp{};
 
 
-			if(getUtilizacoes().at(i).getBikeType() == "Urbana")
-				tmp = 0;
-			else if(getUtilizacoes().at(i).getBikeType() == "Urbana Simples")
-				tmp = 1;
-			else if(getUtilizacoes().at(i).getBikeType() == "Corrida")
-				tmp = 2;
+			if(utilizacoes.at(i).getBikeType() == "Urbana")
+				tmp = 40;
+			else if(utilizacoes.at(i).getBikeType() == "Urbana Simples")
+				tmp = 30;
+			else if(utilizacoes.at(i).getBikeType() == "Corrida")
+				tmp = 50;
 			else
-				tmp = 3;
+				tmp = 20;
 
-			if(prestacao == 0)
-				prestacao = tmp;
-			else if(prestacao < tmp)
+			if(prestacao < tmp)
 				prestacao = tmp;
 
 			//Adiciona utilização ao histórico e remove-a das utilizações
-			historico.push_back(getUtilizacoes().at(i));
+			historico.push_back(utilizacoes.at(i));
 			utilizacoes.erase(utilizacoes.begin() + i);
 			i--;
 
 		}
 	}
 
-	if(prestacao == 0)
-		prestacao = 40;
-	else if(prestacao == 1)
-		prestacao = 30;
-	else if(prestacao == 2)
-		prestacao = 50;
-	else
-		prestacao = 20;
+	string monthNames[] = {"Janeiro","Fevereiro","Março","Abril", "Maio", "Junho",
+			"Julho", "Agosto","Setembro","Outubro","Novembro", "Dezembro"};
 
-	if(mes == 1)
-		mesName = "Janeiro";
-	else if(mes == 2)
-		mesName = "Fevereiro";
-	else if(mes == 3)
-		mesName = "Março";
-	else if(mes == 4)
-		mesName = "Abril";
-	else if(mes == 5)
-		mesName = "Maio";
-	else if(mes == 6)
-		mesName = "Junho";
-	else if(mes == 7)
-		mesName = "Julho";
-	else if(mes == 8)
-		mesName = "Agosto";
-	else if(mes == 9)
-		mesName = "Setembro";
-	else if(mes == 10)
-		mesName = "Outubro";
-	else if(mes == 11)
-		mesName = "Novembro";
-	else if(mes == 12)
-		mesName = "Dezembro";
+	mesName = monthNames[mes-1];
 
 	cout << "Montante a pagar referente ao mês " << mesName << " do ano " << ano << ": ";
 
@@ -339,7 +297,6 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 	return;
 }
 
-
 /**
  * Imprime no ecra o historico do utente.
  * Caso  o historico esteja vazio e apresentada uma mensagem
@@ -349,7 +306,7 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
  */
 void Socio::displayHistoric() const{
 
-	vector<Utilizacao> hist = getHistorico();
+	vector<Utilizacao> hist = historico;
 
 	cout << "Histórico: " << endl << endl;
 
@@ -362,15 +319,6 @@ void Socio::displayHistoric() const{
 	return;
 }
 
-
-
-/**
- * @return Retorna o tipo do utente (socio)
- */
-string Socio::getTipoUtente() const {
-	return "Socio";
-}
-
 /**
  * Imprime no ecra as utilizacoes por pagar do utente.
  * Esta opcao e apenas para socios. Se um utente regular acede a esta opcao,
@@ -379,13 +327,13 @@ string Socio::getTipoUtente() const {
  */
 void Socio::displayPagPendentes(int index){
 
-	if(getUtilizacoes().size() != 0)
+	if(utilizacoes.size() != 0)
 	{
 		cout << "Pagamentos pendentes:" << endl << endl;
 
-		for(unsigned int i = 0; i < getUtilizacoes().size(); i++)
+		for(unsigned int i = 0; i < utilizacoes.size(); i++)
 		{
-			getUtilizacoes().at(i).displayUtilizacao();
+			utilizacoes.at(i).displayUtilizacao();
 			cout << endl;
 		}
 	}
@@ -396,23 +344,6 @@ void Socio::displayPagPendentes(int index){
 
 	return;
 }
-
-/**
- * @return Retorna vetor de utilizacoes por pagar do utente
- */
-vector<Utilizacao> Socio::getUtilizacoes() const {
-	return utilizacoes;
-}
-
-/**
- * Acrescenta uma utilizcao as utilizacoes do utente
- * @param ut utilizacao a acrescentar
- */
-/*void Socio::setUtilizacoes(Utilizacao ut) {
-
-	this->utilizacoes.push_back(ut);
-}
- */
 
 /**
  * Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes
@@ -433,33 +364,33 @@ void Socio::efetuaPag(int index){
 	vector<unsigned int> meses;
 	vector<unsigned int> anos;
 
-	if(getAvailable() == false)
+	if(disponivel == false)
 	{
 		cout << "Não é possível efetuar o pagamento uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
 		return;
 	}
 
-	else if(getUtilizacoes().size() == 0){
+	else if(utilizacoes.size() == 0){
 		cout << "Este utente não possui qualquer pagamento pendente" << endl << endl;
 		return;
 	}
 
 	//Verifica os anos com mensalidades em atraso
-	for(unsigned int i = 0; i < getUtilizacoes().size(); i++)
+	for(unsigned int i = 0; i < utilizacoes.size(); i++)
 	{
 		if(anos.size() == 0)
-			anos.push_back(getUtilizacoes().at(i).getData().getAno());
+			anos.push_back(utilizacoes.at(i).getData().getAno());
 
 		bool cond {false};
 		for(unsigned int k = 0; k < anos.size(); k++)
 		{
-			if(anos.at(k) == getUtilizacoes().at(i).getData().getAno()) {
+			if(anos.at(k) == utilizacoes.at(i).getData().getAno()) {
 				cond = true;
 				break;
 			}
 		}
 		if(cond == false)
-			anos.push_back(getUtilizacoes().at(i).getData().getAno());
+			anos.push_back(utilizacoes.at(i).getData().getAno());
 
 		cond = false;
 	}
@@ -505,119 +436,115 @@ void Socio::efetuaPag(int index){
 	};
 
 	//Verifica meses de utilização do respetivo ano
-	for(unsigned int i = 0; i < getUtilizacoes().size(); i++)
+	for(unsigned int i = 0; i < utilizacoes.size(); i++)
 	{
-		if(getUtilizacoes().at(i).getData().getAno() == ano)
+		if(utilizacoes.at(i).getData().getAno() == ano)
 		{
 			if(meses.size() == 0)
-				meses.push_back(getUtilizacoes().at(i).getData().getMes());
+				meses.push_back(utilizacoes.at(i).getData().getMes());
 
 			bool cond {false};
 			for(unsigned int k = 0; k < meses.size(); k++)
 			{
-				if(meses.at(k) == getUtilizacoes().at(i).getData().getMes())
+				if(meses.at(k) == utilizacoes.at(i).getData().getMes())
 					cond = true;
 			}
 
 			if(cond == false)
-				meses.push_back(getUtilizacoes().at(i).getData().getMes());
+				meses.push_back(utilizacoes.at(i).getData().getMes());
 
 			cond = false;
 		}
 	}
 
+	string monthNames[] = {"Janeiro","Fevereiro","Março","Abril", "Maio", "Junho",
+			"Julho", "Agosto","Setembro","Outubro","Novembro", "Dezembro"};
+
 	cout << "Meses com mensalidades em atraso: " << endl;
+
 	for(unsigned int i = 0; i < meses.size(); i++)
 	{
-		if(meses.at(i) == 1)
-			cout << "1 - Janeiro" << endl;
-		else if(meses.at(i) == 2)
-			cout << "2 - Fevereiro" << endl;
-		else if(meses.at(i) == 3)
-			cout << "3 - Março" << endl;
-		else if(meses.at(i) == 4)
-			cout << "4 - Abril" << endl;
-		else if(meses.at(i) == 5)
-			cout << "5 - Maio" << endl;
-		else if(meses.at(i) == 6)
-			cout << "6 - Junho" << endl;
-		else if(meses.at(i) == 7)
-			cout << "7 - Julho" << endl;
-		else if(meses.at(i) == 8)
-			cout << "8 - Agosto" << endl;
-		else if(meses.at(i) == 9)
-			cout << "9 - Setembro" << endl;
-		else if(meses.at(i) == 10)
-			cout << "10 - Outubro" << endl;
-		else if(meses.at(i) == 11)
-			cout << "11 - Novembro" << endl;
-		else if(meses.at(i) == 12)
-			cout << "12 - Dezembro" << endl;
-
-		cout << endl;
-
-		//Executa até obter um ano válido
-		while(1)
-		{
-			try{
-				cout << "Liquidação de mensalidades do mês: ";
-				cin >> option;
-				cin.ignore(1000,'\n');
-				if(valid_number(option) == false)
-					throw OpcaoInvalida<string>(option);
-
-				mes = stoi(option);
-
-				bool cond {false};
-
-				for(unsigned int i = 0; i < meses.size(); i++)
-				{
-					if(meses.at(i) == mes)
-					{
-						cond = true;
-						break;
-					}
-				}
-
-				if(cond == false)
-					throw OpcaoInvalida<int>(mes);
-
-				cout << endl;
-				break;
-			}
-			catch (OpcaoInvalida<int> &op){
-
-				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-			catch (OpcaoInvalida<string> &op){
-
-				cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
-				cin.clear();
-			}
-		};
+		cout << meses.at(i) << " - " << monthNames[meses.at(i)-1] << endl;
 	}
+
+	cout << endl;
+
+	//Executa até obter um ano válido
+	while(1)
+	{
+		try{
+			cout << "Liquidação de mensalidades do mês: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			mes = stoi(option);
+
+			bool cond {false};
+
+			for(unsigned int i = 0; i < meses.size(); i++)
+			{
+				if(meses.at(i) == mes)
+				{
+					cond = true;
+					break;
+				}
+			}
+
+			if(cond == false)
+				throw OpcaoInvalida<int>(mes);
+
+			cout << endl;
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
 
 	pagaMensalidade(ano,mes);
 
 	return;
 }
 
-Utilizacao Socio::getLastUse() {
-
-	return utilizacoes.back();
-}
-
 bool Socio::hasPendingPay() {
-
 	return utilizacoes.size() > 0;
 }
 
 void Socio::addUse(Utilizacao use) {
-
 	utilizacoes.push_back(use);
 	return;
 
+}
+
+
+// METODOS GET //
+
+/**
+ * @return Retorna vetor de utilizacoes por pagar do utente
+ */
+vector<Utilizacao> Socio::getUtilizacoes() const {
+	return utilizacoes;
+}
+
+Utilizacao Socio::getLastUse() {
+	return utilizacoes.back();
+}
+
+/**
+ * @return Retorna o tipo do utente (socio)
+ */
+string Socio::getTipoUtente() const {
+	return "Socio";
 }
 
 
@@ -626,7 +553,13 @@ void Socio::addUse(Utilizacao use) {
 ////////////////////////
 
 /**
- * Imprime no ecra o historico do utente.
+ * Construtor padrao da classe Regular
+ */
+Regular::Regular() : Utente{} {}
+
+Regular::Regular(string nome,Localizacao spot) : Utente{nome, spot} {}
+
+/** Imprime no ecra o historico do utente.
  * Caso  o historico esteja vazio e apresentada uma mensagem
  * Se o utente é Regular, tambem e apresentado o total pago por cada utilizacao.
  * @param ER sistema em execucao
@@ -647,21 +580,6 @@ void Regular::displayHistoric() const{
 	return;
 }
 
-
-/**
- * Construtor padrao da classe Bicicleta
- */
-Regular::Regular() : Utente{} {}
-
-Regular::Regular(string nome,Localizacao spot) : Utente{nome, spot} {}
-
-/**
- * @return Retorna o tipo do utente (regular)
- */
-string Regular::getTipoUtente() const {
-	return "Regular";
-}
-
 void Regular::displayPagPendentes(int index){
 
 	cout << "Neste tipo de utente [Regular] não é possível ter pagamentos pendentes !" << endl << endl;
@@ -678,18 +596,24 @@ void Regular::efetuaPag(int index){
 	return;
 }
 
-bool Regular::hasPendingPay()
-{
+bool Regular::hasPendingPay() {
 	return false;
 }
 
 void Regular::addUse(Utilizacao use) {
-
 	historico.push_back(use);
 
 }
 
-Utilizacao Regular::getLastUse() {
 
+// METODOS GET //
+
+/** @return Retorna o tipo do utente (regular)
+ */
+string Regular::getTipoUtente() const {
+	return "Regular";
+}
+
+Utilizacao Regular::getLastUse() {
 	return historico.back();
 }

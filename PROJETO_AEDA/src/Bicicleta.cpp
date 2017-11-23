@@ -20,12 +20,6 @@ Bicicleta::Bicicleta(string name) {
 // METODOS GET //
 /////////////////
 
-/**
- * @return Retorna o tipo da bicicleta
- */
-string Bicicleta::getBikeType() const {
-	return bikeType;
-}
 
 /**
  * @return Retorna o nome da bicicleta

@@ -1,4 +1,4 @@
-S,Andre,/41/-8.2,0,2,Urbana-C-Campanhã-1-1/1/2100;Urbana-C-Campanhã-1-22/11/2017;
+S,Andre,/41/-8.2,0,3,Urbana-C-Campanhã-1-1/1/2100;Urbana-C-Campanhã-1-22/11/2017;Urbana Simples-C-Campanhã-22-2/3/2018;
 R,Jose,/123/123,1,Urbana Simples-B-Ramalde-13-12/2/2018;
 S,Ana,/41.1754/-8.60752,0,0,
 S,Rui,/45/-9,0,0,

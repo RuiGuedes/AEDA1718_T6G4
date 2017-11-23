@@ -8,7 +8,6 @@ enum Biketype {
 
 class Bicicleta {
 protected:
-	string bikeType; /**< Tipo de bicicleta*/
 	string bikeName; /**< Nome da bicicleta, composto pelas iniciais do tipo e um numero (ex: "u5" = bicicleta Urbana numero 5 (existem 4 antes desta)) */
 	int price;
 public:
@@ -19,12 +18,9 @@ public:
 	friend istream & operator >>(istream & i, Bicicleta & b);
 
 	//Métodos Get
-	string getBikeType() const;
 	string getBikeName() const;
 
 	int getPrice() const;
-
-
 };
 
 /**
@@ -33,7 +29,7 @@ public:
  */
 inline ostream& operator <<(ostream & o, const Bicicleta & b)
 {
-	o << b.bikeName << '/' << b.bikeType << '/';
+	o << b.bikeName;
 	return o;
 };
 
@@ -43,8 +39,7 @@ inline ostream& operator <<(ostream & o, const Bicicleta & b)
  */
 inline istream& operator >>(istream & i, Bicicleta & b)
 {
-	getline(i,b.bikeName,'/');
-	getline(i,b.bikeType,'/');
+	getline(i,b.bikeName,'\n');
 	return i;
 };
 

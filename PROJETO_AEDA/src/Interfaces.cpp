@@ -405,12 +405,12 @@ void menu_interface(Sistema &ER){
 		case 4:
 			system("cls");
 			mensagemInicial();
-			//utente->displayPagPendentes(index);
+			utente->displayPagPendentes(index);
 			break;
 		case 5:
 			system("cls");
 			mensagemInicial();
-			//utente->efetuaPag(index);
+			utente->efetuaPag(index);
 			break;
 		case 6:
 			system("cls");
