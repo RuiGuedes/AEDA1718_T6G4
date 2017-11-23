@@ -30,7 +30,7 @@ void Sistema::addPontoPartilha() {
 	while(1)
 	{
 		try {
-			cout << "Nome: " ;
+			cout << "Nome do Ponto de Partilha: " ;
 			getline(cin,nome);
 			if(valid_word(nome) == false)
 				throw OpcaoInvalida<string>(nome);
@@ -64,7 +64,7 @@ void Sistema::addPontoPartilha() {
 	while(1)
 	{
 		try {
-			cout << "Nome: " ;
+			cout << "Nome da Localização: " ;
 			getline(cin , locname);
 			if(valid_word(locname) == false)
 				throw OpcaoInvalida<string>(nome);
@@ -551,6 +551,7 @@ void Sistema::removePonto() {
 
 			if(indexPP == -1)
 				throw OpcaoInvalida<string>(nomePP);
+
 			cout << endl;
 			break;
 		}
@@ -589,16 +590,7 @@ void Sistema::removeUtente() {
 		return;
 	}
 
-	cout << left << setw(15) << "   Nome" << setw(6) << " ID" << setw(27) << " Tipo de utente" << setw (20) << " GPS" << endl;
-
-	for (unsigned int i=0 ; i< utentes.size() ; i++)
-	{
-		cout << "-> " << setw(13) << utentes.at(i)->getNome();
-		cout << setw(10) << utentes.at(i)->getId();
-		cout << setw(14) <<utentes.at(i)->getTipoUtente();
-		cout << '(' << setw(9) << utentes.at(i)->getLocalizacao().getX();
-		cout << "," << setw(9) << utentes.at(i)->getLocalizacao().getY() << setw(5) << ')' << endl;
-	}
+	displayUtentes();
 
 	cout << endl;
 
@@ -618,6 +610,7 @@ void Sistema::removeUtente() {
 				throw OpcaoInvalida<string>(id);
 
 			idUT = stoi(id);
+
 			for(unsigned int i = 0; i < utentes.size(); i++)
 			{
 				if(utentes.at(i)->getId() == idUT)
@@ -644,10 +637,11 @@ void Sistema::removeUtente() {
 
 	utentes.erase(utentes.begin() + indexUT);
 
+	//Caso seja o ultimo utente do sistema
 	if((unsigned int)indexUT == utentes.size())
 	{
 
-		utentes.at(0)->setLastId();
+		Utente::setLastId();
 
 		cout << endl << "Utente removido com sucesso !" << endl << endl;
 
@@ -659,7 +653,7 @@ void Sistema::removeUtente() {
 		utentes.at(i)->setIDBackward();
 	}
 
-	utentes.at(0)->setLastId();
+	Utente::setLastId();
 
 	cout << endl << "Utente removido com sucesso !" << endl << endl;
 
