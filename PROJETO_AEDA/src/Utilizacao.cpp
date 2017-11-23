@@ -133,6 +133,7 @@ unsigned int Data::getAno() const { return ano; }
 void Data::setDia(unsigned int d){
 	this->dia=d;
 }
+
 /**
  * Altera o mes
  * @param m mes
@@ -140,6 +141,7 @@ void Data::setDia(unsigned int d){
 void Data::setMes(unsigned int m){
 	this->mes=m;
 }
+
 /**
  * Altera o ano
  * @param a ano
@@ -147,5 +149,3 @@ void Data::setMes(unsigned int m){
 void Data::setAno(unsigned int a){
 	this->ano=a;
 }
-
-

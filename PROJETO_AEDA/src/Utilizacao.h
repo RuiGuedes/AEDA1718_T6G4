@@ -46,22 +46,24 @@ inline istream & operator>> (istream & i, Data & d)
 class Utilizacao : protected Data{
 private:
 	Data data;
-	unsigned int useTime;/**< Numero de horas de uso da bicicleta*/
-	string bikeType;/**< Tipo de bicicleta*/
-	string pontoPartilha;/**< Nome do ponto de partilha onde a bicicleta foi alugada*/
-	string localizacao;/**< Nome da localizacao do ponto de partilha onde a bicicleta foi alugada*/
+	unsigned int useTime;	/**< Numero de horas de uso da bicicleta*/
+	string bikeType;		/**< Tipo de bicicleta*/
+	string pontoPartilha;	/**< Nome do ponto de partilha onde a bicicleta foi alugada*/
+	string localizacao;		/**< Nome da localizacao do ponto de partilha onde a bicicleta foi alugada*/
 public:
 	Utilizacao(); /**< Necessário para o overload do operador de extração na classe utente*/
 	Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc);
-	friend ostream & operator <<(ostream & o, const Utilizacao & u);
-	friend istream & operator >>(istream & i, Utilizacao & u);
-	void displayUtilizacao() const;
 
 	//Métodos Get
 	Data getData() const;
 	unsigned int getUseTime() const;
 	string getBikeType() const;
 	double getPrice() const;
+
+	//Others
+	void displayUtilizacao() const;
+	friend ostream & operator <<(ostream & o, const Utilizacao & u);
+	friend istream & operator >>(istream & i, Utilizacao & u);
 };
 
 /**
