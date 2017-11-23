@@ -28,5 +28,3 @@ bool valid_number(string number);
 bool valid_bike(string bike);
 void mensagemInicial();
 
-template <class T>
-int SequentialSearch(const vector<T> &v, T x);

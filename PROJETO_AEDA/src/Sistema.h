@@ -11,26 +11,31 @@ class Sistema {
 	vector<Utente* > utentes;
 public:
 	Sistema() {}
+
+	//Métodos add
 	void addPontoPartilha();				/**< Criação de uma nova loja */
 	void addNewUtente();					/**< Adiciona um novo utente */
 	void adicionaBike();
+	void addNewUtente(Utente* u1);			//para ficheiros
+	void addPontoPartilha(PontoPartilha* p);	//para ficherios
+
+	//Métodos remove
 	void removePonto();
 	void removeUtente();
 	void removeBike();
+
+	//Others
 	void alugaBike(int index);
 	void devolveBike(int index);
 	void mudaTipoUT(int index);
-	void System_Manager(unsigned int index, string bikeType);
-	void infoER();
-
-
-	//Metodos para extracao dos ficheiros
-	void addNewUtente(Utente* u1);
-	void addPontoPartilha(PontoPartilha* p);
-
+	void system_Manager(unsigned int index, string bikeType);
+	void displayNearestPP(int index);
+	void displayUtentes();
 
 	//Métodos Get
 	vector<Utente* > getUtentes();
 	vector<PontoPartilha* > getPontosPartilha();
-	vector<int> ExtraData(int index);
+	void getInfo();
+	vector<int> getOrderedPP(int index);
+	int getUtenteIndex(int identificacao);
 };

@@ -21,12 +21,7 @@ int main()
 	// Zona de inicialização do programa //
 	///////////////////////////////////////
 
-	//Informacao inicial apresentada ao utilizador
-	cout << "######  ####### #######      ##########  ##  #####    ######  #######" << endl;
-	cout << "##      ##      ##   ##      ##      ##  ##  ##  ##   ##      ##     " << endl;
-	cout << "######  ##      ##   ##      ##  ######  ##  ##   ##  #####   #######" << endl;
-	cout << "##      ##      ##   ##      ##    ##    ##  ##  ##   ##           ##" << endl;
-	cout << "######  ####### #######      ##     ###  ##  #####    ######  #######" << endl << endl;
+	mensagemInicial();
 
 	Sistema sys;
 
