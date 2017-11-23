@@ -768,12 +768,12 @@ void Sistema::getInfo() const {
 	cout << "Nome da empresa: ECO RIDES" << endl << endl;
 	cout << "Número total de pontos de Partilha: " << pontosPartilha.size() << endl << endl;
 	cout << "Pontos de Partilha:" << endl << endl;
-	cout << setw (15) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (20) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
 	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
 			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
 
 	for (unsigned int i=0 ; i<pontosPartilha.size() ; i++){
-		cout << setw(5) << pontosPartilha.at(i)->getNome();
+		cout << setw(10) << pontosPartilha.at(i)->getNome();
 		cout << setw(23) << pontosPartilha.at(i)->getLocal().getNome();
 		cout << '(' << setw(9) << pontosPartilha.at(i)->getLocal().getX();
 		cout << "," << setw(9) << pontosPartilha.at(i)->getLocal().getY() << setw(5) << ')';
@@ -856,6 +856,7 @@ vector<int> Sistema::getOrderedPP(int index) const {
 		distancias.push_back(utentes.at(index)->getLocalizacao().distancia(pontosPartilha.at(i)->getLocal()));
 	}
 
+	//Ordena o vetor por ordem crescente de distância
 	sort(distancias.begin(),distancias.end());
 
 	for(unsigned int i = 0; i < distancias.size(); i++)
@@ -1186,8 +1187,7 @@ void Sistema::devolveBike(int index) {
 	if(utentes.at(index)->getAvailable() == true)
 	{
 		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
-		system("pause");
-		system("cls");
+
 		return;
 	}
 
