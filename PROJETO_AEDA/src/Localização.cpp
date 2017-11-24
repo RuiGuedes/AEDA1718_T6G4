@@ -1,7 +1,7 @@
 #include "Localizacao.h"
 
 /**
- * Construtor padrao da classe Lcalizacao
+ * Construtor padrao da classe Lcalizacao.
  */
 Localizacao::Localizacao(){
 	this->nome = "";
@@ -10,7 +10,7 @@ Localizacao::Localizacao(){
 }
 
 /**
- * Construtor da classe Localizacao
+ * Construtor da classe Localizacao.
  * @param x coordenada x da localizacao
  * @param y coordenada y da localizacao
  */
@@ -21,7 +21,7 @@ Localizacao::Localizacao(double x, double y) {
 }
 
 /**
- * Construtor da classe Localizacao
+ * Construtor da classe Localizacao.
  * @param nome nome da localizacao
  * @param x coordenada x da localizacao
  * @param y coordenada y da localizacao
@@ -37,21 +37,21 @@ Localizacao::Localizacao(string nome, double x, double y){
 /////////////////
 
 /**
- * @return Retorna o nome da localizacao
+ * @return Retorna o nome da localizacao.
  */
 string Localizacao::getNome() const{
 	return nome;
 }
 
 /**
- * @return Retorna coordenada x da localizacao
+ * @return Retorna coordenada x da localizacao.
  */
 double Localizacao::getX() const{
 	return x;
 }
 
 /**
- * @return Retorna a coordenada y da localizacao
+ * @return Retorna a coordenada y da localizacao.
  */
 double Localizacao::getY() const{
 	return y;
@@ -63,7 +63,7 @@ double Localizacao::getY() const{
 /////////////////
 
 /**
- * Altera o nome da localizacao
+ * Altera o nome da localizacao.
  * @param nome novo nome
  */
 void Localizacao::setNome(string nome) {
@@ -71,7 +71,7 @@ void Localizacao::setNome(string nome) {
 }
 
 /**
- * Altera a coordenada x da localizacao
+ * Altera a coordenada x da localizacao.
  * @param x nova coordenada
  */
 void Localizacao::setX(double x) {
@@ -79,7 +79,7 @@ void Localizacao::setX(double x) {
 }
 
 /**
- * Altera a coordenada y da localizacao
+ * Altera a coordenada y da localizacao.
  * @param y nova coordenada
  */
 void Localizacao::setY(double y) {
@@ -91,7 +91,7 @@ void Localizacao::setY(double y) {
 ////////////
 
 /**
- * Construtor de copia
+ * Construtor de copia.
  */
 Localizacao & Localizacao::operator =(Localizacao & l) {
 	setNome(l.nome);
@@ -101,7 +101,7 @@ Localizacao & Localizacao::operator =(Localizacao & l) {
 }
 
 /**
- * Metodo para calcular a distancia entre duas Localizacoes
+ * Metodo para calcular a distancia entre duas Localizacoes.
  * @param local localizacao
  */
 double Localizacao::distancia(Localizacao local) const{

@@ -7,17 +7,20 @@
 #include "Localizacao.h"
 
 class Sistema {
-	vector<PontoPartilha* > pontosPartilha;
-	vector<Utente* > utentes;
+	vector<PontoPartilha* > pontosPartilha;		/**< Pontos de partilha referentes ao sistema. */
+	vector<Utente* > utentes;					/**< Utentes referentes ao sistema. */
 public:
+	/**
+	 *  Construtor padrao da classe Sistema
+	 */
 	Sistema() {}
 
 	//Métodos add
 	void addPontoPartilha();
 	void addNewUtente();
 	void adicionaBike();
-	void addNewUtente(Utente* u1);				/**< Necessario para inclusao direta no sistema dos utente extraidos do ficheiro*/
-	void addPontoPartilha(PontoPartilha* p);	/**< Necessario para inclusao direta no sistema dos pontos de partilha extraidos do ficheiro*/
+	void addNewUtente(Utente* u1);				/**< Necessario para inclusao direta no sistema dos utente extraidos do ficheiro.*/
+	void addPontoPartilha(PontoPartilha* p);	/**< Necessario para inclusao direta no sistema dos pontos de partilha extraidos do ficheiro.*/
 
 	//Métodos remove
 	void removePonto();

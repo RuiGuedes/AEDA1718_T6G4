@@ -6,12 +6,12 @@
 #include "Utente.h"
 
 class PontoPartilha {
-	Localizacao local;							/**< Localizacao do ponto de partilha */
-	unsigned int capacidade;					/**< Capacidade do ponto de partilha */
-	vector <vector<Bicicleta *> > bicicletas;	/**< Bicicletas existentes no ponto de partilha */
-	string nome;								/**< Nome do ponto de partilha */
+	Localizacao local;							/**< Localizacao do ponto de partilha. */
+	unsigned int capacidade;					/**< Capacidade do ponto de partilha. */
+	vector <vector<Bicicleta *> > bicicletas;	/**< Bicicletas existentes no ponto de partilha. */
+	string nome;								/**< Nome do ponto de partilha. */
 public:
-	PontoPartilha();	/**< Necessário para o overload do operador de extração na classe utente*/
+	PontoPartilha();	/**< Necessario para o overload do operador de extracao na classe utente.*/
 	PontoPartilha(Localizacao spot,unsigned int storage,string name);
 
 	//Metodos Get

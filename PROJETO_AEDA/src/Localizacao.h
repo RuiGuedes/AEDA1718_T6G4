@@ -3,11 +3,11 @@
 #include "Includes.h"
 
 class Localizacao {
-	string nome;	/**< Nome da localizacao */
-	double x;		/**< Coordenadas x da localizacao */
-	double y;		/**< Coordenadas y da localizacao */
+	string nome;	/**< Nome da localizacao. */
+	double x;		/**< Coordenadas x da localizacao. */
+	double y;		/**< Coordenadas y da localizacao. */
 public:
-	Localizacao();		/**< Necessário para o overload do operador de extração na classe utente*/
+	Localizacao();		/**< Necessario para o overload do operador de extracao na classe utente.*/
 	Localizacao(double x, double y);
 	Localizacao(string nome, double x, double y);
 

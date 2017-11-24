@@ -9,7 +9,7 @@
  * Verifica se a string number contem apenas digitos ou se contem simbolos ou caracteres nao
  * aceites para a situacao.
  * @param number string extraida da stream de input
- * @return Retorna true se number e um numero e false se number contem alguma coisa para alem de digitos
+ * @return Retorna true se number e um numero e false se number contem alguma coisa para alem de digitos.
  */
 bool valid_number(string number)
 {
@@ -24,7 +24,7 @@ bool valid_number(string number)
  * Verifica se a string number contem apenas digitos e um ponto ou um hifen,
  * ou se contem simbolos ou caracteres nao aceites para a situacao.
  * @param number string extraida da stream de input
- * @return Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para alem de digitos
+ * @return Retorna true se number e um numero decimal negativo ou positivo e false se number contem alguma coisa para alem de digitos.
  */
 bool valid_number_double(string number)
 {
@@ -36,9 +36,9 @@ bool valid_number_double(string number)
 }
 
 /**
- * Verifica se a string word nao contem numeros
+ * Verifica se a string word nao contem numeros.
  * @param word string extraida da stream de input
- * @return Retorna true se nao contem numeros e false caso contrario
+ * @return Retorna true se nao contem numeros e false caso contrario.
  */
 bool valid_word(string word)
 {
@@ -50,9 +50,9 @@ bool valid_word(string word)
 }
 
 /**
- * Verifica se o nome da bicicleta e correto, nao pode comecar por um numero
+ * Verifica se o nome da bicicleta e correto, nao pode comecar por um numero.
  * @param bike string extraida da stream de input
- * @return Retorna true se nao comeca por um numero e false caso contrario
+ * @return Retorna true se nao comeca por um numero e false caso contrario.
  */
 bool valid_bike(string bike)
 {
@@ -63,8 +63,7 @@ bool valid_bike(string bike)
 }
 
 /**
- * Funcao que imprime no ecra o logotipo da empresa ECO RIDES
- * (nome defenido pelo grupo)
+ * Funcao que imprime no ecra o logotipo da empresa ECO RIDES.
  */
 void mensagemInicial(){
 	//Informacao inicial apresentada ao utilizador
@@ -89,7 +88,7 @@ void mensagemInicial(){
  * ou Utente, que executa o procedimento necessario para o que o utente pretende, e a ultima opcao ,
  * 10 - Logout, retorna a funcao openInterfaces, onde esta foi invocada.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param ER sistema em execucao
  */
 void menu_interface(Sistema &ER){
@@ -262,7 +261,7 @@ void menu_interface(Sistema &ER){
  * executa o procedimento necessario para o que e pretendido, e a ultima opcao , 7 - Sair,
  * retorna a funcao openInterfaces, onde esta foi invocada.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param ER sistema em execucao
  */
 void admin_interface(Sistema &ER) {
@@ -400,7 +399,7 @@ void admin_interface(Sistema &ER) {
  * menu_interfaces; 3- Administrador chama a funcao admin_interfaces; 4 - Sair retorna a funcao main,
  * onde esta ,openinterfaces, e invocada.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param ER sistema em execucao
  */
 void openInterface(Sistema & ER){

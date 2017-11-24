@@ -8,7 +8,7 @@ int Utente::lastId = 0;
 ///////////////////////
 
 /**
- * Construtor padrao da classe Utente
+ * Construtor padrao da classe Utente.
  */
 Utente::Utente() : id(++lastId){
 	this->bike = 0;
@@ -16,7 +16,7 @@ Utente::Utente() : id(++lastId){
 }
 
 /**
- * Construtor da classe Utente
+ * Construtor da classe Utente.
  * @param nome nome do utente
  * @param spot localizacao atual do utente
  */
@@ -27,7 +27,7 @@ Utente::Utente(string nome,Localizacao spot) : id(++lastId) {
 }
 
 /**
- * Atribui a bicicleta ao utente e remove-a do ponto de partilha mais proximo do utente
+ * Atribui a bicicleta ao utente e remove-a do ponto de partilha mais proximo do utente.
  * @param b apontador para a bicicleta a alugar
  * @param ut utilizacao = aluger da bicicleta em questao
  */
@@ -40,9 +40,9 @@ void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
 }
 
 /**
- * Remove a bicicleta do utente e coloca-a no ponto de partilha, nao lotado, mais proximo do utente
+// * Remove a bicicleta do utente e coloca-a no ponto de partilha, nao lotado, mais proximo do utente.
  * @param index_distancias vetor de indice dos pontos de partilha ordenados por distancia
- * @return Retorna um apontador para bicicleta que o utente possuia
+ * @return Retorna um apontador para bicicleta que o utente possuia.
  */
 Bicicleta* Utente::removeBicicleta(vector<int> index_distancias) {
 
@@ -137,28 +137,28 @@ void Utente::updateLocation(int index) {
 // METODOS GET //
 
 /**
- * @return Retorna o identificador do ultimo utente criado
+ * @return Retorna o identificador do ultimo utente criado.
  */
 int Utente::getLastId(){
 	return lastId;
 }
 
 /**
- * @return Retorna o identificador do utente
+ * @return Retorna o identificador do utente.
  */
 int Utente::getId() const {
 	return id;
 }
 
 /**
- * @return Retorna o nome do utente
+ * @return Retorna o nome do utente.
  */
 string Utente::getNome() const {
 	return nome;
 }
 
 /**
- * @return Retorna localizacao do utente
+ * @return Retorna localizacao do utente.
  */
 Localizacao Utente::getLocalizacao() const {
 	return local;
@@ -166,22 +166,22 @@ Localizacao Utente::getLocalizacao() const {
 
 /**
  * Retorna um apontador para bicicleta que o utente esta a usar.
- * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0
- * @return Retorna um apontador para bicicleta
+ * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0.
+ * @return Retorna um apontador para bicicleta.
  */
 Bicicleta* Utente::getBike() const {
 	return bike;
 }
 
 /**
- * @return Retorna valor do atributo disponivel do utente
+ * @return Retorna valor do atributo disponivel do utente.
  */
 bool Utente::getAvailable() const {
 	return disponivel;
 }
 
 /**
- * @return Retorna vetor de utilizacoes ja liquidadas do utente
+ * @return Retorna vetor de utilizacoes ja liquidadas do utente.
  */
 vector<Utilizacao> Utente::getHistorico() const{
 	return historico;
@@ -191,21 +191,21 @@ vector<Utilizacao> Utente::getHistorico() const{
 // METODOS SET //
 
 /**
- * Decrementa o numero de identificacao do ultimo utente
+ * Decrementa o numero de identificacao do ultimo utente.
  */
 void Utente::setLastId(){
 	lastId--;
 }
 
 /**
- * Decrementa o numero de identificacao do utente
+ * Decrementa o numero de identificacao do utente.
  */
 void Utente::setIDBackward() {
 	this->id--;
 }
 
 /**
- * Altera o numero de identificacao do utente
+ * Altera o numero de identificacao do utente.
  * @param identificacao novo numero de identificacao
  */
 void Utente::setID(int identificacao){
@@ -213,7 +213,7 @@ void Utente::setID(int identificacao){
 }
 
 /**
- * Altera a localizacao do utente
+ * Altera a localizacao do utente.
  * @param spot nova localizacao
  */
 void Utente::setUtenteLocation(Localizacao spot) {
@@ -221,12 +221,15 @@ void Utente::setUtenteLocation(Localizacao spot) {
 	return;
 }
 
+/**
+ * Coloca a disponibilidade do utente contraria a actual.
+ */
 void Utente::setAvailable() {
 	disponivel = !disponivel;
 }
 
 /**
- * Atribui a bicicleta ao utente
+ * Atribui a bicicleta ao utente.
  * @param bike bicicleta que vai usar
  */
 void Utente::setBike(Bicicleta* bike) {
@@ -234,7 +237,7 @@ void Utente::setBike(Bicicleta* bike) {
 }
 
 /**
- * Acrescenta uma utilizcao ao historico do utente
+ * Acrescenta uma utilizcao ao historico do utente.
  * @param ut utilizacao a acrescentar
  */
 void Utente::setHistoric(Utilizacao ut) {
@@ -247,13 +250,13 @@ void Utente::setHistoric(Utilizacao ut) {
 //////////////////////
 
 /**
- * Construtor padrao da subclasse Socio
+ * Construtor padrao da subclasse Socio.
  */
 Socio::Socio() : Utente{}
 {}
 
 /**
- * Construtor da subclasse Socio
+ * Construtor da subclasse Socio.
  * @param nome nome do utente
  * @param spot localizacao atual do utente
  */
@@ -261,7 +264,7 @@ Socio::Socio(string nome,Localizacao spot) : Utente{nome, spot} {}
 
 /**
  * Paga a mensalidade do mes selecionedo, removendo as ulizacoes correspondestes a esse mes do vetor utilizacoes
- * e colocando-as no historico do utente
+ * e colocando-as no historico do utente.
  * @param ano do qual pretende pagar um mes
  * @param mes que pretende pagar
  */
@@ -554,21 +557,21 @@ void Socio::addUse(Utilizacao use) {
 // METODOS GET //
 
 /**
- * @return Retorna vetor de utilizacoes por pagar do utente
+ * @return Retorna vetor de utilizacoes por pagar do utente.
  */
 vector<Utilizacao> Socio::getUtilizacoes() const {
 	return utilizacoes;
 }
 
 /**
- * @return Retorna a ultima utlilizacao do vetor utilizacoes
+ * @return Retorna a ultima utlilizacao do vetor utilizacoes.
  */
 Utilizacao Socio::getLastUse() {
 	return utilizacoes.back();
 }
 
 /**
- * @return Retorna o tipo do utente (socio)
+ * @return Retorna o tipo do utente (socio).
  */
 string Socio::getTipoUtente() const {
 	return "Socio";
@@ -580,12 +583,12 @@ string Socio::getTipoUtente() const {
 ////////////////////////
 
 /**
- * Construtor padrao da classe Regular
+ * Construtor padrao da classe Regular.
  */
 Regular::Regular() : Utente{} {}
 
 /**
- * Construtor da subclasse Regular
+ * Construtor da subclasse Regular.
  * @param nome nome do utente
  * @param spot localizacao atual do utente
  */
@@ -625,7 +628,7 @@ void Regular::displayPagPendentes(int index){
 
 /**
  * Imprime no ecra a uma mensagem quando chamada para este tipo (Regular), porque o mesmo
- * nao tem pagamentos pendentes, logo nao pode efetuar pagamento
+ * nao tem pagamentos pendentes, logo nao pode efetuar pagamento.
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Regular::efetuaPag(int index){
@@ -656,14 +659,14 @@ void Regular::addUse(Utilizacao use) {
 // METODOS GET //
 
 /**
- * @return Retorna o tipo do utente (regular)
+ * @return Retorna o tipo do utente (regular).
  */
 string Regular::getTipoUtente() const {
 	return "Regular";
 }
 
 /**
- * @return Retorna a ultima utlilizacao do utente Regular
+ * @return Retorna a ultima utlilizacao do utente Regular.
  */
 Utilizacao Regular::getLastUse() {
 	return historico.back();

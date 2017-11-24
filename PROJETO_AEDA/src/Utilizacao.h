@@ -6,7 +6,7 @@ class Data {
 protected:
 	unsigned int dia, mes, ano;
 public:
-	Data();		/**< Necessário para o overload do operador de extração na classe utente*/
+	Data();		/**< Necessario para o overload do operador de extracao na classe utente.*/
 	Data(unsigned int dia,unsigned int mes,unsigned int ano);
 	friend ostream & operator<<(ostream & o, const Data & d);
 	friend istream & operator>>(istream & i, Data & d);
@@ -44,13 +44,13 @@ inline istream & operator>> (istream & i, Data & d)
 
 class Utilizacao {
 private:
-	Data data;
-	unsigned int useTime;	/**< Numero de horas de uso da bicicleta*/
-	string bikeType;		/**< Tipo de bicicleta*/
-	string pontoPartilha;	/**< Nome do ponto de partilha onde a bicicleta foi alugada*/
-	string localizacao;		/**< Nome da localizacao do ponto de partilha onde a bicicleta foi alugada*/
+	Data data;				/**< Data da respetiva utilizacao.*/
+	unsigned int useTime;	/**< Numero de horas de uso da bicicleta.*/
+	string bikeType;		/**< Tipo de bicicleta.*/
+	string pontoPartilha;	/**< Nome do ponto de partilha onde a bicicleta foi alugada.*/
+	string localizacao;		/**< Nome da localizacao do ponto de partilha onde a bicicleta foi alugada.*/
 public:
-	Utilizacao();			/**< Necessário para o overload do operador de extração na classe utente*/
+	Utilizacao();			/**< Necessario para o overload do operador de extracao na classe utente*/
 	Utilizacao(string bikeType, unsigned int numHours, Data d, string pp, string loc);
 
 	//Métodos Get

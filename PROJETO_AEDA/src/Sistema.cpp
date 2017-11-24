@@ -486,14 +486,14 @@ void Sistema::adicionaBike() {
 }
 
 /**
- * Adiciona um utente ao sistema
+ * Adiciona um utente ao sistema.
  * @param u1 apontador para o utente a adicionar
  */
 void Sistema::addNewUtente(Utente* u1){
 	utentes.push_back(u1);
 }
 
-/** Adiciona um ponto de partilha ao sistema
+/** Adiciona um ponto de partilha ao sistema.
  * @param p apontador para o ponto de partilha a adicionar
  */
 void Sistema::addPontoPartilha(PontoPartilha* p){
@@ -563,7 +563,7 @@ void Sistema::removePonto() {
  * Apresenta a informacao de todos os utentes registados (nome, id, tipo e localizacao) e pede para
  * introduzir o id do utente que se pretende remover e remove-o do sistema
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
- * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
 void Sistema::removeUtente() {
 
@@ -801,16 +801,16 @@ void Sistema::getInfo() const {
 }
 
 /**
- * Retorna o vetor de apontadores para os utentes registados no sistema
- * @return Retorna um vetor de utentes
+ * Retorna o vetor de apontadores para os utentes registados no sistema.
+ * @return Retorna um vetor de utentes.
  */
 vector<Utente* > Sistema::getUtentes() const{
 	return utentes;
 }
 
 /**
- * Retorna o vetor de apontadores para os pontos de partilha existentes no sistema
- * @return Retorna um vetor de pontos de partilha
+ * Retorna o vetor de apontadores para os pontos de partilha existentes no sistema.
+ * @return Retorna um vetor de pontos de partilha.
  */
 vector<PontoPartilha* > Sistema::getPontosPartilha() const {
 	return pontosPartilha;
@@ -820,7 +820,7 @@ vector<PontoPartilha* > Sistema::getPontosPartilha() const {
  * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
  * de distancia ao utente com indice = index.
  * @param index indice do utente
- * @return Retorna um vetor com os indices dos pontos de partilha
+ * @return Retorna um vetor com os indices dos pontos de partilha.
  */
 vector<int> Sistema::getOrderedPP(int index) const {
 
@@ -852,7 +852,7 @@ vector<int> Sistema::getOrderedPP(int index) const {
 /**
  * Verifica se existe o utente com numero de identificacao igual ao parametro identificacao no sistema.
  * @param identificacao numero de identificacao de um utente
- * @return Retorna o indice do utente no vetor de utentes do sistema se este existir e -1 caso contrario
+ * @return Retorna o indice do utente no vetor de utentes do sistema se este existir e -1 caso contrario.
  */
 int Sistema::getUtenteIndex(int identificacao) const {
 

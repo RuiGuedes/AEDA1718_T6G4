@@ -1,7 +1,7 @@
 #include "Sistema.h"
 
 /**
- * Construtor padrao da classe PontoPartilha
+ * Construtor padrao da classe PontoPartilha.
  */
 PontoPartilha::PontoPartilha(){
 	capacidade = 0;
@@ -13,7 +13,7 @@ PontoPartilha::PontoPartilha(){
 }
 
 /**
- * Construtor da classe PontoPartilha
+ * Construtor da classe PontoPartilha.
  * @param name nome do ponto de partilha
  * @param spot localizacao do ponto de partilha
  * @param storage capacidade do ponto de partilha
@@ -30,7 +30,7 @@ PontoPartilha::PontoPartilha(Localizacao spot,unsigned int storage,string name) 
 }
 
 /**
- * Remove a bicicleta bike do ponto de partilha
+ * Remove a bicicleta bike do ponto de partilha.
  * @param name nome da bicicleta que se pretende remover
  */
 void PontoPartilha::removeBike(string name) {
@@ -58,7 +58,7 @@ void PontoPartilha::removeBike(string name) {
 }
 
 /**
- * Adiciona a bicicleta bike do ponto de partilha
+ * Adiciona a bicicleta bike do ponto de partilha.
  * @param bike apontador de bicicleta que se pretende adicionar
  */
 void PontoPartilha::adicionaBike(Bicicleta* bike) {
@@ -84,7 +84,7 @@ void PontoPartilha::adicionaBike(Bicicleta* bike) {
 }
 
 /**
- * Limpa o vetor das bicicletas do ponto de partilha, de modo que o mesmo fica sem bicicletas
+ * Limpa o vetor das bicicletas do ponto de partilha, de modo que o mesmo fica sem bicicletas.
  */
 void PontoPartilha::limpaVectorBike(){
 	bicicletas.at(0).clear();
@@ -99,34 +99,34 @@ void PontoPartilha::limpaVectorBike(){
 /////////////////
 
 /**
- * @return Retorna o nome do ponto de partilha
+ * @return Retorna o nome do ponto de partilha.
  */
 string PontoPartilha::getNome() const {
 	return nome;
 }
 
 /**
- * @return Retorna a localizacao do ponto de partilha
+ * @return Retorna a localizacao do ponto de partilha.
  */
 Localizacao PontoPartilha::getLocal() const {
 	return local;
 }
 
 /**
- * @return Retorna a capacidade do ponto de partilha
+ * @return Retorna a capacidade do ponto de partilha.
  */
 int PontoPartilha::getCapacidade() const {
 	return capacidade;
 }
 
 /**
- * Retorna um vetor com a quantidade de cada tipo de bicicletas existentes no ponto de partilha
+ * Retorna um vetor com a quantidade de cada tipo de bicicletas existentes no ponto de partilha.
  * O vetor e composto pelos 4 elementos segintes:
- *  ->quantidade de bicicletas do tipo "Urbana"
- *  ->quantidade de bicicletas do tipo "Urbana Simples"
- *  ->quantidade de bicicletas do tipo "Corrida"
- *  ->quantidade de bicicletas do tipo "Infantil"
- * @return Retorna vetor de inteiros
+ *  (1) quantidade de bicicletas do tipo "Urbana",
+ *  (2) quantidade de bicicletas do tipo "Urbana Simples",
+ *  (3) quantidade de bicicletas do tipo "Corrida",
+ *  (4) quantidade de bicicletas do tipo "Infantil".
+ * @return Retorna vetor de inteiros.
  */
 vector<int> PontoPartilha::getNumberOfBikes() const {
 
@@ -140,7 +140,7 @@ vector<int> PontoPartilha::getNumberOfBikes() const {
 }
 
 /**
- * @return Retorna um vetor com os tipos de bicicletas existentes no ponto de partilha
+ * @return Retorna um vetor com os tipos de bicicletas existentes no ponto de partilha.
  */
 vector <string> PontoPartilha::getBikeTypes() {
 	vector <string> bikeTypes;
@@ -161,7 +161,7 @@ vector <string> PontoPartilha::getBikeTypes() {
 }
 
 /**
- * @return Retorna as bicicletas do ponto de partilha
+ * @return Retorna as bicicletas do ponto de partilha.
  */
 vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
 	return bicicletas;
@@ -172,7 +172,7 @@ vector <vector<Bicicleta *> > PontoPartilha::getBikes() const {
 /////////////////
 
 /**
- * Altera o nome do ponto de partilha
+ * Altera o nome do ponto de partilha.
  * @param name novo nome
  */
 void PontoPartilha::setNome(string name) {

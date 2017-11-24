@@ -13,12 +13,12 @@ int Infantil::id = 1;
 //////////////////////
 
 /**
- * Construtor padrao da classe Bicicleta
+ * Construtor padrao da classe Bicicleta.
  */
 Bicicleta::Bicicleta(){};
 
 /**
- * Construtor da classe Bicicleta
+ * Construtor da classe Bicicleta.
  * @param name nome da bicicleta
  */
 Bicicleta::Bicicleta(string name) {
@@ -29,14 +29,14 @@ Bicicleta::Bicicleta(string name) {
 // METODOS GET //
 
 /**
- * @return Retorna o nome da bicicleta
+ * @return Retorna o nome da bicicleta.
  */
 string Bicicleta::getBikeName() const {
 	return bikeName;
 }
 
 /**
- * @return Retorna o preco associado a um determinado tipo de bicicleta
+ * @return Retorna o preco associado a um determinado tipo de bicicleta.
  */
 int Bicicleta::getPrice() const {
 	return price;
@@ -47,7 +47,7 @@ int Bicicleta::getPrice() const {
 ///////////////////
 
 /**
- * Construtor da classe Urbana
+ * Construtor da classe Urbana.
  * @param bikeName nome da bicicleta
  */
 Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
@@ -59,7 +59,7 @@ Urbana::Urbana(string bikeName) : Bicicleta(bikeName){
 // METODOS GET //
 
 /**
- * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada
+ * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada.
  */
 int Urbana::getID() {
 	return id;
@@ -71,7 +71,7 @@ int Urbana::getID() {
 ///////////////////////////
 
 /**
- * Construtor da classe UrbanaSimples
+ * Construtor da classe UrbanaSimples.
  * @param bikeName nome da bicicleta
  */
 UrbanaSimples::UrbanaSimples(string bikeName) : Bicicleta(bikeName){
@@ -83,7 +83,7 @@ UrbanaSimples::UrbanaSimples(string bikeName) : Bicicleta(bikeName){
 // METODOS GET //
 
 /**
- * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada
+ * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada.
  */
 int UrbanaSimples::getID() {
 	return id++;
@@ -94,7 +94,7 @@ int UrbanaSimples::getID() {
 ////////////////////
 
 /**
- * Construtor da classe Corrida
+ * Construtor da classe Corrida.
  * @param bikeName nome da bicicleta
  */
 Corrida::Corrida(string bikeName) : Bicicleta(bikeName){
@@ -106,7 +106,7 @@ Corrida::Corrida(string bikeName) : Bicicleta(bikeName){
 // METODOS GET //
 
 /**
- * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada
+ * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada.
  */
 int Corrida::getID() {
 	return id;
@@ -117,7 +117,7 @@ int Corrida::getID() {
 /////////////////////
 
 /**
- * Construtor da classe Infantil
+ * Construtor da classe Infantil.
  * @param bikeName nome da bicicleta
  */
 Infantil::Infantil(string bikeName) : Bicicleta(bikeName){
@@ -129,7 +129,7 @@ Infantil::Infantil(string bikeName) : Bicicleta(bikeName){
 // METODOS GET //
 
 /**
- * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada
+ * @return Retorna o id responsavel por identificar a proxima bicicleta desta subclasse a ser adicionada.
  */
 int Infantil::getID() {
 	return id;

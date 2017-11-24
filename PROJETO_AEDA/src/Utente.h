@@ -8,13 +8,13 @@
 
 class Utente {
 protected:
-	static int lastId;				/**< Numero de Identificacao do ultimo utente registado */
-	int id;							/**< Numero de Identificacao do utente */
-	string nome;					/**< Nome do utente */
-	Localizacao local;				/**< Localizacao atual do utente */
-	Bicicleta* bike;				/**< Bicicleta que o utente esta a usar, caso nao esteja a usar nenhuma, o valor de bike = 0 */
-	vector<Utilizacao> historico;	/**< Utilizacoes liquidadas do utente */
-	bool disponivel = true;			/**< Se o utente esta a usar uma bicicleta disponivel = false, caso contrario disponivel = true */
+	static int lastId;				/**< Numero de Identificacao do ultimo utente registado. */
+	int id;							/**< Numero de Identificacao do utente. */
+	string nome;					/**< Nome do utente. */
+	Localizacao local;				/**< Localizacao atual do utente. */
+	Bicicleta* bike;				/**< Bicicleta que o utente esta a usar, caso nao esteja a usar nenhuma, o valor de bike = 0. */
+	vector<Utilizacao> historico;	/**< Utilizacoes liquidadas do utente. */
+	bool disponivel = true;			/**< Se o utente esta a usar uma bicicleta disponivel = false, caso contrario disponivel = true. */
 public:
 	Utente();
 	explicit Utente(string nome, Localizacao spot);
@@ -44,7 +44,10 @@ public:
 	virtual Utilizacao getLastUse() = 0;
 	virtual void addUse(Utilizacao use) = 0;
 	virtual void displayPagPendentes(int index) = 0;
-	virtual ~Utente() {}; 	/**<Destrutor virtual */
+	/**
+	 * Destrutor virtual.
+	 */
+	virtual ~Utente() {};
 
 	//Others
 	void alugaBicicleta(Bicicleta* b, Utilizacao ut);
@@ -58,7 +61,10 @@ class Socio : public Utente {
 	vector<Utilizacao> utilizacoes;		/**<Vetor de utilizacoes por pagar */
 public:
 	Socio();
-	~Socio() {};	/**<Destrutor da classe Socio */
+	/**
+	 * Destrutor da classe Socio.
+	 */
+	~Socio() {};
 	Socio(string nome,Localizacao spot);
 
 	//Friend functions
@@ -130,7 +136,10 @@ inline istream& operator >>(istream & i, Socio & u)
 class Regular : public Utente {
 public:
 	Regular();
-	~Regular() {};	/**<Destrutor da classe Regular */
+	/**
+	 * Destrutor da classe Regular.
+	 */
+	~Regular() {};
 	Regular(string nome,Localizacao spot);
 
 	//Others
