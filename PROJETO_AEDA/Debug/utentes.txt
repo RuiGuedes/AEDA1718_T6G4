@@ -3,8 +3,8 @@ R,Jose,/40.1234/-8.9832,1,Urbana Simples-B-Ramalde-13-12/2/2018;
 S,Ana,/39.8532/-8.2315,2,Urbana-A-Paranhos-4-1/7/2017;Urbana Simples-A-Paranhos-2-12/4/2017;2,Corrida-A-Paranhos-13-14/3/2018;Infantil-B-Ramalde-3-13/5/2019;
 S,Rui,/40.1235/-8.12395,2,Urbana Simples-K-Gondomar-10-11/5/2017;Urbana-B-Ramalde-1-7/6/2018;1,Infantil-B-Ramalde-4-2/12/2017;
 R,Cesar,/41.8273/-7.12385,1,Infantil-B-Ramalde-15-2/3/2017;
-S,Ana,/41.235/-8.012,0,0,
-R,Joana,/42.2345/-9.6723,0,
-S,Roberto,/39.6253/-8.1235,0,0,
-R,Bernardo,/43.9265/-10.9689,0,
-S,Pedro,/42.1233/-9.73217,0,0,
+R,Joana,/41.1522/-8.608,4,Urbana-B-Ramalde-2-18/11/2017;Corrida-F-Bonfim-2-23/11/2017;Corrida-C-Campanhã-1-9/12/2017;Corrida-F-Bonfim-3-13/12/2017;
+S,Roberto,/41.1556/-8.6144,3,Infantil-G-S. Mamede de Infesta-4-2/12/2017;Urbana Simples-F-Bonfim-2-4/12/2017;Urbana-E-Santo Ildefonso-2-15/12/2017;2,Corrida-K-Gondomar-3-8/11/2017;Urbana Simples-H-Pedrouços-1-14/11/2017;
+R,Bernardo,/41.255/-8.571,3,Infantil-E-Santo Ildefonso-4-2/11/2017;Corrida-D-Cedofeita-2-5/11/2017;Infantil-I-Rio Tinto-2-14/11/2017;
+S,Pedro,/41.1754/-8.6075,2,Corrida-D-Cedofeita-2-3/12/2017;Infantil-B-Ramalde-3-9/12/2017;2,Urbana-E-Santo Ildefonso-2-2/11/2017;Urbana Simples-I-Rio Tinto-1-6/11/2017;
+R,Rafael,/41.1951/-8.6132,4,Urbana Simples-I-Rio Tinto-2-7/11/2017;Urbana-C-Campanhã-1-18/11/2017;Infantil-G-S. Mamede de Infesta-2-25/11/2017;Urbana-H-Pedrouços-3-30/11/2017;

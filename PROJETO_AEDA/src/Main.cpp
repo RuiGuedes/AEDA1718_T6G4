@@ -45,6 +45,9 @@ int main()
  */
 void checkinSys(Sistema & ER){
 	ifstream f_utentes;
+	string f_line;
+	stringstream ss;
+	char tipoUtente;
 
 	try{
 		f_utentes.open("utentes.txt");
@@ -58,36 +61,39 @@ void checkinSys(Sistema & ER){
 	}
 
 	while(!f_utentes.eof()){
-		char tipoUtente;
-		tipoUtente = f_utentes.get();
-		f_utentes.get();
+		getline(f_utentes,f_line);
+		if (f_line != ""){
+			ss << f_line;
+			tipoUtente = ss.get();
+			ss.get();
 
-		if(tipoUtente == 'R'){
-			Regular u1;
-			f_utentes >> u1;
-			if (u1.getNome() != ""){
-				Utente * u = new Regular(u1);
-				ER.addNewUtente(u);
+			if(tipoUtente == 'R'){
+				Regular u1;
+				ss >> u1;
+				if (u1.getNome() != ""){
+					Utente * u = new Regular(u1);
+					ER.addNewUtente(u);
+				}
+				else{
+					Utente::setLastId();
+					break;
+				}
 			}
-			else{
-				Utente::setLastId();
-				break;
+			else {
+				Socio u1;
+				ss >> u1;
+				if (u1.getNome()!=""){
+					Utente * u = new Socio(u1);
+					ER.addNewUtente(u);
+				}
+				else{
+					Utente::setLastId();
+					break;
+				}
 			}
-		}
-		else {
-			Socio u1;
-			f_utentes >> u1;
-			if (u1.getNome()!=""){
-				Utente * u = new Socio(u1);
-				ER.addNewUtente(u);
-			}
-			else{
-				Utente::setLastId();
-				break;
-			}
-		}
 
-		f_utentes.ignore(100,'\n');
+			//f_utentes.ignore(100,'\n');
+		}
 	}
 
 	f_utentes.close();
