@@ -638,7 +638,9 @@ void Sistema::removeUtente() {
 	{
 		try {
 			cout << "ID do Utente: " ;
-			getline(cin,id);
+			cin >> id;
+			cin.ignore(1000,'\n');
+
 			if(valid_number(id) == false)
 				throw OpcaoInvalida<string>(id);
 
@@ -704,12 +706,10 @@ void Sistema::removeBike() {
 
 	cout << "Tipos de bicicleta:" << endl << endl;
 
-	cout <<  "-> Urbana" << endl;
-	cout <<  "-> Urbana Simples" << endl;
-	cout <<  "-> Corrida" << endl;
-	cout <<  "-> Infantil" << endl << endl;
-
-
+	cout <<  "-> Urbana   [Name: u(number)]" << endl;
+	cout <<  "-> Urbana Simples [Name: us(number)]" << endl;
+	cout <<  "-> Corrida  [Name: c(number)]" << endl;
+	cout <<  "-> Infantil [Name: i(number)]" << endl << endl;
 
 	string nomePP, biketype;
 	bool cond {false};
