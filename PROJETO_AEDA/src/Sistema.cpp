@@ -710,6 +710,7 @@ void Sistema::removeBike() {
 	cout <<  "-> Infantil" << endl << endl;
 
 
+
 	string nomePP, biketype;
 	bool cond {false};
 	int indexPP {-1};
