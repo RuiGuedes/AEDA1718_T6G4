@@ -1,10 +1,10 @@
-S,Andre,/41/-8.2,0,3,Urbana-C-Campanhã-1-1/1/2100;Urbana-C-Campanhã-1-22/11/2017;Urbana Simples-C-Campanhã-22-2/3/2018;
-R,Jose,/123/123,1,Urbana Simples-B-Ramalde-13-12/2/2018;
-S,Ana,/41.1754/-8.60752,0,0,
-S,Rui,/45/-9,0,0,
-R,Cesar,/2/-9,0,
+S,Andre,/41.4377/-8.2327,0,3,Urbana-C-Campanhã-1-1/1/2100;Urbana-C-Campanhã-1-22/11/2017;Urbana Simples-C-Campanhã-22-2/3/2018;
+R,Jose,/40.1234/-8.9832,1,Urbana Simples-B-Ramalde-13-12/2/2018;
+S,Ana,/39.8532/-8.2315,2,Urbana-A-Paranhos-4-1/7/2017;Urbana Simples-A-Paranhos-2-12/4/2017;2,Corrida-A-Paranhos-13-14/3/2018;Infantil-B-Ramalde-3-13/5/2019;
+S,Rui,/40.1235/-8.12395,2,Urbana Simples-K-Gondomar-10-11/5/2017;Urbana-B-Ramalde-1-7/6/2018;1,Infantil-B-Ramalde-4-2/12/2017;
+R,Cesar,/41.8273/-7.12385,1,Infantil-B-Ramalde-15-2/3/2017;
 S,Ana,/41.235/-8.012,0,0,
 R,Joana,/42.2345/-9.6723,0,
-S,Roberto,/37.23/-8.1723,0,0,
-R,Bernardo,/-28.1312/9.1234,0,
-S,Pedro,/12.1222/-9.7231,0,0,
+S,Roberto,/39.6253/-8.1235,0,0,
+R,Bernardo,/43.9265/-10.9689,0,
+S,Pedro,/42.1233/-9.73217,0,0,

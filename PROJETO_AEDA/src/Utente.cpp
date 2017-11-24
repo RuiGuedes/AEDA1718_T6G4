@@ -326,7 +326,7 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 void Socio::displayHistoric() const{
 
 	if(historico.empty())
-			cout << "Este utente ainda não utilizou o serviço." << endl << endl;
+			cout << "Este utente ainda não utilizou o serviço ou então possui pagamentos pendentes" << endl << endl;
 		else {
 			cout << "Histórico: " << endl << endl;
 
