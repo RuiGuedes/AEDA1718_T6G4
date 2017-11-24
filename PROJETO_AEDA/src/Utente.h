@@ -44,6 +44,7 @@ public:
 	virtual Utilizacao getLastUse() = 0;
 	virtual void addUse(Utilizacao use) = 0;
 	virtual void displayPagPendentes(int index) = 0;
+	virtual void displayHistoric() const = 0;
 	/**
 	 * Destrutor virtual.
 	 */
@@ -53,7 +54,7 @@ public:
 	void alugaBicicleta(Bicicleta* b, Utilizacao ut);
 	Bicicleta* removeBicicleta(vector<int> index_distancias);
 	void updateLocation(int index);
-	virtual void displayHistoric() const = 0;
+
 };
 
 

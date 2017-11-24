@@ -333,6 +333,7 @@ void Socio::displayHistoric() const{
 			for(unsigned int i = 0; i < historico.size(); i++)
 			{
 				historico.at(i).displayUtilizacao();
+				cout << endl;
 			}
 		}
 
