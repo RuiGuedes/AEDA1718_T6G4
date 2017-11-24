@@ -228,6 +228,8 @@ void menu_interface(Sistema &ER){
 			break;
 		case 8:
 			ER.mudaTipoUT(index);
+			cout << "Será agora efetuado o logout do utente para atualização dos dados do mesmo !" << endl << endl;
+			value = 11;
 			break;
 		case 9:
 			ER.getInfo();
@@ -246,7 +248,7 @@ void menu_interface(Sistema &ER){
 
 		system("cls");
 
-	}while(value != 10);
+	}while((value != 10) && (value != 11));
 
 	cout << endl;
 	system("cls");

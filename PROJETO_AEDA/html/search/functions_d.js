@@ -16,5 +16,6 @@ var searchData=
   ['sety',['setY',['../class_localizacao.html#a0a6ddf4814a78c0061b209953934486e',1,'Localizacao']]],
   ['sistema',['Sistema',['../class_sistema.html#a815b07845ef6b03247b239333fe75e28',1,'Sistema']]],
   ['socio',['Socio',['../class_socio.html#a71ea1f6d0146cf86f83325bd9ebbe59a',1,'Socio::Socio()'],['../class_socio.html#ad0c5a88aeb7964f3b2d76f9d5c92fac1',1,'Socio::Socio(string nome, Localizacao spot)']]],
+  ['sortbyid',['sortById',['../_sistema_8cpp.html#a11fc8e0d74db09c744f36d03d8ac2d88',1,'Sistema.cpp']]],
   ['system_5fmanager',['system_Manager',['../class_sistema.html#a344ccc3110caa6d3bcfdad8da3ae3f8a',1,'Sistema']]]
 ];

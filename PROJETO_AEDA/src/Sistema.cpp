@@ -871,6 +871,17 @@ int Sistema::getUtenteIndex(int identificacao) const {
 ////////////
 
 /**
+ *  Ordena o vetor utentes por ordem crescente de ID
+ */
+bool sortById(Utente* u1, Utente* u2)
+{
+	if(u1->getId() < u2->getId())
+		return true;
+
+	return false;
+}
+
+/**
  * Apresenta os passos e pede ao utente que preencha os campos apresentados
  * de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta,
  * numero de horas e data). Chama o metodo da classe utente alugaBicicleta e o metodo
@@ -1289,7 +1300,9 @@ void Sistema::mudaTipoUT(int index){
 			u->setHistoric(hist.at(i));
 		}
 
-		utentes.at(index)=u;
+		utentes.erase(utentes.begin() + index);
+		addNewUtente(u);
+		sort(utentes.begin(), utentes.end(), sortById);
 
 		cout << endl << "Mudança efetuada com sucesso. Agora o seu tipo é: ";
 
@@ -1435,3 +1448,4 @@ void Sistema::displayUtentes() const {
 	cout << endl;
 
 }
+
