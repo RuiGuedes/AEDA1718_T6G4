@@ -388,6 +388,30 @@ void Sistema::adicionaBike() {
 
 	cout << "Adiciona bicicleta: " << endl << endl;
 
+	cout << "Pontos de Partilha:" << endl << endl;
+	cout << setw (20) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
+
+	for (unsigned int i=0 ; i<pontosPartilha.size() ; i++){
+		cout << setw(10) << pontosPartilha.at(i)->getNome();
+		cout << setw(23) << pontosPartilha.at(i)->getLocal().getNome();
+		cout << '(' << setw(9) << pontosPartilha.at(i)->getLocal().getX();
+		cout << "," << setw(9) << pontosPartilha.at(i)->getLocal().getY() << setw(5) << ')';
+
+		vector<int> numtypes = pontosPartilha.at(i)->getNumberOfBikes();
+
+		cout << setw(13) << numtypes.at(0);
+		cout << setw(15) << numtypes.at(1);
+		cout << setw(9) << numtypes.at(2);
+		cout << setw(11) << numtypes.at(3);
+		cout << pontosPartilha.at(i)->getCapacidade();
+
+		cout << endl;
+	}
+
+	cout << endl;
+
 	string biketype;
 	string nomePP;
 	string bikeName = "";
@@ -512,6 +536,31 @@ void Sistema::addPontoPartilha(PontoPartilha* p){
 void Sistema::removePonto() {
 
 	cout << "Remove Ponto de Partilha:" << endl << endl;
+
+	cout << "Pontos de Partilha:" << endl << endl;
+	cout << setw (20) << left << "Nome" << setw (22) << "Local" << setw (13) << "GPS";
+	cout << setw (10) << "Urbana" << setw (18) << "Urbana Simples" <<
+			setw (9) << "Corrida" << setw(10) << "Infantil" << "Capacidade" << endl;
+
+	for (unsigned int i=0 ; i<pontosPartilha.size() ; i++){
+		cout << setw(10) << pontosPartilha.at(i)->getNome();
+		cout << setw(23) << pontosPartilha.at(i)->getLocal().getNome();
+		cout << '(' << setw(9) << pontosPartilha.at(i)->getLocal().getX();
+		cout << "," << setw(9) << pontosPartilha.at(i)->getLocal().getY() << setw(5) << ')';
+
+		vector<int> numtypes = pontosPartilha.at(i)->getNumberOfBikes();
+
+		cout << setw(13) << numtypes.at(0);
+		cout << setw(15) << numtypes.at(1);
+		cout << setw(9) << numtypes.at(2);
+		cout << setw(11) << numtypes.at(3);
+		cout << pontosPartilha.at(i)->getCapacidade();
+
+		cout << endl;
+	}
+
+	cout << endl;
+
 
 	string nomePP;
 	int indexPP {-1};
@@ -652,6 +701,14 @@ void Sistema::removeUtente() {
 void Sistema::removeBike() {
 
 	cout << "Remove bicicleta " << endl << endl;
+
+	cout << "Tipos de bicicleta:" << endl << endl;
+
+	cout <<  "-> Urbana" << endl;
+	cout <<  "-> Urbana Simples" << endl;
+	cout <<  "-> Corrida" << endl;
+	cout <<  "-> Infantil" << endl << endl;
+
 
 	string nomePP, biketype;
 	bool cond {false};
@@ -1233,8 +1290,9 @@ void Sistema::devolveBike(int index) {
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param index indice do utente no vetor de utentes do sistema
+ * @return Retorna 0 caso a operacao seja efetuada, caso contrario retorna 1
  */
-void Sistema::mudaTipoUT(int index){
+int Sistema::mudaTipoUT(int index){
 
 	cout << "Muda tipo de utente" << endl << endl;
 
@@ -1244,13 +1302,13 @@ void Sistema::mudaTipoUT(int index){
 	if(utentes.at(index)->getAvailable() == false)
 	{
 		cout << "Não é possível mudar o tipo de utente uma vez que a bicicleta alugada ainda não foi devolvida" << endl << endl;
-		return;
+		return 1;
 	}
 
 	if(utentes.at(index)->hasPendingPay())
 	{
 		cout << "Neste momento não é possível mudar o tipo de utente visto que existem pagamentos pendentes" << endl << endl;
-		return;
+		return 1;
 	}
 
 	cout << "Neste momento encontra-se definido como: " << tipo << endl << endl;
@@ -1313,9 +1371,12 @@ void Sistema::mudaTipoUT(int index){
 
 	}
 	else
+	{
 		cout << endl << "Mudança cancelada com sucesso " << endl << endl;
+		return 1;
+	}
 
-	return;
+	return 0;
 }
 
 /**

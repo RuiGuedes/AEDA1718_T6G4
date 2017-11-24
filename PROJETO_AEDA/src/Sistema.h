@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Excecoes.h"
 #include "Includes.h"
 #include "Utente.h"
 #include "PontoPartilha.h"
-#include "Exceções.h"
 #include "Localizacao.h"
 
 class Sistema {
@@ -37,7 +37,7 @@ public:
 	//Others
 	void alugaBike(int index);
 	void devolveBike(int index);
-	void mudaTipoUT(int index);
+	int mudaTipoUT(int index);
 	void system_Manager(unsigned int index, string bikeType);
 	void displayNearestPP(int index) const;
 	void displayUtentes() const;

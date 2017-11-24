@@ -227,9 +227,14 @@ void menu_interface(Sistema &ER){
 			ER.displayNearestPP(index);
 			break;
 		case 8:
-			ER.mudaTipoUT(index);
-			cout << "Será agora efetuado o logout do utente para atualização dos dados do mesmo !" << endl << endl;
-			value = 11;
+			value = ER.mudaTipoUT(index);
+			if(value == 0)
+			{
+				cout << "Será agora efetuado o logout do utente para atualização dos dados do mesmo !" << endl << endl;
+				value = 11;
+			}
+			else
+				value = 8;
 			break;
 		case 9:
 			ER.getInfo();
