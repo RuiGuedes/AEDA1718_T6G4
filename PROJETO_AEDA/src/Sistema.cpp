@@ -1423,6 +1423,12 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 	//Necessita de receber bicicletas
 	if(tamanho <= 2)
 	{
+
+		int totalNumberBikes = 0;
+
+		for(unsigned int i = 0; i < pontosPartilha.at(index)->getNumberOfBikes().size(); i++)
+			totalNumberBikes += pontosPartilha.at(index)->getNumberOfBikes().at(i);
+
 		//Distribui bicicletas
 		for(int k = indicesSup5.size() - 1; k >= 0; k--)
 		{
@@ -1433,8 +1439,15 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 
 				Bicicleta* bike = pontosPartilha.at(indicesSup5.at(k))->getBikes().at(value).at(0);
 
-				pontosPartilha.at(index)->adicionaBike(bike);
-				pontosPartilha.at(indicesSup5.at(k))->removeBike(bike->getBikeName());
+				if(totalNumberBikes < pontosPartilha.at(index)->getCapacidade())
+				{
+					pontosPartilha.at(index)->adicionaBike(bike);
+					pontosPartilha.at(indicesSup5.at(k))->removeBike(bike->getBikeName());
+					totalNumberBikes++;
+				}
+				else
+					break;
+
 			}
 
 			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
@@ -1446,6 +1459,11 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 		//Distribui bicicletas
 		for(unsigned int k = 0; k < indicesInf5.size(); k++)
 		{
+			int totalNumberBikes = 0;
+
+			for(unsigned int i = 0; i < pontosPartilha.at(indicesInf5.at(k))->getNumberOfBikes().size(); i++)
+				totalNumberBikes += pontosPartilha.at(indicesInf5.at(k))->getNumberOfBikes().at(i);
+
 			while(pontosPartilha.at(indicesInf5.at(k))->getBikes().at(value).size() < 5)
 			{
 				if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)
@@ -1453,8 +1471,15 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 
 				Bicicleta* bike = pontosPartilha.at(index)->getBikes().at(value).at(0);
 
-				pontosPartilha.at(indicesInf5.at(k))->adicionaBike(bike);
-				pontosPartilha.at(index)->removeBike(bike->getBikeName());
+				if(totalNumberBikes < pontosPartilha.at(indicesInf5.at(k))->getCapacidade())
+				{
+					pontosPartilha.at(indicesInf5.at(k))->adicionaBike(bike);
+					pontosPartilha.at(index)->removeBike(bike->getBikeName());
+					totalNumberBikes++;
+				}
+				else
+					break;
+
 			}
 
 			if(pontosPartilha.at(index)->getBikes().at(value).size() == 5)

@@ -91,8 +91,6 @@ void checkinSys(Sistema & ER){
 					break;
 				}
 			}
-
-			//f_utentes.ignore(100,'\n');
 		}
 	}
 
