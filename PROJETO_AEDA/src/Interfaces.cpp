@@ -358,6 +358,302 @@ void oficina_interface(Sistema &ER) {
 
 }
 
+void bicicleta_interface(Sistema &ER) {
+
+	system("cls");
+
+	string option;
+	int value {};
+
+	do
+	{
+		mensagemInicial();
+
+		cout << "Bicicletas" << endl << endl;
+
+		cout << "1 - Adiciona bicicleta" << endl;
+		cout << "2 - Remove bicicleta" << endl;
+		cout << "3 - Abater bicicletas" << endl;
+		cout << "4 - Consultar bicicletas para abates" << endl;;
+		cout << "5 - Voltar" << endl;
+
+		while(1)
+		{
+			try {
+
+				cout << endl << "Introduza uma opção (1-5): ";
+				cin >> option;
+
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+
+				value = stoi(option);
+
+				if(value < 1 || value > 5)
+					throw OpcaoInvalida<int>(value);
+
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+
+		system("cls");
+		mensagemInicial();
+
+		//Opcões possíveis apresentadas no menu
+		switch (value)
+		{
+		case 1:
+			ER.adicionaBike();
+			break;
+		case 2:
+			ER.removeBike();
+			break;
+		case 3:
+			/*
+			 * Remover uma bicicleta da tabela de dispersão / Abate bicicleta
+			 */
+			break;
+		case 4:
+			/*
+			 * Consulta bicicletas para abate de forma geral.
+			 * Consulta bicicletas para abate por data de abate.
+			 */
+			break;
+		case 5:
+			break;
+		}
+
+		system("cls");
+
+	}while(value != 5);
+
+	return;
+}
+
+void ponto_partilha_interface(Sistema &ER) {
+
+	system("cls");
+
+	string option;
+	int value {};
+
+	do
+	{
+		mensagemInicial();
+
+		cout << "Pontos de Partilha" << endl << endl;
+
+		cout << "1 - Adiciona ponto partilha" << endl;
+		cout << "2 - Remove ponto de partilha" << endl;
+		cout << "3 - Voltar" << endl;
+
+		while(1)
+		{
+			try {
+
+				cout << endl << "Introduza uma opção (1-3): ";
+				cin >> option;
+
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+
+				value = stoi(option);
+
+				if(value < 1 || value > 3)
+					throw OpcaoInvalida<int>(value);
+
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+
+		system("cls");
+		mensagemInicial();
+
+		//Opcões possíveis apresentadas no menu
+		switch (value)
+		{
+		case 1:
+			ER.addPontoPartilha();
+			break;
+		case 2:
+			ER.removePonto();
+			break;
+		case 3:
+			break;
+		}
+
+		system("cls");
+
+	}while(value != 3);
+
+	return;
+}
+
+void utentes_interface(Sistema &ER) {
+
+	system("cls");
+
+	string option;
+	int value {};
+
+	do
+	{
+		mensagemInicial();
+
+		cout << "Utentes" << endl << endl;
+
+		cout << "1 - Remove utente" << endl;
+		cout << "2 - Voltar" << endl;
+
+		while(1)
+		{
+			try {
+
+				cout << endl << "Introduza uma opção (1-2): ";
+				cin >> option;
+
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+
+				value = stoi(option);
+
+				if(value < 1 || value > 2)
+					throw OpcaoInvalida<int>(value);
+
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+
+		system("cls");
+		mensagemInicial();
+
+		//Opcões possíveis apresentadas no menu
+		switch (value)
+		{
+		case 1:
+			ER.removeUtente();
+			break;
+		case 2:
+			break;
+		}
+
+		system("cls");
+
+	}while(value != 2);
+
+	return;
+}
+
+void lojas_interface(Sistema &ER) {
+
+	system("cls");
+
+	string option;
+	int value {};
+
+	do
+	{
+		mensagemInicial();
+
+		cout << "Lojas" << endl << endl;
+
+		cout << "1 - Adiciona loja" << endl;
+		cout << "2 - Remove loja" << endl;
+		cout << "3 - Informação sobre uma determinada loja" << endl;
+		cout << "4 - Voltar" << endl;
+
+		while(1)
+		{
+			try {
+
+				cout << endl << "Introduza uma opção (1-4): ";
+				cin >> option;
+
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+
+				value = stoi(option);
+
+				if(value < 1 || value > 4)
+					throw OpcaoInvalida<int>(value);
+
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+
+		system("cls");
+		mensagemInicial();
+
+		//Opcões possíveis apresentadas no menu
+		switch (value)
+		{
+		case 1:
+			ER.removeUtente();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+
+		system("cls");
+
+	}while(value != 4);
+
+	return;
+}
+
+
 /**
  * Primeiramente pede ao utilizador que insira a senha ("1234") para aceder a opcoes administrativas.
  * Apresenta no ecra os casos de utilizacao para aministrador escolher a opcao que pretende (7 opcoes no total).
@@ -418,23 +714,20 @@ void admin_interface(Sistema &ER) {
 
 		cout << "Administração" << endl << endl;
 
-		cout << "1  - Adiciona bicicleta" << endl;
-		cout << "2  - Adiciona ponto partilha" << endl;
-		cout << "3  - Remove bicicleta" << endl;
-		cout << "4  - Remove ponto de partilha" << endl;
-		cout << "5  - Remove utente" << endl;
-		cout << "6  - Oficina" << endl;
-		cout << "7  - Abater bicicletas" << endl;
-		cout << "8  - Consultar bicicletas para abates" << endl;
-		cout << "9  - Informações sobre ECO_RIDES" << endl;
-		cout << "10 - Sair" << endl;
+		cout << "1 - Bicicletas" << endl;
+		cout << "2 - Pontos de Partilha" << endl;
+		cout << "3 - Utentes" << endl;
+		cout << "4 - Lojas" << endl;
+		cout << "5 - Oficina" << endl;
+		cout << "6 - Informações sobre ECO_RIDES" << endl;
+		cout << "7 - Sair" << endl;
 
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-10): ";
+				cout << endl << "Introduza uma opção (1-7): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -442,7 +735,7 @@ void admin_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 10)
+				if(value < 1 || value > 7)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -468,47 +761,33 @@ void admin_interface(Sistema &ER) {
 		switch (value)
 		{
 		case 1:
-			ER.adicionaBike();
+			bicicleta_interface(ER);
 			break;
 		case 2:
-			ER.addPontoPartilha();
+			ponto_partilha_interface(ER);
 			break;
 		case 3:
-			ER.removeBike();
+			utentes_interface(ER);
 			break;
 		case 4:
-			ER.removePonto();
+			lojas_interface(ER);
 			break;
 		case 5:
-			ER.removeUtente();
-			break;
-		case 6:
 			oficina_interface(ER);
 			break;
-		case 7:
-			/*
-			 * Remover uma bicicleta da tabela de dispersão / Abate bicicleta
-			 */
-			break;
-		case 8:
-			/*
-			 * Consulta bicicletas para abate de forma geral.
-			 * Consulta bicicletas para abate por data de abate.
-			 */
-			break;
-		case 9:
+		case 6:
 			ER.getInfo();
 			break;
-		case 10:
+		case 7:
 			cout << endl;
 			break;
 		}
-		if((value != 10) && (value != 6))
+		if(value == 6)
 			system("pause");
 
 		system("cls");
 
-	}while(value != 10);
+	}while(value != 7);
 
 	system("cls");
 	return;
