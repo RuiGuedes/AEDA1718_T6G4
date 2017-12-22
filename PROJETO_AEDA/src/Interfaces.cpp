@@ -165,15 +165,17 @@ void menu_interface(Sistema &ER){
 		cout << "5  - Efetuar pagamento das mensalidades" << endl;
 		cout << "6  - Atualiza localização" << endl;
 		cout << "7  - Pontos de partilha mais próximos" << endl;
-		cout << "8  - Mudar o tipo de utente" << endl;
-		cout << "9  - Informações sobre ECO_RIDES" << endl;
-		cout << "10 - Logout" << endl << endl;
+		cout << "8  - Comprar bicicletas" << endl;
+		cout << "9  - Lojas com maior reputação" << endl;
+		cout << "10 - Mudar o tipo de utente" << endl;
+		cout << "11 - Informações sobre ECO_RIDES" << endl;
+		cout << "12 - Logout" << endl << endl;
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-10): ";
+				cout << endl << "Introduza uma opção (1-12): ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 
@@ -182,7 +184,7 @@ void menu_interface(Sistema &ER){
 
 				value = stoi(option);
 
-				if(value < 1 || value > 10)
+				if(value < 1 || value > 12)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -227,19 +229,30 @@ void menu_interface(Sistema &ER){
 			ER.displayNearestPP(index);
 			break;
 		case 8:
+			/*
+			 * 	Comprar uma certa quantidade de bicicletas na loja com maior reputação e com stock disponível.
+			 * 	A cada compra deve ser atribuída uma classificação (0-5) da satisfação para atualizar a reputação da respetiva loja.
+			 */
+			break;
+		case 9:
+			/*
+			 *	Deve ser possível listar o top 5 das lojas com maior reputação.
+			 */
+			break;
+		case 10:
 			value = ER.mudaTipoUT(index);
 			if(value == 0)
 			{
 				cout << "Será agora efetuado o logout do utente para atualização dos dados do mesmo !" << endl << endl;
-				value = 11;
+				value = 13;
 			}
 			else
-				value = 8;
+				value = 10;
 			break;
-		case 9:
+		case 11:
 			ER.getInfo();
 			break;
-		case 10:
+		case 12:
 			if(!utente->getAvailable()) {
 				cout << endl << "Antes de efetuar logout o utente necessita primeiramente de devolver a bicicleta !" << endl;
 				value = -1;
@@ -248,12 +261,12 @@ void menu_interface(Sistema &ER){
 			break;
 		}
 
-		if(value != 10)
+		if(value != 12)
 			system("pause");
 
 		system("cls");
 
-	}while((value != 10) && (value != 11));
+	}while((value != 12) && (value != 13));
 
 	cout << endl;
 	system("cls");
