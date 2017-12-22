@@ -260,6 +260,91 @@ void menu_interface(Sistema &ER){
 	return;
 }
 
+void oficina_interface(Sistema &ER) {
+
+	system("cls");
+
+	string option;
+	int value {};
+
+	do
+	{
+		mensagemInicial();
+
+		cout << "Oficina" << endl << endl;
+
+		cout << "1 - Comprar peças" << endl;
+		cout << "2 - Verificar qual o fornecedor que vendeu uma determinada peça ao preço mais baixo" << endl;
+		cout << "3 - Adicionar peças" << endl;
+		cout << "4 - Remover peças" << endl;
+		cout << "5 - Informações acerca dos fornecedores" << endl;
+		cout << "6 - Voltar" << endl;
+
+
+		while(1)
+		{
+			try {
+
+				cout << endl << "Introduza uma opção (1-6): ";
+				cin >> option;
+
+				if(valid_number(option) == false)
+					throw OpcaoInvalida<string>(option);
+
+				value = stoi(option);
+
+				if(value < 1 || value > 6)
+					throw OpcaoInvalida<int>(value);
+
+				break;
+			}
+			catch (OpcaoInvalida<int> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+			catch (OpcaoInvalida<string> &op){
+
+				cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+			}
+		};
+
+		system("cls");
+		mensagemInicial();
+
+		//Opcões possíveis apresentadas no menu
+		switch (value)
+		{
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+			break;
+		case 5:
+
+			break;
+		case 6:
+			break;
+		}
+
+		system("cls");
+
+	}while(value != 6);
+
+	return;
+
+}
+
 /**
  * Primeiramente pede ao utilizador que insira a senha ("1234") para aceder a opcoes administrativas.
  * Apresenta no ecra os casos de utilizacao para aministrador escolher a opcao que pretende (7 opcoes no total).
@@ -325,15 +410,16 @@ void admin_interface(Sistema &ER) {
 		cout << "3 - Remove bicicleta" << endl;
 		cout << "4 - Remove ponto de partilha" << endl;
 		cout << "5 - Remove utente" << endl;
-		cout << "6 - Informações sobre ECO_RIDES" << endl;
-		cout << "7 - Sair" << endl;
+		cout << "6 - Oficina" << endl;
+		cout << "7 - Informações sobre ECO_RIDES" << endl;
+		cout << "8 - Sair" << endl;
 
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-7): ";
+				cout << endl << "Introduza uma opção (1-8): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -341,7 +427,7 @@ void admin_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 7)
+				if(value < 1 || value > 8)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -382,18 +468,21 @@ void admin_interface(Sistema &ER) {
 			ER.removeUtente();
 			break;
 		case 6:
-			ER.getInfo();
+			oficina_interface(ER);
 			break;
 		case 7:
+			ER.getInfo();
+			break;
+		case 8:
 			cout << endl;
 			break;
 		}
-		if(value != 7)
+		if((value != 8) && (value != 6))
 			system("pause");
 
 		system("cls");
 
-	}while(value != 7);
+	}while(value != 8);
 
 	system("cls");
 	return;
