@@ -418,21 +418,23 @@ void admin_interface(Sistema &ER) {
 
 		cout << "Administração" << endl << endl;
 
-		cout << "1 - Adiciona bicicleta" << endl;
-		cout << "2 - Adiciona ponto partilha" << endl;
-		cout << "3 - Remove bicicleta" << endl;
-		cout << "4 - Remove ponto de partilha" << endl;
-		cout << "5 - Remove utente" << endl;
-		cout << "6 - Oficina" << endl;
-		cout << "7 - Informações sobre ECO_RIDES" << endl;
-		cout << "8 - Sair" << endl;
+		cout << "1  - Adiciona bicicleta" << endl;
+		cout << "2  - Adiciona ponto partilha" << endl;
+		cout << "3  - Remove bicicleta" << endl;
+		cout << "4  - Remove ponto de partilha" << endl;
+		cout << "5  - Remove utente" << endl;
+		cout << "6  - Oficina" << endl;
+		cout << "7  - Abater bicicletas" << endl;
+		cout << "8  - Consultar bicicletas para abates" << endl;
+		cout << "9  - Informações sobre ECO_RIDES" << endl;
+		cout << "10 - Sair" << endl;
 
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-8): ";
+				cout << endl << "Introduza uma opção (1-10): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -440,7 +442,7 @@ void admin_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 8)
+				if(value < 1 || value > 10)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -484,18 +486,29 @@ void admin_interface(Sistema &ER) {
 			oficina_interface(ER);
 			break;
 		case 7:
-			ER.getInfo();
+			/*
+			 * Remover uma bicicleta da tabela de dispersão / Abate bicicleta
+			 */
 			break;
 		case 8:
+			/*
+			 * Consulta bicicletas para abate de forma geral.
+			 * Consulta bicicletas para abate por data de abate.
+			 */
+			break;
+		case 9:
+			ER.getInfo();
+			break;
+		case 10:
 			cout << endl;
 			break;
 		}
-		if((value != 8) && (value != 6))
+		if((value != 10) && (value != 6))
 			system("pause");
 
 		system("cls");
 
-	}while(value != 8);
+	}while(value != 10);
 
 	system("cls");
 	return;

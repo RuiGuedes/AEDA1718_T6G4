@@ -7,12 +7,14 @@
 #include "Localizacao.h"
 #include "Oficina.h"
 #include "Loja.h"
+#include "Junkyard.h"
 
 class Sistema {
 	vector<PontoPartilha* > pontosPartilha;		/**< Pontos de partilha referentes ao sistema. */
 	vector<Utente* > utentes;					/**< Utentes referentes ao sistema. */
 	Oficina repairShop;
 	priority_queue<Loja> stores;
+	tabHAbates junkyard;
 public:
 	/**
 	 *  Construtor padrao da classe Sistema
