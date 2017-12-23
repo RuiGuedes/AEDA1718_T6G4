@@ -377,6 +377,131 @@ void Sistema::addNewUtente() {
 	return;
 }
 
+void Sistema::addStore() {
+
+	cout << "Adiciona Loja:" << endl << endl;
+
+	string locname;
+	int value {};
+	string option {};
+	vector<Localizacao> locations;
+	Localizacao* spot = new Localizacao { };
+	unsigned int capacidade {};
+	vector<unsigned int> stock(4);
+
+	cin.ignore(1000,'\n');
+
+	cout << endl << "Localização: " << endl << endl;
+
+	//Verifica quais as localizacoes disponiveis para uma loja
+	for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+	{
+		priority_queue<Loja> tmp = stores;
+		bool exist {false};
+
+		while(!tmp.empty())
+		{
+			if((tmp.top().getLocal()->getX() == pontosPartilha.at(i)->getLocal().getX()) &&
+					(tmp.top().getLocal()->getY() == pontosPartilha.at(i)->getLocal().getY()))
+			{
+				exist = true;
+			}
+
+			tmp.pop();
+		}
+
+		if(exist == false)
+			locations.push_back(pontosPartilha.at(i)->getLocal());
+
+	}
+
+	//Faz display das localizacoes disponiveis para uma loja
+	cout << "Localizações disponiveis: " << endl;
+	for(unsigned int i = 0; i < locations.size(); i++)
+		cout << i+1 << " - " << locations.at(i).getNome() << endl;
+
+	//Verifica qual a localizacao da loja
+	while(1)
+	{
+		try {
+
+			cout << endl << "Introduza uma opção (1-" << locations.size() << "): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > (int)(locations.size()))
+				throw OpcaoInvalida<int>(value);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	//Adiciona a nova localização da loja
+	spot->setNome(locations.at(value - 1).getNome());
+	spot->setX(locations.at(value - 1).getX());
+	spot->setY(locations.at(value - 1).getY());
+
+	//Verifica a capacidade total da loja
+	while(1)
+	{
+		try{
+			cout << endl << "Capacidade [20,30]: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			capacidade = stoi(option);
+
+			if((capacidade < 20) || (capacidade > 30))
+				throw OpcaoInvalida<string>(option);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Capacidade inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	value = capacidade;
+	int tmp_index {0};
+
+	while(value != 0)
+	{
+		stock.at(tmp_index)++;
+
+		if(tmp_index == 3)
+			tmp_index = 0;
+		else
+			tmp_index++;
+
+		value--;
+	}
+
+	Loja store(spot,capacidade,stock);
+	stores.push(store);
+
+	cout << endl << "Nova loja adicionada em " << spot->getNome() << " com sucesso !" << endl << endl;
+}
+
 /**
  * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
  * pretende adicionar. Cria uma bicicleta com do tipo pedido e adionar-a ao ponto de partilha.
@@ -789,6 +914,80 @@ void Sistema::removeBike() {
 
 }
 
+void Sistema::removeStore() {
+
+	cout << "Remove Loja:" << endl << endl;
+
+	if(stores.empty())
+	{
+		cout << "Neste momento não existem lojas para serem removidas !" << endl << endl;
+		return;
+	}
+
+	cout << "Lojas disponiveis:" << endl;
+
+	priority_queue<Loja> tmp = stores;
+	int tmp_index {1};
+	string option,locname;
+	int value {};
+
+	//Verifica as lojas disponveis para remocao
+	while(!tmp.empty())
+	{
+		cout << tmp_index << " - Loja em " << tmp.top().getLocal()->getNome() << endl;
+		tmp_index++;
+		tmp.pop();
+	}
+
+	//Verifica qual a loja a ser removida
+	while(1)
+	{
+		try {
+			cout << endl << "Introduza uma opção (1-" << (tmp_index - 1) << "): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > (tmp_index - 1))
+				throw OpcaoInvalida<int>(value);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	tmp_index = 1;
+
+	//Remove loja
+	while(!stores.empty())
+	{
+		if(tmp_index != value)
+			tmp.push(stores.top());
+		else
+			locname = stores.top().getLocal()->getNome();
+
+		tmp_index++;
+		stores.pop();
+	}
+
+	stores = tmp;
+	cout << endl << "Loja em " << locname << " removida com sucesso !" << endl << endl;
+
+}
 
 /////////////////
 // METODOS GET //
@@ -1536,3 +1735,86 @@ void Sistema::displayUtentes() const {
 
 }
 
+void Sistema::displayStoreInfo() const {
+
+	if(stores.empty())
+	{
+		cout << "Neste momento não existe nenhuma loja !" << endl << endl;
+		return;
+	}
+
+	cout << "Informação sobre uma determinada loja" << endl << endl;
+
+	cout << "Lojas disponiveis:" << endl;
+
+	priority_queue<Loja> tmp = stores;
+	int tmp_index {1};
+	string option,locname;
+	int value {};
+
+	//Verifica as lojas disponveis para remocao
+	while(!tmp.empty())
+	{
+		cout << tmp_index << " - Loja em " << tmp.top().getLocal()->getNome() << endl;
+		tmp_index++;
+		tmp.pop();
+	}
+
+	//Verifica qual a loja selecionada
+	while(1)
+	{
+		try {
+			cout << endl << "Introduza uma opção (1-" << (tmp_index - 1) << "): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > (tmp_index - 1))
+				throw OpcaoInvalida<int>(value);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	tmp_index = 1;
+	tmp = stores;
+
+	//Remove loja
+	while(!tmp.empty())
+	{
+		if(tmp_index == value)
+		{
+			cout << "   Local" <<  "GPS" << "Reputação" << " Capacidade" <<endl;
+
+			cout << endl << endl << "Stock:" << endl << endl;
+
+			cout << setw(20) << left << "Tipo de bicicleta" << "Unidades" << endl;
+			cout << setw(26) << "Urbana" << tmp.top().getStock(0) << endl <<
+					setw(26) << "Urbana Simples" << tmp.top().getStock(1) << endl <<
+					setw(26) << "Corrida" << tmp.top().getStock(2) << endl <<
+					setw(26) << "Infantil" << tmp.top().getStock(3) << endl << endl;
+
+
+		}
+
+		tmp_index++;
+		tmp.pop();
+	}
+
+	cout << endl;
+}

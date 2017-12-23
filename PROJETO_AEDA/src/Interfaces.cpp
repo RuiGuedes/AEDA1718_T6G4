@@ -636,15 +636,19 @@ void lojas_interface(Sistema &ER) {
 		switch (value)
 		{
 		case 1:
-			ER.removeUtente();
+			ER.addStore();
 			break;
 		case 2:
+			ER.removeStore();
 			break;
 		case 3:
+			ER.displayStoreInfo();
 			break;
 		case 4:
 			break;
 		}
+		if(value != 4)
+			system("pause");
 
 		system("cls");
 

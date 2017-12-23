@@ -1,7 +1,7 @@
 #include "Loja.h"
 
-
 Loja::Loja() {
+	local = new Localizacao();
 	vector<unsigned int> init;
 	stock = init;
 	capacity = 0;
@@ -9,7 +9,7 @@ Loja::Loja() {
 	reputation = 0;
 }
 
-Loja::Loja(Localizacao spot, unsigned int capacity, vector<unsigned int> stock) {
+Loja::Loja(Localizacao* spot, unsigned int capacity, vector<unsigned int> stock) {
 	local = spot;
 	this->capacity = capacity;
 	this->stock = stock;
@@ -37,7 +37,9 @@ unsigned int Loja::getStock(unsigned int it) const {
 	return stock.at(it);
 }
 
-
+Localizacao* Loja::getLocal() const {
+	return local;
+}
 /////////////////
 // METODOS SET //
 /////////////////
