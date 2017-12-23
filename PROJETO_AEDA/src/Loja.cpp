@@ -22,7 +22,11 @@ Loja::Loja(Localizacao* spot, unsigned int capacity, vector<unsigned int> stock)
 /////////////////
 
 double Loja::getReputation() const {
-	return ((double)reputation/numberOpinions);
+
+	if(numberOpinions != 0)
+		return ((double)reputation/numberOpinions);
+
+	return 0;
 }
 
 unsigned int Loja::getNumberOpinions() const {
@@ -56,13 +60,18 @@ void Loja::setCapacity(unsigned int capacity) {
 	this->capacity = capacity;
 }
 
+void Loja::setStock(int index, int bikes) {
+
+	this->stock.at(index) = stock.at(index) - bikes;
+}
+
 ////////////
 // OTHERS //
 ////////////
 
 bool Loja::operator<(const Loja& l1) const {
 
-	if(this->reputation > l1.getReputation())
+	if(this->reputation < l1.getReputation())
 		return true;
 
 	return false;

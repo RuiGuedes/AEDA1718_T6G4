@@ -15,6 +15,7 @@ protected:
 	Bicicleta* bike;				/**< Bicicleta que o utente esta a usar, caso nao esteja a usar nenhuma, o valor de bike = 0. */
 	vector<Utilizacao> historico;	/**< Utilizacoes liquidadas do utente. */
 	bool disponivel = true;			/**< Se o utente esta a usar uma bicicleta disponivel = false, caso contrario disponivel = true. */
+	vector<pair<Data,string>> historicoCompras;
 public:
 	Utente();
 	explicit Utente(string nome, Localizacao spot);
@@ -37,6 +38,7 @@ public:
 	void setAvailable();
 	void setBike(Bicicleta* bike);
 	void setHistoric(Utilizacao ut);
+	void setHistoricoCompras(pair<Data,string> info);
 
 	//Virtual methods
 	virtual void efetuaPag(int index) = 0;

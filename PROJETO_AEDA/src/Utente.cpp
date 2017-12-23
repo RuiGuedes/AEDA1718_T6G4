@@ -109,7 +109,7 @@ void Utente::updateLocation(int index) {
 			coordY = stod(option);
 
 			if((coordX < -180) || (coordX > 180))
-					throw OpcaoInvalida<double>(coordY);
+				throw OpcaoInvalida<double>(coordY);
 			break;
 		}
 		catch (OpcaoInvalida<string> &op){
@@ -244,7 +244,9 @@ void Utente::setHistoric(Utilizacao ut) {
 	this->historico.push_back(ut);
 }
 
-
+void Utente::setHistoricoCompras(pair<Data,string> info) {
+	historicoCompras.push_back(info);
+}
 //////////////////////
 //// CLASSE SOCIO ////
 //////////////////////
@@ -326,16 +328,16 @@ void Socio::pagaMensalidade(unsigned int ano, unsigned int mes) {
 void Socio::displayHistoric() const{
 
 	if(historico.empty())
-			cout << "Este utente ainda não utilizou o serviço ou então possui pagamentos pendentes" << endl << endl;
-		else {
-			cout << "Histórico: " << endl << endl;
+		cout << "Este utente ainda não utilizou o serviço ou então possui pagamentos pendentes" << endl << endl;
+	else {
+		cout << "Histórico: " << endl << endl;
 
-			for(unsigned int i = 0; i < historico.size(); i++)
-			{
-				historico.at(i).displayUtilizacao();
-				cout << endl;
-			}
+		for(unsigned int i = 0; i < historico.size(); i++)
+		{
+			historico.at(i).displayUtilizacao();
+			cout << endl;
 		}
+	}
 
 	return;
 }

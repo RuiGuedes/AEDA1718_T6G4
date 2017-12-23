@@ -45,6 +45,7 @@ public:
 	//Others
 	void alugaBike(int index);
 	void devolveBike(int index);
+	void compraBike(int index);
 	int mudaTipoUT(int index);
 	void system_Manager(unsigned int index, string bikeType);
 	void displayNearestPP(int index) const;

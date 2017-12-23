@@ -379,7 +379,7 @@ void Sistema::addNewUtente() {
 
 void Sistema::addStore() {
 
-	cout << "Adiciona Loja:" << endl << endl;
+	cout << "Adiciona Loja:" << endl;
 
 	string locname;
 	int value {};
@@ -1483,6 +1483,313 @@ void Sistema::devolveBike(int index) {
 	return;
 }
 
+void Sistema::compraBike(int index) {
+
+	if(stores.empty())
+	{
+		cout << "Neste momento não é possivel efetuar nenhuma compra visto ainda não existir nenhuma loja" << endl << endl;
+		return;
+	}
+
+	cout << "Compra bicicleta" << endl << endl;
+
+	cout << "Selecione o tipo de bicicleta pretendida: " << endl << endl;
+	string option, bikeType, locname;
+	int quantidade {}, value {}, indicator {};
+	Data d1 {};
+	bool condition {false};
+
+	cout << "Tipos de bicicleta: " << endl;
+	cout << "     1 - Urbana" << endl;
+	cout << "     2 - Urbana Simples" << endl;
+	cout << "     3 - Corrida" << endl;
+	cout << "     4 - Infantil" << endl << endl;
+
+	//Verifica o tipo de bicicleta(s) que pretende comprar
+	while(1)
+	{
+		try{
+			cout << endl << "Introduza uma opção [1-4]: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			if(value < 1 || value > 4)
+				throw OpcaoInvalida<int>(value);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Opção inválida (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	//Verifica o tipo de bicicleta selecionada
+	if(value == 1)
+		bikeType = "Urbana";
+	else if(value == 2)
+		bikeType = "Urbana Simples";
+	else if(value == 3)
+		bikeType = "Corrida";
+	else
+		bikeType = "Infantil";
+
+	//Indicador da posicao do tipo de bicicleta no vetor de inteiros de "loja"
+	indicator = value - 1;
+
+	//Verifica o numero de bicicletas que pretende comprar
+	while(1)
+	{
+		try{
+			cout << endl << "Quantidade [1-5]: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			quantidade = stoi(option);
+			if(quantidade < 1 || quantidade > 5)
+				throw OpcaoInvalida<int>(quantidade);
+
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Quantidade inválida (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Quantidade inválida (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	//Percorrer todas as lojas disponiveis e verificar quais possuem stock para a compra
+	priority_queue<Loja> tmp = stores;
+
+	while(!tmp.empty())
+	{
+		if(tmp.top().getStock(indicator) >= (unsigned int)quantidade) {
+			if(condition == false)
+				condition = true;
+		}
+		tmp.pop();
+	}
+
+	if(condition == false)
+	{
+		cout << endl << "Neste momento nenhuma das lojas existentes possui stock suficiente para satisfazer a presente compra" << endl << endl;
+		return;
+	}
+	else
+		condition = false;
+
+	cout << endl << "Data de compra:" << endl;
+
+	//Executa até obter um ano válido
+	while(1)
+	{
+		try{
+			cout << endl << "Ano [2017 ->]: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			if(value < 2017)
+				throw OpcaoInvalida<int>(value);
+
+			d1.setAno(value);
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Ano inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	//Executa até obter um mês válido
+	while(1)
+	{
+		try{
+			cout << endl << "Mês [1-12]: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			if(value < 1 || value > 12)
+				throw OpcaoInvalida<int>(value);
+
+			d1.setMes(value);
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Mês inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	/* Executa até obter um dia válido
+	 * Considera que fevereiro tem 28 dias
+	 */
+	while(1)
+	{
+		try{
+			cout << endl << "Dia: ";
+			cin >> option;
+			cin.ignore(1000,'\n');
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+			if(d1.getMes() == 2)
+			{
+				if(value < 1 || value > 28)
+					throw OpcaoInvalida<int>(value);
+
+				d1.setDia(value);
+				break;
+			}
+			else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
+					(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+			{
+				if(value < 1 || value > 31)
+					throw OpcaoInvalida<int>(value);
+
+				d1.setDia(value);
+				break;
+			}
+			else
+			{
+				if(value < 1 || value > 30)
+					throw OpcaoInvalida<int>(value);
+
+				d1.setDia(value);
+				break;
+			}
+		}
+		catch (OpcaoInvalida<int> &op){
+
+			cout << "Dia inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+		catch (OpcaoInvalida<string> &op){
+
+			cout << "Dia inválido (" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	};
+
+	//Percorrer todas as lojas disponiveis e verificar quais possuem stock para a compra
+
+	while(!stores.empty())
+	{
+
+		if(stores.top().getStock(indicator) >= (unsigned int)quantidade)
+		{
+			if(condition == false)
+			{
+				condition = true;
+				Loja tmp_store = stores.top();
+				tmp_store.setStock(indicator,quantidade);
+
+				//Atribui uma classificao á loja de 0 a 5
+				while(1)
+				{
+					try{
+						cout << endl << "Classificação [1-5]: ";
+						cin >> option;
+						cin.ignore(1000,'\n');
+						if(valid_number(option) == false)
+							throw OpcaoInvalida<string>(option);
+
+						value = stoi(option);
+						if(value < 1 || value > 5)
+							throw OpcaoInvalida<int>(value);
+
+						break;
+					}
+					catch (OpcaoInvalida<int> &op){
+
+						cout << "Classificação inválida (" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+					}
+					catch (OpcaoInvalida<string> &op){
+
+						cout << "Classificação inválida (" << op.opcao << ") ! Tente novamente." << endl;
+						cin.clear();
+					}
+				};
+				locname = tmp_store.getLocal()->getNome();
+				tmp_store.setNumberOpinions();
+				tmp_store.setReputation((unsigned int)value);
+				tmp.push(tmp_store);
+			}
+			else
+				tmp.push(stores.top());
+		}
+		else
+			tmp.push(stores.top());
+
+		stores.pop();
+	}
+
+	//Atualiza a fila de prioridade stores
+	stores = tmp;
+
+	pair<Data, string> info { };
+	info.first = d1;
+	info.second = bikeType;
+
+	utentes.at(index)->setHistoricoCompras(info);
+
+	system("cls");
+	mensagemInicial();
+	cout << "Resumo da compra:" << endl << endl;
+
+	cout << "Local: " << locname << endl;
+	cout << "Data (DD:MM:AAAA): " << d1.getDia() << "/" << d1.getMes() << "/" << d1.getAno() << endl;
+	cout << "Tipo de bicicleta: " << bikeType << endl;
+	cout << "Quantidade: " << quantidade << endl;
+	cout << "Preço: ";
+
+	if(indicator == 0)
+		cout << "150€" << endl << endl;
+	else if(indicator == 1)
+		cout << "200€" << endl << endl;
+	else if(indicator == 2)
+		cout << "250€" << endl << endl;
+	else
+		cout << "100€" << endl << endl;
+
+	cout << "Bicicleta do tipo " << bikeType << " comprada com sucesso !" << endl << endl;
+}
+
 /**
  * Apresenta o tipo de utente atual e pede confirmacao da decisao de mudar de tipo de utente.
  * Se o utente Socio tentar mudar o tipo de utente e ainda tiver pagamentos pendentes e-lhe
@@ -1791,6 +2098,10 @@ void Sistema::displayStoreInfo() const {
 		}
 	};
 
+	system("cls");
+	mensagemInicial();
+	cout << "Informação sobre uma determinada loja" << endl << endl;
+
 	tmp_index = 1;
 	tmp = stores;
 
@@ -1799,16 +2110,18 @@ void Sistema::displayStoreInfo() const {
 	{
 		if(tmp_index == value)
 		{
-			cout << "   Local" <<  "GPS" << "Reputação" << " Capacidade" <<endl;
+			cout << "Local: " << tmp.top().getLocal()->getNome() << endl << endl;
+			cout << "GPS: " << "(" << tmp.top().getLocal()->getX() << "," << tmp.top().getLocal()->getY() << ")" << endl << endl;
+			cout << "Reputação: " << tmp.top().getReputation() << endl << endl;
+			cout << "Capacidade: " << tmp.top().getCapacity();
 
 			cout << endl << endl << "Stock:" << endl << endl;
 
-			cout << setw(20) << left << "Tipo de bicicleta" << "Unidades" << endl;
+			cout << setw(22) << left << "Tipo de bicicleta" << "Unidades" << endl;
 			cout << setw(26) << "Urbana" << tmp.top().getStock(0) << endl <<
 					setw(26) << "Urbana Simples" << tmp.top().getStock(1) << endl <<
 					setw(26) << "Corrida" << tmp.top().getStock(2) << endl <<
 					setw(26) << "Infantil" << tmp.top().getStock(3) << endl << endl;
-
 
 		}
 

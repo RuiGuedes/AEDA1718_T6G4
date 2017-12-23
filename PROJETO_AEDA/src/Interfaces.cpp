@@ -230,9 +230,10 @@ void menu_interface(Sistema &ER){
 			break;
 		case 8:
 			/*
-			 * 	Comprar uma certa quantidade de bicicletas na loja com maior reputação e com stock disponível.
-			 * 	A cada compra deve ser atribuída uma classificação (0-5) da satisfação para atualizar a reputação da respetiva loja.
+			 * 	Comprar uma certa quantidade de bicicletas na loja com maior reputação e com stock disponível. CHECK
+			 * 	A cada compra deve ser atribuída uma classificação (0-5) da satisfação para atualizar a reputação da respetiva loja. CHECK
 			 */
+			ER.compraBike(index);
 			break;
 		case 9:
 			/*

@@ -24,6 +24,7 @@ public:
 	void setReputation(unsigned int reputation);
 	void setNumberOpinions();
 	void setCapacity(unsigned int capacity);
+	void setStock(int index, int bikes);
 
 	//Others
 	bool operator<(const Loja& l1) const;
