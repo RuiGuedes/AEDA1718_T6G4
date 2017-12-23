@@ -28,4 +28,5 @@ public:
 
 	//Others
 	bool operator<(const Loja& l1) const;
+	void checkStock(int index);
 };

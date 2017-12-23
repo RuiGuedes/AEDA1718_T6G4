@@ -133,6 +133,35 @@ void Utente::updateLocation(int index) {
 	return;
 }
 
+void Utente::displayHistoricoCompras() {
+
+	if(historicoCompras.size() == 0)
+	{
+		cout << "Este cliente ainda não efetuou nenhuma compra !" << endl << endl;
+		return;
+	}
+
+	cout << "Histórico de compras:" << endl << endl;
+
+	for(unsigned int i = 0; i < historicoCompras.size(); i++)
+	{
+		cout << "Local da compra: " << historicoCompras.at(i).getLocation() << endl;
+		cout << "Data (DD:MM:AAAA): " << historicoCompras.at(i).getData().getDia() << "/" << historicoCompras.at(i).getData().getMes() << "/"
+				<<  historicoCompras.at(i).getData().getAno() << endl;
+		cout << "Tipo de bicicleta: " << historicoCompras.at(i).getBikeType() << endl;
+		cout << "Quantidade: " << historicoCompras.at(i).getUseTime() << endl;
+		cout << "Preço: ";
+
+		if(historicoCompras.at(i).getBikeType() == "Urbana")
+			cout << 150*historicoCompras.at(i).getUseTime() << "€" << endl << endl;
+		else if(historicoCompras.at(i).getBikeType() == "Urbana Simples")
+			cout << 200*historicoCompras.at(i).getUseTime() << "€" << endl << endl;
+		else if(historicoCompras.at(i).getBikeType() == "Corrida")
+			cout << 250*historicoCompras.at(i).getUseTime() << "€" << endl << endl;
+		else
+			cout << 100*historicoCompras.at(i).getUseTime() << "€" << endl << endl;
+	}
+}
 
 // METODOS GET //
 
@@ -244,7 +273,7 @@ void Utente::setHistoric(Utilizacao ut) {
 	this->historico.push_back(ut);
 }
 
-void Utente::setHistoricoCompras(pair<Data,string> info) {
+void Utente::setHistoricoCompras(Utilizacao info) {
 	historicoCompras.push_back(info);
 }
 //////////////////////

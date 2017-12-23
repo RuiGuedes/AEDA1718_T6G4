@@ -1722,7 +1722,7 @@ void Sistema::compraBike(int index) {
 				while(1)
 				{
 					try{
-						cout << endl << "Classificação [1-5]: ";
+						cout << endl << "Classificação da compra [1-5]: ";
 						cin >> option;
 						cin.ignore(1000,'\n');
 						if(valid_number(option) == false)
@@ -1748,6 +1748,10 @@ void Sistema::compraBike(int index) {
 				locname = tmp_store.getLocal()->getNome();
 				tmp_store.setNumberOpinions();
 				tmp_store.setReputation((unsigned int)value);
+
+				//Verifica se é necessário reabastecer o stock
+				tmp_store.checkStock(indicator);
+
 				tmp.push(tmp_store);
 			}
 			else
@@ -1762,11 +1766,8 @@ void Sistema::compraBike(int index) {
 	//Atualiza a fila de prioridade stores
 	stores = tmp;
 
-	pair<Data, string> info { };
-	info.first = d1;
-	info.second = bikeType;
-
-	utentes.at(index)->setHistoricoCompras(info);
+	Utilizacao use(bikeType,quantidade,d1,"",locname);
+	utentes.at(index)->setHistoricoCompras(use);
 
 	system("cls");
 	mensagemInicial();
@@ -1779,13 +1780,13 @@ void Sistema::compraBike(int index) {
 	cout << "Preço: ";
 
 	if(indicator == 0)
-		cout << "150€" << endl << endl;
+		cout << 150*quantidade << "€" << endl << endl;
 	else if(indicator == 1)
-		cout << "200€" << endl << endl;
+		cout << 200*quantidade << "€" << endl << endl;
 	else if(indicator == 2)
-		cout << "250€" << endl << endl;
+		cout << 250*quantidade << "€" << endl << endl;
 	else
-		cout << "100€" << endl << endl;
+		cout << 100*quantidade << "€" << endl << endl;
 
 	cout << "Bicicleta do tipo " << bikeType << " comprada com sucesso !" << endl << endl;
 }
@@ -2130,4 +2131,40 @@ void Sistema::displayStoreInfo() const {
 	}
 
 	cout << endl;
+}
+
+void Sistema::displayMostRepStores() const {
+
+	priority_queue<Loja> tmp = stores;
+	int indicator {1};
+
+	if(stores.size() >= 5)
+	{
+		cout << "Top 5 - Lojas" << endl << endl;
+		cout << setw(5) << "ID" << setw(23) << "Localizacao" << "Reputacao" << endl;
+		while(indicator != 6)
+		{
+			cout << setw(5) << indicator << setw(27) << tmp.top().getLocal()->getNome() << tmp.top().getReputation() << endl;
+			indicator++;
+			tmp.pop();
+		}
+	}
+	else if(stores.empty())
+	{
+		cout << "Neste momento não existe nenhuma loja" << endl << endl;
+		return;
+	}
+	else
+	{
+		cout << "Top " << stores.size() << " - Lojas" << endl << endl;
+		cout << setw(5) << "ID" << setw(23) << "Localizacao" << "Reputacao" << endl;
+		while(!tmp.empty())
+		{
+			cout << setw(5) << indicator << setw(27) << tmp.top().getLocal()->getNome() << tmp.top().getReputation() << endl;
+			indicator++;
+			tmp.pop();
+		}
+
+	}
+
 }

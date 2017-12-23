@@ -67,6 +67,9 @@ double Utilizacao::getPrice() const {
 		return useTime*2;
 }
 
+string Utilizacao::getLocation() const {
+	return localizacao;
+}
 
 // OTHERS //
 

@@ -77,3 +77,17 @@ bool Loja::operator<(const Loja& l1) const {
 	return false;
 
 }
+
+void Loja::checkStock(int index) {
+
+	if(stock.at(index) <= 1)
+	{
+		stock.at(index) = (int)capacity / 4;
+
+		unsigned int sum { stock.at(0) + stock.at(1) + stock.at(2) + stock.at(3) };
+
+		if(sum < capacity)
+			stock.at(index)++;
+	}
+
+}

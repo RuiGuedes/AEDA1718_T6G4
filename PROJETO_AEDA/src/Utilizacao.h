@@ -58,6 +58,7 @@ public:
 	unsigned int getUseTime() const;
 	string getBikeType() const;
 	double getPrice() const;
+	string getLocation() const;
 
 	//Others
 	void displayUtilizacao() const;

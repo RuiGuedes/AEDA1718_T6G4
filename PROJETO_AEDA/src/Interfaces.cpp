@@ -160,22 +160,23 @@ void menu_interface(Sistema &ER){
 
 		cout << "1  - Alugar bicicleta" << endl;
 		cout << "2  - Devolver bicicleta" << endl;
-		cout << "3  - Histórico" << endl;
+		cout << "3  - Histórico de alugueres" << endl;
 		cout << "4  - Pagamentos pendentes" << endl;
 		cout << "5  - Efetuar pagamento das mensalidades" << endl;
 		cout << "6  - Atualiza localização" << endl;
 		cout << "7  - Pontos de partilha mais próximos" << endl;
 		cout << "8  - Comprar bicicletas" << endl;
-		cout << "9  - Lojas com maior reputação" << endl;
-		cout << "10 - Mudar o tipo de utente" << endl;
-		cout << "11 - Informações sobre ECO_RIDES" << endl;
-		cout << "12 - Logout" << endl << endl;
+		cout << "9  - Histórico de compras" << endl;
+		cout << "10 - Lojas com maior reputação" << endl;
+		cout << "11 - Mudar o tipo de utente" << endl;
+		cout << "12 - Informações sobre ECO_RIDES" << endl;
+		cout << "13 - Logout" << endl << endl;
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-12): ";
+				cout << endl << "Introduza uma opção (1-13): ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 
@@ -184,7 +185,7 @@ void menu_interface(Sistema &ER){
 
 				value = stoi(option);
 
-				if(value < 1 || value > 12)
+				if(value < 1 || value > 13)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -229,31 +230,28 @@ void menu_interface(Sistema &ER){
 			ER.displayNearestPP(index);
 			break;
 		case 8:
-			/*
-			 * 	Comprar uma certa quantidade de bicicletas na loja com maior reputação e com stock disponível. CHECK
-			 * 	A cada compra deve ser atribuída uma classificação (0-5) da satisfação para atualizar a reputação da respetiva loja. CHECK
-			 */
 			ER.compraBike(index);
 			break;
 		case 9:
-			/*
-			 *	Deve ser possível listar o top 5 das lojas com maior reputação.
-			 */
+			utente->displayHistoricoCompras();
 			break;
 		case 10:
+			ER.displayMostRepStores();
+			break;
+		case 11:
 			value = ER.mudaTipoUT(index);
 			if(value == 0)
 			{
 				cout << "Será agora efetuado o logout do utente para atualização dos dados do mesmo !" << endl << endl;
-				value = 13;
+				value = 14;
 			}
 			else
-				value = 10;
-			break;
-		case 11:
-			ER.getInfo();
+				value = 11;
 			break;
 		case 12:
+			ER.getInfo();
+			break;
+		case 13:
 			if(!utente->getAvailable()) {
 				cout << endl << "Antes de efetuar logout o utente necessita primeiramente de devolver a bicicleta !" << endl;
 				value = -1;
@@ -262,12 +260,12 @@ void menu_interface(Sistema &ER){
 			break;
 		}
 
-		if(value != 12)
+		if(value != 13)
 			system("pause");
 
 		system("cls");
 
-	}while((value != 12) && (value != 13));
+	}while((value != 13) && (value != 14));
 
 	cout << endl;
 	system("cls");

@@ -51,6 +51,7 @@ public:
 	void displayNearestPP(int index) const;
 	void displayUtentes() const;
 	void displayStoreInfo() const;
+	void displayMostRepStores() const;
 };
 
 /**
