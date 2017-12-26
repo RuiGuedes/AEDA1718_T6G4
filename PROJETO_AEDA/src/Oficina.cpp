@@ -41,7 +41,7 @@ void Oficina::displayBrokenBikeInfo() {
 	{
 		try {
 
-			cout << endl << "Selecione uma bicicleta (1-" << brokenBikes.size() << "):";
+			cout << endl << "Selecione uma bicicleta (1-" << brokenBikes.size() << "): ";
 			cin >> option;
 
 			if(valid_number(option) == false)
@@ -68,5 +68,29 @@ void Oficina::displayBrokenBikeInfo() {
 		}
 	};
 
+	system("cls");
+	mensagemInicial();
+	cout << "Informação: " << endl << endl;
 
+	//Mostra informação relativa a bicicleta selecionada
+	cout << "Nome: " << brokenBikes.at(value - 1)->getBikeName() << endl << endl;
+
+	if(brokenBikes.at(value - 1)->getBikeName().at(0) == 'c')
+		cout << "Tipo: Corrida" << endl << endl;
+	else if(brokenBikes.at(value - 1)->getBikeName().at(0) == 'i')
+		cout << "Tipo: Infantil" << endl << endl;
+	else
+	{
+		if(brokenBikes.at(value - 1)->getBikeName().at(1) == 's')
+			cout << "Tipo: Urbana Simples" << endl << endl;
+		else
+			cout << "Tipo: Urbana" << endl << endl;
+	}
+
+	cout << "Avarias:" << endl;
+
+	for(unsigned int i = 0; i < brokenBikes.at(value - 1)->getAvarias().size(); i++)
+		cout << " -> " << brokenBikes.at(value - 1)->getAvarias().at(i) << endl;
+
+	cout << endl;
 }
