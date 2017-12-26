@@ -38,6 +38,7 @@ public:
 	//Métodos Get
 	vector<Utente* > getUtentes() const;
 	vector<PontoPartilha* > getPontosPartilha() const;
+	Oficina& getOficina();
 	void getInfo() const;
 	vector<int> getOrderedPP(int index) const;
 	int getUtenteIndex(int identificacao) const;

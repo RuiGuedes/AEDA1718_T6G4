@@ -272,7 +272,7 @@ void menu_interface(Sistema &ER){
 	return;
 }
 
-void oficina_interface(Sistema &ER) {
+void oficina_interface(Oficina &repairShop) {
 
 	system("cls");
 
@@ -347,11 +347,13 @@ void oficina_interface(Sistema &ER) {
 			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
 			break;
 		case 6:
-			// -> Mostra informacao acerca de uma bicicleta avariada em especifico
+			repairShop.displayBrokenBikeInfo();
 			break;
 		case 7:
 			break;
 		}
+		if(value != 7)
+			system("pause");
 
 		system("cls");
 
@@ -780,7 +782,7 @@ void admin_interface(Sistema &ER) {
 			lojas_interface(ER);
 			break;
 		case 5:
-			oficina_interface(ER);
+			oficina_interface(ER.getOficina());
 			break;
 		case 6:
 			ER.getInfo();

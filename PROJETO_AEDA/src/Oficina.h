@@ -20,5 +20,5 @@ public:
 
 	//Others
 	void addBrokenBike(Bicicleta * bike);
-
+	void displayBrokenBikeInfo();
 };

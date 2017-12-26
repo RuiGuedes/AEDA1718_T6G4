@@ -1073,6 +1073,10 @@ vector<PontoPartilha* > Sistema::getPontosPartilha() const {
 	return pontosPartilha;
 }
 
+Oficina& Sistema::getOficina() {
+	return repairShop;
+}
+
 /**
  * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
  * de distancia ao utente com indice = index.
@@ -2008,12 +2012,12 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 	int random_number {};
 
 	random_number = rand() % 10 + 1;
-
+	cout << random_number << endl << endl;
 	//0-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
 
 	if((random_number >= 1) && (random_number <= 5))
 		return true;
-	else if((random_number >= 1) && (random_number <= 5))
+	else if((random_number >= 6) && (random_number <= 8))
 	{
 		int value {};
 		vector<string> pieces;
