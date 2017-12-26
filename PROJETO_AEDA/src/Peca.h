@@ -22,5 +22,6 @@ public:
 	void setSupplier(string supplier);
 
 	//Others
-	bool operator < (const Peca &ps1) const;
+	bool operator< (const Peca &ps1) const;
+	bool operator==(const Peca &ps1) const;
 };

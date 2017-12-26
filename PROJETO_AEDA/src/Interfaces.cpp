@@ -341,7 +341,7 @@ void oficina_interface(Oficina &repairShop) {
 			repairShop.addPiece();
 			break;
 		case 4:
-			// -> Remover peças (BST)
+			repairShop.removePiece();
 			break;
 		case 5:
 			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.

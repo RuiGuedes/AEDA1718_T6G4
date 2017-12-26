@@ -7,7 +7,7 @@ Peca::Peca(unsigned int lastPurchasePrice, string pieceType, string supplier) {
 }
 
 
-bool Peca::operator < (const Peca &pt1) const {
+bool Peca::operator< (const Peca &pt1) const {
 	if(this->pieceType < pt1.getPieceType())
 		return true;
 	else if(this->pieceType == pt1.getPieceType())
@@ -18,6 +18,12 @@ bool Peca::operator < (const Peca &pt1) const {
 	return false;
 }
 
+bool Peca::operator==(const Peca &ps1) const {
+	if((this->pieceType == ps1.getPieceType()) && (this->supplier == ps1.getSupplier()))
+		return true;
+
+	return false;
+}
 
 /////////////////
 // METODOS GET //
