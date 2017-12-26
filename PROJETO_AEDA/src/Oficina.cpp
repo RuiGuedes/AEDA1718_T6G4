@@ -19,6 +19,130 @@ void Oficina::addBrokenBike(Bicicleta * bike) {
 	brokenBikes.push_back(bike);
 }
 
+void Oficina::addPiece() {
+
+	cout << "Adiciona peça: " << endl << endl;
+
+	string piece,option,nome;
+	int value {};
+	vector<string> piecesAvailable;
+
+	piecesAvailable.push_back("Pneu"); piecesAvailable.push_back("Corrente"); piecesAvailable.push_back("Pedais");
+	piecesAvailable.push_back("Guiador"); piecesAvailable.push_back("Assento"); piecesAvailable.push_back("Cremalheira");
+	piecesAvailable.push_back("Punhos"); piecesAvailable.push_back("Travão traseiro"); piecesAvailable.push_back("Travão dianteiro");
+	piecesAvailable.push_back("Roda");
+
+	//Mostra as peças possiveis para se adicionarem a BST
+	cout << "Peças disponiveis: " << endl << endl;
+
+	for(unsigned int i = 0; i < piecesAvailable.size(); i++)
+		cout << (i+1) << " -> " << piecesAvailable.at(i) << endl;
+
+	//Seleciona uma das peças
+	while(1)
+	{
+		try {
+			cout << endl << "Peça (1-10): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > 10)
+				throw OpcaoInvalida<int>(value);
+
+			piece = piecesAvailable.at(value - 1);
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	cin.ignore(1000,'\n');
+
+	do
+	{
+		BSTItrIn<Peca> it(pieces);
+		bool exist {false};
+
+		//Verifica o nome do fornecedor da respetiva peça
+		while(1)
+		{
+			try {
+				cout << endl << "Nome do fornecedor: " ;
+				getline(cin,nome);
+
+				if(valid_word(nome) == false)
+					throw OpcaoInvalida<string>(nome);
+
+				break;
+			}
+			catch (OpcaoInvalida<string> &op) {
+				cout << "Nome do fornecedor inválido(" << op.opcao << ") ! Tente novamente." << endl;
+				cin.clear();
+			}
+		}
+
+		//Procura na BST o respetivo fornecedor, se ja existir verifica se este ja tem a peça,
+
+		while(!it.isAtEnd())
+		{
+			if(it.retrieve().getSupplier() == nome)
+			{
+				if(it.retrieve().getPieceType() == piece){
+					exist = true;
+					break;
+				}
+			}
+			it.advance();
+		}
+
+		if(exist == false)
+			break;
+		else
+			cout << "Já existe um fornecedor " << nome << " a vender peças do tipo " << piece << " ! Tente novamente." << endl;
+
+
+	}while(1);
+
+	//Adiciona a nova peça
+	pieces.insert(Peca(0,piece,nome));
+
+	cout << endl << "Peça adicionada com sucesso !" << endl << endl;
+}
+
+void Oficina::displayBSTInfo() {
+
+	BSTItrIn<Peca> it(pieces);
+
+	if(it.isAtEnd())
+	{
+		cout << "Não existem peças na BST " << endl << endl;
+		return;
+	}
+
+	cout << "Informação da BST: " << endl << endl;
+
+	while(!it.isAtEnd())
+	{
+		cout << "Fornecedor: " << it.retrieve().getSupplier() << endl;
+		cout << "Peça: " << it.retrieve().getPieceType() << endl;
+		cout << "Valor da última compra: " << it.retrieve().getLastPurchasePrice() << endl << endl;
+		it.advance();
+	}
+
+}
+
 void Oficina::displayBrokenBikeInfo() {
 
 	if(brokenBikes.size() == 0)

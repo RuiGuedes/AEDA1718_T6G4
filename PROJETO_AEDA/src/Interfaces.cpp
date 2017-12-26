@@ -338,13 +338,14 @@ void oficina_interface(Oficina &repairShop) {
 			// -> Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo.
 			break;
 		case 3:
-			// -> Adicionar peças (BST)
+			repairShop.addPiece();
 			break;
 		case 4:
 			// -> Remover peças (BST)
 			break;
 		case 5:
 			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
+			repairShop.displayBSTInfo();
 			break;
 		case 6:
 			repairShop.displayBrokenBikeInfo();

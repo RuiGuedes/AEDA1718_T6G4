@@ -12,7 +12,7 @@ bool Peca::operator < (const Peca &pt1) const {
 		return true;
 	else if(this->pieceType == pt1.getPieceType())
 	{
-		if(this->lastPurchasePrice < pt1.getLastPurchasePrice())
+		if(this->lastPurchasePrice <= pt1.getLastPurchasePrice())
 			return true;
 	}
 	return false;

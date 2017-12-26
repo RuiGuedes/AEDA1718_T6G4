@@ -2009,10 +2009,12 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 
 bool Sistema::generateBikeStatus(Bicicleta* bike) {
 
+	srand (time(NULL));
 	int random_number {};
 
 	random_number = rand() % 10 + 1;
 	cout << random_number << endl << endl;
+
 	//0-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
 
 	if((random_number >= 1) && (random_number <= 5))
@@ -2033,6 +2035,7 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 		//Seleciona aleatoriamente as X pecas avariadas e adiciona-as as vetor de avarias na biclicleta
 		while(random_number != 0)
 		{
+			srand (time(NULL));
 			value = rand() % (pieces.size());
 			bike->addAvarias(pieces.at(value));
 			pieces.erase(pieces.begin() + value);

@@ -20,5 +20,8 @@ public:
 
 	//Others
 	void addBrokenBike(Bicicleta * bike);
+	void addPiece();
+	//void removePiece();
+	void displayBSTInfo();
 	void displayBrokenBikeInfo();
 };
