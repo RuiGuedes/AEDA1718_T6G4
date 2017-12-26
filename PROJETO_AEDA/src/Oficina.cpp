@@ -253,20 +253,18 @@ void Oficina::removePiece() {
 
 	//Remove a peça
 	BSTItrIn<Peca> iterator(pieces);
-	//BST<Peca> tmp = pieces; tmp.makeEmpty();
-	pieces.remove(Peca(0,piece,nome));
-//	while(!iterator.isAtEnd())
-//	{
-//		if((iterator.retrieve().getPieceType() == piece) && (iterator.retrieve().getSupplier() == nome)) {
-//			pieces.remove(iterator.retrieve());
-//		}
-//		else
-//			tmp.insert(iterator.retrieve());
-//
-//		iterator.advance();
-//	}
-//
-//	pieces = tmp;
+	BST<Peca> tmp = pieces; tmp.makeEmpty();
+
+	while(!iterator.isAtEnd())
+	{
+		if((iterator.retrieve().getPieceType() == piece) && (iterator.retrieve().getSupplier() == nome)) {
+		}
+		else
+			tmp.insert(iterator.retrieve());
+
+		iterator.advance();
+	}
+	pieces = tmp;
 	cout << endl << "Peça do tipo " << piece << " associada ao fornecedor " << nome << " removida com sucesso !" << endl << endl;
 }
 
