@@ -48,6 +48,7 @@ public:
 	void compraBike(int index);
 	int mudaTipoUT(int index);
 	void system_Manager(unsigned int index, string bikeType);
+	bool generateBikeStatus(Bicicleta* bike);
 	void displayNearestPP(int index) const;
 	void displayUtentes() const;
 	void displayStoreInfo() const;

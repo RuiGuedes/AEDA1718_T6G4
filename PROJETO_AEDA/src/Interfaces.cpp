@@ -290,14 +290,15 @@ void oficina_interface(Sistema &ER) {
 		cout << "3 - Adicionar peças" << endl;
 		cout << "4 - Remover peças" << endl;
 		cout << "5 - Informações acerca dos fornecedores" << endl;
-		cout << "6 - Voltar" << endl;
+		cout << "6 - Informações acerca das bicicletas avariadas" << endl;
+		cout << "7 - Voltar" << endl;
 
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-6): ";
+				cout << endl << "Introduza uma opção (1-7): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -305,7 +306,7 @@ void oficina_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 6)
+				if(value < 1 || value > 7)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -331,27 +332,30 @@ void oficina_interface(Sistema &ER) {
 		switch (value)
 		{
 		case 1:
-
+			// -> Comprar uma peça, a determinado preço e a determinado fornecedor
 			break;
 		case 2:
-
+			// -> Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo.
 			break;
 		case 3:
-
+			// -> Adicionar peças (BST)
 			break;
 		case 4:
-
+			// -> Remover peças (BST)
 			break;
 		case 5:
-
+			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
 			break;
 		case 6:
+			// -> Mostra informacao acerca de uma bicicleta avariada em especifico
+			break;
+		case 7:
 			break;
 		}
 
 		system("cls");
 
-	}while(value != 6);
+	}while(value != 7);
 
 	return;
 

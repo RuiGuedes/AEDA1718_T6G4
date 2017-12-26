@@ -1443,23 +1443,6 @@ void Sistema::devolveBike(int index) {
 
 	bike = utentes.at(index)->removeBicicleta(index_distancias);
 
-	for(unsigned int i = 0; i < index_distancias.size(); i++)
-	{
-		int lotacao {0};
-
-		for(unsigned int k = 0; k < pontosPartilha.at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
-		{
-			lotacao += pontosPartilha.at(index_distancias.at(i))->getNumberOfBikes().at(k);
-		}
-
-		if(pontosPartilha.at(index_distancias.at(i))->getCapacidade() > lotacao)
-		{
-			index_pp = index_distancias.at(i);
-			pontosPartilha.at(index_distancias.at(i))->adicionaBike(bike);
-			break;
-		}
-	}
-
 	cout << "Devolve bicicleta: " << endl << endl;
 	cout << "Resumo do último aluguer: " << endl << endl;
 
@@ -1476,9 +1459,32 @@ void Sistema::devolveBike(int index) {
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
 	}
 
-	cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << pontosPartilha.at(index_pp)->getNome() << " !" << endl << endl;
 
-	system_Manager(index_pp,bikeType);
+	if(generateBikeStatus(bike) == true)
+	{
+		for(unsigned int i = 0; i < index_distancias.size(); i++)
+		{
+			int lotacao {0};
+
+			for(unsigned int k = 0; k < pontosPartilha.at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
+			{
+				lotacao += pontosPartilha.at(index_distancias.at(i))->getNumberOfBikes().at(k);
+			}
+
+			if(pontosPartilha.at(index_distancias.at(i))->getCapacidade() > lotacao)
+			{
+				index_pp = index_distancias.at(i);
+				pontosPartilha.at(index_distancias.at(i))->adicionaBike(bike);
+				break;
+			}
+		}
+
+		cout << endl << "Bicicleta devolvida com sucesso no ponto de partilha ECO_RIDES_" << pontosPartilha.at(index_pp)->getNome() << " !" << endl << endl;
+
+		system_Manager(index_pp,bikeType);
+	}
+	else
+		cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
 
 	return;
 }
@@ -1995,6 +2001,52 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 	}
 
 	return;
+}
+
+bool Sistema::generateBikeStatus(Bicicleta* bike) {
+
+	int random_number {};
+
+	random_number = rand() % 10 + 1;
+
+	//0-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
+
+	if((random_number >= 1) && (random_number <= 5))
+		return true;
+	else if((random_number >= 1) && (random_number <= 5))
+	{
+		int value {};
+		vector<string> pieces;
+
+		pieces.push_back("Pneu"); pieces.push_back("Corrente"); pieces.push_back("Pedais");
+		pieces.push_back("Guiador"); pieces.push_back("Assento"); pieces.push_back("Cremalheira");
+		pieces.push_back("Punhos"); pieces.push_back("Travão traseiro"); pieces.push_back("Travão dianteiro");
+		pieces.push_back("Roda");
+
+		//Gera numero (X) de peças estragadas de um total de 10
+		random_number = rand() % 10 + 1;
+
+		//Seleciona aleatoriamente as X pecas avariadas e adiciona-as as vetor de avarias na biclicleta
+		while(random_number != 0)
+		{
+			value = rand() % (pieces.size());
+			bike->addAvarias(pieces.at(value));
+			pieces.erase(pieces.begin() + value);
+			random_number--;
+		}
+
+		//Adiciona a bicicleta a oficina
+		repairShop.addBrokenBike(bike);
+	}
+	else
+	{
+		/////////////////////////////
+		// FALTA ENVIAR PARA ABATE //
+		/////////////////////////////
+	}
+
+	return false;
+
 }
 
 /**

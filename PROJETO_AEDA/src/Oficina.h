@@ -14,11 +14,11 @@ public:
 	 */
 	Oficina() : pieces(Peca(0,"","")) {}
 
-	//Funcionalidades
-	// -> Comprar uma peça, a determinado preço e a determinado fornecedor
-	// -> Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo.
-	// -> Remover peças (BST)
-	// -> Adicionar peças (BST)
-	// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
+
+	//Métodos Get
+	vector<Bicicleta *> getBrokenBikes() const;
+
+	//Others
+	void addBrokenBike(Bicicleta * bike);
 
 };

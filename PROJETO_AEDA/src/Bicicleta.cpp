@@ -42,6 +42,18 @@ int Bicicleta::getPrice() const {
 	return price;
 }
 
+vector<string> Bicicleta::getAvarias() const {
+	return avarias;
+}
+
+////////////
+// OTHERS //
+////////////
+
+void Bicicleta::addAvarias(string avaria){
+	avarias.push_back(avaria);
+}
+
 ///////////////////
 // CLASSE URBANA //
 ///////////////////

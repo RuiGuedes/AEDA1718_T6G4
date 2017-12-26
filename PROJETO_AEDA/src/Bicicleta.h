@@ -20,6 +20,10 @@ public:
 	//Métodos Get
 	string getBikeName() const;
 	int getPrice() const;
+	vector<string> getAvarias() const;
+
+	//Others
+	void addAvarias(string avaria);
 };
 
 class Urbana : public Bicicleta {
