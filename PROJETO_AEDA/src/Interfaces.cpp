@@ -434,13 +434,10 @@ void bicicleta_interface(Sistema &ER) {
 			ER.abateBike();
 			break;
 		case 4:
-			//ER.removeFromJunkyard();
+			ER.removeFromJunkyard();
 			break;
 		case 5:
-			/*
-			 * Consulta bicicletas para abate de forma geral.
-			 * Consulta bicicletas para abate por data de abate.
-			 */
+			ER.displayJunkyardInfo();
 			break;
 		case 6:
 			break;

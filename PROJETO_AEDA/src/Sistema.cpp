@@ -2570,3 +2570,45 @@ void Sistema::displayMostRepStores() const {
 	}
 
 }
+
+void Sistema::displayJunkyardInfo() const {
+
+	tabHAbates::const_iterator it = junkyard.begin();
+	int indicator {1};
+	if(it == junkyard.end())
+	{
+		cout << "Neste momento não existem bicicletas enviadas para abate" << endl << endl;
+		return;
+	}
+
+	cout << "Consultar bicicletas enviadas para abate" << endl << endl;
+
+	cout << "Bicicletas disponiveis para abate:" << endl;
+	cout << "Ordem" << "         Tipo " <<  "         Nome" << "         Data de abate" << endl;
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+		cout << indicator << "         ";
+
+		if(it->getBikeName().at(0) == 'c')
+			cout << "Corrida";
+		else if(it->getBikeName().at(0) == 'i')
+			cout << "Infantil";
+		else
+		{
+			if(it->getBikeName().at(1) == 's')
+				cout << "Urbana Simples";
+			else
+				cout << "Urbana";
+		}
+
+		cout << "         " << it->getBikeName() <<  "         ";
+
+		if(it->getAbate().getAno() == 0)
+			cout << "         " << "--/--/----" << endl;
+		else
+			cout << "         " << it->getAbate() << endl;
+
+	}
+
+	cout << endl;
+}

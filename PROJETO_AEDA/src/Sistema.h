@@ -55,6 +55,7 @@ public:
 	void displayUtentes() const;
 	void displayStoreInfo() const;
 	void displayMostRepStores() const;
+	void displayJunkyardInfo() const;
 
 	//Management algorithms
 	void system_Manager(unsigned int index, string bikeType);
