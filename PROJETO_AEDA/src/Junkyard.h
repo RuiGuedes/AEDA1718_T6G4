@@ -5,14 +5,18 @@
 
 struct bikeHash
 {
-	int operator() (const Bicicleta & ap) const
+	int operator() (const Bicicleta & bic) const
 	{
-		return 0;
+		string s1 = bic.getBikeName();
+		int v = 0;
+		for ( unsigned int i=0; i< s1.size(); i++ )
+			v = 37*v + s1[i];
+		return v;
 	}
 
-	bool operator() (const Bicicleta & ap1, const Bicicleta & ap2) const
+	bool operator() (const Bicicleta & b1, const Bicicleta & b2) const
 	{
-		return true;
+		return b1.getBikeName() == b2.getBikeName();
 	}
 };
 

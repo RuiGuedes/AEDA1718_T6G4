@@ -381,17 +381,18 @@ void bicicleta_interface(Sistema &ER) {
 
 		cout << "Bicicletas" << endl << endl;
 
-		cout << "1 - Adiciona bicicleta" << endl;
-		cout << "2 - Remove bicicleta" << endl;
+		cout << "1 - Adicionar bicicleta" << endl;
+		cout << "2 - Remover bicicleta" << endl;
 		cout << "3 - Abater bicicletas" << endl;
-		cout << "4 - Consultar bicicletas para abates" << endl;;
-		cout << "5 - Voltar" << endl;
+		cout << "4 - Retirar bicicletas da lista para abates" << endl;
+		cout << "5 - Consultar bicicletas que aguardam abate" << endl;;
+		cout << "6 - Voltar" << endl;
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-5): ";
+				cout << endl << "Introduza uma opção (1-6): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -399,7 +400,7 @@ void bicicleta_interface(Sistema &ER) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 5)
+				if(value < 1 || value > 6)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -431,23 +432,24 @@ void bicicleta_interface(Sistema &ER) {
 			ER.removeBike();
 			break;
 		case 3:
-			/*
-			 * Remover uma bicicleta da tabela de dispersão / Abate bicicleta
-			 */
+			ER.abateBike();
 			break;
 		case 4:
+			ER.removeFromJunkyard();
+			break;
+		case 5:
 			/*
 			 * Consulta bicicletas para abate de forma geral.
 			 * Consulta bicicletas para abate por data de abate.
 			 */
 			break;
-		case 5:
+		case 6:
 			break;
 		}
 
 		system("cls");
 
-	}while(value != 5);
+	}while(value != 6);
 
 	return;
 }

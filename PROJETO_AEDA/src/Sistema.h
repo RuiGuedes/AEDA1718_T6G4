@@ -35,6 +35,7 @@ public:
 	void removeBike();
 	void removeStore();
 	void removeFromRepairShop();
+	void removeFromJunkyard();
 
 	//Métodos Get
 	vector<Utente* > getUtentes() const;
@@ -55,6 +56,7 @@ public:
 	void displayUtentes() const;
 	void displayStoreInfo() const;
 	void displayMostRepStores() const;
+	void abateBike();
 };
 
 /**
