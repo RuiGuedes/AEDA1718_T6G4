@@ -1039,6 +1039,160 @@ void Sistema::removeFromRepairShop() {
 	repairShop.setBrokenBikes(brokenBikes);
 }
 
+void Sistema::removeFromJunkyard(){
+
+	cout << "Remove bicicleta da lista para abate" << endl << endl;
+
+	cout << "Tipos de bicicleta:" << endl << endl;
+
+	cout <<  "-> Urbana   [Name: u(number)]" << endl;
+	cout <<  "-> Urbana Simples [Name: us(number)]" << endl;
+	cout <<  "-> Corrida  [Name: c(number)]" << endl;
+	cout <<  "-> Infantil [Name: i(number)]" << endl << endl;
+
+	string biketype, nameB;
+
+	cin.ignore(1000,'\n');
+
+	//Verifica tipo de bicicleta a remover
+	while(1)
+	{
+		try {
+			cout << "Tipo de Bicicleta: " ;
+			getline(cin,biketype);
+
+			if(valid_word(biketype) == false || (biketype != "Urbana" && biketype != "Urbana Simples" && biketype != "Corrida" && biketype != "Infantil"))
+				throw OpcaoInvalida<string>(biketype);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+
+	//Verifica se o nome da bicicleta a remover existe
+	while(1)
+	{
+		try {
+			cout << "Nome da Bicicleta: " ;
+			getline(cin,nameB);
+
+			if(valid_bike(nameB) == false || junkyard.find(Bicicleta(nameB)) == junkyard.end())
+				throw OpcaoInvalida<string>(nameB);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Bicicleta não listada para abate ou inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+
+	//Remove a bicicleta da lista de bicicletas para abate
+	junkyard.erase(junkyard.find(Bicicleta(nameB)));
+
+	cout << endl << "Bicicleta removida da lista para abate com sucesso !" << endl << endl;
+
+}
+
+void Sistema::abateBike(){
+
+	cout << "Abate bicicleta" << endl << endl;
+
+	cout << "Tipos de bicicleta:" << endl << endl;
+
+	cout <<  "-> Urbana   [Name: u(number)]" << endl;
+	cout <<  "-> Urbana Simples [Name: us(number)]" << endl;
+	cout <<  "-> Corrida  [Name: c(number)]" << endl;
+	cout <<  "-> Infantil [Name: i(number)]" << endl << endl;
+
+	string nomePP, biketype;
+	bool cond {false};
+	int indexPP {-1};
+	int indexBB {-1};
+	int indexBike {-1};
+
+	cin.ignore(1000,'\n');
+
+	//Verifica tipo de bicicleta a abater
+	while(1)
+	{
+		try {
+			cout << "Tipo de Bicicleta: " ;
+			getline(cin,biketype);
+
+			if(valid_word(biketype) == false)
+				throw OpcaoInvalida<string>(biketype);
+
+			if(biketype == "Urbana")
+				indexBB = 0;
+			else if(biketype == "Urbana Simples")
+				indexBB = 1;
+			else if(biketype == "Corrida")
+				indexBB = 2;
+			else if(biketype == "Infantil")
+				indexBB = 3;
+
+			if(indexBB == -1)
+				throw OpcaoInvalida<string>(biketype);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+		}
+	}
+
+	//Verifica se o nome da bicicleta a abater existe
+	while(1)
+	{
+		try {
+			cout << "Nome da Bicicleta: " ;
+			getline(cin,nomePP);
+
+			if(valid_bike(nomePP) == false)
+				throw OpcaoInvalida<string>(nomePP);
+
+			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+			{
+				for(unsigned int k = 0; k < pontosPartilha.at(i)->getBikes().at(indexBB).size(); k++)
+				{
+					if(pontosPartilha.at(i)->getBikes().at(indexBB).at(k)->getBikeName() == nomePP)
+					{
+						indexPP = i;
+						indexBike = k;
+						cond = true;
+					}
+				}
+			}
+
+			if(cond == false || junkyard.find(Bicicleta(nomePP)) == junkyard.end())
+				throw OpcaoInvalida<string>(nomePP);
+
+			break;
+		}
+		catch (OpcaoInvalida<string> &op) {
+			cout << "Bicicleta não listada para abate ou inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+			cond = false;
+			cin.clear();
+		}
+	}
+
+	Data DATA_ATUAL(1,1,2018);  //apenas para teste
+
+	//Abate a bicicleta e adiciona-lhe a data de abate
+	pontosPartilha.at(indexPP)->getBikes().at(indexBB).at(indexBike)->setAbate(DATA_ATUAL);
+
+	//Remove a bicicleta da lista de bicicletas para abate
+	junkyard.erase(junkyard.find(Bicicleta(nomePP)));
+
+	cout << endl << "Bicicleta abatida com sucesso !" << endl << endl;
+
+}
+
 /////////////////
 // METODOS GET //
 /////////////////
@@ -2097,9 +2251,8 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 	}
 	else
 	{
-		/////////////////////////////
-		// FALTA ENVIAR PARA ABATE //
-		/////////////////////////////
+		//Envia bicicleta para abate
+		junkyard.insert(*bike);
 	}
 
 	return false;

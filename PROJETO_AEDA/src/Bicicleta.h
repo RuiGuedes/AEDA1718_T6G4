@@ -21,9 +21,12 @@ public:
 	string getBikeName() const;
 	int getPrice() const;
 	vector<string> getAvarias() const;
+	Data getAbate() const;
 
 	//Métodos Set
+	void setPrice(int preco);
 	void setAvarias(vector<string> novasAvarias);
+	void setAbate(Data dataAbate);
 
 	//Others
 	void addAvarias(string avaria);
