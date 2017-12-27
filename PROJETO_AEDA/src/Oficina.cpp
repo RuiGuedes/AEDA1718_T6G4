@@ -477,6 +477,14 @@ void Oficina::buyPiece() {
 	cout << endl << "Peça do tipo " << piece << " comprada com sucesso ao fornecedor " << nome << " por " << value << "€" << endl << endl;
 }
 
+bool orderedByPrice(const Peca &ps1, const Peca &ps2 ) {
+
+	if(ps1.getLastPurchasePrice() < ps2.getLastPurchasePrice())
+		return true;
+
+	return false;
+}
+
 void Oficina::displayBSTInfo() {
 
 	BSTItrIn<Peca> it(pieces);
@@ -572,6 +580,96 @@ void Oficina::displayBrokenBikeInfo() {
 
 	for(unsigned int i = 0; i < brokenBikes.at(value - 1)->getAvarias().size(); i++)
 		cout << (i+1) <<" -> " << brokenBikes.at(value - 1)->getAvarias().at(i) << endl;
+
+	cout << endl;
+}
+
+void Oficina::displayPiecePrices() {
+
+	BSTItrIn<Peca> it(pieces);
+	vector<Peca> piecesOrderedPrice;
+
+	if(it.isAtEnd())
+	{
+		cout << "Neste momento não existem fornecedores de qualquer tipo de peça " << endl << endl;
+		return;
+	}
+
+	cout << "Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo" << endl << endl;
+
+	string piece,option,nome;
+	int value {};
+	vector<string> piecesAvailable;
+
+	piecesAvailable.push_back("Pneu"); piecesAvailable.push_back("Corrente"); piecesAvailable.push_back("Pedais");
+	piecesAvailable.push_back("Guiador"); piecesAvailable.push_back("Assento"); piecesAvailable.push_back("Cremalheira");
+	piecesAvailable.push_back("Punhos"); piecesAvailable.push_back("Travão traseiro"); piecesAvailable.push_back("Travão dianteiro");
+	piecesAvailable.push_back("Roda");
+
+	//Mostra as peças possiveis para se adicionarem a BST
+	cout << "Peças disponiveis: " << endl;
+
+	for(unsigned int i = 0; i < piecesAvailable.size(); i++)
+		cout << left << setw(2) << (i+1) << " -> " << piecesAvailable.at(i) << endl;
+
+	//Seleciona uma das peças
+	while(1)
+	{
+		try {
+			cout << endl << "Peça (1-10): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > 10)
+				throw OpcaoInvalida<int>(value);
+
+			piece = piecesAvailable.at(value - 1);
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	//Adiciona as peças do tipo selecionado ao vetor
+	while(!it.isAtEnd())
+	{
+		if(it.retrieve().getPieceType() == piece)
+			piecesOrderedPrice.push_back(it.retrieve());
+
+		it.advance();
+	}
+
+	if(piecesOrderedPrice.empty())
+	{
+		cout << "Neste momento não existem fornecedores do tipo de peça: " << piece << endl << endl;
+		return;
+	}
+
+	//Ordena o vetor "piecesOrderedPrice" por ordem crescente de preço
+	sort(piecesOrderedPrice.begin(),piecesOrderedPrice.end(), orderedByPrice);
+
+	//Mostra os diferentes preços dos diferentes fornecedores de uma peça
+	system("cls");
+	mensagemInicial();
+	cout << "Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo" << endl << endl;
+	cout << "Peça: " << piece << endl << endl;
+
+	cout << "Ordem " << setw(15) << "Fornecedor" << setw(15) << "Preço" << endl;
+
+	for(unsigned int i = 0; i < piecesOrderedPrice.size(); i++)
+		cout << (i+1) <<  setw(20) << piecesOrderedPrice.at(i).getSupplier() << setw(20) << piecesOrderedPrice.at(i).getLastPurchasePrice() << endl;
 
 	cout << endl;
 }

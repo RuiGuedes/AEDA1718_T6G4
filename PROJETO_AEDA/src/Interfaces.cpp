@@ -337,7 +337,7 @@ void oficina_interface(Sistema &ER) {
 			ER.removeFromRepairShop();
 			break;
 		case 2:
-			// -> Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo.
+			ER.getOficina().displayPiecePrices();	//Falta meter o display certo
 			break;
 		case 3:
 			ER.getOficina().addPiece();

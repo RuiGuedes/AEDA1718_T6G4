@@ -20,12 +20,19 @@ public:
 	//Métodos Set
 	void setBrokenBikes(vector<Bicicleta *> newBrokenBikes);
 
-	//Others
+	//Métodos Add
 	void addBrokenBike(Bicicleta * bike);
 	void addPiece();
+
+	//Métodos Remove
 	void removePieceBST();
 	void removePieceBike(int index, string piece);
-	void buyPiece();
+
+	//Métodos Display
 	void displayBSTInfo();
 	void displayBrokenBikeInfo();
+	void displayPiecePrices();
+
+	//Others
+	void buyPiece();
 };
