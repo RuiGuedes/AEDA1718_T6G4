@@ -22,6 +22,9 @@ public:
 	int getPrice() const;
 	vector<string> getAvarias() const;
 
+	//Métodos Set
+	void setAvarias(vector<string> novasAvarias);
+
 	//Others
 	void addAvarias(string avaria);
 };

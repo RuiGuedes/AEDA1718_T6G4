@@ -272,7 +272,7 @@ void menu_interface(Sistema &ER){
 	return;
 }
 
-void oficina_interface(Oficina &repairShop) {
+void oficina_interface(Sistema &ER) {
 
 	system("cls");
 
@@ -289,16 +289,17 @@ void oficina_interface(Oficina &repairShop) {
 		cout << "2 - Verificar qual o fornecedor que vendeu uma determinada peça ao preço mais baixo" << endl;
 		cout << "3 - Adicionar peças" << endl;
 		cout << "4 - Remover peças" << endl;
-		cout << "5 - Informações acerca dos fornecedores" << endl;
-		cout << "6 - Informações acerca das bicicletas avariadas" << endl;
-		cout << "7 - Voltar" << endl;
+		cout << "5 - Informação acerca das peças" << endl;
+		cout << "6 - Informação acerca dos fornecedores" << endl;
+		cout << "7 - Bicicletas em reparação" << endl;
+		cout << "8 - Voltar" << endl;
 
 
 		while(1)
 		{
 			try {
 
-				cout << endl << "Introduza uma opção (1-7): ";
+				cout << endl << "Introduza uma opção (1-8): ";
 				cin >> option;
 
 				if(valid_number(option) == false)
@@ -306,7 +307,7 @@ void oficina_interface(Oficina &repairShop) {
 
 				value = stoi(option);
 
-				if(value < 1 || value > 7)
+				if(value < 1 || value > 8)
 					throw OpcaoInvalida<int>(value);
 
 				break;
@@ -332,33 +333,36 @@ void oficina_interface(Oficina &repairShop) {
 		switch (value)
 		{
 		case 1:
-			// -> Comprar uma peça, a determinado preço e a determinado fornecedor
+			ER.getOficina().buyPiece();
+			ER.removeFromRepairShop();
 			break;
 		case 2:
 			// -> Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo.
 			break;
 		case 3:
-			repairShop.addPiece();
+			ER.getOficina().addPiece();
 			break;
 		case 4:
-			repairShop.removePiece();
+			ER.getOficina().removePieceBST();
 			break;
 		case 5:
-			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
-			repairShop.displayBSTInfo();
+			ER.getOficina().displayBSTInfo();
 			break;
 		case 6:
-			repairShop.displayBrokenBikeInfo();
+			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
 			break;
 		case 7:
+			ER.getOficina().displayBrokenBikeInfo();
+			break;
+		case 8:
 			break;
 		}
-		if(value != 7)
+		if(value != 8)
 			system("pause");
 
 		system("cls");
 
-	}while(value != 7);
+	}while(value != 8);
 
 	return;
 
@@ -783,7 +787,7 @@ void admin_interface(Sistema &ER) {
 			lojas_interface(ER);
 			break;
 		case 5:
-			oficina_interface(ER.getOficina());
+			oficina_interface(ER);
 			break;
 		case 6:
 			ER.getInfo();

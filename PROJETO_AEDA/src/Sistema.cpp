@@ -989,6 +989,56 @@ void Sistema::removeStore() {
 
 }
 
+void Sistema::removeFromRepairShop() {
+
+	vector<Bicicleta *> brokenBikes = repairShop.getBrokenBikes();
+
+	for(unsigned int i = 0; i < brokenBikes.size(); i++)
+	{
+		//Verifica se a bicicleta esta composta
+		if(brokenBikes.at(i)->getAvarias().empty())
+		{
+			int position {0}, indicator{}, min{99};
+			Bicicleta* bike{ };
+
+			if(brokenBikes.at(i)->getBikeName().at(0) == 'c')
+			{
+				position = 2;
+				bike = new Corrida { brokenBikes.at(i)->getBikeName() };
+			}
+			else if(brokenBikes.at(i)->getBikeName().at(0) == 'i')
+			{
+				position = 3;
+				bike = new Infantil { brokenBikes.at(i)->getBikeName() };
+			}
+			else if(brokenBikes.at(i)->getBikeName().at(1) == 's')
+			{
+				position = 1;
+				bike = new UrbanaSimples { brokenBikes.at(i)->getBikeName() };
+			}
+			else
+				bike = new Urbana { brokenBikes.at(i)->getBikeName() };
+
+			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+			{
+				if(pontosPartilha.at(i)->getNumberOfBikes().at(position) < min)
+				{
+					min = pontosPartilha.at(i)->getNumberOfBikes().at(position);
+					indicator = i;
+				}
+			}
+
+			//Adiciona a bicicleta ao ponto de partilha que possui menor quantidade de bicicletas do seu tipo
+			pontosPartilha.at(indicator)->adicionaBike(bike);
+			brokenBikes.erase(brokenBikes.begin() + i);
+			i--;
+		}
+	}
+
+	//Atualiza o vetor de bicicletas avariadas
+	repairShop.setBrokenBikes(brokenBikes);
+}
+
 /////////////////
 // METODOS GET //
 /////////////////

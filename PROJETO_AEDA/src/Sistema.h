@@ -34,6 +34,7 @@ public:
 	void removeUtente();
 	void removeBike();
 	void removeStore();
+	void removeFromRepairShop();
 
 	//Métodos Get
 	vector<Utente* > getUtentes() const;

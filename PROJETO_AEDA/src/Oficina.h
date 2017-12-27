@@ -14,15 +14,18 @@ public:
 	 */
 	Oficina() : pieces(Peca(0,"","")) {}
 
-
 	//Métodos Get
 	vector<Bicicleta *> getBrokenBikes() const;
+
+	//Métodos Set
+	void setBrokenBikes(vector<Bicicleta *> newBrokenBikes);
 
 	//Others
 	void addBrokenBike(Bicicleta * bike);
 	void addPiece();
-	void removePiece();
-
+	void removePieceBST();
+	void removePieceBike(int index, string piece);
+	void buyPiece();
 	void displayBSTInfo();
 	void displayBrokenBikeInfo();
 };

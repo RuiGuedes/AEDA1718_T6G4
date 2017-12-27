@@ -46,6 +46,13 @@ vector<string> Bicicleta::getAvarias() const {
 	return avarias;
 }
 
+
+// METODOS SET //
+
+void Bicicleta::setAvarias(vector<string> novasAvarias) {
+	avarias = novasAvarias;
+}
+
 ////////////
 // OTHERS //
 ////////////
