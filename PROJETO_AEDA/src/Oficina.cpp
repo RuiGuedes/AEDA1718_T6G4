@@ -666,10 +666,10 @@ void Oficina::displayPiecePrices() {
 	cout << "Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo" << endl << endl;
 	cout << "Peça: " << piece << endl << endl;
 
-	cout << left << setw(10) << "Ordem " << setw(20) << "Fornecedor" << "Preço" << endl;
+	cout << left << setw(10) << "Ordem " << setw(22) << "Fornecedor" << "Preço" << endl;
 
 	for(unsigned int i = 0; i < piecesOrderedPrice.size(); i++)
-		cout << " " << left << setw(7) << (i+1) <<  setw(23) << piecesOrderedPrice.at(i).getSupplier() << right << setw(3) << piecesOrderedPrice.at(i).getLastPurchasePrice() << endl;
+		cout << "  " << left << setw(8) << (i+1) <<  setw(23) << piecesOrderedPrice.at(i).getSupplier() << right << setw(3) << piecesOrderedPrice.at(i).getLastPurchasePrice() << endl;
 
 	cout << endl;
 }
