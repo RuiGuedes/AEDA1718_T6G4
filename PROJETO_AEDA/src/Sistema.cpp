@@ -2583,12 +2583,12 @@ void Sistema::displayJunkyardInfo() const {
 
 	cout << "Consultar bicicletas enviadas para abate" << endl << endl;
 
-	cout << "Bicicletas disponiveis para abate:" << endl;
-	cout << "Ordem" << "         Tipo " <<  "         Nome" << "         Data de abate" << endl;
-	for(it = junkyard.begin(); it != junkyard.end(); it++)
-	{
-		cout << indicator << "         ";
+	cout << "Bicicletas enviadas para abate:" << endl;
+	cout << right << "Ordem" << setw(10) << "Tipo" << setw(14) <<  "Nome" << setw(17) << "Data de abate" << endl;
 
+	for(it = junkyard.begin(); it != junkyard.end(); it++){
+		cout << "  " << left << setw(5) << indicator;
+cout << setw(18);
 		if(it->getBikeName().at(0) == 'c')
 			cout << "Corrida";
 		else if(it->getBikeName().at(0) == 'i')
@@ -2601,13 +2601,14 @@ void Sistema::displayJunkyardInfo() const {
 				cout << "Urbana";
 		}
 
-		cout << "         " << it->getBikeName() <<  "         ";
+		cout << setw(10) << it->getBikeName();
 
 		if(it->getAbate().getAno() == 0)
-			cout << "         " << "--/--/----" << endl;
+			cout << "--/--/----" << endl;
 		else
-			cout << "         " << it->getAbate() << endl;
+			cout << it->getAbate() << endl;
 
+		indicator++;
 	}
 
 	cout << endl;
