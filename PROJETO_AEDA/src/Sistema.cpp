@@ -1041,60 +1041,85 @@ void Sistema::removeFromRepairShop() {
 
 void Sistema::removeFromJunkyard(){
 
-	cout << "Remove bicicleta da lista para abate" << endl << endl;
+	tabHAbates::const_iterator it = junkyard.begin();
+	string option, bikeName;
+	int indicator {1}, value {};
+	vector<Bicicleta> bikeNamesAcess;
+	bool exist {false};
 
-	cout << "Tipos de bicicleta:" << endl << endl;
-
-	cout <<  "-> Urbana   [Name: u(number)]" << endl;
-	cout <<  "-> Urbana Simples [Name: us(number)]" << endl;
-	cout <<  "-> Corrida  [Name: c(number)]" << endl;
-	cout <<  "-> Infantil [Name: i(number)]" << endl << endl;
-
-	string biketype, nameB;
-
-	cin.ignore(1000,'\n');
-
-	//Verifica tipo de bicicleta a remover
-	while(1)
+	if(it == junkyard.end())
 	{
-		try {
-			cout << "Tipo de Bicicleta: " ;
-			getline(cin,biketype);
+		cout << "Neste momento não existem bicicletas que já tenham sido abatidas" << endl << endl;
+		return;
+	}
 
-			if(valid_word(biketype) == false || (biketype != "Urbana" && biketype != "Urbana Simples" && biketype != "Corrida" && biketype != "Infantil"))
-				throw OpcaoInvalida<string>(biketype);
-
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+		if(it->getAbate().getAno() != 0){
+			exist = true;
 			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
 		}
 	}
 
-	//Verifica se o nome da bicicleta a remover existe
+	if(exist == false)
+	{
+		cout << "Neste momento não existem bicicletas que já tenham sido abatidas" << endl << endl;
+		return;
+	}
+
+	cout << "Remover bicicleta abatida" << endl << endl;
+	cout << "Bicicletas disponiveis para remoção:" << endl;
+
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+		if(it->getAbate().getAno() != 0)
+		{
+			cout << left << setw(2) << indicator << " -> " << it->getBikeName() << endl;
+			bikeNamesAcess.push_back(*it);
+			indicator++;
+		}
+
+	}
+
+	//Seleciona uma das bicicletas
 	while(1)
 	{
 		try {
-			cout << "Nome da Bicicleta: " ;
-			getline(cin,nameB);
+			cout << endl << "Bicicleta (1-" << (indicator - 1) << "): ";
+			cin >> option;
 
-			if(valid_bike(nameB) == false || junkyard.find(Bicicleta(nameB)) == junkyard.end())
-				throw OpcaoInvalida<string>(nameB);
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
 
+			value = stoi(option);
+
+			if(value < 1 || value > (indicator - 1))
+				throw OpcaoInvalida<int>(value);
+
+			bikeName = bikeNamesAcess.at(value - 1).getBikeName();
 			break;
 		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Bicicleta não listada para abate ou inexistente(" << op.opcao << ") ! Tente novamente." << endl;
+		catch (OpcaoInvalida<int> &op){
+			cout << "Bicicleta inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+			cout << "Bicicleta inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+		if(it->getBikeName() == bikeName) {
+			junkyard.erase(it);
+			break;
 		}
 	}
 
-	//Remove a bicicleta da lista de bicicletas para abate
-	junkyard.erase(junkyard.find(Bicicleta(nameB)));
-
-	cout << endl << "Bicicleta removida da lista para abate com sucesso !" << endl << endl;
-
+	cout << endl << "Bicicleta " << bikeName << " removida com sucesso !" << endl << endl;
 }
 
 /////////////////
@@ -2154,7 +2179,7 @@ void Sistema::abateBike(){
 	while(1)
 	{
 		try {
-			cout << endl << "Peça (1-" << (indicator - 1) << "): ";
+			cout << endl << "Bicicleta (1-" << (indicator - 1) << "): ";
 			cin >> option;
 
 			if(valid_number(option) == false)
@@ -2169,12 +2194,12 @@ void Sistema::abateBike(){
 			break;
 		}
 		catch (OpcaoInvalida<int> &op){
-			cout << "Peça inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cout << "Bicicleta inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
 			cin.ignore(1000,'\n');
 		}
 		catch (OpcaoInvalida<string> &op){
-			cout << "Peça inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cout << "Bicicleta inválida(" << op.opcao << ") ! Tente novamente." << endl;
 			cin.clear();
 			cin.ignore(1000,'\n');
 		}
