@@ -21,7 +21,7 @@ Bicicleta::Bicicleta(){};
  * Construtor da classe Bicicleta.
  * @param name nome da bicicleta
  */
-Bicicleta::Bicicleta(string name) {
+Bicicleta::Bicicleta(string name) : price(0) {
 	bikeName = name;
 }
 
@@ -46,11 +46,22 @@ vector<string> Bicicleta::getAvarias() const {
 	return avarias;
 }
 
+Data Bicicleta::getAbate() const {
+	return abate;
+}
 
 // METODOS SET //
 
+void Bicicleta::setPrice(int preco) {
+	price = preco;
+}
+
 void Bicicleta::setAvarias(vector<string> novasAvarias) {
 	avarias = novasAvarias;
+}
+
+void Bicicleta::setAbate(Data dataAbate) {
+	abate = dataAbate;
 }
 
 ////////////
