@@ -31,7 +31,7 @@ public:
 	//Métodos Display
 	void displayBSTInfo();
 	void displayBrokenBikeInfo();
-	void displayPiecePrices();
+	void displayPieceLowestPrice();
 	void displaySupliersInfo();
 
 	//Others

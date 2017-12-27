@@ -337,7 +337,7 @@ void oficina_interface(Sistema &ER) {
 			ER.removeFromRepairShop();
 			break;
 		case 2:
-			ER.getOficina().displayPiecePrices();	//Falta meter o display certo
+			ER.getOficina().displayPieceLowestPrice();
 			break;
 		case 3:
 			ER.getOficina().addPiece();
@@ -349,7 +349,7 @@ void oficina_interface(Sistema &ER) {
 			ER.getOficina().displayBSTInfo();
 			break;
 		case 6:
-			// -> Deve ser ainda possível obter uma listagem dos fornecedores e valores das últimas compras de determinadas peças em especifico.
+			ER.getOficina().displaySupliersInfo();
 			break;
 		case 7:
 			ER.getOficina().displayBrokenBikeInfo();
