@@ -1097,102 +1097,6 @@ void Sistema::removeFromJunkyard(){
 
 }
 
-void Sistema::abateBike(){
-
-	cout << "Abate bicicleta" << endl << endl;
-
-	cout << "Tipos de bicicleta:" << endl << endl;
-
-	cout <<  "-> Urbana   [Name: u(number)]" << endl;
-	cout <<  "-> Urbana Simples [Name: us(number)]" << endl;
-	cout <<  "-> Corrida  [Name: c(number)]" << endl;
-	cout <<  "-> Infantil [Name: i(number)]" << endl << endl;
-
-	string nomePP, biketype;
-	bool cond {false};
-	int indexPP {-1};
-	int indexBB {-1};
-	int indexBike {-1};
-
-	cin.ignore(1000,'\n');
-
-	//Verifica tipo de bicicleta a abater
-	while(1)
-	{
-		try {
-			cout << "Tipo de Bicicleta: " ;
-			getline(cin,biketype);
-
-			if(valid_word(biketype) == false)
-				throw OpcaoInvalida<string>(biketype);
-
-			if(biketype == "Urbana")
-				indexBB = 0;
-			else if(biketype == "Urbana Simples")
-				indexBB = 1;
-			else if(biketype == "Corrida")
-				indexBB = 2;
-			else if(biketype == "Infantil")
-				indexBB = 3;
-
-			if(indexBB == -1)
-				throw OpcaoInvalida<string>(biketype);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Tipo inválido(" << op.opcao << ") ! Tente novamente." << endl;
-			cin.clear();
-		}
-	}
-
-	//Verifica se o nome da bicicleta a abater existe
-	while(1)
-	{
-		try {
-			cout << "Nome da Bicicleta: " ;
-			getline(cin,nomePP);
-
-			if(valid_bike(nomePP) == false)
-				throw OpcaoInvalida<string>(nomePP);
-
-			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
-			{
-				for(unsigned int k = 0; k < pontosPartilha.at(i)->getBikes().at(indexBB).size(); k++)
-				{
-					if(pontosPartilha.at(i)->getBikes().at(indexBB).at(k)->getBikeName() == nomePP)
-					{
-						indexPP = i;
-						indexBike = k;
-						cond = true;
-					}
-				}
-			}
-
-			if(cond == false || junkyard.find(Bicicleta(nomePP)) == junkyard.end())
-				throw OpcaoInvalida<string>(nomePP);
-
-			break;
-		}
-		catch (OpcaoInvalida<string> &op) {
-			cout << "Bicicleta não listada para abate ou inexistente(" << op.opcao << ") ! Tente novamente." << endl;
-			cond = false;
-			cin.clear();
-		}
-	}
-
-	Data DATA_ATUAL(1,1,2018);  //apenas para teste
-
-	//Abate a bicicleta e adiciona-lhe a data de abate
-	pontosPartilha.at(indexPP)->getBikes().at(indexBB).at(indexBike)->setAbate(DATA_ATUAL);
-
-	//Remove a bicicleta da lista de bicicletas para abate
-	junkyard.erase(junkyard.find(Bicicleta(nomePP)));
-
-	cout << endl << "Bicicleta abatida com sucesso !" << endl << endl;
-
-}
-
 /////////////////
 // METODOS GET //
 /////////////////
@@ -2203,6 +2107,98 @@ int Sistema::mudaTipoUT(int index){
 	return 0;
 }
 
+void Sistema::abateBike(){
+
+	tabHAbates::const_iterator it = junkyard.begin();
+	string option, bikeName;
+	int indicator {1}, value {};
+	vector<Bicicleta> bikeNamesAcess;
+	bool exist {false};
+
+	if(it == junkyard.end())
+	{
+		cout << "Neste momento não existem bicicletas a aguardar abate" << endl << endl;
+		return;
+	}
+
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+		if(it->getAbate().getAno() == 0){
+			exist = true;
+			break;
+		}
+	}
+
+	if(exist == false)
+	{
+		cout << "Neste momento não existem bicicletas a aguardar abate" << endl << endl;
+		return;
+	}
+
+	cout << "Abate bicicleta" << endl << endl;
+	cout << "Bicicletas disponiveis para abate:" << endl;
+
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+
+		if(it->getAbate().getAno() == 0)
+		{
+			cout << left << setw(2) << indicator << " -> " << it->getBikeName() << endl;
+			bikeNamesAcess.push_back(*it);
+			indicator++;
+		}
+
+	}
+
+	//Seleciona uma das bicicletas
+	while(1)
+	{
+		try {
+			cout << endl << "Peça (1-" << (indicator - 1) << "): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > (indicator - 1))
+				throw OpcaoInvalida<int>(value);
+
+			bikeName = bikeNamesAcess.at(value - 1).getBikeName();
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+			cout << "Peça inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+			cout << "Peça inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	for(it = junkyard.begin(); it != junkyard.end(); it++)
+	{
+		if(it->getBikeName() == bikeName)
+		{
+			Bicicleta tmp = (*it);
+			tmp.setAbate(dataAtual);
+			junkyard.erase(it);
+			junkyard.insert(tmp);
+			break;
+		}
+	}
+
+	cout << endl << "Bicicleta " << bikeName << " abatida com sucesso !" << endl << endl;
+}
+
+///////////////////////////
+// MANAGEMENT ALGORITHMS //
+///////////////////////////
+
 /**
  * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
  * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
@@ -2319,6 +2315,7 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 	int random_number {};
 
 	random_number = rand() % 10 + 1;
+	random_number = 9;
 	cout << random_number << endl << endl;
 
 	//0-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
@@ -2352,14 +2349,30 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 		repairShop.addBrokenBike(bike);
 	}
 	else
-	{
-		//Envia bicicleta para abate
-		junkyard.insert(*bike);
-	}
+		junkyard.insert(*bike);		//Adiciona a bicicleta para abate
 
 	return false;
 
 }
+
+void Sistema::updateData(Data data) {
+
+	if(dataAtual.getAno() == data.getAno())
+	{
+		if(dataAtual.getMes() == data.getMes())
+		{
+			if(dataAtual.getDia() == data.getDia())
+				return;
+		}
+	}
+
+	dataAtual = data;
+
+}
+
+/////////////////////
+// METODOS DISPLAY //
+/////////////////////
 
 /**
  * Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
@@ -2530,20 +2543,5 @@ void Sistema::displayMostRepStores() const {
 		}
 
 	}
-
-}
-
-void Sistema::updateData(Data data) {
-
-	if(dataAtual.getAno() == data.getAno())
-	{
-		if(dataAtual.getMes() == data.getMes())
-		{
-			if(dataAtual.getDia() == data.getDia())
-				return;
-		}
-	}
-
-	dataAtual = data;
 
 }

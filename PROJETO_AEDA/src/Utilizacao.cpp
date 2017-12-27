@@ -153,3 +153,15 @@ void Data::setMes(unsigned int m){
 void Data::setAno(unsigned int a){
 	this->ano=a;
 }
+
+////////////
+// OTHERS //
+////////////
+
+bool Data::operator== (const Data &dt1) const {
+
+	if((ano == dt1.getAno()) && (mes == dt1.getMes()) && (dia == dt1.getDia()))
+		return true;
+
+	return false;
+}

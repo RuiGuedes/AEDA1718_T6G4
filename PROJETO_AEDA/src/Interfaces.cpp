@@ -382,9 +382,9 @@ void bicicleta_interface(Sistema &ER) {
 
 		cout << "1 - Adicionar bicicleta" << endl;
 		cout << "2 - Remover bicicleta" << endl;
-		cout << "3 - Abater bicicletas" << endl;
-		cout << "4 - Retirar bicicletas da lista para abates" << endl;
-		cout << "5 - Consultar bicicletas que aguardam abate" << endl;;
+		cout << "3 - Abater bicicleta" << endl;
+		cout << "4 - Remover bicicleta abatida" << endl;
+		cout << "5 - Consultar bicicletas enviadas para abate" << endl;;
 		cout << "6 - Voltar" << endl;
 
 		while(1)
@@ -434,7 +434,7 @@ void bicicleta_interface(Sistema &ER) {
 			ER.abateBike();
 			break;
 		case 4:
-			ER.removeFromJunkyard();
+			//ER.removeFromJunkyard();
 			break;
 		case 5:
 			/*
@@ -445,6 +445,8 @@ void bicicleta_interface(Sistema &ER) {
 		case 6:
 			break;
 		}
+		if(value != 6)
+			system("pause");
 
 		system("cls");
 

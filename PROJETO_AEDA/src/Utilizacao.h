@@ -20,6 +20,9 @@ public:
 	void setDia(unsigned int d);
 	void setMes(unsigned int m);
 	void setAno(unsigned int a);
+
+	//Others
+	bool operator== (const Data &dt1) const;
 };
 
 /**

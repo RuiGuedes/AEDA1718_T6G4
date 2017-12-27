@@ -50,18 +50,22 @@ public:
 	//Métodos Set
 	void setDataAtual(Data data);
 
-	//Others
-	void alugaBike(int index);
-	void devolveBike(int index);
-	void compraBike(int index);
-	int mudaTipoUT(int index);
-	void system_Manager(unsigned int index, string bikeType);
-	bool generateBikeStatus(Bicicleta* bike);
+	//Métodos display
 	void displayNearestPP(int index) const;
 	void displayUtentes() const;
 	void displayStoreInfo() const;
 	void displayMostRepStores() const;
+
+	//Management algorithms
+	void system_Manager(unsigned int index, string bikeType);
+	bool generateBikeStatus(Bicicleta* bike);
 	void updateData(Data data);
+
+	//Others
+	void alugaBike(int index);
+	void devolveBike(int index);
+	void compraBike(int index);
+	int  mudaTipoUT(int index);
 	void abateBike();
 };
 
