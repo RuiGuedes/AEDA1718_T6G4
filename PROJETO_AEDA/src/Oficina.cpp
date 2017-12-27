@@ -597,7 +597,7 @@ void Oficina::displayPiecePrices() {
 
 	cout << "Verificar qual o fornecedor que vendeu determinada peça a preço mais baixo" << endl << endl;
 
-	string piece,option,nome;
+	string piece,option;
 	int value {};
 	vector<string> piecesAvailable;
 
@@ -672,4 +672,82 @@ void Oficina::displayPiecePrices() {
 		cout << (i+1) <<  setw(20) << piecesOrderedPrice.at(i).getSupplier() << setw(20) << piecesOrderedPrice.at(i).getLastPurchasePrice() << endl;
 
 	cout << endl;
+}
+
+void Oficina::displaySupliersInfo() {
+
+	BSTItrIn<Peca> it(pieces);
+
+	if(it.isAtEnd())
+	{
+		cout << "Neste momento não existem fornecedores de qualquer tipo de peça " << endl << endl;
+		return;
+	}
+
+	string option,nome;
+	int value {};
+	vector<string> suplliers;
+
+	cout << "Informação acerca dos fornecedores" << endl << endl;
+
+	//Guarda no vetor "suppliers" todos os fornecedores existentes no momento
+	while(!it.isAtEnd())
+	{
+		if(suplliers.empty())
+			suplliers.push_back(it.retrieve().getSupplier());
+		else
+		{
+			bool exist {false};
+
+			for(unsigned int i = 0; i < suplliers.size(); i++)
+			{
+				if(it.retrieve().getSupplier() == suplliers.at(i))
+					exist = true;
+			}
+
+			if(exist == false)
+				suplliers.push_back(it.retrieve().getSupplier());
+		}
+
+		it.advance();
+	}
+
+	//Mostra todos os fornecedores existentes no momento
+	cout << "Fornecedores: " << endl << endl;
+
+	for(unsigned int i = 0; i < suplliers.size(); i++)
+		cout << left << setw(2) << (i+1) << " -> " << suplliers.at(i) << endl;
+
+	//Seleciona um fornecedor
+	while(1)
+	{
+		try {
+			cout << endl << "Fornecedor (1-" << suplliers.size() <<"): ";
+			cin >> option;
+
+			if(valid_number(option) == false)
+				throw OpcaoInvalida<string>(option);
+
+			value = stoi(option);
+
+			if(value < 1 || value > (int)suplliers.size())
+				throw OpcaoInvalida<int>(value);
+
+			nome = suplliers.at(value - 1);
+			break;
+		}
+		catch (OpcaoInvalida<int> &op){
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+		catch (OpcaoInvalida<string> &op){
+			cout << "Opção inválida(" << op.opcao << ") ! Tente novamente." << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
+		}
+	};
+
+	//
+
 }

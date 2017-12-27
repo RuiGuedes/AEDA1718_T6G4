@@ -32,6 +32,7 @@ public:
 	void displayBSTInfo();
 	void displayBrokenBikeInfo();
 	void displayPiecePrices();
+	void displaySupliersInfo();
 
 	//Others
 	void buyPiece();
