@@ -748,6 +748,6 @@ void Oficina::displaySupliersInfo() {
 		}
 	};
 
-
+	//Mostrar
 
 }
