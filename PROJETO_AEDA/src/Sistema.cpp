@@ -1678,10 +1678,6 @@ void Sistema::devolveBike(int index) {
 
 		system_Manager(index_pp,bikeType);
 	}
-	else
-		cout << endl << "Bicicleta devolvida com sucesso !" << endl << endl;
-
-	return;
 }
 
 void Sistema::compraBike(int index) {
@@ -2340,8 +2336,6 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 	int random_number {};
 
 	random_number = rand() % 10 + 1;
-	random_number = 9;
-	cout << random_number << endl << endl;
 
 	//0-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
 
@@ -2372,9 +2366,14 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 
 		//Adiciona a bicicleta a oficina
 		repairShop.addBrokenBike(bike);
+		cout << endl << "Bicicleta devolvida com sucesso na oficina !" << endl << endl;
 	}
 	else
-		junkyard.insert(*bike);		//Adiciona a bicicleta para abate
+	{
+		//Adiciona a bicicleta para abate
+		junkyard.insert(*bike);
+		cout << endl << "Bicicleta devolvida com sucesso no ferro-velho !" << endl << endl;
+	}
 
 	return false;
 
@@ -2584,11 +2583,11 @@ void Sistema::displayJunkyardInfo() const {
 	cout << "Consultar bicicletas enviadas para abate" << endl << endl;
 
 	cout << "Bicicletas enviadas para abate:" << endl;
-	cout << right << "Ordem" << setw(10) << "Tipo" << setw(14) <<  "Nome" << setw(17) << "Data de abate" << endl;
+	cout << right << "Ordem" << setw(10) << "Tipo" << setw(18) <<  "Nome" << setw(21) << "Data de abate" << endl;
 
 	for(it = junkyard.begin(); it != junkyard.end(); it++){
-		cout << "  " << left << setw(5) << indicator;
-cout << setw(18);
+		cout << "  " << left << setw(9) << indicator;
+		cout << setw(18);
 		if(it->getBikeName().at(0) == 'c')
 			cout << "Corrida";
 		else if(it->getBikeName().at(0) == 'i')
@@ -2601,7 +2600,7 @@ cout << setw(18);
 				cout << "Urbana";
 		}
 
-		cout << setw(10) << it->getBikeName();
+		cout << setw(14) << it->getBikeName();
 
 		if(it->getAbate().getAno() == 0)
 			cout << "--/--/----" << endl;
