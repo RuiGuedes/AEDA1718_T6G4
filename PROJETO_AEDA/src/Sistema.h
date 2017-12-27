@@ -15,6 +15,7 @@ class Sistema {
 	Oficina repairShop;
 	priority_queue<Loja> stores;
 	tabHAbates junkyard;
+	Data dataAtual;
 public:
 	/**
 	 *  Construtor padrao da classe Sistema
@@ -44,6 +45,10 @@ public:
 	void getInfo() const;
 	vector<int> getOrderedPP(int index) const;
 	int getUtenteIndex(int identificacao) const;
+	Data getDataAtual() const;
+
+	//Métodos Set
+	void setDataAtual(Data data);
 
 	//Others
 	void alugaBike(int index);
@@ -56,6 +61,7 @@ public:
 	void displayUtentes() const;
 	void displayStoreInfo() const;
 	void displayMostRepStores() const;
+	void updateData(Data data);
 	void abateBike();
 };
 

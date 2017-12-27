@@ -29,6 +29,10 @@ int main()
 	cout << " .";checkinSys(sys) ; cout << "\b.."; Sleep(1000); cout << "\b\b...";Sleep(500);
 	system("cls");
 
+	////////////////////////////////
+	sys.setDataAtual(Data(20,1,2018));
+	////////////////////////////////
+
 	openInterface(sys);
 
 	checkoutSys(sys);

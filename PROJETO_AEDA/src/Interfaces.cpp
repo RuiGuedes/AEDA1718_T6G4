@@ -259,7 +259,6 @@ void menu_interface(Sistema &ER){
 			cout << endl;
 			break;
 		}
-
 		if(value != 13)
 			system("pause");
 

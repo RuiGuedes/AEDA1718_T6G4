@@ -1330,6 +1330,17 @@ int Sistema::getUtenteIndex(int identificacao) const {
 	return -1;
 }
 
+Data Sistema::getDataAtual() const {
+	return dataAtual;
+}
+
+/////////////////
+// METODOS SET //
+/////////////////
+
+void Sistema::setDataAtual(Data data) {
+	dataAtual = data;
+}
 
 ////////////
 // OTHERS //
@@ -1452,18 +1463,20 @@ void Sistema::alugaBike(int index) {
 			}
 		};
 
+		cout << endl << "Última utilização: " << dataAtual.getDia() << "/" << dataAtual.getMes() << "/" << dataAtual.getAno() << endl;
+
 		//Executa até obter um ano válido
 		while(1)
 		{
 			try{
-				cout << endl << "Ano [2017 ->]: ";
+				cout << endl << "Ano [" << dataAtual.getAno() << " ->]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
 
 				value = stoi(option);
-				if(value < 2017)
+				if(value < (int)dataAtual.getAno())
 					throw OpcaoInvalida<int>(value);
 
 				d1.setAno(value);
@@ -1485,15 +1498,24 @@ void Sistema::alugaBike(int index) {
 		while(1)
 		{
 			try{
-				cout << endl << "Mês [1-12]: ";
+				cout << endl << "Mês [" << dataAtual.getMes() << "-12]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
 					throw OpcaoInvalida<string>(option);
 
 				value = stoi(option);
-				if(value < 1 || value > 12)
-					throw OpcaoInvalida<int>(value);
+
+				if(dataAtual.getAno() < d1.getAno())
+				{
+					if(value < 1 || value > 12)
+						throw OpcaoInvalida<int>(value);
+				}
+				else
+				{
+					if(value < (int)dataAtual.getMes() || value > 12)
+						throw OpcaoInvalida<int>(value);
+				}
 
 				d1.setMes(value);
 				break;
@@ -1523,31 +1545,64 @@ void Sistema::alugaBike(int index) {
 					throw OpcaoInvalida<string>(option);
 
 				value = stoi(option);
-				if(d1.getMes() == 2)
-				{
-					if(value < 1 || value > 28)
-						throw OpcaoInvalida<int>(value);
 
-					d1.setDia(value);
-					break;
-				}
-				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
-						(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+				if((d1.getMes() == dataAtual.getMes()) && (d1.getAno() == dataAtual.getAno()))
 				{
-					if(value < 1 || value > 31)
-						throw OpcaoInvalida<int>(value);
+					if(d1.getMes() == 2)
+					{
+						if(value < (int)dataAtual.getDia() || value > 28)
+							throw OpcaoInvalida<int>(value);
 
-					d1.setDia(value);
-					break;
+						d1.setDia(value);
+						break;
+					}
+					else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
+							(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+					{
+						if(value < (int)dataAtual.getDia() || value > 31)
+							throw OpcaoInvalida<int>(value);
+
+						d1.setDia(value);
+						break;
+					}
+					else
+					{
+						if(value < (int)dataAtual.getDia() || value > 30)
+							throw OpcaoInvalida<int>(value);
+
+						d1.setDia(value);
+						break;
+					}
 				}
 				else
 				{
-					if(value < 1 || value > 30)
-						throw OpcaoInvalida<int>(value);
+					if(d1.getMes() == 2)
+					{
+						if(value < 1 || value > 28)
+							throw OpcaoInvalida<int>(value);
 
-					d1.setDia(value);
-					break;
+						d1.setDia(value);
+						break;
+					}
+					else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
+							(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+					{
+						if(value < 1 || value > 31)
+							throw OpcaoInvalida<int>(value);
+
+						d1.setDia(value);
+						break;
+					}
+					else
+					{
+						if(value < 1 || value > 30)
+							throw OpcaoInvalida<int>(value);
+
+						d1.setDia(value);
+						break;
+					}
 				}
+
 			}
 			catch (OpcaoInvalida<int> &op){
 
@@ -1560,6 +1615,9 @@ void Sistema::alugaBike(int index) {
 				cin.clear();
 			}
 		};
+
+		//Atualiza a data se necessária
+		updateData(d1);
 
 		int idPP {};
 		vector<string> bikesType;
@@ -1808,20 +1866,21 @@ void Sistema::compraBike(int index) {
 	else
 		condition = false;
 
-	cout << endl << "Data de compra:" << endl;
+	cout << endl << "Última utilização: " << dataAtual.getDia() << "/" << dataAtual.getMes() << "/" << dataAtual.getAno() << endl << endl;
+	cout << "Data de compra:" << endl;
 
 	//Executa até obter um ano válido
 	while(1)
 	{
 		try{
-			cout << endl << "Ano [2017 ->]: ";
+			cout << endl << "Ano [" << dataAtual.getAno() << " ->]: ";
 			cin >> option;
 			cin.ignore(1000,'\n');
 			if(valid_number(option) == false)
 				throw OpcaoInvalida<string>(option);
 
 			value = stoi(option);
-			if(value < 2017)
+			if(value < (int)dataAtual.getAno())
 				throw OpcaoInvalida<int>(value);
 
 			d1.setAno(value);
@@ -1843,15 +1902,24 @@ void Sistema::compraBike(int index) {
 	while(1)
 	{
 		try{
-			cout << endl << "Mês [1-12]: ";
+			cout << endl << "Mês [" << dataAtual.getMes() << "-12]: ";
 			cin >> option;
 			cin.ignore(1000,'\n');
 			if(valid_number(option) == false)
 				throw OpcaoInvalida<string>(option);
 
 			value = stoi(option);
-			if(value < 1 || value > 12)
-				throw OpcaoInvalida<int>(value);
+
+			if(dataAtual.getAno() < d1.getAno())
+			{
+				if(value < 1 || value > 12)
+					throw OpcaoInvalida<int>(value);
+			}
+			else
+			{
+				if(value < (int)dataAtual.getMes() || value > 12)
+					throw OpcaoInvalida<int>(value);
+			}
 
 			d1.setMes(value);
 			break;
@@ -1881,30 +1949,62 @@ void Sistema::compraBike(int index) {
 				throw OpcaoInvalida<string>(option);
 
 			value = stoi(option);
-			if(d1.getMes() == 2)
-			{
-				if(value < 1 || value > 28)
-					throw OpcaoInvalida<int>(value);
 
-				d1.setDia(value);
-				break;
-			}
-			else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
-					(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+			if((d1.getMes() == dataAtual.getMes()) && (d1.getAno() == dataAtual.getAno()))
 			{
-				if(value < 1 || value > 31)
-					throw OpcaoInvalida<int>(value);
+				if(d1.getMes() == 2)
+				{
+					if(value < (int)dataAtual.getDia() || value > 28)
+						throw OpcaoInvalida<int>(value);
 
-				d1.setDia(value);
-				break;
+					d1.setDia(value);
+					break;
+				}
+				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
+						(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+				{
+					if(value < (int)dataAtual.getDia() || value > 31)
+						throw OpcaoInvalida<int>(value);
+
+					d1.setDia(value);
+					break;
+				}
+				else
+				{
+					if(value < (int)dataAtual.getDia() || value > 30)
+						throw OpcaoInvalida<int>(value);
+
+					d1.setDia(value);
+					break;
+				}
 			}
 			else
 			{
-				if(value < 1 || value > 30)
-					throw OpcaoInvalida<int>(value);
+				if(d1.getMes() == 2)
+				{
+					if(value < 1 || value > 28)
+						throw OpcaoInvalida<int>(value);
 
-				d1.setDia(value);
-				break;
+					d1.setDia(value);
+					break;
+				}
+				else if((d1.getMes() == 1) ||(d1.getMes() == 3) ||(d1.getMes() == 5) ||
+						(d1.getMes() == 7) ||(d1.getMes() == 8) ||(d1.getMes() == 10) ||(d1.getMes() == 12))
+				{
+					if(value < 1 || value > 31)
+						throw OpcaoInvalida<int>(value);
+
+					d1.setDia(value);
+					break;
+				}
+				else
+				{
+					if(value < 1 || value > 30)
+						throw OpcaoInvalida<int>(value);
+
+					d1.setDia(value);
+					break;
+				}
 			}
 		}
 		catch (OpcaoInvalida<int> &op){
@@ -1919,8 +2019,10 @@ void Sistema::compraBike(int index) {
 		}
 	};
 
-	//Percorrer todas as lojas disponiveis e verificar quais possuem stock para a compra
+	//Atualiza a data se necessária
+	updateData(d1);
 
+	//Percorrer todas as lojas disponiveis e verificar quais possuem stock para a compra
 	while(!stores.empty())
 	{
 
@@ -2428,5 +2530,20 @@ void Sistema::displayMostRepStores() const {
 		}
 
 	}
+
+}
+
+void Sistema::updateData(Data data) {
+
+	if(dataAtual.getAno() == data.getAno())
+	{
+		if(dataAtual.getMes() == data.getMes())
+		{
+			if(dataAtual.getDia() == data.getDia())
+				return;
+		}
+	}
+
+	dataAtual = data;
 
 }
