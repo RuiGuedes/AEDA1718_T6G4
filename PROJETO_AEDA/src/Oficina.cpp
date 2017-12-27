@@ -749,5 +749,6 @@ void Oficina::displaySupliersInfo() {
 	};
 
 	//Mostrar
+	//MASDASD
 
 }
