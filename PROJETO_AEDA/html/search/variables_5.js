@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['historico',['historico',['../class_utente.html#a80d3f62f70812361dee383aedee5e82c',1,'Utente']]]
+  ['ficheiro',['ficheiro',['../class_abertura_falhada.html#a1a1ee662ed0560e51e28976475ea9840',1,'AberturaFalhada']]]
 ];

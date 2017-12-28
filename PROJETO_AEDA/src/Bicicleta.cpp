@@ -23,6 +23,7 @@ Bicicleta::Bicicleta(){};
  */
 Bicicleta::Bicicleta(string name) : price(0) {
 	bikeName = name;
+	abate = Data (0,0,0);
 }
 
 
@@ -51,10 +52,6 @@ Data Bicicleta::getAbate() const {
 }
 
 // METODOS SET //
-
-void Bicicleta::setPrice(int preco) {
-	price = preco;
-}
 
 void Bicicleta::setAvarias(vector<string> novasAvarias) {
 	avarias = novasAvarias;

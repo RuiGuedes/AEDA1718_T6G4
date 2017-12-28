@@ -24,7 +24,6 @@ public:
 	Data getAbate() const;
 
 	//Métodos Set
-	void setPrice(int preco);
 	void setAvarias(vector<string> novasAvarias);
 	void setAbate(Data dataAbate);
 

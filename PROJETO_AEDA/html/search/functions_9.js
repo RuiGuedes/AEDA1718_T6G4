@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['main',['main',['../_main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'Main.cpp']]],
-  ['mensageminicial',['mensagemInicial',['../_includes_8h.html#af1478ec3c3337a2e9b9f6c6a352065e0',1,'mensagemInicial():&#160;Interfaces.cpp'],['../_interfaces_8cpp.html#af1478ec3c3337a2e9b9f6c6a352065e0',1,'mensagemInicial():&#160;Interfaces.cpp']]],
-  ['menu_5finterface',['menu_interface',['../_interfaces_8cpp.html#ac8d5ccf9cf4dbbede85f8cba2e017e40',1,'Interfaces.cpp']]],
-  ['mudatipout',['mudaTipoUT',['../class_sistema.html#a5af35291cfa6248860587d547669db69',1,'Sistema']]]
+  ['limpavectorbike',['limpaVectorBike',['../class_ponto_partilha.html#acc08e56e4b7424415332061cda27ca6a',1,'PontoPartilha']]],
+  ['localizacao',['Localizacao',['../class_localizacao.html#aef7d8fcaecdcfebd82c7b41547ff34af',1,'Localizacao::Localizacao()'],['../class_localizacao.html#a916c9bde806fa6e2f269e67353384651',1,'Localizacao::Localizacao(double x, double y)'],['../class_localizacao.html#ab16c9daf21919162e5b6dfb9fe7cdcf3',1,'Localizacao::Localizacao(string nome, double x, double y)']]],
+  ['loja',['Loja',['../class_loja.html#a87cbcca2d690ffb63347f51a6166b876',1,'Loja::Loja()'],['../class_loja.html#a4438c49c702a6a412c372fd5cb109eb2',1,'Loja::Loja(Localizacao *spot, unsigned int capacity, vector&lt; unsigned int &gt; stock)']]],
+  ['lojas_5finterface',['lojas_interface',['../_interfaces_8cpp.html#a2330b9fd9bc2151b70caf451946dec4e',1,'Interfaces.cpp']]]
 ];

@@ -114,6 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa4ecf2674fa015502dd3a07afb1b3fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fc0271466dc97e89083f272606b0d35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a5fc0271466dc97e89083f272606b0d35">setHistoric</a> (<a class="el" href="class_utilizacao.html">Utilizacao</a> ut)</td></tr>
 <tr class="separator:a5fc0271466dc97e89083f272606b0d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c25abb5551e725076e8b27bc2ac723d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a6c25abb5551e725076e8b27bc2ac723d">setHistoricoCompras</a> (<a class="el" href="class_utilizacao.html">Utilizacao</a> info)</td></tr>
+<tr class="separator:a6c25abb5551e725076e8b27bc2ac723d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7be3cdb81ea155dd0459793862f8a294"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a7be3cdb81ea155dd0459793862f8a294">efetuaPag</a> (int index)=0</td></tr>
 <tr class="separator:a7be3cdb81ea155dd0459793862f8a294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd6de74c0ec5d8f10890533fb5a8e4fe"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#acd6de74c0ec5d8f10890533fb5a8e4fe">hasPendingPay</a> ()=0</td></tr>
@@ -134,6 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad25ff0171f631c60d4535c1c8a14bd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51d6ffa94b7d2a382b67f7c929dbe648"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a51d6ffa94b7d2a382b67f7c929dbe648">updateLocation</a> (int index)</td></tr>
 <tr class="separator:a51d6ffa94b7d2a382b67f7c929dbe648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58dfd0cab9cbc1cd029ff4aad442db97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a58dfd0cab9cbc1cd029ff4aad442db97">displayHistoricoCompras</a> ()</td></tr>
+<tr class="separator:a58dfd0cab9cbc1cd029ff4aad442db97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -156,6 +160,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a80d3f62f70812361dee383aedee5e82c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a733e199570826669c53b5b03c825dfcd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a733e199570826669c53b5b03c825dfcd">disponivel</a> = true</td></tr>
 <tr class="separator:a733e199570826669c53b5b03c825dfcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eaa9fe916ea9a77cb81345c6848a46e"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_utilizacao.html">Utilizacao</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_utente.html#a4eaa9fe916ea9a77cb81345c6848a46e">historicoCompras</a></td></tr>
+<tr class="separator:a4eaa9fe916ea9a77cb81345c6848a46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -338,6 +344,23 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="class_regular.html#a5f271329d7a1baab77addfbca684d6a9">Regular</a>, and <a class="el" href="class_socio.html#af2a7aecde0ba0d0df9f5864389d137eb">Socio</a>.</p>
+
+</div>
+</div>
+<a id="a58dfd0cab9cbc1cd029ff4aad442db97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58dfd0cab9cbc1cd029ff4aad442db97">&#9670;&nbsp;</a></span>displayHistoricoCompras()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Utente::displayHistoricoCompras </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -703,6 +726,24 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6c25abb5551e725076e8b27bc2ac723d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c25abb5551e725076e8b27bc2ac723d">&#9670;&nbsp;</a></span>setHistoricoCompras()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Utente::setHistoricoCompras </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_utilizacao.html">Utilizacao</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a321094475fdd783cbb60c192f5539aa0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a321094475fdd783cbb60c192f5539aa0">&#9670;&nbsp;</a></span>setID()</h2>
 
@@ -886,6 +927,28 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Utilizacoes liquidadas do utente. </p>
+
+</div>
+</div>
+<a id="a4eaa9fe916ea9a77cb81345c6848a46e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eaa9fe916ea9a77cb81345c6848a46e">&#9670;&nbsp;</a></span>historicoCompras</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_utilizacao.html">Utilizacao</a>&gt; Utente::historicoCompras</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -21,21 +21,37 @@ int main()
 	// Zona de inicialização do programa //
 	///////////////////////////////////////
 
+	dataAtual = Data(0,0,0);
+
 	mensagemInicial();
 
 	Sistema sys;
 
-	cout << "APPLICATION LOADING";
-	cout << " .";checkinSys(sys) ; cout << "\b.."; Sleep(1000); cout << "\b\b...";Sleep(500);
-	system("cls");
+	cout << "APPLICATION LOADING"; cout << " .";
 
-	////////////////////////////////
-	sys.setDataAtual(Data(20,1,2018));
-	////////////////////////////////
+	try{
+		checkinSys(sys);
+	}
+	catch (AberturaFalhada<string> &a){
+		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
+		cout << "Tente mais tarde.\n";
+		system("pause");
+		return 1;
+	}
+cout << dataAtual << endl;
+	Sleep(500);
+	system("cls");
 
 	openInterface(sys);
 
-	checkoutSys(sys);
+	try{
+		checkoutSys(sys);
+	}
+	catch (AberturaFalhada<string> &a){
+		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
+		cout << "Tente mais tarde./n";
+		return 1;
+	}
 
 	return 0;
 }
@@ -48,24 +64,17 @@ int main()
  * @param ER sistema que se pretende completar
  */
 void checkinSys(Sistema & ER){
-	ifstream f_utentes;
+	ifstream file_1, file_2;
 	string f_line;
 	stringstream ss;
 	char tipoUtente;
 
-	try{
-		f_utentes.open("utentes.txt");
-		if (!f_utentes.is_open())
-			throw AberturaFalhada<string>("utentes.txt");
-	}
-	catch (AberturaFalhada<string> &a){
-		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
-		cout << "Tente mais tarde.\n";
-		return;
-	}
+	file_1.open("utentes.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("utentes.txt");
 
-	while(!f_utentes.eof()){
-		getline(f_utentes,f_line);
+	while(!file_1.eof()){
+		getline(file_1,f_line);
 		if (f_line != ""){
 			ss << f_line;
 			tipoUtente = ss.get();
@@ -98,35 +107,26 @@ void checkinSys(Sistema & ER){
 		}
 	}
 
-	f_utentes.close();
+	file_1.close();
 
-	ifstream f_pontos_partilha;
 
-	ifstream f_bicicletas;
 
-	try{
-		f_pontos_partilha.open("pontosPartilha.txt");
-		if (!f_pontos_partilha.is_open())
-			throw AberturaFalhada<string>("pontos_partilha.txt");
+	file_1.open("pontosPartilha.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("pontos_partilha.txt");
 
-		f_bicicletas.open("bicicletas.txt");
-		if (!f_bicicletas.is_open())
-			throw AberturaFalhada<string>("bicicletas.txt");
-	}
-	catch (AberturaFalhada<string> &a){
-		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
-		cout << "Tente mais tarde.\n";
-		return;
-	}
+	file_2.open("bicicletas.txt");
+	if (!file_2.is_open())
+		throw AberturaFalhada<string>("bicicletas.txt");
 
-	while(!f_pontos_partilha.eof()){
+	while(!file_1.eof()){
 		PontoPartilha p1;
-		f_pontos_partilha >> p1;
+		file_1 >> p1;
 
 		if(p1.getNome()==""){
 			break;
 		}
-		f_pontos_partilha.ignore();
+		file_1.ignore();
 
 		vector<int> numType = p1.getNumberOfBikes();
 		p1.limpaVectorBike();
@@ -135,12 +135,10 @@ void checkinSys(Sistema & ER){
 			for (int k=0 ; k < numType.at(j) ; k++){
 				string b;
 				Bicicleta* bike;
-				getline(f_bicicletas, b,'\n');
+				getline(file_2, b,'\n');
 
-				if(b.at(0) == 'u')
-				{
-					if(b.at(1) == 's')
-					{
+				if(b.at(0) == 'u') {
+					if(b.at(1) == 's') {
 						bike = new UrbanaSimples(b);
 					}
 					else
@@ -163,9 +161,78 @@ void checkinSys(Sistema & ER){
 		ER.addPontoPartilha(p);
 	}
 
-	f_pontos_partilha.close();
+	file_1.close();
 
-	f_bicicletas.close();
+	file_2.close();
+
+	cout << ".";
+
+	/// LOJAS ///
+	file_1.open("lojas.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("lojas.txt");
+
+	priority_queue<Loja> tmp;
+
+	while (!file_1.eof()) {
+
+		getline(file_1,f_line);
+		if (f_line != ""){
+			ss << f_line;
+
+			Loja lj;
+
+			ss >> lj;
+
+			tmp.push(lj);
+		}
+	}
+	ER.setStores(tmp);
+
+	file_1.close();
+
+	/// OFICINA ///
+	file_2.open("oficina.txt");
+	if (!file_2.is_open())
+		throw AberturaFalhada<string>("oficina.txt");
+
+	Oficina of;
+
+	file_2 >> of;
+
+	ER.setOficina(of);
+
+	file_2.close();
+
+	cout << ".";
+
+	/// ABATES ///
+	file_1.open("abates.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("abates.txt");
+
+	tabHAbates tmptab;
+
+	while (!file_1.eof()) {
+		getline(file_1,f_line);
+
+		if (f_line != ""){
+			ss << f_line;
+			string name;
+
+			getline(ss, name,',');
+
+			Bicicleta bike(name);
+			Data data;
+			ss >> data;
+
+			bike.setAbate(data);
+			tmptab.insert(bike);
+		}
+	}
+	ER.setJunkyard(tmptab);
+
+	file_1.close();
 
 	return;
 };
@@ -178,65 +245,90 @@ void checkinSys(Sistema & ER){
  */
 void checkoutSys(Sistema & ER){
 
-	ofstream f_utentes;
+	ofstream file_1;
+	ofstream file_2;
 
-	try{
-		f_utentes.open("utentes.txt");
-		if (!f_utentes.is_open())
-			throw AberturaFalhada<string>("utentes.txt");
-	}
-	catch (AberturaFalhada<string> &a){
-		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
-		cout << "Tente mais tarde./n";
-		return;
-	}
+	/// UTENTES ///
+	file_1.open("utentes.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("utentes.txt");
 
 	for(unsigned int it=0 ; it<ER.getUtentes().size() ; it++){
 		if(ER.getUtentes().at(it)->getTipoUtente() == "Socio" ){
 			Socio s = *static_cast<Socio *> (ER.getUtentes().at(it));
-			f_utentes << s << endl;
+			file_1 << s << endl;
 		}
 		else {
 			Regular r = *static_cast<Regular *> (ER.getUtentes().at(it));
-			f_utentes << r << endl;
+			file_1 << r << endl;
 		}
 	}
 
-	f_utentes.close();
+	file_1.close();
 
-	ofstream f_pontos_partilha;
+	/// PONTOS PARTILHA ///
+	file_1.open("pontosPartilha.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("pontos_partilha.txt");
 
-	ofstream f_bicicletas;
-
-	try{
-		f_pontos_partilha.open("pontosPartilha.txt");
-		if (!f_pontos_partilha.is_open())
-			throw AberturaFalhada<string>("pontos_partilha.txt");
-
-		f_bicicletas.open("bicicletas.txt");
-		if (!f_bicicletas.is_open())
-			throw AberturaFalhada<string>("bicicletas.txt");
-	}
-	catch (AberturaFalhada<string> &a){
-		cout << "Falha ao abrir o ficheiro " << a.getFicheiro() << "." << endl;
-		cout << "Tente mais tarde./n";
-		return;
-	}
+	file_2.open("bicicletas.txt");
+	if (!file_2.is_open())
+		throw AberturaFalhada<string>("bicicletas.txt");
 
 	for(unsigned int it=0 ; it<ER.getPontosPartilha().size() ; it++){
-		f_pontos_partilha << (*ER.getPontosPartilha().at(it)) << endl;
+		file_1 << (*ER.getPontosPartilha().at(it)) << endl;
 
 		PontoPartilha p(*ER.getPontosPartilha().at(it));
 
 		for(unsigned int j=0 ; j<p.getBikes().size() ; j++)
 			for(unsigned int k=0 ; k <p.getBikes().at(j).size() ; k++){
-				f_bicicletas << (*p.getBikes().at(j).at(k)).getBikeName() << endl;
+				file_2 << (*p.getBikes().at(j).at(k)).getBikeName() << endl;
 			}
 	}
 
-	f_pontos_partilha.close();
+	file_1.close();
+	file_2.close();
 
-	f_bicicletas.close();
+	/// LOJAS ///
+	file_1.open("lojas.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("lojas.txt");
+
+	priority_queue<Loja> tmp = ER.getStores();
+
+	while (!tmp.empty()) {
+		file_1 << tmp.top() << endl;
+		tmp.pop();
+	}
+
+	file_1.close();
+
+	/// OFICINA ///
+	file_2.open("oficina.txt");
+	if (!file_2.is_open())
+		throw AberturaFalhada<string>("oficina.txt");
+
+	file_2 << ER.getOficina();
+
+	file_2.close();
+
+	/// ABATES ///
+	file_1.open("abates.txt");
+	if (!file_1.is_open())
+		throw AberturaFalhada<string>("abates.txt");
+
+	tabHAbates tmptab = ER.getJunkyard();
+
+	tabHAbates::iterator it = tmptab.begin();
+
+	while(it != ER.getJunkyard().end()) {
+		if(it->getBikeName() != "")
+			file_1 << it->getBikeName() << ',' << it->getAbate() << endl;
+
+		it++;
+	}
+
+	file_1.close();
 
 	return;
 }

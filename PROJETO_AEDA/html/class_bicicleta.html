@@ -94,6 +94,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9f33895cc93dbca777e54abf5e705f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addf0c1ebeac486f8d54de7ca794bd9c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#addf0c1ebeac486f8d54de7ca794bd9c0">getPrice</a> () const</td></tr>
 <tr class="separator:addf0c1ebeac486f8d54de7ca794bd9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30cca5701e0d3301c1b0a7837f82e922"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a30cca5701e0d3301c1b0a7837f82e922">getAvarias</a> () const</td></tr>
+<tr class="separator:a30cca5701e0d3301c1b0a7837f82e922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68359cbc1bd39bb43cbdd861800684f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_data.html">Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a68359cbc1bd39bb43cbdd861800684f5">getAbate</a> () const</td></tr>
+<tr class="separator:a68359cbc1bd39bb43cbdd861800684f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11663a90b0f67b57ea1d824e8db2b761"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a11663a90b0f67b57ea1d824e8db2b761">setAvarias</a> (vector&lt; string &gt; novasAvarias)</td></tr>
+<tr class="separator:a11663a90b0f67b57ea1d824e8db2b761"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd56433f00070046de54389b8e60ce0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a4dd56433f00070046de54389b8e60ce0">setAbate</a> (<a class="el" href="class_data.html">Data</a> dataAbate)</td></tr>
+<tr class="separator:a4dd56433f00070046de54389b8e60ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6db01d552f8bc6d999a8771b615a907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#ae6db01d552f8bc6d999a8771b615a907">addAvarias</a> (string avaria)</td></tr>
+<tr class="separator:ae6db01d552f8bc6d999a8771b615a907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -101,6 +111,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af839fed5e45dd2219d3115b7f3bf9224"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9df467fd6ee506b427b59673caa9112c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a9df467fd6ee506b427b59673caa9112c">price</a></td></tr>
 <tr class="separator:a9df467fd6ee506b427b59673caa9112c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed68121b549b9c7c9cc1b8edbdc8d36e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_data.html">Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#aed68121b549b9c7c9cc1b8edbdc8d36e">abate</a></td></tr>
+<tr class="separator:aed68121b549b9c7c9cc1b8edbdc8d36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a89c57cae38e556f6a6f135922bcf6"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bicicleta.html#a20a89c57cae38e556f6a6f135922bcf6">avarias</a></td></tr>
+<tr class="separator:a20a89c57cae38e556f6a6f135922bcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad1af58c3a03f2b8dc081da7b7757c653"></a>
@@ -173,6 +187,58 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae6db01d552f8bc6d999a8771b615a907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6db01d552f8bc6d999a8771b615a907">&#9670;&nbsp;</a></span>addAvarias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bicicleta::addAvarias </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>avaria</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68359cbc1bd39bb43cbdd861800684f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68359cbc1bd39bb43cbdd861800684f5">&#9670;&nbsp;</a></span>getAbate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_data.html">Data</a> Bicicleta::getAbate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30cca5701e0d3301c1b0a7837f82e922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30cca5701e0d3301c1b0a7837f82e922">&#9670;&nbsp;</a></span>getAvarias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; string &gt; Bicicleta::getAvarias </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9f33895cc93dbca777e54abf5e705f31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f33895cc93dbca777e54abf5e705f31">&#9670;&nbsp;</a></span>getBikeName()</h2>
 
@@ -209,7 +275,87 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4dd56433f00070046de54389b8e60ce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd56433f00070046de54389b8e60ce0">&#9670;&nbsp;</a></span>setAbate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bicicleta::setAbate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_data.html">Data</a>&#160;</td>
+          <td class="paramname"><em>dataAbate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11663a90b0f67b57ea1d824e8db2b761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11663a90b0f67b57ea1d824e8db2b761">&#9670;&nbsp;</a></span>setAvarias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bicicleta::setAvarias </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; string &gt;&#160;</td>
+          <td class="paramname"><em>novasAvarias</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aed68121b549b9c7c9cc1b8edbdc8d36e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed68121b549b9c7c9cc1b8edbdc8d36e">&#9670;&nbsp;</a></span>abate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_data.html">Data</a> Bicicleta::abate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20a89c57cae38e556f6a6f135922bcf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a89c57cae38e556f6a6f135922bcf6">&#9670;&nbsp;</a></span>avarias</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;string&gt; Bicicleta::avarias</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af839fed5e45dd2219d3115b7f3bf9224"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af839fed5e45dd2219d3115b7f3bf9224">&#9670;&nbsp;</a></span>bikeName</h2>
 

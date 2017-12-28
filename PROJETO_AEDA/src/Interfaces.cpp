@@ -271,6 +271,7 @@ void menu_interface(Sistema &ER){
 	return;
 }
 
+
 void oficina_interface(Sistema &ER) {
 
 	system("cls");

@@ -1210,6 +1210,14 @@ Oficina& Sistema::getOficina() {
 	return repairShop;
 }
 
+priority_queue<Loja> Sistema::getStores() const {
+	return stores;
+};
+
+tabHAbates Sistema::getJunkyard() const {
+	return junkyard;
+};
+
 /**
  * Retorna um vector com os indices dos pontos de partilha organizados por ordem crescente
  * de distancia ao utente com indice = index.
@@ -1259,16 +1267,20 @@ int Sistema::getUtenteIndex(int identificacao) const {
 	return -1;
 }
 
-Data Sistema::getDataAtual() const {
-	return dataAtual;
-}
-
 /////////////////
 // METODOS SET //
 /////////////////
 
-void Sistema::setDataAtual(Data data) {
-	dataAtual = data;
+void Sistema::setStores(priority_queue<Loja> newStores) {
+	stores = newStores;
+}
+
+void Sistema::setOficina(Oficina newRShop) {
+	repairShop = newRShop;
+}
+
+void Sistema::setJunkyard(tabHAbates newJunkyard){
+	junkyard = newJunkyard;
 }
 
 ////////////

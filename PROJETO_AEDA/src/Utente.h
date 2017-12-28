@@ -6,6 +6,9 @@
 #include "Utilizacao.h"
 #include "PontoPartilha.h"
 
+//// Varivel Global ////
+static Data dataAtual;
+
 class Utente {
 protected:
 	static int lastId;				/**< Numero de Identificacao do ultimo utente registado. */
@@ -106,6 +109,11 @@ inline ostream& operator <<(ostream & o, const Socio & u)
 	for (unsigned int k=0 ; k< u.historico.size() ; k++){
 		o << u.historico.at(k) << ';' ;
 	}
+
+	o << u.historicoCompras.size() << ',' ;
+	for (unsigned int k=0 ; k< u.historicoCompras.size() ; k++){
+		o << u.historicoCompras.at(k) << ';' ;
+	}
 	return o;
 }
 
@@ -116,14 +124,18 @@ inline ostream& operator <<(ostream & o, const Socio & u)
 inline istream& operator >>(istream & i, Socio & u)
 {
 	char b1, b2, b3, b4, b5;
-	unsigned int utiliz, hist;
-	Utilizacao ut;
+	unsigned int utiliz, hist, histComp;
+	Utilizacao ut, compra;
 
 	getline(i,u.nome,',');
 	i >> u.local >> b1 >> utiliz >> b2;
 
 	for(unsigned int k=0 ; k < utiliz ; k++){
 		i >> ut >> b3;
+
+		if (dataAtual < ut.getData())
+			dataAtual = ut.getData();
+
 		u.utilizacoes.push_back(ut);
 	}
 
@@ -131,7 +143,22 @@ inline istream& operator >>(istream & i, Socio & u)
 
 	for(unsigned int k=0 ; k < hist ; k++){
 		i >> ut >> b5;
+
+		if (dataAtual < ut.getData())
+			dataAtual = ut.getData();
+
 		u.historico.push_back(ut);
+	}
+
+	i >> histComp >> b4;
+
+	for(unsigned int k=0 ; k < histComp ; k++){
+		i >> compra >> b5;
+
+		if (dataAtual < compra.getData())
+			dataAtual = compra.getData();
+
+		u.historicoCompras.push_back(compra);
 	}
 	return i;
 }
@@ -174,6 +201,10 @@ inline ostream& operator <<(ostream & o, const Regular & u)
 		o << u.historico.at(k) << ';' ;
 	}
 
+	o << u.historicoCompras.size() << ',' ;
+	for (unsigned int k=0 ; k< u.historicoCompras.size() ; k++){
+		o << u.historicoCompras.at(k) << ';' ;
+	}
 	return o;
 }
 
@@ -183,17 +214,31 @@ inline ostream& operator <<(ostream & o, const Regular & u)
  */
 inline istream& operator >>(istream & i, Regular & u) {
 	char b2, b3, b4;
-	unsigned int hist;
-	Utilizacao ut;
+	unsigned int hist, histComp;
+	Utilizacao ut, compra;
 
 	getline(i,u.nome,',');
 	i >> u.local >> b2 >> hist >> b3;
 
 	for(unsigned int k=0 ; k < hist ; k++){
 		i >> ut >> b4;
+
+		if (dataAtual < ut.getData())
+			dataAtual = ut.getData();
+
 		u.historico.push_back(ut);
 	}
 
+	i >> histComp >> b4;
+
+	for(unsigned int k=0 ; k < histComp ; k++){
+		i >> compra >> b4;
+
+		if (dataAtual < compra.getData())
+			dataAtual = compra.getData();
+
+		u.historicoCompras.push_back(compra);
+	}
 	return i;
 }
 

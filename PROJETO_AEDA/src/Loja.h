@@ -29,4 +29,46 @@ public:
 	//Others
 	bool operator<(const Loja& l1) const;
 	void checkStock(int index);
+	friend ostream & operator <<(ostream & o, const Loja & l);
+	friend istream & operator >>(istream & i, Loja & l);
 };
+
+
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Utilizacao nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
+inline ostream& operator <<(ostream & o, const Loja & l)
+{
+	o << (*l.local) << ',' << l.numberOpinions << ',' << l.reputation << ',' << l.capacity << ';' ;
+
+	o << l.stock.size() << ',' ;
+
+	for (unsigned int k = 0 ; k < l.stock.size() ; k++ ) {
+		o << l.stock.at(k) << ',';
+	}
+
+	return o;
+}
+
+/**
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utilizacao,
+ * de modo a recriar o sistema da ultima execucao.
+ */
+inline istream& operator >>(istream & i, Loja & l) {
+	char b1;
+	unsigned int num_stock , num_bikes;
+	Localizacao loc;
+
+	i >> loc >> b1 >> l.numberOpinions >> b1 >> l.reputation >> b1 >> l.capacity >> b1;
+	l.local = new Localizacao {loc};
+
+	i >> num_stock >> b1 ;
+
+	for (unsigned int k = 0 ; k < num_stock ; k++ ) {
+		i >> num_bikes >> b1;
+		l.stock.push_back(num_bikes);
+	}
+
+	return i;
+}

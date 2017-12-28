@@ -15,7 +15,6 @@ class Sistema {
 	Oficina repairShop;
 	priority_queue<Loja> stores;
 	tabHAbates junkyard;
-	Data dataAtual;
 public:
 	/**
 	 *  Construtor padrao da classe Sistema
@@ -42,13 +41,16 @@ public:
 	vector<Utente* > getUtentes() const;
 	vector<PontoPartilha* > getPontosPartilha() const;
 	Oficina& getOficina();
+	priority_queue<Loja> getStores() const;
+	tabHAbates getJunkyard() const;
 	void getInfo() const;
 	vector<int> getOrderedPP(int index) const;
 	int getUtenteIndex(int identificacao) const;
-	Data getDataAtual() const;
 
 	//Métodos Set
-	void setDataAtual(Data data);
+	void setStores(priority_queue<Loja> newStores);
+	void setOficina(Oficina newRShop);
+	void setJunkyard(tabHAbates newJunkyard);
 
 	//Métodos display
 	void displayNearestPP(int index) const;

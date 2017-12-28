@@ -23,6 +23,7 @@ public:
 
 	//Others
 	bool operator== (const Data &dt1) const;
+	bool operator< (const Data &dt) const;
 };
 
 /**

@@ -165,3 +165,15 @@ bool Data::operator== (const Data &dt1) const {
 
 	return false;
 }
+
+bool Data::operator< (const Data &dt) const {
+
+	if(ano < dt.getAno())
+		return true;
+	else if ((ano == dt.ano) && (mes < dt.mes))
+		return true;
+	else if ((ano == dt.ano) && (mes == dt.mes) && (dia < dt.dia))
+		return true;
+
+	return false;
+}
