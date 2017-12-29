@@ -7,8 +7,8 @@ class Bicicleta {
 protected:
 	string bikeName; 			/**< Nome da bicicleta, composto pelas iniciais do tipo e um numero (ex: "u5" = bicicleta Urbana numero 5 (existem 4 antes desta)). */
 	int price;					/**< Preco referente ao valor de uma mensalidade associada a um tipo de bicicleta. */
-	Data abate;
-	vector<string> avarias;
+	Data abate;					/**< Data em que a bicicleta foi abatida. */
+	vector<string> avarias;		/**< Lista de avarias da bicicleta. */
 public:
 	Bicicleta();				/**< Necessario para o overload do operador de extracao na classe utente.*/
 	Bicicleta(string name);

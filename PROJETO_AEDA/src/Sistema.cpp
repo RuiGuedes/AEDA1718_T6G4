@@ -1267,9 +1267,17 @@ int Sistema::getUtenteIndex(int identificacao) const {
 	return -1;
 }
 
+Data Sistema::getDataAtual() const {
+	return dataAtual;
+}
+
 /////////////////
 // METODOS SET //
 /////////////////
+
+void Sistema::setDataAtual(Data newData) {
+	dataAtual = newData;
+}
 
 void Sistema::setStores(priority_queue<Loja> newStores) {
 	stores = newStores;

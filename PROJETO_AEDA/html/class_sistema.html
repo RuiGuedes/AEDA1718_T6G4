@@ -114,6 +114,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aeefdc1c7c4c16a99c06e11ae66630e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a847e392e8360248c224ac9e487181a73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#a847e392e8360248c224ac9e487181a73">getUtenteIndex</a> (int identificacao) const</td></tr>
 <tr class="separator:a847e392e8360248c224ac9e487181a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8abd1045182f57df8ac1b4c9e6203f54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_data.html">Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#a8abd1045182f57df8ac1b4c9e6203f54">getDataAtual</a> () const</td></tr>
+<tr class="separator:a8abd1045182f57df8ac1b4c9e6203f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c41a1047c1cbbea8a067d8a85ec286"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#aa4c41a1047c1cbbea8a067d8a85ec286">setDataAtual</a> (<a class="el" href="class_data.html">Data</a> newData)</td></tr>
+<tr class="separator:aa4c41a1047c1cbbea8a067d8a85ec286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecff0d6d08377f9f1b38982b79a7a32b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#aecff0d6d08377f9f1b38982b79a7a32b">setStores</a> (priority_queue&lt; <a class="el" href="class_loja.html">Loja</a> &gt; newStores)</td></tr>
 <tr class="separator:aecff0d6d08377f9f1b38982b79a7a32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e2ed3ff522183aa72121f49d8b50f83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#a3e2ed3ff522183aa72121f49d8b50f83">setOficina</a> (<a class="el" href="class_oficina.html">Oficina</a> newRShop)</td></tr>
@@ -159,6 +163,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a668690be0e7c4f4d2c5031f4d6683a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab04e5a021e9104be0b6281739a0dd9f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_junkyard_8h.html#a2aad13db0e3e1b3845b698109968d2c2">tabHAbates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#ab04e5a021e9104be0b6281739a0dd9f9">junkyard</a></td></tr>
 <tr class="separator:ab04e5a021e9104be0b6281739a0dd9f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbb41b31d17ffae63d60b0031a4ce957"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_data.html">Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sistema.html#acbb41b31d17ffae63d60b0031a4ce957">dataAtual</a> = <a class="el" href="_utente_8h.html#a9198a209f83296b8fc0879a690638a68">globalData</a></td></tr>
+<tr class="separator:acbb41b31d17ffae63d60b0031a4ce957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a815b07845ef6b03247b239333fe75e28"></a>
@@ -503,6 +509,23 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a8abd1045182f57df8ac1b4c9e6203f54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8abd1045182f57df8ac1b4c9e6203f54">&#9670;&nbsp;</a></span>getDataAtual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_data.html">Data</a> Sistema::getDataAtual </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a97b54f8009100d8443b69b56f7929bef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97b54f8009100d8443b69b56f7929bef">&#9670;&nbsp;</a></span>getInfo()</h2>
 
@@ -788,6 +811,24 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa4c41a1047c1cbbea8a067d8a85ec286"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c41a1047c1cbbea8a067d8a85ec286">&#9670;&nbsp;</a></span>setDataAtual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sistema::setDataAtual </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_data.html">Data</a>&#160;</td>
+          <td class="paramname"><em>newData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1481e7cb996c3ea46447189adc1821de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1481e7cb996c3ea46447189adc1821de">&#9670;&nbsp;</a></span>setJunkyard()</h2>
 
@@ -896,6 +937,28 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="acbb41b31d17ffae63d60b0031a4ce957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbb41b31d17ffae63d60b0031a4ce957">&#9670;&nbsp;</a></span>dataAtual</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_data.html">Data</a> Sistema::dataAtual = <a class="el" href="_utente_8h.html#a9198a209f83296b8fc0879a690638a68">globalData</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab04e5a021e9104be0b6281739a0dd9f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab04e5a021e9104be0b6281739a0dd9f9">&#9670;&nbsp;</a></span>junkyard</h2>
 

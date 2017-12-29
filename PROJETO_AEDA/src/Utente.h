@@ -7,7 +7,7 @@
 #include "PontoPartilha.h"
 
 //// Varivel Global ////
-static Data dataAtual;
+static Data globalData;
 
 class Utente {
 protected:
@@ -133,8 +133,8 @@ inline istream& operator >>(istream & i, Socio & u)
 	for(unsigned int k=0 ; k < utiliz ; k++){
 		i >> ut >> b3;
 
-		if (dataAtual < ut.getData())
-			dataAtual = ut.getData();
+		if (globalData < ut.getData())
+			globalData = ut.getData();
 
 		u.utilizacoes.push_back(ut);
 	}
@@ -144,8 +144,8 @@ inline istream& operator >>(istream & i, Socio & u)
 	for(unsigned int k=0 ; k < hist ; k++){
 		i >> ut >> b5;
 
-		if (dataAtual < ut.getData())
-			dataAtual = ut.getData();
+		if (globalData < ut.getData())
+			globalData = ut.getData();
 
 		u.historico.push_back(ut);
 	}
@@ -155,8 +155,8 @@ inline istream& operator >>(istream & i, Socio & u)
 	for(unsigned int k=0 ; k < histComp ; k++){
 		i >> compra >> b5;
 
-		if (dataAtual < compra.getData())
-			dataAtual = compra.getData();
+		if (globalData < compra.getData())
+			globalData = compra.getData();
 
 		u.historicoCompras.push_back(compra);
 	}
@@ -223,8 +223,8 @@ inline istream& operator >>(istream & i, Regular & u) {
 	for(unsigned int k=0 ; k < hist ; k++){
 		i >> ut >> b4;
 
-		if (dataAtual < ut.getData())
-			dataAtual = ut.getData();
+		if (globalData < ut.getData())
+			globalData = ut.getData();
 
 		u.historico.push_back(ut);
 	}
@@ -234,8 +234,8 @@ inline istream& operator >>(istream & i, Regular & u) {
 	for(unsigned int k=0 ; k < histComp ; k++){
 		i >> compra >> b4;
 
-		if (dataAtual < compra.getData())
-			dataAtual = compra.getData();
+		if (globalData < compra.getData())
+			globalData = compra.getData();
 
 		u.historicoCompras.push_back(compra);
 	}

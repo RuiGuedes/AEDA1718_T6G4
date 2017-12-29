@@ -1,5 +1,8 @@
 #include "Loja.h"
 
+/**
+ * Construtor Padrao da classe Loja
+ */
 Loja::Loja() {
 	local = new Localizacao();
 	vector<unsigned int> init;
@@ -9,6 +12,12 @@ Loja::Loja() {
 	reputation = 0;
 }
 
+/**
+ * Construtor da classe Loja
+ * @param spot apontador para a Localizacao da loja
+ * @param capacity capacidade de stock da loja
+ * @param stock quantidade de bicicletas de cada tipo (stock[0] = num_Urbanas, stock[1] = num_Urbanas_Simples, stock[2] = num_Corrida, stock[3] = num_Infantis )
+ */
 Loja::Loja(Localizacao* spot, unsigned int capacity, vector<unsigned int> stock) {
 	local = spot;
 	this->capacity = capacity;
@@ -20,6 +29,7 @@ Loja::Loja(Localizacao* spot, unsigned int capacity, vector<unsigned int> stock)
 /////////////////
 // METODOS GET //
 /////////////////
+
 
 double Loja::getReputation() const {
 

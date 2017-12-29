@@ -5,6 +5,9 @@
 
 struct bikeHash
 {
+	/**
+	 * Funcao dispersao
+	 */
 	int operator() (const Bicicleta & bic) const{
 		int v {0};
 		for ( unsigned int i=0; i< bic.getBikeName().size(); i++ )
@@ -12,6 +15,9 @@ struct bikeHash
 		return v;
 	}
 
+	/**
+	 * Operador de igualdade
+	 */
 	bool operator() (const Bicicleta & b1, const Bicicleta & b2) const {
 		return b1.getBikeName() == b2.getBikeName();
 	}

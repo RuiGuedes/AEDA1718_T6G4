@@ -43,20 +43,34 @@ int Bicicleta::getPrice() const {
 	return price;
 }
 
+/**
+ * @return Retorna a lista de avarias da bicicleta, caso nao haja avarias retorna um vetor vazio.
+ */
 vector<string> Bicicleta::getAvarias() const {
 	return avarias;
 }
 
+/**
+ * @return Retorna a data em que a bicicleta foi abatida, caso nao tenha acontecido, retorna 0/0/0.
+ */
 Data Bicicleta::getAbate() const {
 	return abate;
 }
 
 // METODOS SET //
 
+/**
+ * Altera a lista de avarias da bicicleta
+ * @param novasAvarias lista de avarias da bicicleta.
+ */
 void Bicicleta::setAvarias(vector<string> novasAvarias) {
 	avarias = novasAvarias;
 }
 
+/**
+ * Altera a data de abate da bicicleta
+ * @param dataAbate data de abate da bicicleta.
+ */
 void Bicicleta::setAbate(Data dataAbate) {
 	abate = dataAbate;
 }
@@ -65,6 +79,10 @@ void Bicicleta::setAbate(Data dataAbate) {
 // OTHERS //
 ////////////
 
+/**
+ * Adiciona a avaria a lista de avarias da bicicleta.
+ * @param avaria avaria que sera adicionada.
+ */
 void Bicicleta::addAvarias(string avaria){
 	avarias.push_back(avaria);
 }

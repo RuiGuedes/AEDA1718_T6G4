@@ -21,7 +21,7 @@ int main()
 	// Zona de inicialização do programa //
 	///////////////////////////////////////
 
-	dataAtual = Data(0,0,0);
+	globalData = Data(0,0,0);
 
 	mensagemInicial();
 
@@ -38,9 +38,11 @@ int main()
 		system("pause");
 		return 1;
 	}
-cout << dataAtual << endl;
+
 	Sleep(500);
 	system("cls");
+
+	sys.setDataAtual(globalData);
 
 	openInterface(sys);
 
