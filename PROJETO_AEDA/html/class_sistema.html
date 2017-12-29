@@ -208,6 +208,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Verifica se existem bicicletas a aguardar abate, se sim, imprime-as no ecra para o utilizador selecionar a que pretende abater, senao e impressa uma mensagem. A bicicleta selecionada e abatida. </p>
 
 </div>
 </div>
@@ -311,6 +312,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Apresenta os passos necessarios para criacao de uma nova loja, pedindo para escolher uma localizacao das disponiveis e a capacidade, por fim, adiciona-a ao sistema. Adiciona bicicletas de incrementando o stock de cada tipo ate atingir a capacidade. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
 
 </div>
 </div>
@@ -328,7 +330,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que pretende adicionar. Cria uma bicicleta com do tipo pedido e adionar-a ao ponto de partilha. Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
+<p>Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que pretende adicionar. Cria uma bicicleta do tipo pedido e adionar-a ao ponto de partilha. Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
 
 </div>
 </div>
@@ -371,6 +373,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a necessaria para a compra de bicicletas (tipo de bicicleta, quantidade e data). A compra e feita na loja mais proximo do utente, com stock suficiente. Chama o metodo checkStock da classe <a class="el" href="class_loja.html">Loja</a> para reabastecer o stock da loja se necessario. No final, e apresentado o total a pagar pelo aluguer. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -389,7 +397,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta e o metodo adicionaBike da classe pontoPartilha para remover a bicicleta do utente e coloca-la no ponto de partilha. A devolucao e feita no ponto de partilha mais proximo do utente. No final, chama a funcao Sistem_Manager para gerir as bicicletas. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta e o metodo adicionaBike da classe pontoPartilha para remover a bicicleta do utente e coloca-la no ponto de partilha. A devolucao e feita no ponto de partilha mais proximo, nao lotado, do utente. E chamada a funcao generateBikeStatus que decide se a bicicleta fica no ponto de partilha, ou se e enviada para a oficina ou para a sucata. No final,se a bicicleta ficar no ponto de partilha, chama a funcao Sistem_Manager para gerir as bicicletas. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
   </table>
@@ -412,6 +420,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Apresenta todas as bicicletas que foram envidas para abate. As bicicletas que ja foram abatidas, tem a data de abate, as que ainda aguardam abate tem &ndash;/&ndash;/-&mdash;. E impresso o tipo de bicicleta, o nome, a data de abate. </p>
 
 </div>
 </div>
@@ -429,6 +438,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Apresenta o top 5 das lojas do sistema. Imprime a informacao das 5 lojas com maior reputacao, localizacao e reputacao. </p>
 
 </div>
 </div>
@@ -470,6 +480,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Apresenta uma lista de todas as lojas existentes e pede para selecionar uma. De seguida e impressa a informacao sobre essa loja: localizacao, reputacao, capacidade e stock. </p>
 
 </div>
 </div>
@@ -506,6 +517,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gera um numero aleatorio de 0-10. 0-5 -&gt; Devolve no ponto de partilha 6-8 -&gt; Gera avarias entre 0 e 10 e envia bicicleta para a oficina 9-10 -&gt; Envia a bicicleta para abate </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bike</td><td>apontador da bicicleta que se pretende gerar um estado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -523,6 +540,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna a data da ultima utilizacao do sistema. </dd></dl>
 
 </div>
 </div>
@@ -558,6 +576,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna a tabela de dispersao com as bicicletas que estao para abate. </dd></dl>
 
 </div>
 </div>
@@ -575,6 +594,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna uma referencia da oficina. </dd></dl>
 
 </div>
 </div>
@@ -635,6 +655,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna a fila de prioridade das lojas. </dd></dl>
 
 </div>
 </div>
@@ -738,6 +759,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Pede ao utilizador para escolher a bicicleta da lista apresentada. Essa lista contem as bicicletas que ja foram abatidas. O utilizador escolhe e a bicicleta e removida da sucata. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
 
 </div>
 </div>
@@ -755,6 +777,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Remove as bicicletas ja reparadas da oficina e coloca-as no ponto de partilha com menos bicicletas do seu tipo. </p>
 
 </div>
 </div>
@@ -790,6 +813,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Pede ao utilizador que escolha a loja que pretende remover da lista apresentada e remove-a do sistema. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
 
 </div>
 </div>
@@ -826,6 +850,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a data da ultima utilizacao do sistema. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newData</td><td>nova data </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -844,6 +874,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a tabela de dispersao com as bicicletas que estao para abate. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newJunkyard</td><td>nova tabela de bicicletas </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -862,6 +898,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a oficina </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newRShop</td><td>nova oficina </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -880,6 +922,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a fila de prioridade das lojas. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newStores</td><td>nova fila de lojas </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -933,6 +981,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Compara a data com a dataAtual e atualiza-a caso sejam diferentes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>nova data </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -956,6 +1010,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_data.html">Data</a> da ultima utilizacao do sistema. </p>
 
 </div>
 </div>
@@ -978,6 +1033,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Tabela de dispersao de bicicletas abatidas e que aguardam abate. </p>
 
 </div>
 </div>
@@ -1023,6 +1079,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_oficina.html">Oficina</a> de reparacao de bicicletas. </p>
 
 </div>
 </div>
@@ -1045,6 +1102,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Fila de prioridade de lojas. </p>
 
 </div>
 </div>

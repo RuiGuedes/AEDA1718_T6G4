@@ -14,6 +14,7 @@ var searchData=
   ['getcapacidade',['getCapacidade',['../class_ponto_partilha.html#ac6641ed6a5ff80fade731d409cfd8ce7',1,'PontoPartilha']]],
   ['getcapacity',['getCapacity',['../class_loja.html#a0711d581547acbbbc842fe952fc15e18',1,'Loja']]],
   ['getdata',['getData',['../class_utilizacao.html#a84be740e0b86e87ecb97fc2bb8581a9a',1,'Utilizacao']]],
+  ['getdataatual',['getDataAtual',['../class_sistema.html#a8abd1045182f57df8ac1b4c9e6203f54',1,'Sistema']]],
   ['getdia',['getDia',['../class_data.html#a459536c9351759b5697ba25456d9bd70',1,'Data']]],
   ['getficheiro',['getFicheiro',['../class_abertura_falhada.html#a9ad000694b3ea79c63deb3a4b9aa0f03',1,'AberturaFalhada']]],
   ['gethistorico',['getHistorico',['../class_utente.html#aee272ae0a2de68ae45f4df2cfba1d05b',1,'Utente']]],
@@ -45,5 +46,6 @@ var searchData=
   ['getutentes',['getUtentes',['../class_sistema.html#aa446e6313e567949a6faa7caa52b9461',1,'Sistema']]],
   ['getutilizacoes',['getUtilizacoes',['../class_socio.html#a41092a31869d837f5fc6c3133775782e',1,'Socio']]],
   ['getx',['getX',['../class_localizacao.html#a9e4256d4a7e2745454598fb57746ceaf',1,'Localizacao']]],
-  ['gety',['getY',['../class_localizacao.html#a0ffc42182aedb8116105435da1b71f83',1,'Localizacao']]]
+  ['gety',['getY',['../class_localizacao.html#a0ffc42182aedb8116105435da1b71f83',1,'Localizacao']]],
+  ['globaldata',['globalData',['../_utente_8h.html#a9198a209f83296b8fc0879a690638a68',1,'Utente.h']]]
 ];

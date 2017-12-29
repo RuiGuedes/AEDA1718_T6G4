@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['usetime',['useTime',['../class_utilizacao.html#a2fd7fd4362e3f9bc7c82469edfcb4369',1,'Utilizacao']]],
-  ['utentes',['utentes',['../class_sistema.html#ad6fc10ffb43c5040a4c977fabbeaa043',1,'Sistema']]],
-  ['utilizacoes',['utilizacoes',['../class_socio.html#ac9a896af9cc86577d885aaae4c44329d',1,'Socio']]]
+  ['stock',['stock',['../class_loja.html#a2b21571cc79e3f298b7a22f61deb3081',1,'Loja']]],
+  ['stores',['stores',['../class_sistema.html#a668690be0e7c4f4d2c5031f4d6683a93',1,'Sistema']]],
+  ['supplier',['supplier',['../class_peca.html#ace9d2b95208443d809fd268a5653923a',1,'Peca']]]
 ];

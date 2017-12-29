@@ -93,7 +93,6 @@ void PontoPartilha::limpaVectorBike(){
 	bicicletas.at(3).clear();
 }
 
-
 /////////////////
 // METODOS GET //
 /////////////////
@@ -135,7 +134,6 @@ vector<int> PontoPartilha::getNumberOfBikes() const {
 	for(unsigned int i = 0; i < bicicletas.size(); i++){
 		number_bikes.push_back(bicicletas.at(i).size());
 	}
-
 	return number_bikes;
 }
 

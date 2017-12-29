@@ -8,6 +8,8 @@ protected:
 public:
 	Data();		/**< Necessario para o overload do operador de extracao na classe utente.*/
 	Data(unsigned int dia,unsigned int mes,unsigned int ano);
+
+	//Friend functions
 	friend ostream & operator<<(ostream & o, const Data & d);
 	friend istream & operator>>(istream & i, Data & d);
 
@@ -66,6 +68,8 @@ public:
 
 	//Others
 	void displayUtilizacao() const;
+
+	//Friend functions
 	friend ostream & operator <<(ostream & o, const Utilizacao & u);
 	friend istream & operator >>(istream & i, Utilizacao & u);
 

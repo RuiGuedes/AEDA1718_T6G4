@@ -7,7 +7,7 @@ var searchData=
   ['pieces',['pieces',['../class_oficina.html#a2cdb0e72dc07c07a91ee6bd4812acdfa',1,'Oficina']]],
   ['piecetype',['pieceType',['../class_peca.html#a72c6b4b7e2ea473a2345c94aae15dc3d',1,'Peca']]],
   ['ponto_5fpartilha_5finterface',['ponto_partilha_interface',['../_interfaces_8cpp.html#a20af55539f19fdf6e3d76c4ccaa77cc1',1,'Interfaces.cpp']]],
-  ['pontopartilha',['PontoPartilha',['../class_ponto_partilha.html',1,'PontoPartilha'],['../class_utilizacao.html#ad004dcbcf8ce086dcc00ed9f8b63a9ce',1,'Utilizacao::pontoPartilha()'],['../class_ponto_partilha.html#a0a5a17a5290153e997b3a498651b7cfd',1,'PontoPartilha::PontoPartilha()'],['../class_ponto_partilha.html#ac6af1ae38bf57cf3f85f81d6e38f4ba3',1,'PontoPartilha::PontoPartilha(Localizacao spot, unsigned int storage, string name)']]],
+  ['pontopartilha',['PontoPartilha',['../class_ponto_partilha.html',1,'PontoPartilha'],['../class_ponto_partilha.html#a0a5a17a5290153e997b3a498651b7cfd',1,'PontoPartilha::PontoPartilha()'],['../class_ponto_partilha.html#ac6af1ae38bf57cf3f85f81d6e38f4ba3',1,'PontoPartilha::PontoPartilha(Localizacao spot, unsigned int storage, string name)'],['../class_utilizacao.html#ad004dcbcf8ce086dcc00ed9f8b63a9ce',1,'Utilizacao::pontoPartilha()']]],
   ['pontopartilha_2ecpp',['PontoPartilha.cpp',['../_ponto_partilha_8cpp.html',1,'']]],
   ['pontopartilha_2eh',['PontoPartilha.h',['../_ponto_partilha_8h.html',1,'']]],
   ['pontospartilha',['pontosPartilha',['../class_sistema.html#ac1bb7e7448d12f689f565dd6e2bf9310',1,'Sistema']]],

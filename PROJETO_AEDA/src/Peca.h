@@ -2,13 +2,11 @@
 
 #include "Includes.h"
 
-
 class Peca {
-	unsigned int lastPurchasePrice;
-	string pieceType;
-	string supplier;
+	unsigned int lastPurchasePrice;		/**< Preco da ultima compra da peca. */
+	string pieceType;					/**< Tipo da peca. */
+	string supplier;					/**< Nome do fornecedor. */
 public:
-
 	Peca(unsigned int lastPurchasePrice, string pieceType, string supplier);
 
 	//Métodos Get
@@ -18,17 +16,20 @@ public:
 
 	//Métodos Set
 	void setLastPurchasePrice(unsigned int lastPurchasePrice);
-	void setPieceType(string pieceType);
-	void setSupplier(string supplier);
 
 	//Others
 	bool operator< (const Peca &ps1) const;
 	bool operator==(const Peca &ps1) const;
+
+	//Friend functions
 	friend ostream & operator <<(ostream & o, const Peca & p);
 	friend istream & operator >>(istream & i, Peca & p);
 };
 
-
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Peca nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream& operator <<(ostream & o, const Peca & p)
 {
 	o << p.lastPurchasePrice << ',' << p.pieceType << ',' << p.supplier ;

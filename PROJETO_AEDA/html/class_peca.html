@@ -83,10 +83,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abbca8f954059b3f25e3c35746061ea1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a725b439b7d49076f5424da17e196fa08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_peca.html#a725b439b7d49076f5424da17e196fa08">setLastPurchasePrice</a> (unsigned int <a class="el" href="class_peca.html#ab79d10732310d81ecf485b4043e1d0ec">lastPurchasePrice</a>)</td></tr>
 <tr class="separator:a725b439b7d49076f5424da17e196fa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07dcb6c22671c052f5acc53a70f1c442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_peca.html#a07dcb6c22671c052f5acc53a70f1c442">setPieceType</a> (string <a class="el" href="class_peca.html#a72c6b4b7e2ea473a2345c94aae15dc3d">pieceType</a>)</td></tr>
-<tr class="separator:a07dcb6c22671c052f5acc53a70f1c442"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f9c6dd8271b1f632b5689e7d5046215"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_peca.html#a6f9c6dd8271b1f632b5689e7d5046215">setSupplier</a> (string <a class="el" href="class_peca.html#ace9d2b95208443d809fd268a5653923a">supplier</a>)</td></tr>
-<tr class="separator:a6f9c6dd8271b1f632b5689e7d5046215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17ea78d893b8e94dece86fa042556256"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_peca.html#a17ea78d893b8e94dece86fa042556256">operator&lt;</a> (const <a class="el" href="class_peca.html">Peca</a> &amp;ps1) const</td></tr>
 <tr class="separator:a17ea78d893b8e94dece86fa042556256"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba6abe1799964839d72e2419800bdca4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_peca.html#aba6abe1799964839d72e2419800bdca4">operator==</a> (const <a class="el" href="class_peca.html">Peca</a> &amp;ps1) const</td></tr>
@@ -140,6 +136,14 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Construtor da classe <a class="el" href="class_peca.html">Peca</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lastPurchasePrice</td><td>preco da ultima compra </td></tr>
+    <tr><td class="paramname">pieceType</td><td>tipo de peca </td></tr>
+    <tr><td class="paramname">supplier</td><td>nome do fornecedor </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -158,6 +162,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna o preco da ultima compra. </dd></dl>
 
 </div>
 </div>
@@ -175,6 +180,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna o tipo de peca. </dd></dl>
 
 </div>
 </div>
@@ -192,6 +198,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna o nome do fornecedor. </dd></dl>
 
 </div>
 </div>
@@ -205,11 +212,18 @@ Friends</h2></td></tr>
           <td class="memname">bool Peca::operator&lt; </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_peca.html">Peca</a> &amp;&#160;</td>
-          <td class="paramname"><em>ps1</em></td><td>)</td>
+          <td class="paramname"><em>pt1</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Overload do operador &lt; para comparacao de 2 pecas. Uma peca e menor que outra se o tipo de peca e menor alfabeticamente. Em caso de igualdade, e menor aquela que tem menor preco de ultima compra. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pt1</td><td>peca com quem vai ser comparada </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna true se a condicao se verificar e false caso contrario. </dd></dl>
 
 </div>
 </div>
@@ -228,6 +242,13 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Overload do operador == para comparacao de 2 pecas. Uma peca e igual a outra se tiverem o mesmo tipo e o mesmo fornecedor. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ps1</td><td>peca com quem vai ser comparada </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna true se a condicao se verificar e false caso contrario. </dd></dl>
 
 </div>
 </div>
@@ -246,42 +267,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a07dcb6c22671c052f5acc53a70f1c442"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07dcb6c22671c052f5acc53a70f1c442">&#9670;&nbsp;</a></span>setPieceType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Peca::setPieceType </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>pieceType</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6f9c6dd8271b1f632b5689e7d5046215"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f9c6dd8271b1f632b5689e7d5046215">&#9670;&nbsp;</a></span>setSupplier()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Peca::setSupplier </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>supplier</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Atualiza o preco da ultima compra </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lastPurchasePrice</td><td>novo preco da ultima compra </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -319,6 +310,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Overload do operador de insercao usado para escrever os objetos do tipo <a class="el" href="class_peca.html">Peca</a> nos ficheiros, de modo a guardar a informacao do sistema. </p>
 
 </div>
 </div>
@@ -379,6 +371,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Preco da ultima compra da peca. </p>
 
 </div>
 </div>
@@ -401,6 +394,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Tipo da peca. </p>
 
 </div>
 </div>
@@ -423,6 +417,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Nome do fornecedor. </p>
 
 </div>
 </div>

@@ -34,21 +34,17 @@ void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
 	setBike(b);
 	setAvailable();
 	addUse(ut);
-
 	return;
 }
 
 /**
-// * Remove a bicicleta do utente e coloca-a no ponto de partilha, nao lotado, mais proximo do utente.
- * @param index_distancias vetor de indice dos pontos de partilha ordenados por distancia
+ * Remove a bicicleta do utente.
  * @return Retorna um apontador para bicicleta que o utente possuia.
  */
-Bicicleta* Utente::removeBicicleta(vector<int> index_distancias) {
-
+Bicicleta* Utente::removeBicicleta() {
 	Bicicleta* b = bike;
 	setAvailable();
 	setBike(0);
-
 	return b;
 }
 
@@ -132,6 +128,10 @@ void Utente::updateLocation(int index) {
 	return;
 }
 
+/**
+ * Imprime no ecra o historico de compras do utente, apresentando o local da compra, a data,
+ * o tipo de bicicleta, quantidade e o preco.
+ */
 void Utente::displayHistoricoCompras() {
 
 	if(historicoCompras.size() == 0)
@@ -215,7 +215,6 @@ vector<Utilizacao> Utente::getHistorico() const{
 	return historico;
 }
 
-
 // METODOS SET //
 
 /**
@@ -272,9 +271,14 @@ void Utente::setHistoric(Utilizacao ut) {
 	this->historico.push_back(ut);
 }
 
+/**
+ * Acrescenta uma compra ao historico do utente.
+ * @param info compra a acrescentar
+ */
 void Utente::setHistoricoCompras(Utilizacao info) {
 	historicoCompras.push_back(info);
 }
+
 //////////////////////
 //// CLASSE SOCIO ////
 //////////////////////
@@ -581,7 +585,6 @@ bool Socio::hasPendingPay() {
 void Socio::addUse(Utilizacao use) {
 	utilizacoes.push_back(use);
 	return;
-
 }
 
 

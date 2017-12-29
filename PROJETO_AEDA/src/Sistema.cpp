@@ -1,6 +1,5 @@
 #include "Sistema.h"
 
-
 /////////////////
 // METODOS ADD //
 /////////////////
@@ -377,6 +376,13 @@ void Sistema::addNewUtente() {
 	return;
 }
 
+/**
+ * Apresenta os passos necessarios para criacao de uma nova loja, pedindo para escolher uma
+ * localizacao das disponiveis e a capacidade, por fim, adiciona-a ao sistema.
+ * Adiciona bicicletas de incrementando o stock de cada tipo ate atingir a capacidade.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
+ */
 void Sistema::addStore() {
 
 	cout << "Adiciona Loja:" << endl;
@@ -504,7 +510,7 @@ void Sistema::addStore() {
 
 /**
  * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
- * pretende adicionar. Cria uma bicicleta com do tipo pedido e adionar-a ao ponto de partilha.
+ * pretende adicionar. Cria uma bicicleta do tipo pedido e adionar-a ao ponto de partilha.
  * Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
@@ -642,7 +648,8 @@ void Sistema::addNewUtente(Utente* u1){
 	utentes.push_back(u1);
 }
 
-/** Adiciona um ponto de partilha ao sistema.
+/**
+ * Adiciona um ponto de partilha ao sistema.
  * @param p apontador para o ponto de partilha a adicionar
  */
 void Sistema::addPontoPartilha(PontoPartilha* p){
@@ -914,6 +921,12 @@ void Sistema::removeBike() {
 
 }
 
+/**
+ * Pede ao utilizador que escolha a loja que pretende remover da lista apresentada e remove-a
+ * do sistema.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
+ */
 void Sistema::removeStore() {
 
 	cout << "Remove Loja:" << endl << endl;
@@ -989,6 +1002,10 @@ void Sistema::removeStore() {
 
 }
 
+/**
+ * Remove as bicicletas ja reparadas da oficina e coloca-as no ponto de partilha com
+ * menos bicicletas do seu tipo.
+ */
 void Sistema::removeFromRepairShop() {
 
 	vector<Bicicleta *> brokenBikes = repairShop.getBrokenBikes();
@@ -999,25 +1016,26 @@ void Sistema::removeFromRepairShop() {
 		if(brokenBikes.at(i)->getAvarias().empty())
 		{
 			int position {0}, indicator{}, min{99};
+			string name= brokenBikes.at(i)->getBikeName();
 			Bicicleta* bike{ };
 
-			if(brokenBikes.at(i)->getBikeName().at(0) == 'c')
+			if(name.at(0) == 'c')
 			{
 				position = 2;
-				bike = new Corrida { brokenBikes.at(i)->getBikeName() };
+				bike = new Corrida { name };
 			}
-			else if(brokenBikes.at(i)->getBikeName().at(0) == 'i')
+			else if(name.at(0) == 'i')
 			{
 				position = 3;
-				bike = new Infantil { brokenBikes.at(i)->getBikeName() };
+				bike = new Infantil { name };
 			}
-			else if(brokenBikes.at(i)->getBikeName().at(1) == 's')
+			else if(name.at(1) == 's')
 			{
 				position = 1;
-				bike = new UrbanaSimples { brokenBikes.at(i)->getBikeName() };
+				bike = new UrbanaSimples { name };
 			}
 			else
-				bike = new Urbana { brokenBikes.at(i)->getBikeName() };
+				bike = new Urbana { name };
 
 			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
 			{
@@ -1039,6 +1057,13 @@ void Sistema::removeFromRepairShop() {
 	repairShop.setBrokenBikes(brokenBikes);
 }
 
+/**
+ * Pede ao utilizador para escolher a bicicleta da lista apresentada.
+ * Essa lista contem as bicicletas que ja foram abatidas. O utilizador escolhe e a bicicleta
+ * e removida da sucata.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
+ */
 void Sistema::removeFromJunkyard(){
 
 	tabHAbates::const_iterator it = junkyard.begin();
@@ -1206,14 +1231,23 @@ vector<PontoPartilha* > Sistema::getPontosPartilha() const {
 	return pontosPartilha;
 }
 
+/**
+ * @return Retorna uma referencia da oficina.
+ */
 Oficina& Sistema::getOficina() {
 	return repairShop;
 }
 
+/**
+ * @return Retorna a fila de prioridade das lojas.
+ */
 priority_queue<Loja> Sistema::getStores() const {
 	return stores;
 };
 
+/**
+ * @return Retorna a tabela de dispersao com as bicicletas que estao para abate.
+ */
 tabHAbates Sistema::getJunkyard() const {
 	return junkyard;
 };
@@ -1267,6 +1301,9 @@ int Sistema::getUtenteIndex(int identificacao) const {
 	return -1;
 }
 
+/**
+ * @return Retorna a data da ultima utilizacao do sistema.
+ */
 Data Sistema::getDataAtual() const {
 	return dataAtual;
 }
@@ -1275,18 +1312,34 @@ Data Sistema::getDataAtual() const {
 // METODOS SET //
 /////////////////
 
+/**
+ * Altera a data da ultima utilizacao do sistema.
+ * @param newData nova data
+ */
 void Sistema::setDataAtual(Data newData) {
 	dataAtual = newData;
 }
 
+/**
+ * Altera a fila de prioridade das lojas.
+ * @param newStores nova fila de lojas
+ */
 void Sistema::setStores(priority_queue<Loja> newStores) {
 	stores = newStores;
 }
 
+/**
+ * Altera a oficina
+ * @param newRShop nova oficina
+ */
 void Sistema::setOficina(Oficina newRShop) {
 	repairShop = newRShop;
 }
 
+/**
+ * Altera a tabela de dispersao com as bicicletas que estao para abate.
+ * @param newJunkyard nova tabela de bicicletas
+ */
 void Sistema::setJunkyard(tabHAbates newJunkyard){
 	junkyard = newJunkyard;
 }
@@ -1639,16 +1692,17 @@ void Sistema::alugaBike(int index) {
  * Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta
  * e o metodo adicionaBike da classe pontoPartilha para remover a bicicleta do utente e
  * coloca-la no ponto de partilha.
- * A devolucao e feita no ponto de partilha mais proximo do utente.
- * No final, chama a funcao Sistem_Manager para gerir as bicicletas.
+ * A devolucao e feita no ponto de partilha mais proximo, nao lotado, do utente.
+ * E chamada a funcao generateBikeStatus que decide se a bicicleta fica no ponto de partilha,
+ * ou se e enviada para a oficina ou para a sucata.
+ * No final,se a bicicleta ficar no ponto de partilha, chama a funcao Sistem_Manager para gerir
+ * as bicicletas.
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Sistema::devolveBike(int index) {
 
-	if(utentes.at(index)->getAvailable() == true)
-	{
+	if(utentes.at(index)->getAvailable() == true) {
 		cout << "Neste momento o utente não tem nenhuma bicicleta para entregar" << endl << endl;
-
 		return;
 	}
 
@@ -1656,7 +1710,7 @@ void Sistema::devolveBike(int index) {
 	vector<int> index_distancias = getOrderedPP(index);
 	Bicicleta* bike {};
 
-	bike = utentes.at(index)->removeBicicleta(index_distancias);
+	bike = utentes.at(index)->removeBicicleta();
 
 	cout << "Devolve bicicleta: " << endl << endl;
 	cout << "Resumo do último aluguer: " << endl << endl;
@@ -1664,21 +1718,17 @@ void Sistema::devolveBike(int index) {
 	string bikeType;
 
 	//Verifica o tipo de utente e apresenta a respetiva informação
-
 	Utilizacao ut = utentes.at(index)->getLastUse();
 	bikeType = ut.getBikeType();
 	ut.displayUtilizacao();
 
-	if(utentes.at(index)->getTipoUtente() == "Regular")
-	{
+	if(utentes.at(index)->getTipoUtente() == "Regular") {
 		cout << "Montante: " << ut.getPrice() << "€" << endl;
 	}
 
 
-	if(generateBikeStatus(bike) == true)
-	{
-		for(unsigned int i = 0; i < index_distancias.size(); i++)
-		{
+	if(generateBikeStatus(bike) == true) {
+		for(unsigned int i = 0; i < index_distancias.size(); i++) {
 			int lotacao {0};
 
 			for(unsigned int k = 0; k < pontosPartilha.at(index_distancias.at(i))->getNumberOfBikes().size(); k++)
@@ -1686,8 +1736,7 @@ void Sistema::devolveBike(int index) {
 				lotacao += pontosPartilha.at(index_distancias.at(i))->getNumberOfBikes().at(k);
 			}
 
-			if(pontosPartilha.at(index_distancias.at(i))->getCapacidade() > lotacao)
-			{
+			if(pontosPartilha.at(index_distancias.at(i))->getCapacidade() > lotacao) {
 				index_pp = index_distancias.at(i);
 				pontosPartilha.at(index_distancias.at(i))->adicionaBike(bike);
 				break;
@@ -1700,6 +1749,16 @@ void Sistema::devolveBike(int index) {
 	}
 }
 
+/**
+ * Apresenta os passos e pede ao utente que preencha os campos apresentados
+ * de modo a obter a necessaria para a compra de bicicletas (tipo de bicicleta,
+ * quantidade e data). A compra e feita na loja mais proximo do utente, com stock suficiente.
+ * Chama o metodo checkStock da classe Loja para reabastecer o stock da loja se necessario.
+ * No final, e apresentado o total a pagar pelo aluguer.
+ * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
+ * @param index indice do utente no vetor de utentes do sistema
+ */
 void Sistema::compraBike(int index) {
 
 	if(stores.empty())
@@ -2148,6 +2207,11 @@ int Sistema::mudaTipoUT(int index){
 	return 0;
 }
 
+/**
+ * Verifica se existem bicicletas a aguardar abate, se sim, imprime-as no ecra
+ * para o utilizador selecionar a que pretende abater, senao e impressa uma
+ * mensagem. A bicicleta selecionada e abatida.
+ */
 void Sistema::abateBike(){
 
 	tabHAbates::const_iterator it = junkyard.begin();
@@ -2164,7 +2228,7 @@ void Sistema::abateBike(){
 
 	for(it = junkyard.begin(); it != junkyard.end(); it++)
 	{
-		if(it->getAbate().getAno() == 0){
+		if(it->getAbate().getAno() == 0) {
 			exist = true;
 			break;
 		}
@@ -2181,14 +2245,12 @@ void Sistema::abateBike(){
 
 	for(it = junkyard.begin(); it != junkyard.end(); it++)
 	{
-
 		if(it->getAbate().getAno() == 0)
 		{
 			cout << left << setw(2) << indicator << " -> " << it->getBikeName() << endl;
 			bikeNamesAcess.push_back(*it);
 			indicator++;
 		}
-
 	}
 
 	//Seleciona uma das bicicletas
@@ -2350,6 +2412,13 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 	return;
 }
 
+/**
+ * Gera um numero aleatorio de 0-10.
+ * 0-5 -> Devolve no ponto de partilha
+ * 6-8 -> Gera avarias entre 0 e 10  e envia bicicleta para a oficina
+ * 9-10 -> Envia a bicicleta para abate
+ * @param bike apontador da bicicleta que se pretende gerar um estado
+ */
 bool Sistema::generateBikeStatus(Bicicleta* bike) {
 
 	srand (time(NULL));
@@ -2396,9 +2465,12 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 	}
 
 	return false;
-
 }
 
+/**
+ * Compara a data com a dataAtual e atualiza-a caso sejam diferentes.
+ * @param data nova data
+ */
 void Sistema::updateData(Data data) {
 
 	if(dataAtual.getAno() == data.getAno())
@@ -2464,6 +2536,11 @@ void Sistema::displayUtentes() const {
 
 }
 
+/**
+ * Apresenta uma lista de todas as lojas existentes e pede para selecionar uma.
+ * De seguida e impressa a informacao sobre essa loja: localizacao, reputacao,
+ * capacidade e stock.
+ */
 void Sistema::displayStoreInfo() const {
 
 	if(stores.empty())
@@ -2544,16 +2621,18 @@ void Sistema::displayStoreInfo() const {
 					setw(26) << "Urbana Simples" << tmp.top().getStock(1) << endl <<
 					setw(26) << "Corrida" << tmp.top().getStock(2) << endl <<
 					setw(26) << "Infantil" << tmp.top().getStock(3) << endl << endl;
-
 		}
 
 		tmp_index++;
 		tmp.pop();
 	}
-
 	cout << endl;
 }
 
+/**
+ * Apresenta o top 5 das lojas do sistema.
+ * Imprime a informacao das 5 lojas com maior reputacao, localizacao e reputacao.
+ */
 void Sistema::displayMostRepStores() const {
 
 	priority_queue<Loja> tmp = stores;
@@ -2590,12 +2669,17 @@ void Sistema::displayMostRepStores() const {
 
 }
 
+/**
+ * Apresenta todas as bicicletas que foram envidas para abate.
+ * As bicicletas que ja foram abatidas, tem a data de abate, as que ainda
+ * aguardam abate tem --/--/----. E impresso o tipo de bicicleta, o nome, a
+ * data de abate.
+ */
 void Sistema::displayJunkyardInfo() const {
 
 	tabHAbates::const_iterator it = junkyard.begin();
 	int indicator {1};
-	if(it == junkyard.end())
-	{
+	if(it == junkyard.end()) {
 		cout << "Neste momento não existem bicicletas enviadas para abate" << endl << endl;
 		return;
 	}
@@ -2629,6 +2713,5 @@ void Sistema::displayJunkyardInfo() const {
 
 		indicator++;
 	}
-
 	cout << endl;
 }

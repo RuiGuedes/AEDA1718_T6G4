@@ -4,11 +4,12 @@
 #include "Localizacao.h"
 
 class Loja {
-	Localizacao* local;
-	unsigned int reputation;
-	unsigned int numberOpinions;
-	unsigned int capacity;
-	vector<unsigned int> stock;
+	Localizacao* local;				/**< Apontador para a localizacao da loja. */
+	unsigned int reputation;		/**< Soma das classificacoes atribuidas a loja. */
+	unsigned int numberOpinions;	/**< Quantidade de classificacoes atribuidas a loja. */
+	unsigned int capacity;			/**< Capacidade maxima da loja. */
+	vector<unsigned int> stock;		/**< Quantidade de bicicletas em stock de cada tipo
+										(vetor com 4 elementos => 4 tipos de bicicletas). */
 public:
 	Loja();
 	Loja(Localizacao* spot, unsigned int capacity, vector<unsigned int> stock);
@@ -29,13 +30,15 @@ public:
 	//Others
 	bool operator<(const Loja& l1) const;
 	void checkStock(int index);
+
+	//Friend functions
 	friend ostream & operator <<(ostream & o, const Loja & l);
 	friend istream & operator >>(istream & i, Loja & l);
 };
 
 
 /**
- * Overload do operador de insercao usado para escrever os objetos do tipo Utilizacao nos ficheiros,
+ * Overload do operador de insercao usado para escrever os objetos do tipo Loja nos ficheiros,
  * de modo a guardar a informacao do sistema.
  */
 inline ostream& operator <<(ostream & o, const Loja & l)
@@ -52,7 +55,7 @@ inline ostream& operator <<(ostream & o, const Loja & l)
 }
 
 /**
- * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utilizacao,
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Loja,
  * de modo a recriar o sistema da ultima execucao.
  */
 inline istream& operator >>(istream & i, Loja & l) {

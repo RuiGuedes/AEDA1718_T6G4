@@ -29,6 +29,8 @@ public:
 	void limpaVectorBike();
 	void removeBike(string name);
 	void adicionaBike(Bicicleta* bike);
+
+	//Friend functions
 	friend ostream & operator <<(ostream & o, const PontoPartilha & p);
 	friend istream & operator >>(istream & i, PontoPartilha & p);
 };

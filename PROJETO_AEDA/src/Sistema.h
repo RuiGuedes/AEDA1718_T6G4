@@ -12,15 +12,12 @@
 class Sistema {
 	vector<PontoPartilha* > pontosPartilha;		/**< Pontos de partilha referentes ao sistema. */
 	vector<Utente* > utentes;					/**< Utentes referentes ao sistema. */
-	Oficina repairShop;
-	priority_queue<Loja> stores;
-	tabHAbates junkyard;
-	Data dataAtual = globalData;
+	Oficina repairShop;							/**< Oficina de reparacao de bicicletas. */
+	priority_queue<Loja> stores;				/**< Fila de prioridade de lojas.*/
+	tabHAbates junkyard;						/**< Tabela de dispersao de bicicletas abatidas e que aguardam abate. */
+	Data dataAtual = globalData;				/**< Data da ultima utilizacao do sistema.*/
 public:
-	/**
-	 *  Construtor padrao da classe Sistema
-	 */
-	Sistema() {}
+	Sistema() {}	/**< Construtor padrao da classe Sistema */
 
 	//Métodos add
 	void addPontoPartilha();

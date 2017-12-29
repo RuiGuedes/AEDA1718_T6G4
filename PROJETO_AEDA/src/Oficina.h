@@ -6,13 +6,10 @@
 #include "Peca.h"
 
 class Oficina {
-	BST<Peca> pieces;
-	vector<Bicicleta *> brokenBikes;
+	BST<Peca> pieces;					/**< Arvore binaria de pesquisa de pecas da oficina. */
+	vector<Bicicleta *> brokenBikes;	/**< Vetor de apontadores de bicicletas que aguardam reparacao. */
 public:
-	/**
-	 *  Construtor padrao da classe Oficina
-	 */
-	Oficina() : pieces(Peca(0,"","")) {}
+	Oficina() : pieces(Peca(0,"","")) {}	/**< Construtor padrao da classe Oficina */
 
 	//Métodos Get
 	vector<Bicicleta *> getBrokenBikes() const;
@@ -36,11 +33,16 @@ public:
 
 	//Others
 	void buyPiece();
+
+	//Friend functions
 	friend ostream & operator <<(ostream & o, const Oficina & u);
 	friend istream & operator >>(istream & i, Oficina & u);
 };
 
-
+/**
+ * Overload do operador de insercao usado para escrever os objetos do tipo Oficina nos ficheiros,
+ * de modo a guardar a informacao do sistema.
+ */
 inline ostream& operator <<(ostream & o, const Oficina & u)
 {
 	BSTItrIn<Peca> it(u.pieces);
@@ -70,7 +72,7 @@ inline ostream& operator <<(ostream & o, const Oficina & u)
 }
 
 /**
- * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Utilizacao,
+ * Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo Oficina,
  * de modo a recriar o sistema da ultima execucao.
  */
 inline istream& operator >>(istream & i, Oficina & u) {
@@ -112,11 +114,8 @@ inline istream& operator >>(istream & i, Oficina & u) {
 			getline(i, av, ',');
 			bike->addAvarias(av);
 		}
-
 		i.ignore(100 , '\n');
 	}
 
 	return i;
 }
-
-

@@ -155,6 +155,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Adiciona uma bicicleta avariada na lista para reparacao </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bike</td><td>apontador da bicicleta a adicionar </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -172,6 +178,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Adiciona uma peca a lista de pecas. Pede ao utilizador para escolher o tipo de peca a adicionar, escrever o fornecedor e verifica se ja existe alguma peca desse tipo com o mesmo fornecedor. Caso se verifique o utilizador e indicado da situacao senao, a peca e adicionada a <a class="el" href="class_b_s_t.html">BST</a>. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido. </p>
 
 </div>
 </div>
@@ -189,6 +196,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Compra uma peca para reparar uma bicicleta avariada. Pede ao utlizador para escolher uma bicicleta para reparar, da lista apresentada, escolher a peca que pretende reparar, da lista apresentada, escolher o fornecedor, e ainda e pedido para inserir o preco da peca que pretende comprar. Se existir a peca com o fornecedor selecionados na <a class="el" href="class_b_s_t.html">BST</a> da oficina, o preco dessa peca e atualizado, senao e inserida uma nova peca. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido. </p>
 
 </div>
 </div>
@@ -206,6 +214,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Imprime a informacao sobre uma bicicleta avariada: nome, tipo e avarias. Pede ao utilizador que escolha uma bicicleta de lista apresentada. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido. </p>
 
 </div>
 </div>
@@ -223,6 +232,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Imprime no ecra a informacao das pecas existentes na <a class="el" href="class_b_s_t.html">BST</a> da oficina. </p>
 
 </div>
 </div>
@@ -240,6 +250,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Imprime no ecra o fornecedor que vendeu mais barato uma determinada peca. Pede ao utilizador que escolha, de uma lista, a peca que pretende verificar. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido. </p>
 
 </div>
 </div>
@@ -257,6 +268,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Imprime no ecra os fornecedores que venderam uma determinada peca. Pede ao utilizador que escolha, de uma lista, a peca que pretende verificar. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido. </p>
 
 </div>
 </div>
@@ -274,6 +286,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna o vetor de apontadores das bicicletas que estao na oficina para reparacao </dd></dl>
 
 </div>
 </div>
@@ -302,6 +315,13 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Remove a piece da lista de avarias da bicicleta, isto e, repara a avaria "piece" da bicicleta. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>indice da bicicleta em reparacao </td></tr>
+    <tr><td class="paramname">piece</td><td>peca reparada </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -319,6 +339,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Remove uma peca da lista de pecas. Pede ao utilizador para escolher o tipo de peca a remover, das existentes, e escolher o fornecedor da lista apresentada. Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido. </p>
 
 </div>
 </div>
@@ -337,6 +358,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera o vetor de apontadores de bicicletas avariadas </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newBrokenBikes</td><td>novo vetor de bicicletas avariadas </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -374,6 +401,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Overload do operador de insercao usado para escrever os objetos do tipo <a class="el" href="class_oficina.html">Oficina</a> nos ficheiros, de modo a guardar a informacao do sistema. </p>
 
 </div>
 </div>
@@ -410,7 +438,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo <a class="el" href="class_utilizacao.html">Utilizacao</a>, de modo a recriar o sistema da ultima execucao. </p>
+<p>Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo <a class="el" href="class_oficina.html">Oficina</a>, de modo a recriar o sistema da ultima execucao. </p>
 
 </div>
 </div>
@@ -434,6 +462,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Vetor de apontadores de bicicletas que aguardam reparacao. </p>
 
 </div>
 </div>
@@ -456,6 +485,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Arvore binaria de pesquisa de pecas da oficina. </p>
 
 </div>
 </div>

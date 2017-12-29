@@ -6,7 +6,7 @@
 struct bikeHash
 {
 	/**
-	 * Funcao dispersao
+	 * Funcao dispersao para tabela de abates
 	 */
 	int operator() (const Bicicleta & bic) const{
 		int v {0};
@@ -16,7 +16,7 @@ struct bikeHash
 	}
 
 	/**
-	 * Operador de igualdade
+	 * Operador de igualdade para a tabela de abates
 	 */
 	bool operator() (const Bicicleta & b1, const Bicicleta & b2) const {
 		return b1.getBikeName() == b2.getBikeName();

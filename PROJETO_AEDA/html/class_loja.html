@@ -197,6 +197,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Reabaste o stock da loja caso esta tenha um stock atual de um tipo de bicicleta menor 2. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>indice do tipo de bicicleta a verificar o stock </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -214,6 +220,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna a capacidade de stock da loja </dd></dl>
 
 </div>
 </div>
@@ -231,6 +238,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna o apontador para a <a class="el" href="class_localizacao.html">Localizacao</a> da loja </dd></dl>
 
 </div>
 </div>
@@ -248,6 +256,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna o numero de opinioes que contribuiram para a classificacao media </dd></dl>
 
 </div>
 </div>
@@ -265,6 +274,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Retorna a classificacao media da loja </dd></dl>
 
 </div>
 </div>
@@ -283,6 +293,13 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>indice para o tipo de bicicleta que se pretende consultar (it=0 &gt;&gt; <a class="el" href="class_urbana.html">Urbana</a>, it=1 &gt;&gt; <a class="el" href="class_urbana_simples.html">UrbanaSimples</a>, it=2 &gt;&gt; <a class="el" href="class_corrida.html">Corrida</a>, it=4 &gt;&gt; <a class="el" href="class_infantil.html">Infantil</a>). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna a quantidade em stock de bicicletas do tipo indicado por it. </dd></dl>
 
 </div>
 </div>
@@ -301,6 +318,13 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Overload do operador &lt; para comparacao de 2 lojas. Uma loja e menor que outra se a sua classificacao media for menorr. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l1</td><td>loja com quem vai ser comparada </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Retorna true se a condicao se verificar e false caso contrario. </dd></dl>
 
 </div>
 </div>
@@ -319,6 +343,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a capacidade da loja </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>nova capacidade </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -336,6 +366,7 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Incrementa o numero de opinioes da loja </p>
 
 </div>
 </div>
@@ -354,6 +385,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a reputacao da loja (reputacao = soma das classificacoes atribuidas a loja) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reputation</td><td>nova reputacao </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -382,6 +419,13 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Altera a quantidade de bicicletas em stock de um determinado tipo, retirando bikes a quantidade existente </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>indice do tipo de bicicleta a alterar a quantidade </td></tr>
+    <tr><td class="paramname">bikes</td><td>quantidade de bicicletas a retira </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -419,7 +463,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Overload do operador de insercao usado para escrever os objetos do tipo <a class="el" href="class_utilizacao.html">Utilizacao</a> nos ficheiros, de modo a guardar a informacao do sistema. </p>
+<p>Overload do operador de insercao usado para escrever os objetos do tipo <a class="el" href="class_loja.html">Loja</a> nos ficheiros, de modo a guardar a informacao do sistema. </p>
 
 </div>
 </div>
@@ -456,7 +500,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo <a class="el" href="class_utilizacao.html">Utilizacao</a>, de modo a recriar o sistema da ultima execucao. </p>
+<p>Overload do operador de extracao usado para recolher dos ficheiros os objetos do tipo <a class="el" href="class_loja.html">Loja</a>, de modo a recriar o sistema da ultima execucao. </p>
 
 </div>
 </div>
@@ -480,6 +524,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Capacidade maxima da loja. </p>
 
 </div>
 </div>
@@ -502,6 +547,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Apontador para a localizacao da loja. </p>
 
 </div>
 </div>
@@ -524,6 +570,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Quantidade de classificacoes atribuidas a loja. </p>
 
 </div>
 </div>
@@ -546,6 +593,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Soma das classificacoes atribuidas a loja. </p>
 
 </div>
 </div>
@@ -568,6 +616,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Quantidade de bicicletas em stock de cada tipo (vetor com 4 elementos =&gt; 4 tipos de bicicletas). </p>
 
 </div>
 </div>

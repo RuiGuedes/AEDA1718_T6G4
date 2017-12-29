@@ -5,6 +5,9 @@
 // METODOS GET //
 /////////////////
 
+/**
+ * @return Retorna o vetor de apontadores das bicicletas que estao na oficina para reparacao
+ */
 vector<Bicicleta *> Oficina::getBrokenBikes() const {
 	return brokenBikes;
 }
@@ -13,6 +16,10 @@ vector<Bicicleta *> Oficina::getBrokenBikes() const {
 // METODOS SET //
 /////////////////
 
+/**
+ * Altera o vetor de apontadores de bicicletas avariadas
+ * @param newBrokenBikes novo vetor de bicicletas avariadas
+ */
 void Oficina::setBrokenBikes(vector<Bicicleta *> newBrokenBikes) {
 	brokenBikes = newBrokenBikes;
 }
@@ -21,10 +28,21 @@ void Oficina::setBrokenBikes(vector<Bicicleta *> newBrokenBikes) {
 // METODOS ADD //
 /////////////////
 
+/**
+ * Adiciona uma bicicleta avariada na lista para reparacao
+ * @param bike apontador da bicicleta a adicionar
+ */
 void Oficina::addBrokenBike(Bicicleta * bike) {
 	brokenBikes.push_back(bike);
 }
 
+/**
+ * Adiciona uma peca a lista de pecas.
+ * Pede ao utilizador para escolher o tipo de peca a adicionar, escrever o fornecedor e verifica
+ * se ja existe alguma peca desse tipo com o mesmo fornecedor.
+ * Caso se verifique o utilizador e indicado da situacao senao, a peca e adicionada a BST.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
+ */
 void Oficina::addPiece() {
 
 	cout << "Adiciona peça: " << endl << endl;
@@ -131,6 +149,12 @@ void Oficina::addPiece() {
 // METODOS REMOVE //
 ////////////////////
 
+/**
+ * Remove uma peca da lista de pecas.
+ * Pede ao utilizador para escolher o tipo de peca a remover, das existentes, e escolher o fornecedor
+ * da lista apresentada.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
+ */
 void Oficina::removePieceBST() {
 
 	BSTItrIn<Peca> it(pieces);
@@ -267,8 +291,7 @@ void Oficina::removePieceBST() {
 
 	while(!iterator.isAtEnd())
 	{
-		if((iterator.retrieve().getPieceType() == piece) && (iterator.retrieve().getSupplier() == nome)) {
-		}
+		if((iterator.retrieve().getPieceType() == piece) && (iterator.retrieve().getSupplier() == nome)) {}
 		else
 			tmp.insert(iterator.retrieve());
 
@@ -278,6 +301,12 @@ void Oficina::removePieceBST() {
 	cout << endl << "Peça do tipo " << piece << " fornecida por " << nome << " removida com sucesso !" << endl << endl;
 }
 
+/**
+ * Remove a piece da lista de avarias da bicicleta, isto e, repara a avaria
+ * "piece" da bicicleta.
+ * @param index indice da bicicleta em reparacao
+ * @param piece	peca reparada
+ */
 void Oficina::removePieceBike(int index, string piece) {
 
 	vector<string> avarias;
@@ -296,6 +325,14 @@ void Oficina::removePieceBike(int index, string piece) {
 // OTHERS //
 ////////////
 
+/**
+ * Compra uma peca para reparar uma bicicleta avariada.
+ * Pede ao utlizador para escolher uma bicicleta para reparar, da lista apresentada, escolher a peca
+ * que pretende reparar, da lista apresentada, escolher o fornecedor, e ainda e pedido para inserir
+ * o preco da peca que pretende comprar. Se existir a peca com o fornecedor selecionados na BST da
+ * oficina, o preco dessa peca e atualizado, senao e inserida uma nova peca.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
+ */
 void Oficina::buyPiece() {
 
 	cout << "Compra peça:" << endl << endl;
@@ -487,24 +524,20 @@ void Oficina::buyPiece() {
 	cout << endl << "Peça do tipo " << piece << " comprada com sucesso ao fornecedor " << nome << " por " << value << "€" << endl << endl;
 }
 
-bool orderedByPrice(const Peca &ps1, const Peca &ps2 ) {
-
-	if(ps1.getLastPurchasePrice() < ps2.getLastPurchasePrice())
-		return true;
-
-	return false;
-}
 
 /////////////////////
 // METODOS DISPLAY //
 /////////////////////
 
+/**
+ * Imprime no ecra a informacao das pecas existentes na BST da oficina.
+ */
+
 void Oficina::displayBSTInfo() {
 
 	BSTItrIn<Peca> it(pieces);
 
-	if(it.isAtEnd())
-	{
+	if(it.isAtEnd()) {
 		cout << "No momento não existe registo de qualquer tipo de peça" << endl << endl;
 		return;
 	}
@@ -518,13 +551,18 @@ void Oficina::displayBSTInfo() {
 		if(it.retrieve().getLastPurchasePrice() != 0)
 			cout << "Valor da última compra: " << it.retrieve().getLastPurchasePrice() << endl << endl;
 		else
-			cout << "Valor da última compra: " << "----" << endl << endl;
+			cout << "Valor da última compra: " << "---" << endl << endl;
 
 		it.advance();
 	}
-
 }
 
+
+/**
+ * Imprime a informacao sobre uma bicicleta avariada: nome, tipo e avarias.
+ * Pede ao utilizador que escolha uma bicicleta de lista apresentada.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
+ */
 void Oficina::displayBrokenBikeInfo() {
 
 	if(brokenBikes.size() == 0)
@@ -603,6 +641,12 @@ void Oficina::displayBrokenBikeInfo() {
 	cout << endl;
 }
 
+
+/**
+ * Imprime no ecra o fornecedor que vendeu mais barato uma determinada peca.
+ * Pede ao utilizador que escolha, de uma lista, a peca que pretende verificar.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
+ */
 void Oficina::displayPieceLowestPrice() {
 
 	BSTItrIn<Peca> it(pieces);
@@ -677,7 +721,7 @@ void Oficina::displayPieceLowestPrice() {
 	}
 
 	//Ordena o vetor "piecesOrderedPrice" por ordem crescente de preço
-	sort(piecesOrderedPrice.begin(),piecesOrderedPrice.end(), orderedByPrice);
+	sort(piecesOrderedPrice.begin(),piecesOrderedPrice.end());
 
 	for(unsigned int i = 0; i < piecesOrderedPrice.size(); i++)
 	{
@@ -705,6 +749,12 @@ void Oficina::displayPieceLowestPrice() {
 	}
 }
 
+
+/**
+ * Imprime no ecra os fornecedores que venderam uma determinada peca.
+ * Pede ao utilizador que escolha, de uma lista, a peca que pretende verificar.
+ * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
+ */
 void Oficina::displaySupliersInfo() {
 
 
@@ -780,7 +830,7 @@ void Oficina::displaySupliersInfo() {
 	}
 
 	//Ordena o vetor "piecesOrderedPrice" por ordem crescente de preço
-	sort(piecesOrderedPrice.begin(),piecesOrderedPrice.end(), orderedByPrice);
+	sort(piecesOrderedPrice.begin(),piecesOrderedPrice.end());
 
 	//Verifica se alguma das peças ja foi comprada
 	bool bought {false};
@@ -803,7 +853,8 @@ void Oficina::displaySupliersInfo() {
 		cout << "Neste momento a peça do tipo " << piece << " ainda não foi comprada" << endl << endl;
 	}
 	else
-	{
+	{	int ord(1);
+
 		cout << "Informação acerca dos fornecedores" << endl << endl;
 		cout << "Peça: " << piece << endl << endl;
 
@@ -811,8 +862,10 @@ void Oficina::displaySupliersInfo() {
 
 		for(unsigned int i = 0; i < piecesOrderedPrice.size(); i++)
 		{
-			if(piecesOrderedPrice.at(i).getLastPurchasePrice() != 0)
-				cout << "  " << left << setw(8) << (i+1) <<  setw(23) << piecesOrderedPrice.at(i).getSupplier() << right << setw(3) << piecesOrderedPrice.at(i).getLastPurchasePrice() << endl;
+			if(piecesOrderedPrice.at(i).getLastPurchasePrice() != 0){
+				cout << "  " << left << setw(8) << ord <<  setw(23) << piecesOrderedPrice.at(i).getSupplier() << right << setw(3) << piecesOrderedPrice.at(i).getLastPurchasePrice() << endl;
+				ord++;
+			}
 		}
 		cout << endl;
 	}

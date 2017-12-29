@@ -30,7 +30,9 @@ Loja::Loja(Localizacao* spot, unsigned int capacity, vector<unsigned int> stock)
 // METODOS GET //
 /////////////////
 
-
+/**
+ * @return Retorna a classificacao media da loja
+ */
 double Loja::getReputation() const {
 
 	if(numberOpinions != 0)
@@ -39,37 +41,67 @@ double Loja::getReputation() const {
 	return 0;
 }
 
+/**
+ * @return Retorna o numero de opinioes que contribuiram para a classificacao media
+ */
 unsigned int Loja::getNumberOpinions() const {
 	return numberOpinions;
 }
 
+/**
+ * @return Retorna a capacidade de stock da loja
+ */
 unsigned int Loja::getCapacity() const {
 	return capacity;
 }
 
+/**
+ * @param it indice para o tipo de bicicleta que se pretende consultar (it=0 >> Urbana, it=1 >> UrbanaSimples, it=2 >> Corrida, it=4 >> Infantil).
+ * @return Retorna a quantidade em stock de bicicletas do tipo indicado por it.
+ */
 unsigned int Loja::getStock(unsigned int it) const {
 	return stock.at(it);
 }
 
+/**
+ * @return Retorna o apontador para a Localizacao da loja
+ */
 Localizacao* Loja::getLocal() const {
 	return local;
 }
+
 /////////////////
 // METODOS SET //
 /////////////////
 
+/**
+ * Altera a reputacao da loja (reputacao = soma das classificacoes atribuidas a loja)
+ * @param reputation nova reputacao
+ */
 void Loja::setReputation(unsigned int reputation) {
 	this->reputation = this->reputation + reputation;
 }
 
+/**
+ * Incrementa o numero de opinioes da loja
+ */
 void Loja::setNumberOpinions() {
 	numberOpinions++;
 }
 
+/**
+ * Altera a capacidade da loja
+ * @param capacity nova capacidade
+ */
 void Loja::setCapacity(unsigned int capacity) {
 	this->capacity = capacity;
 }
 
+/**
+ * Altera a quantidade de bicicletas em stock de um determinado tipo, retirando bikes a quantidade existente
+ * @param index indice do tipo de bicicleta a alterar a quantidade
+ * @param bikes quantidade de bicicletas a retira
+ */
 void Loja::setStock(int index, int bikes) {
 
 	this->stock.at(index) = stock.at(index) - bikes;
@@ -79,15 +111,24 @@ void Loja::setStock(int index, int bikes) {
 // OTHERS //
 ////////////
 
+/**
+ * Overload do operador < para comparacao de 2 lojas.
+ * Uma loja e menor que outra se a sua classificacao media for menorr.
+ * @param l1 loja com quem vai ser comparada
+ * @return Retorna true se a condicao se verificar e false caso contrario.
+ */
 bool Loja::operator<(const Loja& l1) const {
 
-	if(this->reputation < l1.getReputation())
+	if(this->getReputation() < l1.getReputation())
 		return true;
 
 	return false;
-
 }
 
+/**
+ * Reabaste o stock da loja caso esta tenha um stock atual de um tipo de bicicleta menor 2.
+ * @param index indice do tipo de bicicleta a verificar o stock
+ */
 void Loja::checkStock(int index) {
 
 	if(stock.at(index) <= 1)
@@ -99,5 +140,4 @@ void Loja::checkStock(int index) {
 		if(sum < capacity)
 			stock.at(index)++;
 	}
-
 }
