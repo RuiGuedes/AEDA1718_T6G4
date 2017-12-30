@@ -58,8 +58,8 @@ void PontoPartilha::removeBike(string name) {
 }
 
 /**
- * Adiciona a bicicleta bike do ponto de partilha.
- * @param bike apontador de bicicleta que se pretende adicionar
+ * Adiciona a bicicleta bike ao ponto de partilha.
+ * @param bike apontador para a bicicleta que se pretende adicionar
  */
 void PontoPartilha::adicionaBike(Bicicleta* bike) {
 
@@ -84,7 +84,7 @@ void PontoPartilha::adicionaBike(Bicicleta* bike) {
 }
 
 /**
- * Limpa o vetor das bicicletas do ponto de partilha, de modo que o mesmo fica sem bicicletas.
+ * Limpa o vetor das bicicletas do ponto de partilha, de modo a que o mesmo fique sem bicicletas.
  */
 void PontoPartilha::limpaVectorBike(){
 	bicicletas.at(0).clear();
@@ -120,7 +120,7 @@ int PontoPartilha::getCapacidade() const {
 
 /**
  * Retorna um vetor com a quantidade de cada tipo de bicicletas existentes no ponto de partilha.
- * O vetor e composto pelos 4 elementos segintes:
+ * O vetor e composto pelos 4 elementos seguintes:
  *  (1) quantidade de bicicletas do tipo "Urbana",
  *  (2) quantidade de bicicletas do tipo "Urbana Simples",
  *  (3) quantidade de bicicletas do tipo "Corrida",

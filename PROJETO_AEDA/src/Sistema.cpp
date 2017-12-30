@@ -377,9 +377,9 @@ void Sistema::addNewUtente() {
 }
 
 /**
- * Apresenta os passos necessarios para criacao de uma nova loja, pedindo para escolher uma
- * localizacao das disponiveis e a capacidade, por fim, adiciona-a ao sistema.
- * Adiciona bicicletas de incrementando o stock de cada tipo ate atingir a capacidade.
+ * Apresenta os passos necessarios para a criacao de uma nova loja, pedindo para escolher uma
+ * localizacao entre as disponiveis, a capacidade e, por fim, adiciona-a ao sistema.
+ * Adiciona bicicletas incrementando o stock de cada tipo ate atingir a capacidade.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  */
@@ -510,7 +510,7 @@ void Sistema::addStore() {
 
 /**
  * Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que
- * pretende adicionar. Cria uma bicicleta do tipo pedido e adionar-a ao ponto de partilha.
+ * pretende adicionar. Cria uma bicicleta do tipo pedido e adiciona-a ao ponto de partilha.
  * Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
@@ -1361,13 +1361,13 @@ bool sortById(Utente* u1, Utente* u2)
 
 /**
  * Apresenta os passos e pede ao utente que preencha os campos apresentados
- * de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta,
- * numero de horas e data). Chama o metodo da classe utente alugaBicicleta e o metodo
- * classe pontoPartilha removeBike para remover a bicicleta do ponto de partilha e atribui-la
+ * de modo a obter a informacao necessaria para o aluguer de uma bicicleta (tipo de bicicleta,
+ * numero de horas e data). Chama o metodo da classe Utente alugaBicicleta e o metodo da
+ * classe PontoPartilha removeBike para remover a bicicleta do ponto de partilha e atribui-la
  * ao utente. O aluguer e feito no ponto de partilha mais proximo do utente.
  * Caso o utente seja Regular e apresentado o total a pagar pelo aluguer.
- * No final, chama o metodo Sistem_Manager para gerir as bicicletas.
- * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
+ * No final, chama o metodo System_Manager para gerir as bicicletas.
+ * Para cada introducao do utente e verificado se o mesmo introduziu os dados no formato pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao.
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -1689,13 +1689,13 @@ void Sistema::alugaBike(int index) {
 }
 
 /**
- * Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta
- * e o metodo adicionaBike da classe pontoPartilha para remover a bicicleta do utente e
+ * Apresenta a informacao do aluguer e chama o metodo da classe Utente removeBicicleta
+ * e o metodo adicionaBike da classe PontoPartilha para remover a bicicleta do utente e
  * coloca-la no ponto de partilha.
  * A devolucao e feita no ponto de partilha mais proximo, nao lotado, do utente.
  * E chamada a funcao generateBikeStatus que decide se a bicicleta fica no ponto de partilha,
  * ou se e enviada para a oficina ou para a sucata.
- * No final,se a bicicleta ficar no ponto de partilha, chama a funcao Sistem_Manager para gerir
+ * No final, se a bicicleta ficar no ponto de partilha, chama a funcao System_Manager para gerir
  * as bicicletas.
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -1751,8 +1751,8 @@ void Sistema::devolveBike(int index) {
 
 /**
  * Apresenta os passos e pede ao utente que preencha os campos apresentados
- * de modo a obter a necessaria para a compra de bicicletas (tipo de bicicleta,
- * quantidade e data). A compra e feita na loja mais proximo do utente, com stock suficiente.
+ * de modo a obter a informacao necessaria para a compra de bicicletas (tipo de bicicleta,
+ * quantidade e data). A compra e feita na loja mais proxima do utente, com stock suficiente.
  * Chama o metodo checkStock da classe Loja para reabastecer o stock da loja se necessario.
  * No final, e apresentado o total a pagar pelo aluguer.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
@@ -2303,7 +2303,7 @@ void Sistema::abateBike(){
 ///////////////////////////
 
 /**
- * Verifica se exite excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
+ * Verifica se existe excesso (<=8) ou defice (>=2) de bicicletas do tipo bikeType nos pontos de partilha,
  * caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente.
  * @param index indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao)
  * @param bikeType tipo de bicicleta que se pretende verificar
@@ -2414,9 +2414,9 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 
 /**
  * Gera um numero aleatorio de 0-10.
- * 0-5 -> Devolve no ponto de partilha
- * 6-8 -> Gera avarias entre 0 e 10  e envia bicicleta para a oficina
- * 9-10 -> Envia a bicicleta para abate
+ * (0-5) -> Devolve no ponto de partilha;
+ * (6-8) -> Gera avarias entre 0 e 10  e envia bicicleta para a oficina;
+ * (9-10) -> Envia a bicicleta para abate;
  * @param bike apontador da bicicleta que se pretende gerar um estado
  */
 bool Sistema::generateBikeStatus(Bicicleta* bike) {
@@ -2491,7 +2491,7 @@ void Sistema::updateData(Data data) {
 /////////////////////
 
 /**
- * Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao).
+ * Imprime por ordem crescente de distancia do utente, os pontos de partilha (designacao do ponto de partilha e nome da localizacao).
  * @param index indice do utente no vetor de utentes do sistema
  */
 void Sistema::displayNearestPP(int index) const {
@@ -2631,7 +2631,7 @@ void Sistema::displayStoreInfo() const {
 
 /**
  * Apresenta o top 5 das lojas do sistema.
- * Imprime a informacao das 5 lojas com maior reputacao, localizacao e reputacao.
+ * Imprime a informacao das 5 lojas com maior reputacao (imprime a sua localizacao e reputacao).
  */
 void Sistema::displayMostRepStores() const {
 

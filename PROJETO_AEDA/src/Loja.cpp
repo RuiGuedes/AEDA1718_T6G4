@@ -100,7 +100,7 @@ void Loja::setCapacity(unsigned int capacity) {
 /**
  * Altera a quantidade de bicicletas em stock de um determinado tipo, retirando bikes a quantidade existente
  * @param index indice do tipo de bicicleta a alterar a quantidade
- * @param bikes quantidade de bicicletas a retira
+ * @param bikes quantidade de bicicletas a retirar
  */
 void Loja::setStock(int index, int bikes) {
 
@@ -113,7 +113,7 @@ void Loja::setStock(int index, int bikes) {
 
 /**
  * Overload do operador < para comparacao de 2 lojas.
- * Uma loja e menor que outra se a sua classificacao media for menorr.
+ * Uma loja e menor que outra se a sua classificacao media for menor.
  * @param l1 loja com quem vai ser comparada
  * @return Retorna true se a condicao se verificar e false caso contrario.
  */
@@ -126,7 +126,7 @@ bool Loja::operator<(const Loja& l1) const {
 }
 
 /**
- * Reabaste o stock da loja caso esta tenha um stock atual de um tipo de bicicleta menor 2.
+ * Reabastece o stock da loja caso esta tenha um stock atual de um tipo de bicicleta menor que 2.
  * @param index indice do tipo de bicicleta a verificar o stock
  */
 void Loja::checkStock(int index) {

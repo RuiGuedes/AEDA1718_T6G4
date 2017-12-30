@@ -1,7 +1,7 @@
 #include "Localizacao.h"
 
 /**
- * Construtor padrao da classe Lcalizacao.
+ * Construtor padrao da classe Localizacao.
  */
 Localizacao::Localizacao(){
 	this->nome = "";

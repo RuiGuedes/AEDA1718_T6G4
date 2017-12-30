@@ -28,7 +28,7 @@ Utente::Utente(string nome,Localizacao spot) : id(++lastId) {
 /**
  * Atribui a bicicleta ao utente e remove-a do ponto de partilha mais proximo do utente.
  * @param b apontador para a bicicleta a alugar
- * @param ut utilizacao = aluger da bicicleta em questao
+ * @param ut utilizacao = aluguer da bicicleta em questao
  */
 void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
 	setBike(b);
@@ -39,7 +39,7 @@ void Utente::alugaBicicleta(Bicicleta* b, Utilizacao ut) {
 
 /**
  * Remove a bicicleta do utente.
- * @return Retorna um apontador para bicicleta que o utente possuia.
+ * @return Retorna um apontador para a bicicleta que o utente possuia.
  */
 Bicicleta* Utente::removeBicicleta() {
 	Bicicleta* b = bike;
@@ -49,7 +49,7 @@ Bicicleta* Utente::removeBicicleta() {
 }
 
 /**
- * Mostar a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente
+ * Mostra a localizacao atual e extrai da stream de input a nova localizacao introduzida pelo utente
  * e chama o metodo setUtenteLocation que altera a localizacao.
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
  * e se os dados sao validos, caso contrario e impressa uma mensagem e levantada uma excecao.
@@ -193,7 +193,7 @@ Localizacao Utente::getLocalizacao() const {
 }
 
 /**
- * Retorna um apontador para bicicleta que o utente esta a usar.
+ * Retorna um apontador para a bicicleta que o utente esta a usar.
  * Caso nao esteja a usar uma bicicleta, o apontador tem o valor 0.
  * @return Retorna um apontador para bicicleta.
  */
@@ -264,7 +264,7 @@ void Utente::setBike(Bicicleta* bike) {
 }
 
 /**
- * Acrescenta uma utilizcao ao historico do utente.
+ * Acrescenta uma utilizacao ao historico do utente.
  * @param ut utilizacao a acrescentar
  */
 void Utente::setHistoric(Utilizacao ut) {
@@ -297,7 +297,7 @@ Socio::Socio() : Utente{}
 Socio::Socio(string nome,Localizacao spot) : Utente{nome, spot} {}
 
 /**
- * Paga a mensalidade do mes selecionedo, removendo as ulizacoes correspondestes a esse mes do vetor utilizacoes
+ * Paga a mensalidade do mes selecionado, removendo as utilizacoes correspondentes a esse mes do vetor utilizacoes
  * e colocando-as no historico do utente.
  * @param ano do qual pretende pagar um mes
  * @param mes que pretende pagar
@@ -402,8 +402,8 @@ void Socio::displayPagPendentes(int index){
 
 /**
  * Efetua o pagamento de mensalidades, para tal, sera impresso no ecra os anos que contem utilizacoes
- * por saldar, e depois do utente selecionar o ano, e-lhe apresentado os meses que pode tem em divida
- * depos de selecionar chama-se o metodo da subclasse Socio pagaMensalidade que calcula a mensalidade
+ * por saldar, e depois do utente selecionar o ano, e-lhe apresentado os meses que tem em divida;
+ * depois de selecionar chama-se o metodo da subclasse Socio pagaMensalidade que calcula a mensalidade
  * consoante o numero de horas de uso nesse mes (desconto) e consoante o tipo de bicicletas alugadas
  * (ver tabela de mensalidades (infoER)).
  * Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido
@@ -572,7 +572,7 @@ void Socio::efetuaPag(int index){
 }
 
 /**
- * @return Retorna false se o vetor utilizaoes esta vazio, caso contrario, returna true.
+ * @return Retorna false se o vetor utilizacoes esta vazio, caso contrario, retorna true.
  */
 bool Socio::hasPendingPay() {
 	return utilizacoes.size() > 0;
@@ -649,7 +649,7 @@ void Regular::displayHistoric() const{
 }
 
 /**
- * Imprime no ecra a uma mensagem quando chamada para este tipo (Regular), porque o mesmo
+ * Imprime no ecra uma mensagem quando chamada para este tipo (Regular), porque o mesmo
  * nao tem pagamentos pendentes.
  * @param index indice do utente no vetor de utentes do sistema
  */
@@ -675,7 +675,7 @@ void Regular::efetuaPag(int index){
 }
 
 /**
- * @return Retorna false visto nao ter utilizacoes pendentes.
+ * @return Retorna false visto nao ter utilizacoes com pagamentos pendentes.
  */
 bool Regular::hasPendingPay() {
 	return false;
@@ -700,7 +700,7 @@ string Regular::getTipoUtente() const {
 }
 
 /**
- * @return Retorna a ultima utlilizacao do utente Regular.
+ * @return Retorna a ultima utilizacao do utente Regular.
  */
 Utilizacao Regular::getLastUse() {
 	return historico.back();

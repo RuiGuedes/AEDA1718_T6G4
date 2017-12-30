@@ -671,7 +671,7 @@ void lojas_interface(Sistema &ER) {
 
 /**
  * Primeiramente pede ao utilizador que insira a senha ("1234") para aceder a opcoes administrativas.
- * Apresenta no ecra os casos de utilizacao para aministrador escolher a opcao que pretende (7 opcoes no total).
+ * Apresenta no ecra os casos de utilizacao para o administrador escolher a opcao que pretende (7 opcoes no total).
  * Depois de introduzida a opcao, e efetuado o procedimento que corresponde a opcao escolhida.
  * Para cada uma das 6 primeiras opcoes e chamado um metodo da classe Sistema que
  * executa o procedimento necessario para o que e pretendido, e a ultima opcao , 7 - Sair,

@@ -560,7 +560,7 @@ void Oficina::displayBSTInfo() {
 
 /**
  * Imprime a informacao sobre uma bicicleta avariada: nome, tipo e avarias.
- * Pede ao utilizador que escolha uma bicicleta de lista apresentada.
+ * Pede ao utilizador que escolha uma bicicleta da lista apresentada.
  * Para cada introducao do utilizador e verificado se o mesmo introduziu o formato de dados pedido.
  */
 void Oficina::displayBrokenBikeInfo() {

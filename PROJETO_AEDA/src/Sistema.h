@@ -24,7 +24,7 @@ public:
 	void addNewUtente();
 	void adicionaBike();
 	void addStore();
-	void addNewUtente(Utente* u1);				/**< Necessario para inclusao direta no sistema dos utente extraidos do ficheiro.*/
+	void addNewUtente(Utente* u1);				/**< Necessario para inclusao direta no sistema dos utentes extraidos do ficheiro.*/
 	void addPontoPartilha(PontoPartilha* p);	/**< Necessario para inclusao direta no sistema dos pontos de partilha extraidos do ficheiro.*/
 
 	//Métodos remove
