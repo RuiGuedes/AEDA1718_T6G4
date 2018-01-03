@@ -111,7 +111,7 @@ void checkinSys(Sistema & ER){
 
 	file_1.close();
 
-
+	cout << ".";
 
 	file_1.open("pontosPartilha.txt");
 	if (!file_1.is_open())
@@ -167,8 +167,6 @@ void checkinSys(Sistema & ER){
 
 	file_2.close();
 
-	cout << ".";
-
 	/// LOJAS ///
 	file_1.open("lojas.txt");
 	if (!file_1.is_open())
@@ -193,6 +191,8 @@ void checkinSys(Sistema & ER){
 
 	file_1.close();
 
+	cout << ".";
+
 	/// OFICINA ///
 	file_2.open("oficina.txt");
 	if (!file_2.is_open())
@@ -205,8 +205,6 @@ void checkinSys(Sistema & ER){
 	ER.setOficina(of);
 
 	file_2.close();
-
-	cout << ".";
 
 	/// ABATES ///
 	file_1.open("abates.txt");

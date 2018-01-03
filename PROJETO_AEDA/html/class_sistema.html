@@ -245,7 +245,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Necessario para inclusao direta no sistema dos utente extraidos do ficheiro.</p>
+<p>Necessario para inclusao direta no sistema dos utentes extraidos do ficheiro.</p>
 <p>Adiciona um utente ao sistema. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">u1</td><td>apontador para o utente a adicionar </td></tr>
@@ -312,7 +312,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta os passos necessarios para criacao de uma nova loja, pedindo para escolher uma localizacao das disponiveis e a capacidade, por fim, adiciona-a ao sistema. Adiciona bicicletas de incrementando o stock de cada tipo ate atingir a capacidade. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
+<p>Apresenta os passos necessarios para a criacao de uma nova loja, pedindo para escolher uma localizacao entre as disponiveis, a capacidade e, por fim, adiciona-a ao sistema. Adiciona bicicletas incrementando o stock de cada tipo ate atingir a capacidade. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que pretende adicionar. Cria uma bicicleta do tipo pedido e adionar-a ao ponto de partilha. Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
+<p>Pede o nome do ponto de partilha onde vai adicionar a bicicleta e o tipo de bicicleta que pretende adicionar. Cria uma bicicleta do tipo pedido e adiciona-a ao ponto de partilha. Se a capaciadade do ponto de partilha estiver no maximo e apresentada uma mensagem. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a necessaria para o aluger de uma bicicleta (tipo de bicicleta, numero de horas e data). Chama o metodo da classe utente alugaBicicleta e o metodo classe pontoPartilha removeBike para remover a bicicleta do ponto de partilha e atribui-la ao utente. O aluguer e feito no ponto de partilha mais proximo do utente. Caso o utente seja <a class="el" href="class_regular.html">Regular</a> e apresentado o total a pagar pelo aluguer. No final, chama o metodo Sistem_Manager para gerir as bicicletas. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a informacao necessaria para o aluguer de uma bicicleta (tipo de bicicleta, numero de horas e data). Chama o metodo da classe <a class="el" href="class_utente.html">Utente</a> alugaBicicleta e o metodo da classe <a class="el" href="class_ponto_partilha.html">PontoPartilha</a> removeBike para remover a bicicleta do ponto de partilha e atribui-la ao utente. O aluguer e feito no ponto de partilha mais proximo do utente. Caso o utente seja <a class="el" href="class_regular.html">Regular</a> e apresentado o total a pagar pelo aluguer. No final, chama o metodo System_Manager para gerir as bicicletas. Para cada introducao do utente e verificado se o mesmo introduziu os dados no formato pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
   </table>
@@ -373,7 +373,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a necessaria para a compra de bicicletas (tipo de bicicleta, quantidade e data). A compra e feita na loja mais proximo do utente, com stock suficiente. Chama o metodo checkStock da classe <a class="el" href="class_loja.html">Loja</a> para reabastecer o stock da loja se necessario. No final, e apresentado o total a pagar pelo aluguer. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta os passos e pede ao utente que preencha os campos apresentados de modo a obter a informacao necessaria para a compra de bicicletas (tipo de bicicleta, quantidade e data). A compra e feita na loja mais proxima do utente, com stock suficiente. Chama o metodo checkStock da classe <a class="el" href="class_loja.html">Loja</a> para reabastecer o stock da loja se necessario. No final, e apresentado o total a pagar pelo aluguer. Para cada introducao do utente e verificado se o mesmo introduziu o formato de dados pedido e se os dados sao validos, caso contrario e impressa uma mensagem e e lancada uma excecao. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
   </table>
@@ -397,7 +397,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta a informacao do aluger e chama-se o metodo da classe utente removeBicicleta e o metodo adicionaBike da classe pontoPartilha para remover a bicicleta do utente e coloca-la no ponto de partilha. A devolucao e feita no ponto de partilha mais proximo, nao lotado, do utente. E chamada a funcao generateBikeStatus que decide se a bicicleta fica no ponto de partilha, ou se e enviada para a oficina ou para a sucata. No final,se a bicicleta ficar no ponto de partilha, chama a funcao Sistem_Manager para gerir as bicicletas. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apresenta a informacao do aluguer e chama o metodo da classe <a class="el" href="class_utente.html">Utente</a> removeBicicleta e o metodo adicionaBike da classe <a class="el" href="class_ponto_partilha.html">PontoPartilha</a> para remover a bicicleta do utente e coloca-la no ponto de partilha. A devolucao e feita no ponto de partilha mais proximo, nao lotado, do utente. E chamada a funcao generateBikeStatus que decide se a bicicleta fica no ponto de partilha, ou se e enviada para a oficina ou para a sucata. No final, se a bicicleta ficar no ponto de partilha, chama a funcao System_Manager para gerir as bicicletas. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
   </table>
@@ -438,7 +438,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apresenta o top 5 das lojas do sistema. Imprime a informacao das 5 lojas com maior reputacao, localizacao e reputacao. </p>
+<p>Apresenta o top 5 das lojas do sistema. Imprime a informacao das 5 lojas com maior reputacao (imprime a sua localizacao e reputacao). </p>
 
 </div>
 </div>
@@ -457,7 +457,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Imprime por ordem crescente de distancia do utente, os pontos de partilha (nome e nome da localizacao). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Imprime por ordem crescente de distancia do utente, os pontos de partilha (designacao do ponto de partilha e nome da localizacao). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>indice do utente no vetor de utentes do sistema </td></tr>
   </table>
@@ -517,7 +517,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gera um numero aleatorio de 0-10. 0-5 -&gt; Devolve no ponto de partilha 6-8 -&gt; Gera avarias entre 0 e 10 e envia bicicleta para a oficina 9-10 -&gt; Envia a bicicleta para abate </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Gera um numero aleatorio de 1-10. (1-5) -&gt; Devolve no ponto de partilha; (6-8) -&gt; Gera avarias entre 0 e 10 e envia bicicleta para a oficina; (9-10) -&gt; Envia a bicicleta para abate; </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bike</td><td>apontador da bicicleta que se pretende gerar um estado </td></tr>
   </table>
@@ -956,7 +956,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Verifica se exite excesso (&lt;=8) ou defice (&gt;=2) de bicicletas do tipo bikeType nos pontos de partilha, caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Verifica se existe excesso (&lt;=8) ou defice (&gt;=2) de bicicletas do tipo bikeType nos pontos de partilha, caso se verifique as bicicletas sao distribuidas pelos pontos de partilha uniformemente. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>indice do ponto de partilha em que ocorreu o ultimo movimento (aluguer ou devolucao) </td></tr>
     <tr><td class="paramname">bikeType</td><td>tipo de bicicleta que se pretende verificar </td></tr>

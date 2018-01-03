@@ -8,9 +8,9 @@
 -19,Guiador,Sachs
 -0,Pedais,Stark
 -12,Pedais,Prego a Fundo
--0,Pneu,Reta dos Pneus
--0,Pneu,Carglass
 -0,Pneu,Bosch
+-0,Pneu,Carglass
+-0,Pneu,Reta dos Pneus
 -20,Pneu,Michelin
 -50,Pneu,Pneus Baratos
 -0,Punhos,Norauto
