@@ -1,2 +1,31 @@
+-0,Amortecedor,Stark
+-34,Amortecedor,Norauto
+-37,Amortecedor,Reta dos Pneus
+-40,Amortecedor,TYC
+-0,Assento,SKF
+-23,Corrente,Norauto
+-35,Cremalheira,Portugalia
+-19,Guiador,Sachs
+-0,Pedais,Stark
+-12,Pedais,Prego a Fundo
 -0,Pneu,Reta dos Pneus
-0
+-0,Pneu,Carglass
+-0,Pneu,Bosch
+-20,Pneu,Michelin
+-50,Pneu,Pneus Baratos
+-0,Punhos,Norauto
+-9,Punhos,Continental
+-13,Punhos,Carglass
+-15,Punhos,TYC
+-0,Roda,Michelin
+-0,Travão,Norauto
+-25,Travão,Bosch
+8
+u53,5,Travão,Pedais,Pneu,Cremalheira,Assento,
+i11,3,Pedais,Travão,Amortecedor,
+u13,5,Guiador,Cremalheira,Amortecedor,Pedais,Corrente,
+i12,5,Cremalheira,Guiador,Pedais,Punhos,Pneu,
+u2,6,Punhos,Guiador,Travão,Pneu,Pedais,Cremalheira,
+i1,5,Travão,Guiador,Cremalheira,Corrente,Assento,
+us2,3,Pedais,Amortecedor,Cremalheira,
+c31,1,Punhos,

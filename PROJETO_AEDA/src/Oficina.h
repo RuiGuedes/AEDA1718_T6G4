@@ -114,6 +114,7 @@ inline istream& operator >>(istream & i, Oficina & u) {
 			getline(i, av, ',');
 			bike->addAvarias(av);
 		}
+		u.addBrokenBike(bike);
 		i.ignore(100 , '\n');
 	}
 

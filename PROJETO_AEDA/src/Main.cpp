@@ -219,14 +219,16 @@ void checkinSys(Sistema & ER){
 		getline(file_1,f_line);
 
 		if (f_line != ""){
-			ss << f_line;
+			stringstream ss1;
+
+			ss1 << f_line;
 			string name;
 
-			getline(ss, name,',');
+			getline(ss1, name,',');
 
 			Bicicleta bike(name);
 			Data data;
-			ss >> data;
+			ss1 >> data;
 
 			bike.setAbate(data);
 			tmptab.insert(bike);

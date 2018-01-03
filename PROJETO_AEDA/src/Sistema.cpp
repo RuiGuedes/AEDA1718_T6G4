@@ -1037,12 +1037,12 @@ void Sistema::removeFromRepairShop() {
 			else
 				bike = new Urbana { name };
 
-			for(unsigned int i = 0; i < pontosPartilha.size(); i++)
+			for(unsigned int j = 0; j < pontosPartilha.size(); j++)
 			{
-				if(pontosPartilha.at(i)->getNumberOfBikes().at(position) < min)
+				if(pontosPartilha.at(j)->getNumberOfBikes().at(position) < min)
 				{
-					min = pontosPartilha.at(i)->getNumberOfBikes().at(position);
-					indicator = i;
+					min = pontosPartilha.at(j)->getNumberOfBikes().at(position);
+					indicator = j;
 				}
 			}
 
@@ -1500,7 +1500,10 @@ void Sistema::alugaBike(int index) {
 		while(1)
 		{
 			try{
-				cout << endl << "Mês [" << dataAtual.getMes() << "-12]: ";
+				if(dataAtual.getAno() < d1.getAno())
+					cout << endl << "Mês [1-12]: ";
+				else
+					cout << endl << "Mês [" << dataAtual.getMes() << "-12]: ";
 				cin >> option;
 				cin.ignore(1000,'\n');
 				if(valid_number(option) == false)
@@ -1906,7 +1909,10 @@ void Sistema::compraBike(int index) {
 	while(1)
 	{
 		try{
-			cout << endl << "Mês [" << dataAtual.getMes() << "-12]: ";
+			if(dataAtual.getAno() < d1.getAno())
+				cout << endl << "Mês [1-12]: ";
+			else
+				cout << endl << "Mês [" << dataAtual.getMes() << "-12]: ";
 			cin >> option;
 			cin.ignore(1000,'\n');
 			if(valid_number(option) == false)
@@ -2413,8 +2419,8 @@ void Sistema::system_Manager(unsigned int index, string bikeType) {
 }
 
 /**
- * Gera um numero aleatorio de 0-10.
- * (0-5) -> Devolve no ponto de partilha;
+ * Gera um numero aleatorio de 1-10.
+ * (1-5) -> Devolve no ponto de partilha;
  * (6-8) -> Gera avarias entre 0 e 10  e envia bicicleta para a oficina;
  * (9-10) -> Envia a bicicleta para abate;
  * @param bike apontador da bicicleta que se pretende gerar um estado
@@ -2426,7 +2432,7 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 
 	random_number = rand() % 10 + 1;
 
-	//0-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
+	//1-5 -> Devolve no ponto de partilha  || 6-8 -> Envia bicicleta para a oficina  || 9-10 -> Envia a bicicleta para abate
 
 	if((random_number >= 1) && (random_number <= 5))
 		return true;
@@ -2437,7 +2443,7 @@ bool Sistema::generateBikeStatus(Bicicleta* bike) {
 
 		pieces.push_back("Pneu"); pieces.push_back("Corrente"); pieces.push_back("Pedais");
 		pieces.push_back("Guiador"); pieces.push_back("Assento"); pieces.push_back("Cremalheira");
-		pieces.push_back("Punhos"); pieces.push_back("Travão traseiro"); pieces.push_back("Travão dianteiro");
+		pieces.push_back("Punhos"); pieces.push_back("Travão"); pieces.push_back("Amortecedor");
 		pieces.push_back("Roda");
 
 		//Gera numero (X) de peças estragadas de um total de 10
